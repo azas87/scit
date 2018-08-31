@@ -11,10 +11,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<a href="loginForm?">로그인</a>
+<a href="joinForm?">회원가입</a>
+<a href="writeBuyBoardForm?">글등록</a>
+<a href="buyListHistory?">구매내역<
 </body>
 </html>
