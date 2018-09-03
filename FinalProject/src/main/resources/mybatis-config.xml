@@ -5,10 +5,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	
 	<typeAliases>
-		<!-- <typeAlias type="VO.Hobby" alias="HB"/> -->
+		<typeAlias type="com.kay87.team.vo.MemberInfo" alias="Member"/>
+		<typeAlias type="com.kay87.team.vo.BuyList" alias="BuyList"/>
+		<typeAlias type="com.kay87.team.vo.FishList" alias="FishList"/>
 	</typeAliases>
 	
 	<mappers>
-		<!-- <mapper resource="HobbyMapper.xml" />  -->
+		<mapper resource="MemberMapper.xml" />
+		<mapper resource="BuyMapper.xml" />
 	</mappers>
 </configuration>
