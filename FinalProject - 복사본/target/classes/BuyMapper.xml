@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kay87.team.dao.BuyMapper">
+	
+<!-- 검색한 생선리스트 가져오기 -->
+	<select id="getFishName" parameterType="string" resultType="FishList">
+		
+		select * from fishList
+		where fishName LIKE '%' || #{search} || '%'
+	
+	</select>
+	
+<!-- 구매글 올리기	 -->
+	<insert id="insertBuyList" parameterType="BuyList">
+	
+		insert into buyList
+		(
+							buyNum
+							, fishNum
+							, buyerId
+							, buyLocation
+							<if test="uploadDate!=null">
+							, uploadDate
+							</if>
+							, deadline
+							<if test="priority1!=null">
+							, priority1
+							</if>
+							<if test="priority2!=null">
+							, priority2
+							</if>
+							<if test="priority3!=null">
+							, priority3
+							</if>
+							, weight
+							, price
+							,buyListComment
+							)
+		values
+		(
+							buyNum.nextval
+							,#{fishNum}	
+							,#{buyerId}	
+							,#{buyLocation}
+							<if test="uploadDate!=null">
+							,#{uploadDate}
+							</if>
+							, #{deadline}
+							<if test="priority1!=null">
+							,#{priority1}
+							</if>
+							<if test="priority2!=null">
+							,#{priority2}
+							</if>
+							<if test="priority3!=null">
+							,#{priority3}
+							</if>
+							,#{weight}	
+							,#{price}
+							,#{buyListComment}	
+		)
+
+	</insert>
+	
+<!-- 사용자의 판매이력 가져오기(중복된 판매자는 제외) -->
+	<select id="getHistorySellerId" parameterType="string" resultType="BuyList">
+		
+		SELECT * FROM buyList 
+ 		WHERE ROWID IN(SELECT MAX(ROWID) FROM buyList 
+ 		where buyerid = #{id}
+ 		GROUP BY successsellerId) 
+ 		and successsellerId is not null
+ 		
+	</select>
+	
+	<select id="getSuccessBuyList" parameterType="string" resultType="hashmap">
+	
+			SELECT * 
+			FROM 
+				buyList b, fishlist f
+	 		where 
+	 			b.fishnum=f.fishnum
+	 		and
+	 			buyerid = #{id}
+	 		and 
+                saleStatus !='onSale' and saleStatus !='refundComplete'
+
+	</select>
+	
+<!-- 	
+	  <select id="selectBestseller" resultType="hashmap">
+   	SELECT
+   		b.bookcode,
+   		b.title,
+   		b.price,
+   		s.purchasecnt
+   	FROM
+   		book b, sale s
+   	WHERE
+   		b.bookcode=s.bookcode
+   	AND
+   		s.purchasecnt
+   	IN (
+   		SELECT
+   			MAX(purchasecnt)
+   		FROM
+   			sale
+   	)
+   </select> -->
+	
+</mapper>

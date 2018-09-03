@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kay87.team.dao.MemberMapper">
+
+	<insert id="joinMember" parameterType="Member">
+	
+		insert into memberinfo
+		(
+			id,
+			password,
+			nameKana,
+			name,
+			address,
+			addrHurikana,
+			tel,
+			email,
+			alarm,
+			grade,
+			first,
+			memberStatus
+		)
+		values
+		(
+			#{id},
+			#{password},
+			#{nameKana},
+			#{name},
+			#{address},
+			#{addrHurikana},
+			#{tel},
+			#{email},
+			#{alarm},
+			#{grade},
+			#{first},
+			#{memberStatus}
+		)
+	
+	</insert>
+	
+	<select id="login" parameterType="Member" resultType="Member">
+	
+		select * from memberinfo where id = #{id} and password = #{password}
+	
+	</select>
+	
+</mapper>
