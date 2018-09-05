@@ -401,6 +401,8 @@ $(document).ready(function()
 		<a class="btn" href="?page=${endGroup+1}&searchText=${searchText}">다음 페이지</a>&nbsp;
 		<a class="btn" href="?page=${endpage}&searchText=${searchText}">끝 페이지</a>
 	</div>
+	
+	<div>test</div>
 </body>
 </html>
 </head>
