@@ -40,7 +40,7 @@ public class HomeController {
 	
 	}
 	
-	//회원가입 폼 불러오기
+	//로그인 폼 불러오기
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public void login() {
 		
@@ -56,23 +56,8 @@ public class HomeController {
 			,@RequestParam(value = "page", defaultValue="1") int page
 			,Model model) {				
 		System.out.println("qq");
-		BuyMapper mapper = sql.getMapper(BuyMapper.class);
 		
-		int total = mapper.getTotal(searchText);
-		//System.out.println(total);
-		//System.out.println(searchText);
-			
-		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
-				
-		RowBounds rb = new RowBounds(navi.getStartRecord(), navi.getCountPerPage());
-			
-		List<BuyList> allbuylist = mapper.allBuyList(searchText, rb);
-		model.addAttribute("allbuylist", allbuylist);
-		model.addAttribute("searchText", searchText);
-		model.addAttribute("navi", navi);                            
-		model.addAttribute("startGroup", navi.getStartPageGroup()); 
-		model.addAttribute("endGroup", navi.getEndPageGroup());      
-		model.addAttribute("endpage", navi.getTotalPageCount()); 
+		 
 		return "home";
 	}	
 	
@@ -93,7 +78,7 @@ public class HomeController {
 				
 		RowBounds rb = new RowBounds(navi.getStartRecord(), navi.getCountPerPage());
 			
-		List<BuyList> allbuylist = mapper.allBuyList(searchText, rb);
+		List<BuyList> allbuylist = mapper.allBuyList(searchText);
 		model.addAttribute("allbuylist", allbuylist);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("navi", navi);                            
@@ -122,7 +107,7 @@ public class HomeController {
 		RowBounds rb = new RowBounds(navi.getStartRecord(), navi.getCountPerPage());
 		
 		
-		List<BuyList> mybuylist = mapper.myBuyList(userId, rb);
+		List<BuyList> mybuylist = mapper.myBuyList(userId);
 		System.out.println(mybuylist);
 		
 		model.addAttribute("mybuylist", mybuylist);
@@ -134,5 +119,4 @@ public class HomeController {
 		return "home";
 	}
 	
-
 }
