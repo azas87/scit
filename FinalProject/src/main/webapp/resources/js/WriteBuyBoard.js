@@ -3,22 +3,20 @@
 $(function(){
 	
 	var setFishName =$('#setFishName').val();
-	var setFishNum =$('#setFishNum').val();
 	var setLoction =$('#setLoction').val();
 	var setSellerId =$('#setSellerId').val();
-
+	
 	var currentDate = today();
 	var tomorrow = getTomorrow();
 	var setDate = '<option value="'+currentDate+'">'+currentDate+'</option>';
 		setDate += '<option value="'+tomorrow+'">'+tomorrow+'</option>';
-	$('#loadDate').html(setDate);
+	$('#loadDate').append(setDate);
 	
 	if(fishName.length!=0){
 		$('#fishName').val(setFishName);
-		$('#fishNum').val(setFishNum);
 		var temp = '<option value="'+setLoction+'">'+setLoction+'</option>';
 		$('#location').html(temp);
-		$('#buyLocation').val(setLoction).prop("selected", true);
+		$('#location').val(setLoction).prop("selected", true);
 		$('#priority1').val(setSellerId).prop("selected", true);
 	}
 	
@@ -46,8 +44,7 @@ $(function(){
 					temp='該当する魚は販売しておりません。'
 				}
 				if(data.length==1){
-					$('#fishNum').val(data[0].fishNum);
-					getLocation(data[0].location);
+					getLocation(data[0].locations);
 				}
 				for(i in data){
 					
@@ -74,7 +71,6 @@ function getFishName() {
 	
 	var locationList = $(this).attr("data-loca");
 	var fishName = $(this).attr("data-name");
-	var fishNum = $(this).attr("data-no");
 	$('#fishName').val(fishName);
 	
 	getLocation(locationList);
@@ -106,8 +102,7 @@ function check() {
 	var weight = $('#weight').val();
 	var price = $('#price').val();
 	var deadline = $('#deadline').val();
-	var fishNum = $('#fishNum').val();
-	
+
 	if(fishName.length==0){
 		alert('魚種を入力してください。');
 		$('#fishName').focus();
@@ -133,12 +128,20 @@ function check() {
 	var loadDate = $('#loadDate').val();
 	var hour = $('#hour').val();
 	var minute = $('#minute').val();
-	var temp = loadDate+" "+hour+":"+minute+":00";
-	$('#uploadDate').val(temp);
-	var finishHour = $('#finishHour').val();
-	hour += finishHour;
-	temp = loadDate+" "+hour+":"+minute+":00";
-	$('#deadline').val(temp);
+	var startTime = loadDate+" "+hour+":"+minute+":00";
+	var startDate = new Date();
+		//예약 안하는경우
+		if(loadDate.length==0){
+			$('#uploadDate').val(startDate);
+	}	//예약하는경우
+		else{
+			startDate = new Date(startTime);
+			$('#uploadDate').val(new Date(startDate));
+	}
+	//마감시간계산
+	var takenTime = $('#finishHour').val();
+	var finishTime = plusTime(startDate, takenTime);
+	$('#deadline').val(finishTime);
 	return true;
 }
 //선택한 생선이름에 대한 원산지 정보 select 박스에 주입
@@ -161,8 +164,8 @@ function today(){
     var year  = date.getFullYear();
     var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
     var day   = date.getDate();
-
     if (("" + month).length == 1) { month = "0" + month; }
+    if (("" + day).length == 1) { day = "0" + day; }
     return year +"/" + month +"/"+ day; 
        
 }
@@ -179,5 +182,16 @@ function getTomorrow(){
 	var day = tomorrow.getDate();
 	
 	if (("" + month).length == 1) { month = "0" + month; }
+	if (("" + day).length == 1) { day = "0" + day; }
 	return year +"/" + month +"/"+ day; 
+}
+
+//경과된 시간 계산
+function plusTime(finishTime, takenTime){
+
+	var minute = takenTime*60;
+	finishTime.setMinutes(finishTime.getMinutes() + minute);
+	
+	return finishTime;
+	
 }

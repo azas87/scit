@@ -36,16 +36,12 @@ public class HomeController {
 	
 	}
 	
-	//회원가입 폼 불러오기
+	//로그인 폼 불러오기
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public void login() {
 		
 		
 	}
 	
-	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
-	public void jqgrid() {
-		
-		
-	}
+
 }

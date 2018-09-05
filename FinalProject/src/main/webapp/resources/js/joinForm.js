@@ -1,16 +1,17 @@
 function check() {
-	
-	var email =  document.getElementById("email").value;
-	var userpwd = document.getElementById("userpwd").value;
-	var userpwd2 = document.getElementById("userpwd2").value;
-	var phone = document.getElementById("phone").value;
-	var name = document.getElementById("name").value;
-	var namekana = document.getElementById("namekana").value;
+
+	var userid = $('#userid').val();
+	var email =  $('#email').val();
+	var userpwd = $('#userpwd').val();
+	var userpwd2 = $('#userpwd2').val();
+	var phone = $('#phone').val();
+	var name = $('#name').val();
+	var namekana = $('#namekana').val();
 	var pattern1 = /[0-9]/;	
 	var pattern2 = /[a-zA-Z]/;
 	
-	if(userid.length==0){
-		alert("IDを入力してください。");
+	if( userid.length < 3 || userid.length > 10){
+		alert("IDは3桁～10桁を入力してください。");
 		document.getElementById("userid").focus();
 		return false;
 	}
@@ -40,7 +41,7 @@ function check() {
 	
 	else if(email.length==0){
 		alert("メールアドレスを入力してください。");
-		document.getElementById("email").focus();
+		email.focus();
 		return false;
 	}
 
