@@ -10,13 +10,8 @@
 <head>
 	<title>Home</title>
 	<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
-<script>
-$(document).ready(function()
-  {
-	printClock();
-	
+	<script>
+
     $(".item").mouseenter(function(){
       $(this).css('flex-grow',1);
       $(this).css('font-size',"3.5em");
@@ -103,6 +98,7 @@ function myBuyList() {
 	location.href="myBuyList?";
 }
 </script>
+
 	<style>
 		div{
 			border:1px solid #cccccc;
@@ -120,7 +116,8 @@ function myBuyList() {
     	border-radius:5px;
     	padding:10px;
     	color:#fff;
-    	font-size:3.5em Arial;
+    	font-size:3.5em;
+    	text-align: center;
     }
 
 		#contain
@@ -222,6 +219,83 @@ function myBuyList() {
 			line-height: 100px;
 		}
 	</style>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
+<script>
+
+function printClock() {
+    
+    var clock = document.getElementById("clock");            // 출력할 장소 선택
+    var currentDate = new Date();                                     // 현재시간
+    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+    var amPm = 'AM'; // 초기값 AM
+    var currentHours = addZeros(currentDate.getHours(),2); 
+    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+    
+    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+    	amPm = 'PM';
+    	currentHours = addZeros(currentHours - 12,2);
+    }
+
+    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+    }
+    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+    
+    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+}
+
+function addZeros(num, digit) { // 자릿수 맞춰주기
+	  var zero = '';
+	  num = num.toString();
+	  if (num.length < digit) {
+	    for (i = 0; i < digit - num.length; i++) {
+	      zero += '0';
+	    }
+	  }
+	  return zero + num;
+}
+
+$(document).ready(function()
+{
+	printClock();
+	
+    $(".item").mouseenter(function(){
+      $(this).css('flex-grow',1);
+      $(this).css('font-size',"3.5em");
+      $(this).css('background-color',"powderblue");
+    });
+    
+    $(".item").mouseleave(function(){
+      $(this).css('flex-grow',1);
+      $(this).css('font-size',"1em");
+      $(this).css('background-color',"white");
+    });
+
+    $('.item').hover(function(){
+        // Hover over code
+        var title = $(this).attr('title');
+        $(this).data('tipText', title).removeAttr('title');
+        $('<p class="tooltip"></p>')
+        .text(title)
+        .appendTo('body')
+        .fadeIn('slow');
+	}, function() {
+	        // Hover out code
+	        $(this).attr('title', $(this).data('tipText'));
+	        $('.tooltip').remove();
+	}).mousemove(function(e) {
+	        var mousex = e.pageX + 20; //Get X coordinates
+	        var mousey = e.pageY + 10; //Get Y coordinates
+	        $('.tooltip').css({ top: mousey, left: mousex })
+	});
+    
+    
+});
+
+</script>
+	
 </head>
 <body>
  	<div id="contain">
@@ -232,10 +306,10 @@ function myBuyList() {
 		<div id="nav">
 			<p>NAVIGATION</p>
       <div class="items">
-        <div class="item " title="Click button"><a href="loginForm?">로그인</a></div>
-        <div class="item " title="Drag button"><a href="joinForm?">회원가입</a></div>
-        <div class="item " title="Select button"><a href="writeBuyBoardForm?">글등록</a></div>
-        <div class="item " title="Double Click"><a href="buyListHistory?">구매내역</a></div>
+        <div class="item " title="로그인"><a href="loginForm?">로그인</a></div>
+        <div class="item " title="회원가입"><a href="joinForm?">회원가입</a></div>
+        <div class="item " title="글등록"><a href="writeBuyBoardForm?">글등록</a></div>
+        <div class="item " title="구매내역"><a href="buyListHistory?">구매내역</a></div>
       </div>
 		</div>
 

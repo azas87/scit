@@ -1,6 +1,5 @@
 package com.kay87.team.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -27,4 +26,9 @@ public interface BuyMapper {
 	public List<BuyList> myBuyList(String userId, RowBounds rb);
 
 	public int mygetTotal(String userId);
+
+	public List<BuyList> getSuccessBuyList(String search, RowBounds rb);
+	
+	public int GetTotalListCount(String search);
+
 }

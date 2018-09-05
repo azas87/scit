@@ -76,7 +76,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				location 
 			FROM 
 				buyList
+
 	</select>
+
+			WHERE buyerId = #{search}
+
 
 
 
@@ -92,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and 
 			saleStatus = 'onSale'				
 	</select>
-	
+
 	<select id="getTotal" resultType="int" parameterType="string">
 		select count(*) from BuyList
 		where
@@ -140,4 +144,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	and schoolnum = #{schoolnum}
    </if>
    </select> -->
+
+	<select id="GetTotalListCount" resultType="int" parameterType="string">
+		SELECT COUNT(*) FROM buyList <if test="_parameter != null"> WHERE buyerId = #{search}  </if>
+	</select>
+
 </mapper>
