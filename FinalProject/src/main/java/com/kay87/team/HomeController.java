@@ -17,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
 import com.kay87.team.util.PageNavigator;
 import com.kay87.team.vo.BuyList;
@@ -28,8 +30,7 @@ import com.kay87.team.vo.MemberInfo;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	final int countPerPage = 3;
-	final int pagePerGroup = 5;
+	
 	@Autowired
 	SqlSession sql;	
 	
@@ -50,89 +51,41 @@ public class HomeController {
 
 	
 	//첫 메인화면에서 전체구매리스트+검색
-	@RequestMapping(value = "/")
-	public String home(
-			@RequestParam(value = "searchText", defaultValue="") String searchText
-			,@RequestParam(value = "page", defaultValue="1") int page
-			,Model model) {				
-		System.out.println("qq");
-		BuyMapper mapper = sql.getMapper(BuyMapper.class);
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {		
 		
-		int total = mapper.getTotal(searchText);
-		//System.out.println(total);
-		//System.out.println(searchText);
-			
-		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
-				
-		RowBounds rb = new RowBounds(navi.getStartRecord(), navi.getCountPerPage());
-			
-		List<BuyList> allbuylist = mapper.allBuyList(searchText, rb);
-		model.addAttribute("allbuylist", allbuylist);
-		model.addAttribute("searchText", searchText);
-		model.addAttribute("navi", navi);                            
-		model.addAttribute("startGroup", navi.getStartPageGroup()); 
-		model.addAttribute("endGroup", navi.getEndPageGroup());      
-		model.addAttribute("endpage", navi.getTotalPageCount()); 
 		return "home";
 	}	
 	
 	
-	@RequestMapping(value = "/allBuyList")
-	public String allBuyList(
-			@RequestParam(value = "searchText", defaultValue="") String searchText
-			,@RequestParam(value = "page", defaultValue="1") int page
-			,Model model) {				
-		System.out.println("qq");
+	@RequestMapping(value = "/allBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String allBuyList() {			
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
 		
-		int total = mapper.getTotal(searchText);
-		//System.out.println(total);
-		//System.out.println(searchText);
-			
-		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
-				
-		RowBounds rb = new RowBounds(navi.getStartRecord(), navi.getCountPerPage());
-			
-		List<BuyList> allbuylist = mapper.allBuyList(searchText, rb);
-		model.addAttribute("allbuylist", allbuylist);
-		model.addAttribute("searchText", searchText);
-		model.addAttribute("navi", navi);                            
-		model.addAttribute("startGroup", navi.getStartPageGroup()); 
-		model.addAttribute("endGroup", navi.getEndPageGroup());      
-		model.addAttribute("endpage", navi.getTotalPageCount()); 
-		return "home";
+		List<BuyList> allbuylist = mapper.allBuyList();			
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(allbuylist) + "}";
+		System.out.println(jsonPlace);		
+		
+		return jsonPlace;
 	}	
 	
 	//첫 메인화면에서 나의구매리스트+검색
-	@RequestMapping(value = "/myBuyList", method = RequestMethod.GET)
-	public String myBuyList(
-			@RequestParam(value = "page", defaultValue="1") int page
-			,Model model, HttpSession session) {				
-		System.out.println("ww");
-		BuyMapper mapper = sql.getMapper(BuyMapper.class);
+	@RequestMapping(value = "/myBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String myBuyList(HttpSession session) {			
+		BuyMapper mapper = sql.getMapper(BuyMapper.class);		
+		String userId = (String) session.getAttribute("loginId");		
 		
-		String userId = (String) session.getAttribute("loginId");	
-				
-		int total = mapper.mygetTotal(userId);
-		System.out.println(total);
-		//System.out.println(searchText);
-		
-		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
-		
-		RowBounds rb = new RowBounds(navi.getStartRecord(), navi.getCountPerPage());
+		List<BuyList> mybuylist = mapper.myBuyList(userId);
+		System.out.println(mybuylist);		
 		
 		
-		List<BuyList> mybuylist = mapper.myBuyList(userId, rb);
-		System.out.println(mybuylist);
-		
-		model.addAttribute("mybuylist", mybuylist);
-		//model.addAttribute("searchText", searchText);
-		model.addAttribute("navi", navi);                            
-		model.addAttribute("startGroup", navi.getStartPageGroup()); 
-		model.addAttribute("endGroup", navi.getEndPageGroup());      
-		model.addAttribute("endpage", navi.getTotalPageCount()); 
-		return "home";
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(mybuylist) + "}";
+		System.out.println(jsonPlace);
+		return jsonPlace;
 	}
-	
-
 }

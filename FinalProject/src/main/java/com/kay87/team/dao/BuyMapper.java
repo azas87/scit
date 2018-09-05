@@ -18,14 +18,11 @@ public interface BuyMapper {
 	public List<BuyList> getSuccessBuyList(String id);
 	
 	
+		
+	public List<BuyList> allBuyList();
 	
-	public List<BuyList> allBuyList(String searchText, RowBounds rb);	
+	public List<BuyList> myBuyList(String userId);
 	
-	public int getTotal(String searchText);
-	
-	public List<BuyList> myBuyList(String userId, RowBounds rb);
-
-	public int mygetTotal(String userId);
 
 	public List<BuyList> getSuccessBuyList(String search, RowBounds rb);
 	

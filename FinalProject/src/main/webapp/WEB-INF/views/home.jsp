@@ -10,95 +10,7 @@
 <head>
 	<title>Home</title>
 	<title>Insert title here</title>
-	<script>
-
-    $(".item").mouseenter(function(){
-      $(this).css('flex-grow',1);
-      $(this).css('font-size',"3.5em");
-      $(this).css('background-color',"powderblue");
-    });
-    $(".item").mouseleave(function(){
-      $(this).css('flex-grow',1);
-      $(this).css('font-size',"1em");
-      $(this).css('background-color',"white");
-    });
-
-    $('.item').hover(function(){
-        // Hover over code
-        var title = $(this).attr('title');
-        $(this).data('tipText', title).removeAttr('title');
-        $('<p class="tooltip"></p>')
-        .text(title)
-        .appendTo('body')
-        .fadeIn('slow');
-}, function() {
-        // Hover out code
-        $(this).attr('title', $(this).data('tipText'));
-        $('.tooltip').remove();
-}).mousemove(function(e) {
-        var mousex = e.pageX + 20; //Get X coordinates
-        var mousey = e.pageY + 10; //Get Y coordinates
-        $('.tooltip').css({ top: mousey, left: mousex })
-});
-  });
-  
-function printClock() {
-    
-    var clock = document.getElementById("clock");            // 출력할 장소 선택
-    var currentDate = new Date();                                     // 현재시간
-    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
-    var amPm = 'AM'; // 초기값 AM
-    var currentHours = addZeros(currentDate.getHours(),2); 
-    var currentMinute = addZeros(currentDate.getMinutes() ,2);
-    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
-    
-    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
-    	amPm = 'PM';
-    	currentHours = addZeros(currentHours - 12,2);
-    }
-
-    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
-       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
-    }
-    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
-    
-    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
-}
-
-function addZeros(num, digit) { // 자릿수 맞춰주기
-	  var zero = '';
-	  num = num.toString();
-	  if (num.length < digit) {
-	    for (i = 0; i < digit - num.length; i++) {
-	      zero += '0';
-	    }
-	  }
-	  return zero + num;
-}
-
-function search() {	
-	var search_bar = document.getElementById("search_bar").value;
-	location.href="?searchText="+search_bar;
-}
-
-function pagingFormsubmit(currentPage) {
-	var form = document.getElementById('pagingForm');
-	var page = document.getElementById('page');
-	page.value = currentPage;
-	form.submit();
-}
-
-function allBuyList() {
-	alert("aa");
-	location.href="allBuyList?";
-}
-
-function myBuyList() {	
-	alert("bb");
-	location.href="myBuyList?";
-}
-</script>
-
+	
 	<style>
 		div{
 			border:1px solid #cccccc;
@@ -219,9 +131,36 @@ function myBuyList() {
 			line-height: 100px;
 		}
 	</style>
+
+
+<!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
+<!-- The link to the CSS that the grid needs -->
+<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
+
+<script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
+<script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
+
+
+ <!-- The jQuery library is a prerequisite for all jqSuite products -->
+ <script type="text/javascript" src="./resources/js/jquery.min.js"></script> 
+ <script type="text/javascript" src="./resources/js/jquery-ui.min.js"></script>
+ <!-- This is the Javascript file of jqGrid -->   
+
+
+ <!-- This is the localization file of the grid controlling messages, labels, etc.
+ <!-- We support more than 40 localizations -->
+ <script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
+ 
+ <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
+ 
+ 
 <script>
+$(document).ready(function() {
+	 homeList('allBuyList');
+});
 
 function printClock() {
     
@@ -246,6 +185,99 @@ function printClock() {
     setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
 }
 
+function homeList(url2) {
+	$("#jqGrid").jqGrid({
+		url : url2,
+		mtype : "GET",
+		datatype : "json",
+		colModel : 
+		[ 
+			{
+				label : '購買日付',
+				name : 'deadline',
+				width : 150,
+				height : 200,
+				align:'center'
+			}, {
+				label : '品種',
+				name : 'fishName',
+				width : 150,
+				height : 200,
+				align:'center'
+			}, {
+				label : '産地',
+				name : 'location',
+				width : 100,
+				height : 200,
+				align:'center'
+			}, {
+				label : '重量',
+				name : 'weight',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '価格',
+				name : 'price',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '販売者ID',
+				name : 'successSellerId',
+				width : 100,
+				height : 200,
+				align:'center'
+			}, {
+				label : '再購入1',
+				name : '再購入2',
+				width : 100,
+				height : 200,
+				formatter: rebuy,
+				align:'center'
+			},
+
+		],
+		viewrecords : true,
+		width : 950,
+		height : 400,
+		rowNum : 10,
+		rowList:[10,20,30],
+		pager : "#jqGridPager",
+		loadonce: true,
+		shrinkToFit : false,
+		
+		loadComplete:function(data)
+		{
+			$('.bigSize').hover(function(){
+				console.log("test");
+				var title = $(this).attr('title');
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		},
+		gridComplete: function(){
+		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+    		var cm = $(this).jqGrid('getGridParam','colModel');    
+    		if(cm[index].name == "再購入2")
+    		{	
+       		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
+    		} 
+    	},
+    	
+	});
+}
+
 function addZeros(num, digit) { // 자릿수 맞춰주기
 	  var zero = '';
 	  num = num.toString();
@@ -263,7 +295,7 @@ $(document).ready(function()
 	
     $(".item").mouseenter(function(){
       $(this).css('flex-grow',1);
-      $(this).css('font-size',"3.5em");
+      $(this).css('fo9/nt-size',"3.5em");
       $(this).css('background-color',"powderblue");
     });
     
@@ -290,11 +322,162 @@ $(document).ready(function()
 	        var mousey = e.pageY + 10; //Get Y coordinates
 	        $('.tooltip').css({ top: mousey, left: mousex })
 	});
+
+ /* 	$("#jqGrid").jqGrid({
+		url : 'allBuyLilst',
+		mtype : "GET",
+		datatype : "json",
+		colModel : 
+		[ 
+			{
+				label : '購買日付',
+				name : 'deadline',
+				width : 150,
+				height : 200,
+				align:'center'
+			}, {
+				label : '品種',
+				name : 'fishName',
+				width : 150,
+				height : 200,
+				align:'center'
+			}, {
+				label : '産地',
+				name : 'location',
+				width : 100,
+				height : 200,
+				align:'center'
+			}, {
+				label : '重量',
+				name : 'weight',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '価格',
+				name : 'price',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '販売者ID',
+				name : 'successSellerId',
+				width : 100,
+				height : 200,
+				align:'center'
+			}, {
+				label : '再購入1',
+				name : '再購入2',
+				width : 100,
+				height : 200,
+				formatter: rebuy,
+				align:'center'
+			},
+
+		],
+		viewrecords : true,
+		width : 950,
+		height : 400,
+		rowNum : 10,
+		rowList:[10,20,30],
+		pager : "#jqGridPager",
+		loadonce: true,
+		shrinkToFit : false,
+		
+		loadComplete:function(data)
+		{
+			$('.bigSize').hover(function(){
+				console.log("test");
+				var title = $(this).attr('title');
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		},
+		gridComplete: function(){
+		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+    		var cm = $(this).jqGrid('getGridParam','colModel');    
+    		if(cm[index].name == "再購入2")
+    		{	
+       		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
+    		} 
+    	},
+    	
+	}); */
+	
+	
+	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
+        search: false, // show search button on the toolbar
+        add: false,
+        edit: false,
+        del: false,
+        refresh: true
+    });
+	
+	var timer;
+	$("#search_cells").on("keyup", function() {
+		var self = this;
+		if(timer) { clearTimeout(timer); }
+		timer = setTimeout(function(){
+			//timer = null;
+			$("#jqGrid").jqGrid('filterInput', self.value);
+		},0);
+	});
     
-    
-});
+}); 
+
+function rebuy (cellvalue, options, rowObject) {
+	 //console.log(rowObject);
+	   return '<a href="#">再購入</a>'; 
+	 };
+	 
+	 
+	 $("#search").on("click",function(){
+	      var data = $("#searchData").val()
+	     var searchType = $("#searchType").val();
+	     var rows = $("[title ='Records per Page']").val();
+	     var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
+
+
+	     rowData = null
+
+
+	     $("#jqGrid").jqGrid("clearGridData", true);
+
+
+	     $("#jqGrid").setGridParam({
+	    	 datatype	: "json",
+	    	 postData	: postData,
+	    	 loadComplete	: function(data) {
+	    		 console.log(data);
+	    	 }
+	     }).trigger("reloadGrid");
+	});
+	
+
+   	function allBuyList() {	
+   		alert("all");
+   		homeList('allBuyList');
+   		//location.href="allBuyList?";
+   	}
+
+   	function myBuyList() {		
+   		alert("my");
+   		homeList('myBuyList');
+   		//location.href="myBuyList?";
+   	}
 
 </script>
+	
 	
 </head>
 <body>
@@ -346,24 +529,14 @@ $(document).ready(function()
 <input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
 <input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
 
-<form class="right" method="get">
-	<select name="searchItem">
-		<option value="userid">품종</option>
-		<option value="title">원산지</option>
-		<option value="content">구매자</option>
-	</select>	
-	<input type="text" id="search_bar" class="search_bar">
-	<input type="button" onclick="search()" value="검색">
-</form>
 
-<div id="result"></div>
 
-<table border="1">
+<%-- <table border="1">
 	<tr>
 		<th>품종</th><th>원산지</th><th>중량</th><th>가격</th><th>구매자</th>
 	</tr>
 
- 	<c:forEach var="a" items="${allbuylist}" >
+ 	<c:forEach var="a" items="${buylist}" >
 	<tr>
 		<td>${a.fishName}</td>
 		<td>${a.location}</td>
@@ -372,37 +545,11 @@ $(document).ready(function()
 		<td>${a.buyerId}</td>
 	</tr>
 	</c:forEach>	
-</table>
+</table> --%>
 
-<table border="1">
-	<tr>
-		<th>품종</th><th>원산지</th><th>중량</th><th>가격</th><th>구매자</th>
-	</tr>
+	<table id="jqGrid"></table>
+	<div id="jqGridPager"></div>
 
- 	<c:forEach var="a" items="${mybuylist}" >
-	<tr>
-		<td>${a.fishName}</td>
-		<td>${a.location}</td>
-		<td>${a.weight}</td>
-		<td>${a.price}</td>
-		<td>${a.buyerId}</td>
-	</tr>
-	</c:forEach>	
-</table>
-
-
-	<c:forEach var="i" begin="${startGroup}" end="${endGroup}"  step="1">
-		<a href="?page=${i}&searchText=${searchText}"><input type="button" value="${i}"></a>
-	</c:forEach>
-	
-	<div class="boardfooter">
-		<a class="btn" href="?page=1&searchText=${searchText}">처음 페이지</a>&nbsp;
-		<a class="btn" href="?page=${navi.startPageGroup-1}&searchText=${searchText}">이전 페이지</a>&nbsp;
-		<a class="btn" href="?page=${endGroup+1}&searchText=${searchText}">다음 페이지</a>&nbsp;
-		<a class="btn" href="?page=${endpage}&searchText=${searchText}">끝 페이지</a>
-	</div>
-	
-	<div>test</div>
 </body>
 </html>
 </head>
