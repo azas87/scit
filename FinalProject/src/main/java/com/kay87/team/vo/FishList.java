@@ -1,92 +1,59 @@
 package com.kay87.team.vo;
 
 public class FishList {
-	private int fishNum;
-	private int fishCategoryNum;
 	private String fishName;
-	private String gender;
-	private String location;
-	private String fishInfo;
+	private int fishCategoryNum;
+	private String locations;
 	private String seasonInfo;
-	
+	private String fishInfo;
+	public FishList(String fishName, int fishCategoryNum, String locations, String seasonInfo, String fishInfo) {
+		super();
+		this.fishName = fishName;
+		this.fishCategoryNum = fishCategoryNum;
+		this.locations = locations;
+		this.seasonInfo = seasonInfo;
+		this.fishInfo = fishInfo;
+	}
 	public FishList() {
 		super();
 	}
-
-	public FishList(int fishNum, int fishCategoryNum, String fishName, String gender, String location, String fishInfo,
-			String seasonInfo) {
-		super();
-		this.fishNum = fishNum;
-		this.fishCategoryNum = fishCategoryNum;
-		this.fishName = fishName;
-		this.gender = gender;
-		this.location = location;
-		this.fishInfo = fishInfo;
-		this.seasonInfo = seasonInfo;
-	}
-
-	public int getFishNum() {
-		return fishNum;
-	}
-
-	public void setFishNum(int fishNum) {
-		this.fishNum = fishNum;
-	}
-
-	public int getFishCategoryNum() {
-		return fishCategoryNum;
-	}
-
-	public void setFishCategoryNum(int fishCategoryNum) {
-		this.fishCategoryNum = fishCategoryNum;
-	}
-
 	public String getFishName() {
 		return fishName;
 	}
-
 	public void setFishName(String fishName) {
 		this.fishName = fishName;
 	}
-
-	public String getGender() {
-		return gender;
+	public int getFishCategoryNum() {
+		return fishCategoryNum;
 	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setFishCategoryNum(int fishCategoryNum) {
+		this.fishCategoryNum = fishCategoryNum;
 	}
-
-	public String getLocation() {
-		return location;
+	public String getLocations() {
+		return locations;
 	}
-
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocations(String locations) {
+		this.locations = locations;
 	}
-
-	public String getFishInfo() {
-		return fishInfo;
-	}
-
-	public void setFishInfo(String fishInfo) {
-		this.fishInfo = fishInfo;
-	}
-
 	public String getSeasonInfo() {
 		return seasonInfo;
 	}
-
 	public void setSeasonInfo(String seasonInfo) {
 		this.seasonInfo = seasonInfo;
 	}
-
+	public String getFishInfo() {
+		return fishInfo;
+	}
+	public void setFishInfo(String fishInfo) {
+		this.fishInfo = fishInfo;
+	}
 	@Override
 	public String toString() {
-		return "FishList [fishNum=" + fishNum + ", fishCategoryNum=" + fishCategoryNum + ", fishName=" + fishName
-				+ ", gender=" + gender + ", location=" + location + ", fishInfo=" + fishInfo + ", seasonInfo="
-				+ seasonInfo + "]";
+		return "FishList [fishName=" + fishName + ", fishCategoryNum=" + fishCategoryNum + ", locations=" + locations
+				+ ", seasonInfo=" + seasonInfo + ", fishInfo=" + fishInfo + "]";
 	}
+	
+	
 	
 	
 }

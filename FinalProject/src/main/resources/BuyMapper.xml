@@ -14,57 +14,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- 구매글 올리기	 -->
 	<insert id="insertBuyList" parameterType="BuyList">
-	
+
 		insert into buyList
 		(
 							buyNum
-							, fishNum
+							, fishName
 							, buyerId
-							, buyLocation
 							<if test="uploadDate!=null">
 							, uploadDate
 							</if>
-							, deadline
-							<if test="priority1!=null">
-							, priority1
-							</if>
-							<if test="priority2!=null">
-							, priority2
-							</if>
-							<if test="priority3!=null">
-							, priority3
-							</if>
+							, deadline 
 							, weight
 							, price
-							,buyListComment
+							, buyListComment
+							, location
 							)
 		values
 		(
 							buyNum.nextval
-							,#{fishNum}	
+							,#{fishName}	
 							,#{buyerId}	
-							,#{buyLocation}
 							<if test="uploadDate!=null">
 							,#{uploadDate}
 							</if>
 							, #{deadline}
-							<if test="priority1!=null">
-							,#{priority1}
-							</if>
-							<if test="priority2!=null">
-							,#{priority2}
-							</if>
-							<if test="priority3!=null">
-							,#{priority3}
-							</if>
-							,#{weight}	
-							,#{price}
-							,#{buyListComment}	
+							, #{weight}	
+							, #{price}
+							, #{buyListComment}	
+							, #{location}	
 		)
 
 	</insert>
 	
-<!-- 사용자의 판매이력 가져오기(중복된 판매자는 제외) -->
+	<!-- 사용자의 판매이력 가져오기(중복된 판매자는 제외) 
+	판매자 우선순위를 위해-->
 	<select id="getHistorySellerId" parameterType="string" resultType="BuyList">
 		
 		SELECT * FROM buyList 
@@ -75,23 +58,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		
 	</select>
 	
-	<select id="getSuccessBuyList" parameterType="string" resultType="hashmap">
+	<!-- 구매이력 가져오기 -->
+	<select id="getSuccessBuyList" parameterType="string" resultType="BuyList">
 	
-			SELECT * 
+			SELECT *
 			FROM 
-				buyList b, fishlist f
+				buyList
 	 		where 
-	 			b.fishnum=f.fishnum
-	 		and
 	 			buyerid = #{id}
 	 		and 
                 saleStatus !='onSale' and saleStatus !='refundComplete'
 
 	</select>
 	
+	<!-- 생선별 구매 합계 -->
+	<select id="sumPricebyFishName" parameterType="string" resultType="BuyList">
+		SELECT SUM(price) as price ,fishName
+			FROM 
+				buyList
+	 		where 
+	 			buyerid = #{id}
+	 		and 
+                saleStatus !='onSale' and saleStatus !='refundComplete'
+            group by 
+                fishName
+    </select>
+    
+    <!-- 월별 구매합계 -->
+    <select id="sumPricebyMonth" parameterType="string" resultType="BuyList">
+		select
+   			 to_char(deadline, 'MM') as fishName, sum(price) as price
+		from
+    		buylist
+		where 
+    		to_char(deadline, 'YYYYMMDD') between sysdate-365 and sysdate
+		and
+   			buyerid = #{id}
+		and 
+		    saleStatus !='onSale' and saleStatus !='refundComplete'
+		group by 
+		    to_char(deadline, 'MM')
+		order by
+ 		   fishName
+    </select>
+    
+    <!-- 수취확인 -->
+	<update id="saleComplete" parameterType="string">
+ 
+  	 	UPDATE buylist
+     	SET saleStatus = 'saleComplete'
+    	WHERE buyNum = #{buyNum}
+
+	</update>
 <!-- 	
 	  <select id="selectBestseller" resultType="hashmap">
    	SELECT
+  
+   	
    		b.bookcode,
    		b.title,
    		b.price,

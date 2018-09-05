@@ -14,5 +14,11 @@ public interface BuyMapper {
 
 	public List<BuyList> getHistorySellerId(String attribute);
 
-	public List<HashMap<String, Object>> getSuccessBuyList(String id);
+	public List<BuyList> getSuccessBuyList(String id);
+
+	public List<BuyList> sumPricebyFishName(String userid);
+
+	public List<BuyList> sumPricebyMonth(String userid);
+
+	public int saleComplete(String buyNum);
 }
