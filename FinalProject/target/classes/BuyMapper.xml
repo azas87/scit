@@ -86,41 +86,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	
-<!--전체구매리스트, 검색(getTotal),  -->	
-	<select id="allBuyList" resultType="BuyList" parameterType="string">
+<!--전체구매리스트,검색은 없음-->	
+	<select id="allBuyList" resultType="BuyList" >
 		select 
-			fishName, location, weight, price, buyerId
+			*
 		from 
 			BuyList
-		where
-			fishName like '%' || #{searchText} || '%'
-		and 
+		where			
 			saleStatus = 'onSale'				
 	</select>
 	
 	
 	
-<!--나의구매리스트, 검색(mygetTotal),  -->		
+<!--나의구매리스트, 검색은 없음 -->		
 	<select id="myBuyList" resultType="BuyList" parameterType="string">
 		select 
-			fishName, location, weight, price, buyerId
+			*
 		from 
 			BuyList
-		where	
-		<!-- 	fishName like '%' || #{searchText} || '%'			
-		and  -->
+		where			
 			buyerId = #{buyerId}
 		and
 			saleStatus = 'onSale'				
 	</select>	
 	
-	<select id="mygetTotal" resultType="int" parameterType="string">
+	<!-- <select id="mygetTotal" resultType="int" parameterType="string">
 		select count(*) from BuyList
-		where
-		<!-- 	fishName like '%' || #{searchText} || '%'
-		and -->
+		where		
 			buyerId = #{buyerId}		
 	</select>
+	 -->
 	
 
 	<select id="GetTotalListCount" resultType="int" parameterType="string">

@@ -15,6 +15,8 @@ public interface BuyMapper {
 	public List<BuyList> getSuccessBuyList(String search);
 	
 	
+		
+	public List<BuyList> allBuyList();
 	
 	public List<BuyList> allBuyList(String searchText);	
 	
