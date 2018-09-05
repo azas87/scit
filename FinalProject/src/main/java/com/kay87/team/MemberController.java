@@ -39,7 +39,11 @@ public class MemberController {
 		System.out.println(member);
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		MemberInfo user=dao.login(member);
-		session.setAttribute("loginId", user.getId());
+
+
+		if(user!=null) {
+		session.setAttribute("loginId", user.getId());}
+
 		return "home";
 	}
 	
