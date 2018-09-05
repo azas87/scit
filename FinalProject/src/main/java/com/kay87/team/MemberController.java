@@ -40,7 +40,7 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		MemberInfo user=dao.login(member);
 		session.setAttribute("loginId", user.getId());
-		return "home";
+		return "redirect:/";
 	}
 	
 	//id중복체크

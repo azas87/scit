@@ -10,7 +10,95 @@
 <head>
 	<title>Home</title>
 	<title>Insert title here</title>
-	
+	<script>
+
+    $(".item").mouseenter(function(){
+      $(this).css('flex-grow',1);
+      $(this).css('font-size',"3.5em");
+      $(this).css('background-color',"powderblue");
+    });
+    $(".item").mouseleave(function(){
+      $(this).css('flex-grow',1);
+      $(this).css('font-size',"1em");
+      $(this).css('background-color',"white");
+    });
+
+    $('.item').hover(function(){
+        // Hover over code
+        var title = $(this).attr('title');
+        $(this).data('tipText', title).removeAttr('title');
+        $('<p class="tooltip"></p>')
+        .text(title)
+        .appendTo('body')
+        .fadeIn('slow');
+}, function() {
+        // Hover out code
+        $(this).attr('title', $(this).data('tipText'));
+        $('.tooltip').remove();
+}).mousemove(function(e) {
+        var mousex = e.pageX + 20; //Get X coordinates
+        var mousey = e.pageY + 10; //Get Y coordinates
+        $('.tooltip').css({ top: mousey, left: mousex })
+});
+  });
+  
+function printClock() {
+    
+    var clock = document.getElementById("clock");            // 출력할 장소 선택
+    var currentDate = new Date();                                     // 현재시간
+    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+    var amPm = 'AM'; // 초기값 AM
+    var currentHours = addZeros(currentDate.getHours(),2); 
+    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+    
+    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+    	amPm = 'PM';
+    	currentHours = addZeros(currentHours - 12,2);
+    }
+
+    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+    }
+    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+    
+    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+}
+
+function addZeros(num, digit) { // 자릿수 맞춰주기
+	  var zero = '';
+	  num = num.toString();
+	  if (num.length < digit) {
+	    for (i = 0; i < digit - num.length; i++) {
+	      zero += '0';
+	    }
+	  }
+	  return zero + num;
+}
+
+function search() {	
+	var search_bar = document.getElementById("search_bar").value;
+	location.href="?searchText="+search_bar;
+}
+
+function pagingFormsubmit(currentPage) {
+	var form = document.getElementById('pagingForm');
+	var page = document.getElementById('page');
+	page.value = currentPage;
+	form.submit();
+}
+
+function allBuyList() {
+	alert("aa");
+	location.href="allBuyList?";
+}
+
+function myBuyList() {	
+	alert("bb");
+	location.href="myBuyList?";
+}
+</script>
+
 	<style>
 		div{
 			border:1px solid #cccccc;
@@ -210,7 +298,7 @@ $(document).ready(function()
 	
 </head>
 <body>
-	<div id="contain">
+ 	<div id="contain">
 		<div id="header">
 			<div id="clock">	</div>
 		</div>
@@ -251,6 +339,70 @@ $(document).ready(function()
 			FOOTER
 		</div>
 	</div>
+
+ 
+
+	
+<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
+<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
+
+<form class="right" method="get">
+	<select name="searchItem">
+		<option value="userid">품종</option>
+		<option value="title">원산지</option>
+		<option value="content">구매자</option>
+	</select>	
+	<input type="text" id="search_bar" class="search_bar">
+	<input type="button" onclick="search()" value="검색">
+</form>
+
+<div id="result"></div>
+
+<table border="1">
+	<tr>
+		<th>품종</th><th>원산지</th><th>중량</th><th>가격</th><th>구매자</th>
+	</tr>
+
+ 	<c:forEach var="a" items="${allbuylist}" >
+	<tr>
+		<td>${a.fishName}</td>
+		<td>${a.location}</td>
+		<td>${a.weight}</td>
+		<td>${a.price}</td>
+		<td>${a.buyerId}</td>
+	</tr>
+	</c:forEach>	
+</table>
+
+<table border="1">
+	<tr>
+		<th>품종</th><th>원산지</th><th>중량</th><th>가격</th><th>구매자</th>
+	</tr>
+
+ 	<c:forEach var="a" items="${mybuylist}" >
+	<tr>
+		<td>${a.fishName}</td>
+		<td>${a.location}</td>
+		<td>${a.weight}</td>
+		<td>${a.price}</td>
+		<td>${a.buyerId}</td>
+	</tr>
+	</c:forEach>	
+</table>
+
+
+	<c:forEach var="i" begin="${startGroup}" end="${endGroup}"  step="1">
+		<a href="?page=${i}&searchText=${searchText}"><input type="button" value="${i}"></a>
+	</c:forEach>
+	
+	<div class="boardfooter">
+		<a class="btn" href="?page=1&searchText=${searchText}">처음 페이지</a>&nbsp;
+		<a class="btn" href="?page=${navi.startPageGroup-1}&searchText=${searchText}">이전 페이지</a>&nbsp;
+		<a class="btn" href="?page=${endGroup+1}&searchText=${searchText}">다음 페이지</a>&nbsp;
+		<a class="btn" href="?page=${endpage}&searchText=${searchText}">끝 페이지</a>
+	</div>
+	
+	<div>test</div>
 </body>
 </html>
 </head>
