@@ -81,6 +81,27 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	  return zero + num;
 }
 
+function search() {	
+	var search_bar = document.getElementById("search_bar").value;
+	location.href="?searchText="+search_bar;
+}
+
+function pagingFormsubmit(currentPage) {
+	var form = document.getElementById('pagingForm');
+	var page = document.getElementById('page');
+	page.value = currentPage;
+	form.submit();
+}
+
+function allBuyList() {
+	alert("aa");
+	location.href="allBuyList?";
+}
+
+function myBuyList() {	
+	alert("bb");
+	location.href="myBuyList?";
+}
 </script>
 	<style>
 		div{
@@ -203,7 +224,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	</style>
 </head>
 <body>
-	<div id="contain">
+ 	<div id="contain">
 		<div id="header">
 			<div id="clock">	</div>
 		</div>
@@ -243,6 +264,68 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 		<div id="footer">
 			FOOTER
 		</div>
+	</div>
+
+ 
+
+	
+<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
+<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
+
+<form class="right" method="get">
+	<select name="searchItem">
+		<option value="userid">품종</option>
+		<option value="title">원산지</option>
+		<option value="content">구매자</option>
+	</select>	
+	<input type="text" id="search_bar" class="search_bar">
+	<input type="button" onclick="search()" value="검색">
+</form>
+
+<div id="result"></div>
+
+<table border="1">
+	<tr>
+		<th>품종</th><th>원산지</th><th>중량</th><th>가격</th><th>구매자</th>
+	</tr>
+
+ 	<c:forEach var="a" items="${allbuylist}" >
+	<tr>
+		<td>${a.fishName}</td>
+		<td>${a.location}</td>
+		<td>${a.weight}</td>
+		<td>${a.price}</td>
+		<td>${a.buyerId}</td>
+	</tr>
+	</c:forEach>	
+</table>
+
+<table border="1">
+	<tr>
+		<th>품종</th><th>원산지</th><th>중량</th><th>가격</th><th>구매자</th>
+	</tr>
+
+ 	<c:forEach var="a" items="${mybuylist}" >
+	<tr>
+		<td>${a.fishName}</td>
+		<td>${a.location}</td>
+		<td>${a.weight}</td>
+		<td>${a.price}</td>
+		<td>${a.buyerId}</td>
+	</tr>
+	</c:forEach>	
+</table>
+
+
+	<c:forEach var="i" begin="${startGroup}" end="${endGroup}"  step="1">
+		<a href="?page=${i}&searchText=${searchText}"><input type="button" value="${i}"></a>
+	</c:forEach>
+	
+	<div class="boardfooter">
+		<a class="btn" href="?page=1&searchText=${searchText}">처음 페이지</a>&nbsp;
+		<a class="btn" href="?page=${navi.startPageGroup-1}&searchText=${searchText}">이전 페이지</a>&nbsp;
+		<a class="btn" href="?page=${endGroup+1}&searchText=${searchText}">다음 페이지</a>&nbsp;
+		<a class="btn" href="?page=${endpage}&searchText=${searchText}">끝 페이지</a>
 	</div>
 </body>
 </html>

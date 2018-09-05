@@ -76,7 +76,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				location 
 			FROM 
 				buyList
+	</select>
 
+
+
+	
+<!--전체구매리스트, 검색(getTotal),  -->	
+	<select id="allBuyList" resultType="BuyList" parameterType="string">
+		select 
+			fishName, location, weight, price, buyerId
+		from 
+			BuyList
+		where
+			fishName like '%' || #{searchText} || '%'
+		and 
+			saleStatus = 'onSale'				
 	</select>
 	
+	<select id="getTotal" resultType="int" parameterType="string">
+		select count(*) from BuyList
+		where
+			fishName like '%' || #{searchText} || '%'
+	</select>
+	
+	
+	
+	
+	
+<!--나의구매리스트, 검색(mygetTotal),  -->		
+	<select id="myBuyList" resultType="BuyList" parameterType="string">
+		select 
+			fishName, location, weight, price, buyerId
+		from 
+			BuyList
+		where	
+		<!-- 	fishName like '%' || #{searchText} || '%'			
+		and  -->
+			buyerId = #{buyerId}
+		and
+			saleStatus = 'onSale'				
+	</select>	
+	
+	<select id="mygetTotal" resultType="int" parameterType="string">
+		select count(*) from BuyList
+		where
+		<!-- 	fishName like '%' || #{searchText} || '%'
+		and -->
+			buyerId = #{buyerId}		
+	</select>
+	
+	<!-- <select id="getBoardListMap" resultType="Board" parameterType="map">
+	select 
+		boardnum, 
+	    userid,
+	    title,
+	    content,
+	    hitcount,
+	    to_char(regdate, 'YYYY/MM/DD')as regdate      
+	from board3
+	<if test="_parameter!=null">
+	where
+   		${search} like '%'||#{searchText}||'%'
+	and schoolnum = #{schoolnum}
+   </if>
+   </select> -->
 </mapper>
