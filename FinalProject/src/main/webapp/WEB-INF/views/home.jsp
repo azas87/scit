@@ -402,7 +402,7 @@ $(document).ready(function()
 		<a class="btn" href="?page=${endpage}&searchText=${searchText}">끝 페이지</a>
 	</div>
 	
-	<div>test</div>
+	<div>test1</div>
 </body>
 </html>
 </head>
