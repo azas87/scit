@@ -76,10 +76,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				location 
 			FROM 
 				buyList
+				
+			WHERE buyerId = #{search}
 
 	</select>
 
-			WHERE buyerId = #{search}
+			
 
 
 
