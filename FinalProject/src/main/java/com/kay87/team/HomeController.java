@@ -43,4 +43,9 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
+	public void jqgrid() {
+		
+		
+	}
 }
