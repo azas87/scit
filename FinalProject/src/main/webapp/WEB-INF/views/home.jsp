@@ -548,6 +548,7 @@ function rebuy (cellvalue, options, rowObject) {
 
 	<table id="jqGrid"></table>
 	<div id="jqGridPager"></div>
+	<div>test 김동규 </div>
 
 </body>
 </html>
