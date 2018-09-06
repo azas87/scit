@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,8 +58,19 @@ public class MemberController {
 		return checkedId;
 	}
 	
-	
-	
+	//판매자상세정보
+	@RequestMapping(value = "/sellerInfoDetail", method = RequestMethod.POST)
+	public String sellerInfoDetail(String id, HttpSession session, Model model) {
+		/*System.out.println(member);
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		MemberInfo user=dao.login(member);
+
+
+		if(user!=null) {
+		session.setAttribute("loginId", user.getId());}*/
+
+		return "sellerInfoDetail";
+	}
 	
 	
 	
