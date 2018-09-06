@@ -203,15 +203,6 @@
     </button>
 	</div>
 	
-	
-	<br><br>
-	<h1>판매자 상세정보 (임시버튼)</h1>
-	<div>
-		<input type="button" onclick="id1()" value="id1">	
-		<input type="button" onclick="id2()" value="id2">
-		<input type="button" onclick="2()" value="2">	
-	</div>
-
 
 
 	<script type="text/javascript">

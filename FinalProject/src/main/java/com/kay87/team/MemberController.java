@@ -36,16 +36,22 @@ public class MemberController {
 	}
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(MemberInfo member, HttpSession session) {
+	public String login(MemberInfo member, HttpSession session, Model model) {
 		System.out.println(member);
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		MemberInfo user=dao.login(member);
 
 
-		if(user!=null) {
-		session.setAttribute("loginId", user.getId());}
-
-		return "home";
+		if(user!=null) 
+		{
+			session.setAttribute("loginId", user.getId());
+			return "home";
+		}
+		else
+		{
+			model.addAttribute("msg", "로그인 실패");
+			return "loginForm";
+		}
 	}
 	
 	//id중복체크
@@ -58,19 +64,16 @@ public class MemberController {
 		return checkedId;
 	}
 	
-	//판매자상세정보
-	@RequestMapping(value = "/sellerInfoDetail", method = RequestMethod.POST)
-	public String sellerInfoDetail(String id, HttpSession session, Model model) {
-		/*System.out.println(member);
-		MemberMapper dao=sql.getMapper(MemberMapper.class);
-		MemberInfo user=dao.login(member);
 
+	
 
-		if(user!=null) {
-		session.setAttribute("loginId", user.getId());}*/
+	@RequestMapping(value = "/LogOut", method = RequestMethod.GET)
+	public String LogOut(HttpSession session, Model model) {
 
-		return "sellerInfoDetail";
+		session.invalidate();
+		return "home";
 	}
+
 	
 	
 	

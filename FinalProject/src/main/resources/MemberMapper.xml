@@ -46,8 +46,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<select id="sellerInfoDetail" parameterType="string" resultType="">
-	
-	</select>
-	
 </mapper>
