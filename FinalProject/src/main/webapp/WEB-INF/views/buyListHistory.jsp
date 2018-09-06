@@ -92,7 +92,9 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
-<script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
+
+<script type="text/javascript" src="./resources/js/alertify.js"></script>
+<script type="text/javascript" src="./resources/js/alertify.min.js"></script>
 
  <!-- The jQuery library is a prerequisite for all jqSuite products -->
  <script type="text/javascript" src="./resources/js/jquery.min.js"></script> 
@@ -103,10 +105,11 @@
  <!-- This is the localization file of the grid controlling messages, labels, etc.
  <!-- We support more than 40 localizations -->
  <script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
- 
  <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/alertify.core.css" />
+<link rel="stylesheet" href="./resources/css/alertify.default.css" id="toggleCSS" />
 
-
+<script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
       	google.charts.load("current", {packages:["corechart"]});
@@ -116,10 +119,13 @@
     //원형그래프
       function drawPieChart() {
     	var dataChart = [['Task', 'Hours per Day']];
+    	//총액 구하기
+    	var sum = 0;
     	<c:forEach items="${sumPricebyFishName}" var="item">
     		dataChart.push(["${item.fishName}",Number("${item.price}")]);
+    		sum += ${item.price};
     	</c:forEach> 
-
+			$('#sum').text(sum);
     	var data = google.visualization.arrayToDataTable(dataChart);
         var view = new google.visualization.DataView(data);
         var options = {
@@ -190,173 +196,65 @@
 	<div><br></div>
 	
 	<div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
-    <select class = "form-control" style = "width : 10%; float : left;" id = "searchType">
-        <option value = "All" selected>전체 검색</option>
-        <option value = "user_status">회원상태</option>
-      	<option value = "user_sex">성별</option>
-        <option value = "user_name">이름</option>
-        <option value = "user_email">이메일</option>
-    </select>
-    <input type ="text" id = "searchData" class ="form-control" style = "width : 30%; float : left; margin-bottom : 50px; margin-left : 10px;">
-    <button class = "btn btn-info btn-fill" id = "search" value = "검색 " style = "width : 10%; float : left; margin-left : 10px;">
-      검색
-    </button>
-	</div>
-	
 
+	    <select class = "form-control" style = "width : 10%; float : left;" id = "searchType">
+	        <option value = "All" selected>전체 검색</option>
+	        <option value = "user_status">회원상태</option>
+	      	<option value = "user_sex">성별</option>
+	        <option value = "user_name">이름</option>
+	        <option value = "user_email">이메일</option>
+	    </select>
+	    <input type ="text" id = "searchData" class ="form-control" style = "width : 30%; float : left; margin-bottom : 50px; margin-left : 10px;">
+	    <button class = "btn btn-info btn-fill" id = "search" value = "검색 " style = "width : 10%; float : left; margin-left : 10px;">
+	      검색
+	    </button>
+	</div>
+</div>
 
 	<script type="text/javascript">
-	$(document).ready(
-			function() {
-				$(document).ready(function() {
-					$("#jqGrid").jqGrid({
-						url : 'jqgrid_R',
-						mtype : "GET",
-						datatype : "json",
-						colModel : 
-						[ 
-							{
-								label : '購買日付',
-								name : 'deadline',
-								width : 150,
-								height : 200,
-								align:'center'
-							}, {
-								label : '品種',
-								name : 'fishName',
-								width : 150,
-								height : 200,
-								align:'center'
-							}, {
-								label : '産地',
-								name : 'location',
-								width : 100,
-								height : 200,
-								align:'center'
-							}, {
-								label : '重量',
-								name : 'weight',
-								width : 80,
-								height : 200,
-								align:'center'
-							}, {
-								label : '価格',
-								name : 'price',
-								width : 80,
-								height : 200,
-								align:'center'
-							}, {
-								label : '販売者ID',
-								name : 'successSellerId',
-								width : 100,
-								height : 200,
-								align:'center'
-							}, {
-								label : '再購入1',
-								name : '再購入2',
-								width : 100,
-								height : 200,
-								formatter: rebuy,
-								align:'center'
-							},
-
-						],
-						viewrecords : true,
-						width : 950,
-						height : 400,
-						rowNum : 10,
-						rowList:[10,20,30],
-						pager : "#jqGridPager",
-						loadonce: true,
-						shrinkToFit : false,
-						
-						loadComplete:function(data)
-						{
-							$('.bigSize').hover(function(){
-								console.log("test");
-								var title = $(this).attr('title');
-								$(this).data('tipText', title).removeAttr('title');
-								$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-							},
-							function() {
-								$(this).attr('title',$(this).data('tipText'));
-								$('.tooltip').remove();
-							}).mousemove(function(e) {
-								var mousex = e.pageX + 20;
-								var mousey = e.pageY + 10;
-								$('.tooltip').css({top : mousey,left : mousex});
-							});
-						},
-						gridComplete: function(){
-						},
-						onCellSelect: function(rowid, index, contents, event) 
-				    	{    
-				    		var cm = $(this).jqGrid('getGridParam','colModel');    
-				    		if(cm[index].name == "再購入2")
-				    		{	
-				       		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
-				    		} 
-				    	},
-				    	
-					});
-					
-					$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-		                search: false, // show search button on the toolbar
-		                add: false,
-		                edit: false,
-		                del: false,
-		                refresh: true
-		            });
-					
-					var timer;
-					$("#search_cells").on("keyup", function() {
-						var self = this;
-						if(timer) { clearTimeout(timer); }
-						timer = setTimeout(function(){
-							//timer = null;
-							$("#jqGrid").jqGrid('filterInput', self.value);
-						},0);
-					});
-
-					
-				});
-				
-
-
-
-				 function rebuy (cellvalue, options, rowObject) {
-					 //console.log(rowObject);
-					   return '<a href="#">再購入</a>'; 
-					 };
-					 
-					 
-					 $("#search").on("click",function(){
-					      var data = $("#searchData").val()
-					     var searchType = $("#searchType").val();
-					     var rows = $("[title ='Records per Page']").val();
-					     var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
-
-
-					     rowData = null
-
-
-					     $("#jqGrid").jqGrid("clearGridData", true);
-
-
-					     $("#jqGrid").setGridParam({
-					    	 datatype	: "json",
-					    	 postData	: postData,
-					    	 loadComplete	: function(data) {
-					    		 console.log(data);
-					    	 }
-					     }).trigger("reloadGrid");
-					})
-					
-					
-					
-				});
-	
+	$(document).ready(function() {
+		var period = "${period}"	
+		buyList(period);
+		//다운로드를 위한 period
+		$('#period').text(period);
+		
+		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
+		    search: false, // show search button on the toolbar
+		    add: false,
+		    edit: false,
+		    del: false,
+		    refresh: true
+		});
+		
+		var timer;
+		$("#search_cells").on("keyup", function() {
+			var self = this;
+			if(timer) { clearTimeout(timer); }
+			timer = setTimeout(function(){
+				//timer = null;
+				$("#jqGrid").jqGrid('filterInput', self.value);
+			},0);
+		});
+	});
 	
 	</script>
+	<br><br>
+	<a href="buyListHistory?period=1week">1週間</a>
+	<a href="buyListHistory?period=1month">1ヶ月</a>
+	<a href="buyListHistory?period=3month">3ヶ月</a>
+	<a href="buyListHistory?period=1year">1年</a>
+	
+	<table border="1">
+	<tr><td>魚種</td><td>魚種別総額</td></tr>
+	<c:forEach items="${sumPricebyFishName}" var="item">
+    		<tr><td>${item.fishName}</td><td>${item.price}</td></tr>
+    </c:forEach> 
+    <tr><td>総額</td><td id="sum"></td></tr>
+	
+	</table>
+	<form action="download">
+		<input type="hidden" id="period" name="period">
+		<input type="submit" value="ダウンロード">
+	</form>
 </body>
 </html>

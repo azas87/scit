@@ -20,13 +20,13 @@
 
 		#contain
 		{
-			width:800px;
+			width:1000px;
 			margin: 0 auto;
 			overflow: hidden;
 		}
 
 		#header{
-			width:780px;
+			width:980px;
 			
 			line-height:100px;
 			
@@ -36,7 +36,7 @@
 		}
 
 		#nav{
-			width:780px;
+			width:980px;
 			height:200px;
 		}
 
@@ -58,61 +58,3 @@
 
   } */
 
-		#wrap{
-			width:780px;
-			overflow:hidden;
-		}
-
-		#content{
-			width:600px;
-			height:500px;
-			float:left;
-
-
-		}
-
-
-
-		#content #hit ul, #content #fav ul
-		{
-			overflow:hidden;
-			width:600px;
-			padding:0px;
-			margin: 0px 0px 0px 10px;
-		}
-
-		#content #hit ul li, #content #fav ul li
-		{
-			width:135px;
-			height:230px;
-			float:left;
-			border:1px solid #dddddd;
-			list-style: none;
-			line-height: 220px;
-			box-sizing:border-sizing;
-			margin-right: 5px;
-		}
-
-		#content #hit ul li, #content #fav ul li
-		{
-			width:135px;
-			height:230px;
-			float:left;
-			border:1px solid #dddddd;
-			list-style: none;
-			line-height: 220px;
-			box-sizing:border-sizing;
-		}
-
-
-		#banner{
-			width:135px;
-			height:500px;
-			float:left;
-		}
-
-		#footer{
-			width:780px;
-			height:100px;
-			line-height: 100px;
-		}

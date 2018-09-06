@@ -61,7 +61,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 구매이력 가져오기 -->
-	<select id="getSuccessBuyList" parameterType="string" resultType="BuyList">
+	<select id="getSuccessBuyList" parameterType="map" resultType="BuyList">
+	
+			SELECT
+				buyNum,
+				fishName,
+				buyerId,
+				registDate,
+				uploadDate,
+				deadline,
+				weight,
+				saleStatus,
+				price,
+				successSellerId,
+				buyListComment,
+				location 
+			FROM 
+				buyList
+				
+			WHERE buyerId = #{id}
+			
+			AND 
+                saleStatus !='onSale' and saleStatus !='refund'
+   			<if test="period !=null and period=='1week'">
+            AND 
+            	deadline >= sysdate-7
+            </if>
+            <if test="period !=null and period=='3week'">
+            AND 
+            	deadline >= sysdate-21
+            </if>
+            <if test="period !=null and period=='1month'">
+            AND 
+            	deadline >= sysdate-30
+            </if>
+             <if test="period !=null and period=='1year'">
+            AND 
+            	deadline >= sysdate-365
+            </if>
+	
+	</select>
+	
+	<!-- 환불이력가져오기 -->
+	<select id="getRefundsBuyList" parameterType="string" resultType="BuyList">
 	
 			SELECT
 				buyNum,
@@ -82,7 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{search}
 			
 			and 
-                saleStatus !='onSale' and saleStatus !='refundComplete'
+                saleStatus ='refund'
 	</select>
 
 	
@@ -122,15 +164,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) FROM buyList <if test="_parameter != null"> WHERE buyerId = #{search}  </if>
 	</select>
 	
+	<select id="GetTotalRefundListCount" resultType="int" parameterType="string">
+		SELECT COUNT(*) FROM buyList <if test="_parameter != null"> WHERE buyerId = #{search}  </if>
+		AND saleStatus = 'refund'
+	</select>
+	
 	<!-- 생선별 구매 합계 -->
-	<select id="sumPricebyFishName" parameterType="string" resultType="BuyList">
+	<select id="sumPricebyFishName" parameterType="map" resultType="BuyList">
 		SELECT SUM(price) as price ,fishName
 			FROM 
 				buyList
 	 		where 
 	 			buyerid = #{id}
 	 		and 
-                saleStatus !='onSale' and saleStatus !='refundComplete'
+                saleStatus !='onSale' and saleStatus !='refund'
+            <if test="period !=null and period=='1week'">
+            AND 
+            	deadline >= sysdate-7
+            </if>
+            <if test="period !=null and period=='3week'">
+            AND 
+            	deadline >= sysdate-21
+            </if>
+            <if test="period !=null and period=='1month'">
+            AND 
+            	deadline >= sysdate-30
+            </if>
+             <if test="period !=null and period=='1year'">
+            AND 
+            	deadline >= sysdate-365
+            </if>
+            
             group by 
                 fishName
     </select>
@@ -146,7 +210,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and
    			buyerid = #{id}
 		and 
-		    saleStatus !='onSale' and saleStatus !='refundComplete'
+		    saleStatus !='onSale' and saleStatus !='refund'
 		group by 
 		    to_char(deadline, 'MM')
 		order by
