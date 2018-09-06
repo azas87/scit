@@ -72,6 +72,7 @@ public class BuyController {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		String id = (String)session.getAttribute("loginId");
+
 		
 		Map<String, String> map = new HashMap<String, String>();
 	    map.put("period", period);
@@ -113,19 +114,13 @@ public class BuyController {
 		}
 
 		@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+
 		public @ResponseBody String jqgrid(
 			   @RequestParam(value="period", defaultValue="1") String period,
 			   String page, String rows, HttpSession session) {
 			
-			System.out.println(page+" "+rows);
-			
 			String id =(String)session.getAttribute("loginId");
-			BuyMapper dao=sql.getMapper(BuyMapper.class);
-			int total = dao.GetTotalListCount("id1");
-			Map<String, String> map = new HashMap<String, String>();
-		    map.put("period", period);
-		    map.put("id", id);
-			List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
+			List<BuyList> buyListHistory = getBuyListHistory(id, period);
 			
 			Gson gson = new Gson();
 			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
@@ -140,8 +135,6 @@ public class BuyController {
 		public @ResponseBody String refundList(String page, String rows, HttpSession session) {
 			
 			BuyMapper dao=sql.getMapper(BuyMapper.class);
-			int total = dao.GetTotalRefundListCount("id1");
-			
 			List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));
 			
 			Gson gson = new Gson();
@@ -152,6 +145,27 @@ public class BuyController {
 			return jsonPlace;
 		}
 		
-	/*List<HashMap<String, Object>> bestseller = repository.selectBestseller();*/
-
+		//엑셀로 다운로드
+		@RequestMapping(value = "/download", method = RequestMethod.GET)
+		public String download(String period, HttpSession session, Model model){
+			
+			String id =(String)session.getAttribute("loginId");
+			List<BuyList> buyListHistory = getBuyListHistory(id, period);
+			model.addAttribute("list", buyListHistory);
+			model.addAttribute("date", "2018-09-06");
+			return "listSave";
+		}
+	
+		
+		//판매이력가져오기
+		public List<BuyList> getBuyListHistory(String id, String period){
+			
+			BuyMapper dao=sql.getMapper(BuyMapper.class);
+			Map<String, String> map = new HashMap<String, String>();
+		    map.put("period", period);
+		    map.put("id", id);
+			List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
+			
+			return buyListHistory;
+		}
 }

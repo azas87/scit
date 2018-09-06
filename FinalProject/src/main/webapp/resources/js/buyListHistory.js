@@ -1,8 +1,4 @@
 
-$(function(){
-	$("input:button.confirm").click(confirm);
-	$("input:button.refund").click(refund);
-});
 
 
 //date타입 string 형식으로 변환
@@ -30,17 +26,17 @@ function reset () {
 		buttonReverse : false,
 		buttonFocus   : "ok"
 	});
+	
 }
-//리뷰등록 여부
-function confirm() {
-
-	var buyNum = $(this).attr("data");
-	$('#buyNum').val(buyNum);
-	alert(buyNum);
-		$.ajax({
+//수취확인&리뷰등록 여부
+function confirm(obj) {
+	//리뷰등록을 위해 buyNum 저장해두기
+	$('#buyNum').val(obj.buyNum);
+	//수취확인
+	$.ajax({
 			url:"confirm",
 			type:"get",
-			data:{"buyNum":buyNum,
+			data:{"buyNum":obj.buyNum,
 				  },
 			success:function(data){
 		

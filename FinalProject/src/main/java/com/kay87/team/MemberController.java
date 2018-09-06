@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,16 +36,22 @@ public class MemberController {
 	}
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(MemberInfo member, HttpSession session) {
+	public String login(MemberInfo member, HttpSession session, Model model) {
 		System.out.println(member);
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		MemberInfo user=dao.login(member);
 
 
-		if(user!=null) {
-		session.setAttribute("loginId", user.getId());}
-
-		return "home";
+		if(user!=null) 
+		{
+			session.setAttribute("loginId", user.getId());
+			return "home";
+		}
+		else
+		{
+			model.addAttribute("msg", "로그인 실패");
+			return "loginForm";
+		}
 	}
 	
 	//id중복체크
@@ -57,7 +64,12 @@ public class MemberController {
 		return checkedId;
 	}
 	
-	
+	@RequestMapping(value = "/LogOut", method = RequestMethod.GET)
+	public String LogOut(HttpSession session, Model model) {
+
+		session.invalidate();
+		return "home";
+	}
 	
 	
 	

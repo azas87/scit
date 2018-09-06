@@ -15,6 +15,6 @@ language="java" pageEncoding="UTF-8"%>
    
 		<input type="submit"  onclick="return check()" value="ログイン">
 	</form>
-
+	<div>${msg}</div>
 </body>
 </html>

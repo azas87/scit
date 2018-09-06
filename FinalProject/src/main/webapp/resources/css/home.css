@@ -1,0 +1,118 @@
+		div{
+			border:1px solid #cccccc;
+			padding:5px;
+			margin: 5px;
+			text-align: center;
+		}
+
+    .tooltip
+    {
+    	display:none;
+    	position:absolute;
+    	border:1px solid #333;
+    	background-color:#161616;
+    	border-radius:5px;
+    	padding:10px;
+    	color:#fff;
+    	font-size:3.5em;
+    	text-align: center;
+    }
+
+		#contain
+		{
+			width:800px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+
+		#header{
+			width:780px;
+			
+			line-height:100px;
+			
+			color:#666;
+			font-size:100px;
+			text-align:center;
+		}
+
+		#nav{
+			width:780px;
+			height:200px;
+		}
+
+    #nav .items {
+    display: flex;
+    flex-direction: row;
+    height:130px;
+
+  }
+  #nav .item{
+    line-height: 130px;
+    list-style: none;
+    margin:0px;
+    flex-grow: 1;
+    //border:0;
+  }
+   /* #nav .item:nth-child(1)
+  {
+
+  } */
+
+		#wrap{
+			width:780px;
+			overflow:hidden;
+		}
+
+		#content{
+			width:600px;
+			height:500px;
+			float:left;
+
+
+		}
+
+
+
+		#content #hit ul, #content #fav ul
+		{
+			overflow:hidden;
+			width:600px;
+			padding:0px;
+			margin: 0px 0px 0px 10px;
+		}
+
+		#content #hit ul li, #content #fav ul li
+		{
+			width:135px;
+			height:230px;
+			float:left;
+			border:1px solid #dddddd;
+			list-style: none;
+			line-height: 220px;
+			box-sizing:border-sizing;
+			margin-right: 5px;
+		}
+
+		#content #hit ul li, #content #fav ul li
+		{
+			width:135px;
+			height:230px;
+			float:left;
+			border:1px solid #dddddd;
+			list-style: none;
+			line-height: 220px;
+			box-sizing:border-sizing;
+		}
+
+
+		#banner{
+			width:135px;
+			height:500px;
+			float:left;
+		}
+
+		#footer{
+			width:780px;
+			height:100px;
+			line-height: 100px;
+		}
