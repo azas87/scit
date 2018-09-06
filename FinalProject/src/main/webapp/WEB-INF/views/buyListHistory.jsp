@@ -92,7 +92,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
-<script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
+
 <script type="text/javascript" src="./resources/js/alertify.js"></script>
 <script type="text/javascript" src="./resources/js/alertify.min.js"></script>
 
@@ -108,6 +108,8 @@
  <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/alertify.core.css" />
 <link rel="stylesheet" href="./resources/css/alertify.default.css" id="toggleCSS" />
+
+<script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
       	google.charts.load("current", {packages:["corechart"]});
@@ -189,18 +191,18 @@
 	<div><br></div>
 	
 	<div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
-    <select class = "form-control" style = "width : 10%; float : left;" id = "searchType">
-        <option value = "All" selected>전체 검색</option>
-        <option value = "user_status">회원상태</option>
-      	<option value = "user_sex">성별</option>
-        <option value = "user_name">이름</option>
-        <option value = "user_email">이메일</option>
-    </select>
-    <input type ="text" id = "searchData" class ="form-control" style = "width : 30%; float : left; margin-bottom : 50px; margin-left : 10px;">
-    <button class = "btn btn-info btn-fill" id = "search" value = "검색 " style = "width : 10%; float : left; margin-left : 10px;">
-      검색
-    </button>
-</div>
+	    <select class = "form-control" style = "width : 10%; float : left;" id = "searchType">
+	        <option value = "All" selected>전체 검색</option>
+	        <option value = "user_status">회원상태</option>
+	      	<option value = "user_sex">성별</option>
+	        <option value = "user_name">이름</option>
+	        <option value = "user_email">이메일</option>
+	    </select>
+	    <input type ="text" id = "searchData" class ="form-control" style = "width : 30%; float : left; margin-bottom : 50px; margin-left : 10px;">
+	    <button class = "btn btn-info btn-fill" id = "search" value = "검색 " style = "width : 10%; float : left; margin-left : 10px;">
+	      검색
+	    </button>
+	</div>
 
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -208,177 +210,28 @@
 		buyList(period);
 		//다운로드를 위한 period
 		$('#period').text(period);
-				function buyList(period) {
-					$("#jqGrid").jqGrid({
-						/* 환불 url:'refundList'*/
-						url : 'jqgrid_R?period='+period,
-						mtype : "GET",
-						datatype : "json",
-						colModel : 
-						[ 
-							{
-								label : '히든',
-								name : 'buyNum',
-								width : 150,
-								height : 200,
-								align:'center'
-							},
-							{
-								label : '購買日付',
-								name : 'deadline',
-								width : 150,
-								height : 200,
-								align:'center'
-							}, {
-								label : '品種',
-								name : 'fishName',
-								width : 150,
-								height : 200,
-								align:'center'
-							}, {
-								label : '産地',
-								name : 'location',
-								width : 100,
-								height : 200,
-								align:'center'
-							}, {
-								label : '重量',
-								name : 'weight',
-								width : 80,
-								height : 200,
-								align:'center'
-							}, {
-								label : '価格',
-								name : 'price',
-								width : 80,
-								height : 200,
-								align:'center'
-							}, {
-								label : '販売者ID',
-								name : 'successSellerId',
-								width : 100,
-								height : 200,
-								align:'center'
-							}, {
-								label : '再購入1',
-								name : '再購入2',
-								width : 100,
-								height : 200,
-								formatter: rebuy,
-								align:'center'
-							},{
-								label : '受け取り確認',
-								name : '確認',
-								width : 100,
-								height : 200,
-								formatter: rebuy2,
-								align:'center'
-							},
-
-						],
-						viewrecords : true,
-						width : 950,
-						height : 400,
-						rowNum : 10,
-						rowList:[10,20,30],
-						pager : "#jqGridPager",
-						loadonce: true,
-						shrinkToFit : false,
-						
-						loadComplete:function(data)
-						{
-							$('.bigSize').hover(function(){
-								console.log("test");
-								var title = $(this).attr('title');
-								$(this).data('tipText', title).removeAttr('title');
-								$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-							},
-							function() {
-								$(this).attr('title',$(this).data('tipText'));
-								$('.tooltip').remove();
-							}).mousemove(function(e) {
-								var mousex = e.pageX + 20;
-								var mousey = e.pageY + 10;
-								$('.tooltip').css({top : mousey,left : mousex});
-							});
-						},
-						gridComplete: function(){
-						},
-						onCellSelect: function(rowid, index, contents, event) 
-				    	{    
-				    		var cm = $(this).jqGrid('getGridParam','colModel');    
-				    		if(cm[index].name == "再購入2")
-				    		{	
-				       		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
-				    		}else if(cm[index].name == "確認") {
-				    			confirm($("#jqGrid").getRowData(rowid));
-				    		}
-				    	},
-				    	
-					});
-					
-					$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-		                search: false, // show search button on the toolbar
-		                add: false,
-		                edit: false,
-		                del: false,
-		                refresh: true
-		            });
-					
-					var timer;
-					$("#search_cells").on("keyup", function() {
-						var self = this;
-						if(timer) { clearTimeout(timer); }
-						timer = setTimeout(function(){
-							//timer = null;
-							$("#jqGrid").jqGrid('filterInput', self.value);
-						},0);
-					});
-
-				}
-				
-
-
-
-				 function rebuy (cellvalue, options, rowObject) {
-					 //console.log(rowObject);
-					   return '<a href="#">再購入</a>'; 
-					 };
-				　function rebuy2 (cellvalue, options, rowObject) {
-						 //console.log(rowObject);
-					　　return '確認'; 
-						 };
-					 
-					 
-					 $("#search").on("click",function(){
-					     var data = $("#searchData").val()
-					     var searchType = $("#searchType").val();
-					     var rows = $("[title ='Records per Page']").val();
-					     var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
-
-
-					     rowData = null
-
-
-					     $("#jqGrid").jqGrid("clearGridData", true);
-
-
-					     $("#jqGrid").setGridParam({
-					    	 datatype	: "json",
-					    	 postData	: postData,
-					    	 loadComplete	: function(data) {
-					    		 console.log(data);
-					    	 }
-					     }).trigger("reloadGrid");
-					})
-					
-					
-					
-				});
-	
+		
+		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
+		    search: false, // show search button on the toolbar
+		    add: false,
+		    edit: false,
+		    del: false,
+		    refresh: true
+		});
+		
+		var timer;
+		$("#search_cells").on("keyup", function() {
+			var self = this;
+			if(timer) { clearTimeout(timer); }
+			timer = setTimeout(function(){
+				//timer = null;
+				$("#jqGrid").jqGrid('filterInput', self.value);
+			},0);
+		});
+	});
 	
 	</script>
-	</br></br>
+	<br><br>
 	<a href="buyListHistory?period=1week">1週間</a>
 	<a href="buyListHistory?period=1month">1ヶ月</a>
 	<a href="buyListHistory?period=3month">3ヶ月</a>

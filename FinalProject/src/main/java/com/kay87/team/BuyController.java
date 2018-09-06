@@ -31,6 +31,7 @@ public class BuyController {
 	@Autowired
 	SqlSession sql;
 	
+	
 	//구매글쓰기 폼 불러오기
 	@RequestMapping(value = "/writeBuyBoardForm", method = RequestMethod.GET)
 	public String writeBuyBoardForm(Model model, HttpSession session, 
@@ -107,6 +108,7 @@ public class BuyController {
 		@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 		public @ResponseBody int confirm(String buyNum) {
 			
+			System.out.println(buyNum);
 			BuyMapper dao=sql.getMapper(BuyMapper.class);
 			int result =dao.saleComplete(buyNum);
 			
