@@ -45,11 +45,9 @@
 		<div id="header">
 			<div id="clock">	</div>
 		</div>
-
+		
 		<div id="nav">
-			<p>NAVIGATION</p>
-      <div class="items">
-      
+	      <div class="items">
       		<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
 					<div class="item " title="로그인"><a href="loginForm?">로그인</a></div>
@@ -62,46 +60,25 @@
 			        <div class="item " title="구매내역"><a href="buyListHistory?">구매내역</a></div>
 				</c:when>
 			</c:choose>
-			
-        
-      </div>
+	      </div>
 		</div>
+		
+		<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
+		<c:choose>
+			<c:when test="${sessionScope.loginId != null }">
+				<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
+			</c:when>
+		</c:choose>
+		<input type="text" id="search_cells">
 
-		<div id="wrap">
-			<div id="content">
-				<div id="hit">
-					<ul>
-						<li>hit1</li>
-						<li>hit2</li>
-						<li>hit3</li>
-						<li>hit4</li>
-					</ul>
-				</div>
-				<div id="fav">
-					<ul>
-						<li>fav1</li>
-						<li>fav2</li>
-						<li>fav3</li>
-						<li>fav4</li>
-					</ul>
-				</div>
-			</div>
-			<div id="banner">BANNER</div>
-		</div>
-
-		<div id="footer">
-			FOOTER
-		</div>
+	<table id="jqGrid"></table>
+	<div id="jqGridPager"></div>
 	</div>
 
  
 
 	
-<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
-<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
-
-	<table id="jqGrid"></table>
-	<div id="jqGridPager"></div>
+	
 
 </body>
 </html>
