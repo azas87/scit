@@ -1,7 +1,4 @@
 
-$(function(){
-	$("input:button.confirm").click(confirm);
-});
 
 
 //date타입 string 형식으로 변환
@@ -29,17 +26,17 @@ function reset () {
 		buttonReverse : false,
 		buttonFocus   : "ok"
 	});
+	
 }
-//리뷰등록 여부
-function confirm() {
-
-	var buyNum = $(this).attr("data");
-	$('#buyNum').val(buyNum);
-	alert(buyNum);
-		$.ajax({
+//수취확인&리뷰등록 여부
+function confirm(obj) {
+	//리뷰등록을 위해 buyNum 저장해두기
+	$('#buyNum').val(obj.buyNum);
+	//수취확인
+	$.ajax({
 			url:"confirm",
 			type:"get",
-			data:{"buyNum":buyNum,
+			data:{"buyNum":obj.buyNum,
 				  },
 			success:function(data){
 		
@@ -63,3 +60,36 @@ function confirm() {
 	return false;
 	
 }
+//환불여부
+function refund() {
+
+	var buyNum = $(this).attr("data");
+	$('#buyNum').val(buyNum);
+
+	reset();
+	alertify.set({ buttonReverse: true });
+	alertify.confirm("払い戻しされますか", function (e) {
+		if (e) {
+			alertify.success("You've clicked OK");
+			
+			$.ajax({
+				url:"refund",
+				type:"get",
+				data:{"buyNum":buyNum,
+					  },
+				success:function(data){
+			
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
+		
+		} else {
+			alertify.error("You've clicked Cancel");
+		}
+	});
+	return false;
+	
+	}
+

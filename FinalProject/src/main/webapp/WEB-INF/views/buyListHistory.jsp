@@ -93,6 +93,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
 <script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
+<script type="text/javascript" src="./resources/js/alertify.js"></script>
+<script type="text/javascript" src="./resources/js/alertify.min.js"></script>
 
  <!-- The jQuery library is a prerequisite for all jqSuite products -->
  <script type="text/javascript" src="./resources/js/jquery.min.js"></script> 
@@ -103,10 +105,9 @@
  <!-- This is the localization file of the grid controlling messages, labels, etc.
  <!-- We support more than 40 localizations -->
  <script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
- 
  <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
-
-
+<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/alertify.core.css" />
+<link rel="stylesheet" href="./resources/css/alertify.default.css" id="toggleCSS" />
 <script type='text/javascript'>
 	$(document).ready(function() {
       	google.charts.load("current", {packages:["corechart"]});
@@ -116,10 +117,13 @@
     //원형그래프
       function drawPieChart() {
     	var dataChart = [['Task', 'Hours per Day']];
+    	//총액 구하기
+    	var sum = 0;
     	<c:forEach items="${sumPricebyFishName}" var="item">
     		dataChart.push(["${item.fishName}",Number("${item.price}")]);
+    		sum += ${item.price};
     	</c:forEach> 
-
+			$('#sum').text(sum);
     	var data = google.visualization.arrayToDataTable(dataChart);
         var view = new google.visualization.DataView(data);
         var options = {
@@ -199,15 +203,26 @@
 </div>
 
 	<script type="text/javascript">
-	$(document).ready(
-			function() {
-				$(document).ready(function() {
+	$(document).ready(function() {
+		var period = "${period}"	
+		buyList(period);
+		//다운로드를 위한 period
+		$('#period').text(period);
+				function buyList(period) {
 					$("#jqGrid").jqGrid({
-						url : 'jqgrid_R',
+						/* 환불 url:'refundList'*/
+						url : 'jqgrid_R?period='+period,
 						mtype : "GET",
 						datatype : "json",
 						colModel : 
 						[ 
+							{
+								label : '히든',
+								name : 'buyNum',
+								width : 150,
+								height : 200,
+								align:'center'
+							},
 							{
 								label : '購買日付',
 								name : 'deadline',
@@ -251,6 +266,13 @@
 								height : 200,
 								formatter: rebuy,
 								align:'center'
+							},{
+								label : '受け取り確認',
+								name : '確認',
+								width : 100,
+								height : 200,
+								formatter: rebuy2,
+								align:'center'
 							},
 
 						],
@@ -288,7 +310,9 @@
 				    		if(cm[index].name == "再購入2")
 				    		{	
 				       		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
-				    		} 
+				    		}else if(cm[index].name == "確認") {
+				    			confirm($("#jqGrid").getRowData(rowid));
+				    		}
 				    	},
 				    	
 					});
@@ -311,8 +335,7 @@
 						},0);
 					});
 
-					
-				});
+				}
 				
 
 
@@ -321,10 +344,14 @@
 					 //console.log(rowObject);
 					   return '<a href="#">再購入</a>'; 
 					 };
+				　function rebuy2 (cellvalue, options, rowObject) {
+						 //console.log(rowObject);
+					　　return '確認'; 
+						 };
 					 
 					 
 					 $("#search").on("click",function(){
-					      var data = $("#searchData").val()
+					     var data = $("#searchData").val()
 					     var searchType = $("#searchType").val();
 					     var rows = $("[title ='Records per Page']").val();
 					     var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
@@ -351,5 +378,23 @@
 	
 	
 	</script>
+	</br></br>
+	<a href="buyListHistory?period=1week">1週間</a>
+	<a href="buyListHistory?period=1month">1ヶ月</a>
+	<a href="buyListHistory?period=3month">3ヶ月</a>
+	<a href="buyListHistory?period=1year">1年</a>
+	
+	<table border="1">
+	<tr><td>魚種</td><td>魚種別総額</td></tr>
+	<c:forEach items="${sumPricebyFishName}" var="item">
+    		<tr><td>${item.fishName}</td><td>${item.price}</td></tr>
+    </c:forEach> 
+    <tr><td>総額</td><td id="sum"></td></tr>
+	
+	</table>
+	<form action="download">
+		<input type="hidden" id="period" name="period">
+		<input type="submit" value="ダウンロード">
+	</form>
 </body>
 </html>
