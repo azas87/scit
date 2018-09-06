@@ -18,14 +18,9 @@ public interface BuyMapper {
 		
 	public List<BuyList> allBuyList();
 	
-	public List<BuyList> allBuyList(String searchText);	
-	
-	public int getTotal(String searchText);
-	
 	public List<BuyList> myBuyList(String userId);
 
-	public int mygetTotal(String userId);
-
+	
 	
 	public int GetTotalListCount(String search);
 	
