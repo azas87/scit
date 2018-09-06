@@ -68,6 +68,7 @@ public class BuyController {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		String userid = (String)session.getAttribute("loginId");
+		System.out.println(userid);
 		List<BuyList> buyListHistory=dao.getSuccessBuyList(userid);
 		System.out.println(buyListHistory);
 		//생선별 구매합계
@@ -111,9 +112,9 @@ public class BuyController {
 		}
 
 		@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-		public @ResponseBody String jqgrid(String page, String rows, HttpSession session) {
+		public @ResponseBody String jqgrid(String page, String rows, String test, HttpSession session) {
 			
-			System.out.println(page+" "+rows);
+			System.out.println(test);
 			
 			BuyMapper dao=sql.getMapper(BuyMapper.class);
 			int total = dao.GetTotalListCount("id1");

@@ -65,7 +65,7 @@ public class HomeController {
 	@RequestMapping(value = "/allBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String allBuyList() {			
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
-		
+		System.out.println("allBuyList");
 		List<BuyList> allbuylist = mapper.allBuyList();			
 		
 		Gson gson = new Gson();
@@ -78,7 +78,8 @@ public class HomeController {
 	
 	//첫 메인화면에서 나의구매리스트+검색
 	@RequestMapping(value = "/myBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String myBuyList(HttpSession session) {			
+	public @ResponseBody String myBuyList(HttpSession session) {
+		System.out.println("myBuyList");
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);		
 		String userId = (String) session.getAttribute("loginId");		
 		
