@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kay87.team.vo.Review;
+
 @Controller
 public class ReviewController {
 	
@@ -28,8 +30,8 @@ public class ReviewController {
 	
 
 	@RequestMapping(value = "/insertReview", method = RequestMethod.GET)
-	public String insertReview(){
-
+	public String insertReview(Review review){
+		System.out.println(review);
 		return "home";
 	}
 

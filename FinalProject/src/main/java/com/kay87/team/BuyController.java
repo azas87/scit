@@ -115,6 +115,16 @@ public class BuyController {
 			
 			return result ;
 		}
+		
+		//수취확인
+		@RequestMapping(value = "/refund", method = RequestMethod.GET)
+		public @ResponseBody int refund(String buyNum) {
+					
+			BuyMapper dao=sql.getMapper(BuyMapper.class);
+			int result =dao.refund(buyNum);
+					
+			return result ;
+		}		
 	
 	/*List<HashMap<String, Object>> bestseller = repository.selectBestseller();*/
 

@@ -94,6 +94,7 @@
 		<th>販売者ID</th>
 		<th>再購入</th>
 		<th>受け取り確認</th>
+		<th>返金</th>
 	</tr>
 	
 	<c:forEach var="buylist" items="${buyListHistory}">	
@@ -113,10 +114,12 @@
 			</form>
 			
 		<td><input type="button" class="confirm" data="${buylist.buyNum}" value="受け取り確認"></td>
+		<td><input type="button" class="refund" data-no="${buylist.buyNum}" value="返金"></td>
 			
 	</tr>
 	</c:forEach>
-	
+		
+		<input type="hidden" id="buyNum">
 </table>
 </body>
 </html>

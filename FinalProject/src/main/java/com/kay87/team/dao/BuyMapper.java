@@ -21,4 +21,6 @@ public interface BuyMapper {
 	public List<BuyList> sumPricebyMonth(String userid);
 
 	public int saleComplete(String buyNum);
+
+	public int refund(String buyNum);
 }

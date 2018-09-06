@@ -1,5 +1,6 @@
 $(function(){
 	$("input:button.confirm").click(confirm);
+	$("input:button.refund").click(refund);
 });
 
 
@@ -31,9 +32,10 @@ function reset () {
 }
 //리뷰등록 여부
 function confirm() {
-	alert('여기오니?');
+
 	var buyNum = $(this).attr("data");
-	alert(buyNum);
+	$('#buyNum').val(buyNum);
+
 		$.ajax({
 			url:"confirm",
 			type:"get",
@@ -53,7 +55,7 @@ function confirm() {
 	alertify.confirm("レビューを登録されますか", function (e) {
 		if (e) {
 			alertify.success("You've clicked OK");
-			window.open("reviewForm", "join", "width=400px,height=300px,left=500px,top=200px");
+			window.open("reviewForm", "reviewForm", "width=400px,height=300px,left=500px,top=200px");
 		} else {
 			alertify.error("You've clicked Cancel");
 		}
@@ -61,3 +63,35 @@ function confirm() {
 	return false;
 	
 }
+
+function refund() {
+	alert('오나')
+	var buyNum = $(this).attr("data");
+	$('#buyNum').val(buyNum);
+
+	reset();
+	alertify.set({ buttonReverse: true });
+	alertify.confirm("払い戻しされますか", function (e) {
+		if (e) {
+			alertify.success("You've clicked OK");
+			
+			$.ajax({
+				url:"refund",
+				type:"get",
+				data:{"buyNum":buyNum,
+					  },
+				success:function(data){
+			
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
+		
+		} else {
+			alertify.error("You've clicked Cancel");
+		}
+	});
+	return false;
+	
+	}

@@ -110,6 +110,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	WHERE buyNum = #{buyNum}
 
 	</update>
+	
+	<!-- 환불 -->
+	<update id="refund" parameterType="string">
+ 
+  	 	UPDATE buylist
+     	SET saleStatus = 'refund'
+    	WHERE buyNum = #{buyNum}
+
+	</update>
 <!-- 	
 	  <select id="selectBestseller" resultType="hashmap">
    	SELECT
