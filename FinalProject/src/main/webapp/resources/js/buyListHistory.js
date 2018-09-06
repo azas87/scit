@@ -1,6 +1,7 @@
 
 $(function(){
 	$("input:button.confirm").click(confirm);
+	$("input:button.refund").click(refund);
 });
 
 
@@ -63,3 +64,36 @@ function confirm() {
 	return false;
 	
 }
+//환불여부
+function refund() {
+
+	var buyNum = $(this).attr("data");
+	$('#buyNum').val(buyNum);
+
+	reset();
+	alertify.set({ buttonReverse: true });
+	alertify.confirm("払い戻しされますか", function (e) {
+		if (e) {
+			alertify.success("You've clicked OK");
+			
+			$.ajax({
+				url:"refund",
+				type:"get",
+				data:{"buyNum":buyNum,
+					  },
+				success:function(data){
+			
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
+		
+		} else {
+			alertify.error("You've clicked Cancel");
+		}
+	});
+	return false;
+	
+	}
+

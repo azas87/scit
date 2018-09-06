@@ -199,11 +199,14 @@
 </div>
 
 	<script type="text/javascript">
-	$(document).ready(
-			function() {
-				$(document).ready(function() {
+	$(document).ready(function() {
+		var period = "${period}"	
+		buyList(period);
+		alert(period);
+				function buyList(period) {
 					$("#jqGrid").jqGrid({
-						url : 'jqgrid_R',
+						/* 환불 url:'refundList'*/
+						url : 'jqgrid_R?period='+period,
 						mtype : "GET",
 						datatype : "json",
 						colModel : 
@@ -311,8 +314,7 @@
 						},0);
 					});
 
-					
-				});
+				}
 				
 
 
@@ -351,5 +353,17 @@
 	
 	
 	</script>
+	
+	<a href="buyListHistory?period=1week">1週間</a>
+	<a href="buyListHistory?period=1month">1ヶ月</a>
+	<a href="buyListHistory?period=3month">3ヶ月</a>
+	<a href="buyListHistory?period=1year">1年</a>
+	
+	<table>
+	<tr><td>魚種</td><td>魚種別総額</td></tr>
+	<tr><td></td><td></td></tr>
+	</table>
+	
+	
 </body>
 </html>

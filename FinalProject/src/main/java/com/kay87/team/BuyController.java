@@ -1,6 +1,8 @@
 package com.kay87.team;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -64,17 +67,21 @@ public class BuyController {
 	
 	//구매완료내역출력
 	@RequestMapping(value = "/buyListHistory", method = RequestMethod.GET)
-	public String buyListHistory(Model model, HttpSession session) {
+	public String buyListHistory(Model model, HttpSession session,
+			@RequestParam(value="period", defaultValue="1") String period) {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
-		String userid = (String)session.getAttribute("loginId");
-		List<BuyList> buyListHistory=dao.getSuccessBuyList(userid);
-		System.out.println(buyListHistory);
-		//생선별 구매합계
-		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(userid);
+		String id = (String)session.getAttribute("loginId");
 		
+		Map<String, String> map = new HashMap<String, String>();
+	    map.put("period", period);
+	    map.put("id", id);
+		
+		//생선별 구매합계
+		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
+	
 		//월별 구매합계
-		List<BuyList> sumPricebyMonth= dao.sumPricebyMonth(userid);
+		List<BuyList> sumPricebyMonth= dao.sumPricebyMonth(id);
 		int[] list = new int[12];
 		int month=0;
 		
@@ -88,14 +95,9 @@ public class BuyController {
 					
 			}
 		}
-		System.out.println(list);
-		/*SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		for(BuyList b : buyListHistory) {
-		String getdealine = transFormat.format(b.getDeadline());
-		}	*/
+		model.addAttribute("period", period);
 		model.addAttribute("list", list);
-		model.addAttribute("buyListHistory", buyListHistory);
 		model.addAttribute("sumPricebyFishName", sumPricebyFishName);
 		return "buyListHistory";
 	}
@@ -111,14 +113,19 @@ public class BuyController {
 		}
 
 		@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-		public @ResponseBody String jqgrid(String page, String rows, HttpSession session) {
+		public @ResponseBody String jqgrid(
+			   @RequestParam(value="period", defaultValue="1") String period,
+			   String page, String rows, HttpSession session) {
 			
 			System.out.println(page+" "+rows);
 			
+			String id =(String)session.getAttribute("loginId");
 			BuyMapper dao=sql.getMapper(BuyMapper.class);
 			int total = dao.GetTotalListCount("id1");
-			
-			List<BuyList> buyListHistory = dao.getSuccessBuyList((String)session.getAttribute("loginId"));
+			Map<String, String> map = new HashMap<String, String>();
+		    map.put("period", period);
+		    map.put("id", id);
+			List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
 			
 			Gson gson = new Gson();
 			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
@@ -127,6 +134,24 @@ public class BuyController {
 			
 			return jsonPlace;
 		}
+		
+		//환불리스트
+		@RequestMapping(value = "/refundList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+		public @ResponseBody String refundList(String page, String rows, HttpSession session) {
+			
+			BuyMapper dao=sql.getMapper(BuyMapper.class);
+			int total = dao.GetTotalRefundListCount("id1");
+			
+			List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));
+			
+			Gson gson = new Gson();
+			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+			String jsonPlace = "{\"rows\":"+ gson.toJson(refundBuyList) + "}";
+			System.out.println(jsonPlace);
+			
+			return jsonPlace;
+		}
+		
 	/*List<HashMap<String, Object>> bestseller = repository.selectBestseller();*/
 
 }
