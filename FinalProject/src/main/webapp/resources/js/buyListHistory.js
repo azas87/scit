@@ -30,7 +30,13 @@ function rebuy2 (cellvalue, options, rowObject) {
 		 }
 	 }).trigger("reloadGrid");
 });
-					
+ 
+ $(window).resize(function() {
+
+		$("jqGrid").setGridWidth($(this).width() * .100);
+
+	});
+ 
  function buyList(period) 
  {
 	 console.log(period);
@@ -44,75 +50,59 @@ function rebuy2 (cellvalue, options, rowObject) {
  			{
  				label : '히든',
  				name : 'buyNum',
- 				width : 150,
- 				height : 200,
  				align:'center',
  				hidden:true
  			},
  			{
  				label : '購買日付',
  				name : 'deadline',
- 				width : 150,
- 				height : 200,
+ 				width:'200',
  				align:'center'
  			}, {
  				label : '品種',
  				name : 'fishName',
- 				width : 150,
- 				height : 200,
  				align:'center'
  			}, {
  				label : '産地',
  				name : 'location',
- 				width : 100,
- 				height : 200,
  				align:'center'
  			}, {
  				label : '重量',
  				name : 'weight',
- 				width : 80,
- 				height : 200,
  				align:'center'
  			}, {
  				label : '価格',
  				name : 'price',
- 				width : 80,
- 				height : 200,
  				align:'center'
  			}, {
  				label : '販売者ID',
  				name : 'successSellerId',
- 				width : 100,
- 				height : 200,
  				align:'center'
  			}, {
  				label : '再購入1',
  				name : '再購入2',
- 				width : 100,
- 				height : 200,
  				formatter: rebuy,
  				align:'center'
  			},{
  				label : '受け取り確認',
  				name : '確認',
- 				width : 100,
- 				height : 200,
  				formatter: rebuy2,
  				align:'center'
  			},
 
  		],
  		viewrecords : true,
- 		width : 950,
- 		height : 400,
  		rowNum : 10,
  		rowList:[10,20,30],
  		pager : "#jqGridPager",
  		loadonce: true,
  		shrinkToFit : false,
- 		
+ 		footerrow:true,
+ 		userDataOnFooter : true,
  		loadComplete:function(data)
  		{
+ 			
+
  			$('.bigSize').hover(function(){
  				console.log("test");
  				var title = $(this).attr('title');
@@ -127,6 +117,51 @@ function rebuy2 (cellvalue, options, rowObject) {
  				var mousey = e.pageY + 10;
  				$('.tooltip').css({top : mousey,left : mousex});
  			});
+ 			
+ 			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
+ 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
+ 			
+ 			/*var widthSum = $('#grid tr:first td:eq(0)').width(); 
+ 			widthSum += $('#grid tr:first td:eq(1)').width();
+ 			widthSum += $('#grid tr:first td:eq(2)').width();
+ 			widthSum += $('#grid tr:first td:eq(3)').width();
+ 			*/
+ 			
+ 			$('table.ui-jqgrid-ftable td:eq(2)').hide(); 
+ 			$('table.ui-jqgrid-ftable td:eq(3)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(4)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(6)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(7)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(8)').hide();
+ 			
+ 			
+ 			var footer = $("table.ui-jqgrid-ftable tr:first td:eq(0)");	
+ 			footer.css("color", "#2e6e9e"); 
+ 			//footer.css("text-align", "left");
+ 			//footer.css("width", widthSum); 
+ 			
+ 			$('table.ui-jqgrid-ftable tr:first').children("td").css("background-color", "#dfeffc");
+ 			$('table.ui-jqgrid-ftable tr:first td:eq(1)').css("width","13px");
+ 			$('table.ui-jqgrid-ftable tr:first td:eq(5)').css("text-align", "right");
+ 			$('table.ui-jqgrid-ftable tr:first td:eq(1), table.ui-jqgrid-ftable tr:first td:eq(5)').css("padding-bottom","8px");
+ 			$('table.ui-jqgrid-ftable tr:first td:eq(1), table.ui-jqgrid-ftable tr:first td:eq(5)').css("padding-top","8px");
+ 			$('table.ui-jqgrid-ftable tr:first td:eq(5)').append(" \u00A0");
+
+/* 			var $grid = $(this);
+ 	        var columns = $grid.jqGrid('getGridParam', 'colModel');
+
+ 	        var colsTotalWidth = 0;
+ 	        for (var i = 0; columns[i]; i++) {
+ 	            colsTotalWidth += columns[i].width;
+ 	            $grid.setColProp(columns[i].name, { width: columns[i].width, widthOrg: columns[i].width });
+ 	        }
+
+ 	        colsTotalWidth += 50;
+ 	        $(this).jqGrid('setGridWidth', colsTotalWidth, true);*/
+ 	        
+ 	       //resizeJqGridWidth('grid_container', $('#grid_container').width(), true);
+ 				
+
  		},
  		gridComplete: function(){
  		},
@@ -146,6 +181,22 @@ function rebuy2 (cellvalue, options, rowObject) {
  };					
 					
 	
+ function resizeJqGridWidth(div_id, width, tf){
+	 console.log("Test");
+     // window에 resize 이벤트를 바인딩 한다. 
+     $(window).bind('resize', function() {
+
+     var resizeWidth = $('#grid_container').width()-33; //jQuery-ui의 padding 설정 및 border-width값때문에 넘치는 걸 빼줌.
+
+         // 그리드의 width 초기화
+         $("#jqGrid").setGridWidth( resizeWidth, tf);
+
+         // 그리드의 width를 div 에 맞춰서 적용
+         $("#jqGrid").setGridWidth( resizeWidth , tf); //Resized to new width as per window. 
+
+      }).trigger('resize');
+  }
+
 
 
 //date타입 string 형식으로 변환

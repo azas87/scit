@@ -105,69 +105,69 @@ public class BuyController {
 	}
 	
 	//수취확인
-		@RequestMapping(value = "/confirm", method = RequestMethod.GET)
-		public @ResponseBody int confirm(String buyNum) {
-			
-			System.out.println(buyNum);
-			BuyMapper dao=sql.getMapper(BuyMapper.class);
-			int result =dao.saleComplete(buyNum);
-			
-			return result ;
-		}
-
-		@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-
-		public @ResponseBody String jqgrid(
-			   @RequestParam(value="period", defaultValue="1") String period,
-			   String page, String rows, HttpSession session) {
-			
-			String id =(String)session.getAttribute("loginId");
-			List<BuyList> buyListHistory = getBuyListHistory(id, period);
-			
-			Gson gson = new Gson();
-			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
-			String jsonPlace = "{\"rows\":"+ gson.toJson(buyListHistory) + "}";
-			System.out.println(jsonPlace);
-			
-			return jsonPlace;
-		}
+	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
+	public @ResponseBody int confirm(String buyNum) {
 		
-		//환불리스트
-		@RequestMapping(value = "/refundList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-		public @ResponseBody String refundList(String page, String rows, HttpSession session) {
-			
-			BuyMapper dao=sql.getMapper(BuyMapper.class);
-			List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));
-			
-			Gson gson = new Gson();
-			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
-			String jsonPlace = "{\"rows\":"+ gson.toJson(refundBuyList) + "}";
-			System.out.println(jsonPlace);
-			
-			return jsonPlace;
-		}
+		System.out.println(buyNum);
+		BuyMapper dao=sql.getMapper(BuyMapper.class);
+		int result =dao.saleComplete(buyNum);
 		
-		//엑셀로 다운로드
-		@RequestMapping(value = "/download", method = RequestMethod.GET)
-		public String download(String period, HttpSession session, Model model){
-			
-			String id =(String)session.getAttribute("loginId");
-			List<BuyList> buyListHistory = getBuyListHistory(id, period);
-			model.addAttribute("list", buyListHistory);
-			model.addAttribute("date", "2018-09-06");
-			return "listSave";
-		}
+		return result ;
+	}
+
+	// 구매 목록 페이지의 구매내역 전체 리스트
+	@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String jqgrid(
+		   @RequestParam(value="period", defaultValue="1") String period,
+		   String page, String rows, HttpSession session) {
+		
+		String id =(String)session.getAttribute("loginId");
+		List<BuyList> buyListHistory = getBuyListHistory(id, period);
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		System.out.println(jsonPlace);
+		
+		return jsonPlace;
+	}
 	
+	//환불리스트
+	@RequestMapping(value = "/refundList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String refundList(String page, String rows, HttpSession session) {
 		
-		//판매이력가져오기
-		public List<BuyList> getBuyListHistory(String id, String period){
-			
-			BuyMapper dao=sql.getMapper(BuyMapper.class);
-			Map<String, String> map = new HashMap<String, String>();
-		    map.put("period", period);
-		    map.put("id", id);
-			List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
-			
-			return buyListHistory;
-		}
+		BuyMapper dao=sql.getMapper(BuyMapper.class);
+		List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(refundBuyList) + "}";
+		System.out.println(jsonPlace);
+		
+		return jsonPlace;
+	}
+	
+	//엑셀로 다운로드
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	public String download(String period, HttpSession session, Model model){
+		
+		String id =(String)session.getAttribute("loginId");
+		List<BuyList> buyListHistory = getBuyListHistory(id, period);
+		model.addAttribute("list", buyListHistory);
+		model.addAttribute("date", "2018-09-06");
+		return "listSave";
+	}
+
+	
+	//판매이력가져오기
+	public List<BuyList> getBuyListHistory(String id, String period){
+		
+		BuyMapper dao=sql.getMapper(BuyMapper.class);
+		Map<String, String> map = new HashMap<String, String>();
+	    map.put("period", period);
+	    map.put("id", id);
+		List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
+		
+		return buyListHistory;
+	}
 }

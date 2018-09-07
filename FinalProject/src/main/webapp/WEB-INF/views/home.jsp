@@ -41,39 +41,39 @@
 	
 </head>
 <body>
- 	<div id="contain">
-		<div id="header">
-			<div id="clock">	</div>
-		</div>
-		
-		<div id="nav">
-	      <div class="items">
-      		<c:choose>
+<div id="contain">
+	<div id="header">
+		<div id="clock">	</div>
+	</div>
+	
+	<div id="nav">
+		<div class="items">
+			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
 					<div class="item " title="로그인"><a href="loginForm?">로그인</a></div>
-			        <div class="item " title="회원가입"><a href="joinForm?">회원가입</a></div>
+					<div class="item " title="회원가입"><a href="joinForm?">회원가입</a></div>
 				</c:when>
 				
 				<c:when test="${sessionScope.loginId != null }">
-			        <div class="item " title="로그인"><a href="logOut?">로그아웃</a></div>
-			        <div class="item " title="글등록"><a href="writeBuyBoardForm?">글등록</a></div>
-			        <div class="item " title="구매내역"><a href="buyListHistory?">구매내역</a></div>
+					<div class="item " title="로그인"><a href="logOut?">로그아웃</a></div>
+					<div class="item " title="글등록"><a href="writeBuyBoardForm?">글등록</a></div>
+					<div class="item " title="구매내역"><a href="buyListHistory?">구매내역</a></div>
 				</c:when>
 			</c:choose>
-	      </div>
 		</div>
-		
-		<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
-		<c:choose>
-			<c:when test="${sessionScope.loginId != null }">
-				<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
-			</c:when>
-		</c:choose>
-		<input type="text" id="search_cells">
-
+	</div>
+	
+	<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
+	<c:choose>
+		<c:when test="${sessionScope.loginId != null }">
+			<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
+		</c:when>
+	</c:choose>
+	
+	<input type="text" id="search_cells">
 	<table id="jqGrid"></table>
 	<div id="jqGridPager"></div>
-	</div>
+</div>
 
  
 

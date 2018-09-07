@@ -183,11 +183,13 @@
 	</div>
 	
 	<div><br></div>
+	</div>
 	
-	<input id="search_cells" type="search"/>
-	<table id="jqGrid"></table>
-	<div id="jqGridPager"></div>
-	
+	<div id="grid_container">
+		<input id="search_cells" type="search"/>
+		<table id="jqGrid"></table>
+		<div id="jqGridPager"></div>
+	</div>
 	<div><br></div>
 	
 	<div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
