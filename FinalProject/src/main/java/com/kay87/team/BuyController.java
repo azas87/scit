@@ -1,5 +1,6 @@
 package com.kay87.team;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class BuyController {
 	
 	@Autowired
 	SqlSession sql;
+	
 	
 	//구매글쓰기 폼 불러오기
 	@RequestMapping(value = "/writeBuyBoardForm", method = RequestMethod.GET)
@@ -107,10 +109,21 @@ public class BuyController {
 		@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 		public @ResponseBody int confirm(String buyNum) {
 			
+			System.out.println(buyNum);
 			BuyMapper dao=sql.getMapper(BuyMapper.class);
 			int result =dao.saleComplete(buyNum);
 			
 			return result ;
+		}
+		//환불
+		@RequestMapping(value = "/refund", method = RequestMethod.GET)
+		public @ResponseBody int refund(String buyNum) {
+			
+			System.out.println(buyNum);
+			BuyMapper dao=sql.getMapper(BuyMapper.class);
+			int result =dao.refund(buyNum);
+			
+			return 0;
 		}
 
 		@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
@@ -118,7 +131,7 @@ public class BuyController {
 		public @ResponseBody String jqgrid(
 			   @RequestParam(value="period", defaultValue="1") String period,
 			   String page, String rows, HttpSession session) {
-			
+			System.out.println("컨트롤러");
 			String id =(String)session.getAttribute("loginId");
 			List<BuyList> buyListHistory = getBuyListHistory(id, period);
 			
@@ -165,7 +178,7 @@ public class BuyController {
 		    map.put("period", period);
 		    map.put("id", id);
 			List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
-			
+		
 			return buyListHistory;
 		}
 }

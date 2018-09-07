@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		values
 		(
-			#{buyNum.nextval},
+			buyNum.nextval,
 			#{fishName},
 			#{buyerId},
 			#{registDate},
@@ -222,6 +222,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
   	 	UPDATE buylist
      	SET saleStatus = 'saleComplete'
+    	WHERE buyNum = #{buyNum}
+
+	</update>
+	
+	<update id="refund" parameterType="string">
+ 
+  	 	UPDATE buylist
+     	SET saleStatus = 'refund'
     	WHERE buyNum = #{buyNum}
 
 	</update>

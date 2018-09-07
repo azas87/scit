@@ -1,5 +1,54 @@
 $(document).ready(function() {
 	 homeList('allBuyList');
+	 
+	 printClock();
+		
+	  $(".item").mouseenter(function(){
+	      $(this).css('flex-grow',1);
+	      $(this).css('font-size',"3.5em");
+	      $(this).css('background-color',"powderblue");
+	    });
+	    
+	    $(".item").mouseleave(function(){
+	      $(this).css('flex-grow',1);
+	      $(this).css('font-size',"1em");
+	      $(this).css('background-color',"white");
+	    });
+	    $('.item').hover(function(){
+	        // Hover over code
+	        var title = $(this).attr('title');
+	        $(this).data('tipText', title).removeAttr('title');
+	        $('<p class="tooltip"></p>')
+	        .text(title)
+	        .appendTo('body')
+	        .fadeIn('slow');
+		}, function() {
+		        // Hover out code
+		        $(this).attr('title', $(this).data('tipText'));
+		        $('.tooltip').remove();
+		}).mousemove(function(e) {
+		        var mousex = e.pageX + 20; //Get X coordinates
+		        var mousey = e.pageY + 10; //Get Y coordinates
+		        $('.tooltip').css({ top: mousey, left: mousex })
+		});
+	
+	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
+       search: false, // show search button on the toolbar
+       add: false,
+       edit: false,
+       del: false,
+       refresh: true
+   });
+	
+	var timer;
+	$("#search_cells").on("keyup", function() {
+		var self = this;
+		if(timer) { clearTimeout(timer); }
+		timer = setTimeout(function(){
+			//timer = null;
+			$("#jqGrid").jqGrid('filterInput', self.value);
+		},0);
+	});
 });
 
 function printClock() {
@@ -111,7 +160,9 @@ function homeList(url2) {
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")
     		{	
-       		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
+       		 	console.log(jQuery("#jqGrid").getRowData(rowid));
+       		 	location.href="writeBuyBoardForm";
+    			
     		} 
     	},
     	
@@ -129,54 +180,13 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	  return zero + num;
 }
 
-$(document).ready(function()
-{
-	printClock();
-	
-	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-        search: false, // show search button on the toolbar
-        add: false,
-        edit: false,
-        del: false,
-        refresh: true
-    });
-	
-	var timer;
-	$("#search_cells").on("keyup", function() {
-		var self = this;
-		if(timer) { clearTimeout(timer); }
-		timer = setTimeout(function(){
-			//timer = null;
-			$("#jqGrid").jqGrid('filterInput', self.value);
-		},0);
-	});
-    
-}); 
-
 function rebuy (cellvalue, options, rowObject) {
  //console.log(rowObject);
-   return '<a href="#">再購入</a>'; 
+   return '再購入'; 
 };
 	 
 	 
- $("#search").on("click",function(){
-	 var data = $("#searchData").val()
-	 var searchType = $("#searchType").val();
-	 var rows = $("[title ='Records per Page']").val();
-	 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
-	
-	 rowData = null
-	
-	 $("#jqGrid").jqGrid("clearGridData", true);
-	
-	 $("#jqGrid").setGridParam({
-		 datatype	: "json",
-		 postData	: postData,
-		 loadComplete	: function(data) {
-			 console.log(data);
-		 }
-	 }).trigger("reloadGrid");
-});
+
 	
 
 function allBuyList() {	

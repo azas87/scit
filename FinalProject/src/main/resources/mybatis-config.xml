@@ -8,10 +8,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kay87.team.vo.MemberInfo" alias="Member"/>
 		<typeAlias type="com.kay87.team.vo.BuyList" alias="BuyList"/>
 		<typeAlias type="com.kay87.team.vo.FishList" alias="FishList"/>
+		<typeAlias type="com.kay87.team.vo.Review" alias="Review"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="MemberMapper.xml" />
 		<mapper resource="BuyMapper.xml" />
+		<mapper resource="ReviewMapper.xml" />
 	</mappers>
 </configuration>

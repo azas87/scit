@@ -64,7 +64,7 @@ public class MemberController {
 		return checkedId;
 	}
 	
-	@RequestMapping(value = "/LogOut", method = RequestMethod.GET)
+	@RequestMapping(value = "/logOut", method = RequestMethod.GET)
 	public String LogOut(HttpSession session, Model model) {
 
 		session.invalidate();
