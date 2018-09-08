@@ -4,16 +4,19 @@ function rebuy (cellvalue, options, rowObject) {
 	 return '再購入'; 
 };
 
-
-
 function rebuy2 (cellvalue, options, rowObject) {
 	//console.log(rowObject);
 	return '確認'; 
 };
  
-function rebuy2 (cellvalue, options, rowObject) {
+function rebuy3 (cellvalue, options, rowObject) {
 	//console.log(rowObject);
 	return '返金'; 
+};
+function sellerDetail (seller) {
+	
+	$('#sellerInfo').val(seller);
+	window.open("sellerDetail", "sellerDetail", "width=400px,height=300px,left=500px,top=200px");
 };
  
  $("#search").on("click",function(){
@@ -109,7 +112,7 @@ function rebuy2 (cellvalue, options, rowObject) {
  				name : '払い戻し',
  				width : 100,
  				height : 200,
- 				formatter: rebuy2,
+ 				formatter: rebuy3,
  				align:'center'
  			},
 
@@ -155,6 +158,10 @@ function rebuy2 (cellvalue, options, rowObject) {
      		}
      		else if(cm[index].name == "払い戻し") {
      			refund($("#jqGrid").getRowData(rowid));
+     			
+     		}
+     		else if(cm[index].name == "successSellerId") {
+     			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
      			
      		}
      	},

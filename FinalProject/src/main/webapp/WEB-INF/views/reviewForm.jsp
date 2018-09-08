@@ -163,12 +163,13 @@ function review() {
 		type:"get",
 		data:obj,
 		success:function(data){
-			
+			window.close();
 		},
 		error:function(){
 			alert("통신실패");
 		}
 	});
+
 }
 
 

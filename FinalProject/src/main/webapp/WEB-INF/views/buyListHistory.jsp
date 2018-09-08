@@ -206,7 +206,7 @@
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var period = "${period}"	
+		var period = "${period}"
 		buyList(period);
 		//다운로드를 위한 period
 		$('#period').text(period);
@@ -255,5 +255,7 @@
 	<!-- 리뷰등록을 위해사용 -->
 	<input type="hidden" id="buyNum" name="buyNum">
 	<input type="hidden" id="sellerId" name="sellerId">
+	<!-- 판매자상세정보를 위해 사용 -->
+	<input type="hidden" id="sellerInfo" name="sellerInfo">
 </body>
 </html>
