@@ -57,43 +57,43 @@ language="java" pageEncoding="UTF-8"%>
 .star-input>.input>label:hover~label{
     background-image: none;
 }
-.star-input>.input>label[for="p1"]{ 
+.star-input>.input>label[for="p1"]{
     width: 10px;
     z-index: 10;
 }
-.star-input>.input>label[for="p2"]{ 
+.star-input>.input>label[for="p2"]{
     width: 20px;
     z-index: 9;
 }
-.star-input>.input>label[for="p3"]{ 
+.star-input>.input>label[for="p3"]{
     width: 30px;
     z-index: 8;
 }
-.star-input>.input>label[for="p4"]{ 
+.star-input>.input>label[for="p4"]{
     width: 40px;
     z-index: 7;
 }
-.star-input>.input>label[for="p5"]{ 
+.star-input>.input>label[for="p5"]{
     width: 50px;
     z-index: 6;
 }
-.star-input>.input>label[for="p6"]{ 
+.star-input>.input>label[for="p6"]{
     width: 60px;
     z-index: 5;
 }
-.star-input>.input>label[for="p7"]{ 
+.star-input>.input>label[for="p7"]{
     width: 70px;
     z-index: 4;
 }
-.star-input>.input>label[for="p8"]{ 
+.star-input>.input>label[for="p8"]{
     width: 80px;
     z-index: 3;
 }
-.star-input>.input>label[for="p9"]{ 
+.star-input>.input>label[for="p9"]{
     width: 90px;
     z-index: 2;
 }
-.star-input>.input>label[for="p10"]{ 
+.star-input>.input>label[for="p10"]{
     width: 100px;
     z-index: 1;
 }
@@ -135,6 +135,7 @@ var starRating = function(){
   })
     .on("mouseleave", ".star-input>.input", function(){
     var $checked = $star.find(":checked");
+		console.log($checked.length);
     if($checked.length === 0){
       $result.text("0");
     } else {
@@ -145,7 +146,7 @@ var starRating = function(){
 starRating();
 </script>
 <body>
-  
+
   <span class="star-input">
   <span class="input">
     <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>

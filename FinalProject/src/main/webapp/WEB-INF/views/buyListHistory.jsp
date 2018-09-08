@@ -141,6 +141,10 @@
       function drawHistogram() 
     {
     	  var dataChart = [["Element", "Density", { role: "style" } ]];
+    	  
+    	  console.log(${list}})
+    	  
+    	  
       	<c:forEach items="${list}" var="item" varStatus="status">
       		dataChart.push(["${status.count}",Number("${item}"), "gold"]);
   
@@ -183,13 +187,11 @@
 	</div>
 	
 	<div><br></div>
-	</div>
 	
-	<div id="grid_container">
-		<input id="search_cells" type="search"/>
-		<table id="jqGrid"></table>
-		<div id="jqGridPager"></div>
-	</div>
+	<input id="search_cells" type="search"/>
+	<table id="jqGrid"></table>
+	<div id="jqGridPager"></div>
+	
 	<div><br></div>
 	
 	<div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
@@ -230,6 +232,31 @@
 				$("#jqGrid").jqGrid('filterInput', self.value);
 			},0);
 		});
+		
+		$("#search").on("click",function(){
+			 var data = $("#searchData").val()
+			 var searchType = $("#searchType").val();
+			 var rows = $("[title ='Records per Page']").val();
+			 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
+
+			 rowData = null;
+			
+			 $("#jqGrid").jqGrid("clearGridData", true);
+			
+			 $("#jqGrid").setGridParam({
+			 datatype	: "json",
+				 postData	: postData,
+				 loadComplete	: function(data) {
+					 console.log(data);
+				 }
+			 }).trigger("reloadGrid");
+		});
+		 
+		 $(window).resize(function() {
+
+				$("jqGrid").setGridWidth($(this).width() * .100);
+
+			});
 	});
 	
 	</script>

@@ -1,8 +1,34 @@
+var listMode = "allBuyList";
+var refreshInterver = 600000; // 1000 = 1초
+
+
+
 $(document).ready(function() {
+	$('.popdown').popdown();
+	
 	 homeList('allBuyList');
-	 
+	//myBuyList();
 	 printClock();
+	 
+	 
+	 /*
+	 // 자동 글쓰기 테스트.
+	 setTimeout(function(){
+		 console.log("settimeout");
+		 autoWriteTest();
+		ListRefresh();
+	}, 60000);
+		*/
+	 
+	 // 10분 마다 자동갱신
+	 setInterval(function(){
+		 console.log(new Date());
+		 ListRefresh();
 		
+	}, refreshInterver);
+	 
+	 
+	 
 	  $(".item").mouseenter(function(){
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"3.5em");
@@ -49,7 +75,34 @@ $(document).ready(function() {
 			$("#jqGrid").jqGrid('filterInput', self.value);
 		},0);
 	});
+	
+	tab('#tab',0);
 });
+
+
+function tab(e, num){
+    var num = num || 0;
+    var menu = $(e).children();
+    var con = $(e+'_con').children();
+    var select = $(menu).eq(num);
+    var i = num;
+
+    select.addClass('on');
+    con.eq(num).show();
+
+    menu.click(function(){
+        if(select!==null){
+            select.removeClass("on");
+            con.eq(i).hide();
+        }
+
+        select = $(this);	
+        i = $(this).index();
+
+        select.addClass('on');
+        con.eq(i).show();
+    });
+}
 
 function printClock() {
     
@@ -75,6 +128,7 @@ function printClock() {
 }
 
 function homeList(url2) {
+	console.log("homeList");
 	$("#jqGrid").jqGrid({
 		url : url2,
 		mtype : "GET",
@@ -82,6 +136,11 @@ function homeList(url2) {
 		colModel : 
 		[ 
 			{
+ 				label : '히든',
+ 				name : 'buyNum',
+ 				align:'center',
+ 				hidden:true
+ 			}, {
 				label : '購買日付',
 				name : 'deadline',
 				width : 150,
@@ -96,13 +155,13 @@ function homeList(url2) {
 			}, {
 				label : '産地',
 				name : 'location',
-				width : 100,
+				width : 80,
 				height : 200,
 				align:'center'
 			}, {
 				label : '重量',
 				name : 'weight',
-				width : 80,
+				width : 60,
 				height : 200,
 				align:'center'
 			}, {
@@ -128,16 +187,20 @@ function homeList(url2) {
 
 		],
 		viewrecords : true,
-		width : 950,
+		width : 900,
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
 		pager : "#jqGridPager",
 		loadonce: true,
-		shrinkToFit : false,
-		
+		grouping: false,
+		groupingView: {
+		    groupField: ['buyNum'],
+		    groupColumnShow : [false],
+		},
 		loadComplete:function(data)
 		{
+			console.log("loadComplete");
 			$('.bigSize').hover(function(){
 				console.log("test");
 				var title = $(this).attr('title');
@@ -190,10 +253,56 @@ function rebuy (cellvalue, options, rowObject) {
 	
 
 function allBuyList() {	
-	$("#jqGrid").jqGrid().setGridParam({url:'allBuyList',datatype:'json'}).trigger('reloadGrid');
+	console.log("allBuyList");
+	listMode = "allBuyList";
+	ListRefresh();
 }
 
 function myBuyList() {		
-	$("#jqGrid").jqGrid().setGridParam({url:'myBuyList',datatype:'json'}).trigger('reloadGrid');
+	console.log("myBuylist");
+	listMode = "myBuyList";
+	ListRefresh();
 }
+
+
+function ListRefresh()
+{
+	//$("#jqGrid").trigger("reloadGrid"); // loadonce 떄문인지 한번 밖에 안 됨
+	var grouping = false;
+	console.log("ListRefresh");
+	console.log(listMode);
+	if(listMode == "myBuyList")
+	{
+		grouping= true;
+	}
+	console.log(grouping);
+	
+	$("#jqGrid").jqGrid().setGridParam({url:listMode, datatype:'json',grouping: grouping}).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
+}
+
+
+
+function autoWriteTest()
+{
+	console.log("autoWriteTest " + today());
+	//location.href="writeBuyBoard?fishName=クマエビ&buyerId=id2&weight=100&saleStatus=onSale&price=12345&registDate=Sep 10 2018 4:18:17 PM&uploadDate=Sep 10 2018 4:18:18 PM&deadline=+Sep 11 2018 4:18:23&successSellerId=id1&buyListComment=auto_write&location=인천"
+	location.href="writeBuyBoard?fishName=クマエビ&buyerId=id2&weight=100&saleStatus=onSale&price=12345&registDate=Sep 10 2018 4:18:17 PM&uploadDate=Sep 10 2018 4:18:18 PM&deadline="+today()+"&successSellerId=id1&buyListComment=auto_write&location=인천";
+}
+
+
+
+//오늘날짜 구하기
+function today(){
+	   
+    var date = new Date();
+
+    var year  = date.getFullYear();
+    var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
+    var day   = date.getDate();
+    if (("" + month).length == 1) { month = "0" + month; }
+    if (("" + day).length == 1) { day = "0" + day; }
+    return year +"/" + month +"/"+ day; 
+       
+}
+
 

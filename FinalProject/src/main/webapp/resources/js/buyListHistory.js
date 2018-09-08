@@ -1,4 +1,59 @@
 
+//$(document).ready(function() {
+window.onload = function() { //실행될 코드 }
+		var period = "${period}"	
+		buyList(period);
+		//다운로드를 위한 period
+		$('#period').text(period);
+		
+		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
+		    search: false, // show search button on the toolbar
+		    add: false,
+		    edit: false,
+		    del: false,
+		    refresh: true
+		});
+		
+		var timer;
+		$("#search_cells").on("keyup", function() {
+			var self = this;
+			if(timer) { clearTimeout(timer); }
+			timer = setTimeout(function(){
+				//timer = null;
+				$("#jqGrid").jqGrid('filterInput', self.value);
+			},0);
+		});
+		
+		$("#search").on("click",function(){
+			 var data = $("#searchData").val()
+			 var searchType = $("#searchType").val();
+			 var rows = $("[title ='Records per Page']").val();
+			 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
+
+			 rowData = null;
+			
+			 $("#jqGrid").jqGrid("clearGridData", true);
+			
+			 $("#jqGrid").setGridParam({
+			 datatype	: "json",
+				 postData	: postData,
+				 loadComplete	: function(data) {
+					 console.log(data);
+				 }
+			 }).trigger("reloadGrid");
+		});
+		 
+		 $(window).resize(function() {
+
+				$("jqGrid").setGridWidth($(this).width() * .100);
+
+			});
+		 
+		 
+}
+//	});
+
+
 function rebuy (cellvalue, options, rowObject) {
 	 //console.log(rowObject);
 	 return '再購入'; 
@@ -12,34 +67,10 @@ function rebuy2 (cellvalue, options, rowObject) {
 };
  
  
- $("#search").on("click",function(){
-	 var data = $("#searchData").val()
-	 var searchType = $("#searchType").val();
-	 var rows = $("[title ='Records per Page']").val();
-	 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
-
-	 rowData = null;
-	
-	 $("#jqGrid").jqGrid("clearGridData", true);
-	
-	 $("#jqGrid").setGridParam({
-	 datatype	: "json",
-		 postData	: postData,
-		 loadComplete	: function(data) {
-			 console.log(data);
-		 }
-	 }).trigger("reloadGrid");
-});
  
- $(window).resize(function() {
-
-		$("jqGrid").setGridWidth($(this).width() * .100);
-
-	});
  
  function buyList(period) 
  {
-	 console.log(period);
  	$("#jqGrid").jqGrid({
  		/* 환불 url:'refundList'*/
  		url : 'jqgrid_R?period='+period,

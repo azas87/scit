@@ -47,7 +47,7 @@ public class BuyController {
 	//구매글쓰기
 	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.GET)
 	public String writeBuyBoard(BuyList buyList, HttpSession session){
-
+		System.out.println("writeBuyBoard buyList => " + buyList);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		buyList.setBuyerId((String)session.getAttribute("loginId"));
 		dao.insertBuyList(buyList);
