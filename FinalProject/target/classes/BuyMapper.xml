@@ -244,12 +244,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<!-- 판매자 선택  -->
-	<update id="selectSeller" parameterType="string">
+	<update id="selectSeller" parameterType="map">
 		UPDATE buylist
      	SET saleStatus = 'saleComplete'
-     		,successSellerId=#{successSellerId}
+     		,successSellerId=#{SellerId}
     	WHERE buyNum = #{buyNum}
 	</update>
+
 
 	<update id="refund" parameterType="string">
  

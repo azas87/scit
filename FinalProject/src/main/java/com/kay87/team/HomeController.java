@@ -1,6 +1,7 @@
 package com.kay87.team;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -95,9 +96,15 @@ public class HomeController {
 
 	//판매자선택
 	@RequestMapping(value = "/selectSeller", method = RequestMethod.GET)
-	public String selectSeller(String buyNum, HttpSession session, Model model){
-		BuyMapper dao = sql.getMapper(BuyMapper.class);		
-		dao.selectSeller(buyNum);
+	public String selectSeller(HttpSession session, String SellerId, 
+			String buyNum, Model model){
+		
+		BuyMapper dao = sql.getMapper(BuyMapper.class);				
+		Map<String, String> map = new HashMap<String, String>();
+	    map.put("SellerId", SellerId);
+	    map.put("buyNum", buyNum);
+	    dao.selectSeller(map);
+	    
 		return "home";
 	}
 
