@@ -50,7 +50,7 @@ $.ajax({
 		for(i in resp){
 			wishlist += resp[i].wish + " ";
 		}
-
+		alert(resp);
 		$('#id').text(wishlist);
 		$('#name').text(resp[0].name);
 		$('#nameKana').text(resp[0].nameKana);

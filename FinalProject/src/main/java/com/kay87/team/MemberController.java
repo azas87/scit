@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kay87.team.dao.MemberMapper;
+import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.vo.MemberInfo;
+import com.kay87.team.vo.Review;
 import com.kay87.team.vo.SellerInfo;
 
 
@@ -28,7 +30,7 @@ public class MemberController {
 	@Autowired
 	SqlSession sql;
 
-	//회원가입
+	//구매자회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(MemberInfo member) {
 		System.out.println(member);
@@ -37,6 +39,21 @@ public class MemberController {
 		
 		return "home";
 	}
+	
+	//판매자회원가입
+		@RequestMapping(value = "/sellerJoin", method = RequestMethod.POST)
+		public String sellerJoin(MemberInfo member) {
+			System.out.println(member);
+			MemberMapper dao=sql.getMapper(MemberMapper.class);
+			/*dao.joinMember(member);*/
+			ReviewMapper reviewMapper=sql.getMapper(ReviewMapper.class);
+			Review r = new Review();
+			r.setStar(3);
+			r.setSellerId(member.getId());
+			reviewMapper.insertReview(r);
+			
+			return "home";
+		}
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberInfo member, HttpSession session, Model model) {
