@@ -141,6 +141,7 @@
       function drawHistogram() 
     {
     	  var dataChart = [["Element", "Density", { role: "style" } ]];
+    	  
       	<c:forEach items="${list}" var="item" varStatus="status">
       		dataChart.push(["${status.count}",Number("${item}"), "gold"]);
   
@@ -228,6 +229,31 @@
 				$("#jqGrid").jqGrid('filterInput', self.value);
 			},0);
 		});
+		
+		$("#search").on("click",function(){
+			 var data = $("#searchData").val()
+			 var searchType = $("#searchType").val();
+			 var rows = $("[title ='Records per Page']").val();
+			 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
+
+			 rowData = null;
+			
+			 $("#jqGrid").jqGrid("clearGridData", true);
+			
+			 $("#jqGrid").setGridParam({
+			 datatype	: "json",
+				 postData	: postData,
+				 loadComplete	: function(data) {
+					 console.log(data);
+				 }
+			 }).trigger("reloadGrid");
+		});
+		 
+		 $(window).resize(function() {
+
+				$("jqGrid").setGridWidth($(this).width() * .100);
+
+			});
 	});
 	
 	

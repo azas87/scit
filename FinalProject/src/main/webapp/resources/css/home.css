@@ -1,8 +1,21 @@
-		div{
+		 #contain
+		{
+			width:1000px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		 #contain div{
 			border:1px solid #cccccc;
 			padding:5px;
 			margin: 5px;
 			text-align: center;
+		}
+		
+		#list {
+			border:1px solid #cccccc;
+			width:900px;
+			margin: 0 auto;
+			overflow: hidden;
 		}
 
     .tooltip
@@ -16,14 +29,10 @@
     	color:#fff;
     	font-size:3.5em;
     	text-align: center;
+    	z-index: 1000;
     }
 
-		#contain
-		{
-			width:1000px;
-			margin: 0 auto;
-			overflow: hidden;
-		}
+		
 
 		#header{
 			width:980px;
@@ -37,17 +46,18 @@
 
 		#nav{
 			width:980px;
-			height:200px;
 		}
 
     #nav .items {
+    border:0px;	
     display: flex;
     flex-direction: row;
-    height:130px;
+    height:80px;
 
   }
-  #nav .item{
-    line-height: 130px;
+  #nav .item
+  {
+    line-height: 80px;
     list-style: none;
     margin:0px;
     flex-grow: 1;
@@ -57,4 +67,22 @@
   {
 
   } */
+  
+  #tab .item:nth-child(3)
+  {
+  	border:0px;	
+    list-style: none;
+    margin:0px;
+    flex-grow: 1;
+  }
 
+
+* { margin:0; padding:0; }
+ul,li { list-style:none; }
+a { text-decoration:none; color:#000; }
+.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
+.tab li { float:left; width:33.3%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+.tab li { display:inline-block; padding:20px; cursor:pointer; }
+.tab li.on { background-color:#eee; color:#f00; }
+.tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
+.tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
