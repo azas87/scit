@@ -33,6 +33,10 @@ public interface BuyMapper {
 	public int saleComplete(String buyNum);
 
 	public List<BuyList> getRefundsBuyList(String attribute);
+	
+	
+
+	public int selectSeller(String buyNum);//sql문은 update임
 
 
 

@@ -131,7 +131,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--전체구매리스트,검색은 없음-->	
 	<select id="allBuyList" resultType="BuyList" >
 		select 
-			*
+			buyNum
+			,fishName
+			,buyerId
+			,registDate
+			,uploadDate
+			,deadline
+			,weight
+			,saleStatus
+			,price
+			,successSellerId
+			,buyListComment
+			,location
 		from 
 			BuyList
 		where			
@@ -143,7 +154,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--나의구매리스트, 검색은 없음 -->		
 	<select id="myBuyList" resultType="BuyList" parameterType="string">
 		select 
-			*
+			buyNum
+			,fishName
+			,buyerId
+			,registDate
+			,uploadDate
+			,deadline
+			,weight
+			,saleStatus
+			,price
+			,successSellerId
+			,buyListComment
+			,location
 		from 
 			BuyList
 		where			
@@ -152,12 +174,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			saleStatus = 'onSale'				
 	</select>	
 	
-	<!-- <select id="mygetTotal" resultType="int" parameterType="string">
-		select count(*) from BuyList
-		where		
-			buyerId = #{buyerId}		
-	</select>
-	 -->
 	
 
 	<select id="GetTotalListCount" resultType="int" parameterType="string">
@@ -225,27 +241,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	WHERE buyNum = #{buyNum}
 
 	</update>
-<!-- 	
-	  <select id="selectBestseller" resultType="hashmap">
-   	SELECT
-  
-   	
-   		b.bookcode,
-   		b.title,
-   		b.price,
-   		s.purchasecnt
-   	FROM
-   		book b, sale s
-   	WHERE
-   		b.bookcode=s.bookcode
-   	AND
-   		s.purchasecnt
-   	IN (
-   		SELECT
-   			MAX(purchasecnt)
-   		FROM
-   			sale
-   	)
-   </select> -->
+	
+	<!-- 판매자 선택  -->
+	<update id="selectSeller" parameterType="string">
+		UPDATE buylist
+     	SET saleStatus = 'saleComplete'
+     		,successSellerId=#{successSellerId}
+    	WHERE buyNum = #{buyNum}
+	</update>
 	
 </mapper>

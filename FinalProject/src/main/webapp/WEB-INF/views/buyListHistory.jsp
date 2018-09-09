@@ -170,9 +170,6 @@
 
 	
 	
-	function id1() {
-		location.href="sellerInfoDetail";
-	}
 	
 </script>
 

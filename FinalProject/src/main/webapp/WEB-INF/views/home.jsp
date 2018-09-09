@@ -12,7 +12,7 @@
 	<title>Insert title here</title>
 	
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/home.css" />
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
 <link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->

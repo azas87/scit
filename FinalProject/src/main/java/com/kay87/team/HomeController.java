@@ -93,4 +93,12 @@ public class HomeController {
 		System.out.println(jsonPlace);
 		return jsonPlace;
 	}
+	
+	//판매자선택
+	@RequestMapping(value = "/selectSeller", method = RequestMethod.GET)
+	public String selectSeller(String buyNum, HttpSession session, Model model){
+		BuyMapper dao = sql.getMapper(BuyMapper.class);		
+		dao.selectSeller(buyNum);
+		return "home";
+	}
 }

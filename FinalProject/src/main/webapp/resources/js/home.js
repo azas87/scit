@@ -113,7 +113,7 @@ function homeList(url2) {
 				align:'center'
 			}, {
 				label : '販売者ID',
-				name : 'successSellerId',
+				name : 'buyerId',
 				width : 100,
 				height : 200,
 				align:'center'
@@ -124,7 +124,14 @@ function homeList(url2) {
 				height : 200,
 				formatter: rebuy,
 				align:'center'
-			},
+			}, {
+				label : '販売者選択',
+				name : 'successSellerId',
+				width : 100,
+				height : 200,
+				formatter: select,
+				align:'center'
+			}
 
 		],
 		viewrecords : true,
@@ -159,11 +166,17 @@ function homeList(url2) {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")
-    		{	
+    		{	alert('구입')
        		 	console.log(jQuery("#jqGrid").getRowData(rowid));
        		 	location.href="writeBuyBoardForm";
     			
-    		} 
+    		}else if(cm[index].name == "11"){    			
+    			alert('이벤트')
+    			console.log(jQuery("#jqGrid").getRowData(rowid));
+       		 	location.href="selectSeller";
+    			
+    		}
+    		
     	},
     	
 	});
@@ -184,7 +197,11 @@ function rebuy (cellvalue, options, rowObject) {
  //console.log(rowObject);
    return '再購入'; 
 };
-	 
+function select (cellvalue, options, rowObject) {
+	/* //console.log(rowObject);
+	alert('선택이니.')
+	   return '選択'; */
+	};	
 	 
 
 	
