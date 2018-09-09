@@ -37,45 +37,57 @@
  <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
  <script type="text/javascript" src="./resources/js/home.js"></script>
  
-	
+ 	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
+ 		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
+ 
 	
 </head>
 <body>
- 	<div id="contain">
-		<div id="header">
-			<div id="clock">	</div>
-		</div>
-		
-		<div id="nav">
-	      <div class="items">
-      		<c:choose>
+<div id="contain">
+	<div id="header">
+		<div id="clock">	</div>
+	</div>
+	<div id="nav">
+		<div class="items">
+			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
 					<div class="item " title="로그인"><a href="loginForm?">로그인</a></div>
-			        <div class="item " title="회원가입"><a href="joinForm?">회원가입</a></div>
+					<div class="item " title="회원가입"><a href="joinForm?">회원가입</a></div>
 				</c:when>
 				
 				<c:when test="${sessionScope.loginId != null }">
-			        <div class="item " title="로그인"><a href="logOut?">로그아웃</a></div>
-			        <div class="item " title="글등록"><a href="writeBuyBoardForm?">글등록</a></div>
-			        <div class="item " title="구매내역"><a href="buyListHistory?">구매내역</a></div>
+					<div class="item" title="로그인"><a href="logOut?">로그아웃</a></div>
+					<div class="item" title="글등록"><a href="writeBuyBoardForm?">글등록</a></div>
+					<div class="item" title="구매내역"><a href="buyListHistory?">구매내역</a></div>
 				</c:when>
 			</c:choose>
-	      </div>
 		</div>
-		
-		<input type="button" value="전체품목(리스트)" id="allBuyList" class="allBuyList" onclick="allBuyList()">
-		<c:choose>
-			<c:when test="${sessionScope.loginId != null }">
-				<input type="button" value="나의품목(리스트)" id="myBuyList" class="myBuyList" onclick="myBuyList()"><br>
-			</c:when>
-		</c:choose>
-		<input type="text" id="search_cells">
-
-	<table id="jqGrid"></table>
-	<div id="jqGridPager"></div>
+		<div class="items">
+			<div class="item" title="Content Demo"><a href="./resources/content.html" class=" popdown btn">알림창 데모</a></div>
+		</div>
+		<div id="tab">
+			<div class="items">
+				<div class="item " title="전체 글" onclick="allBuyList()">전체 글</a></div>
+				<c:choose>
+					<c:when test="${sessionScope.loginId != null }">
+						<div class="item " title="나의 품목" onclick="myBuyList()">나의 품목</a></div>
+					</c:when>
+				</c:choose>
+				<div class="item">검색 : <input type="text" id="search_cells" title=""></div>
+			</div>
+		</div>
 	</div>
+	
+	
 
- 
+</div>
+
+ <div id="list">
+		<div>
+			<table id="jqGrid"></table>
+			<div id="jqGridPager"></div>
+		</div>	
+	</div>
 
 	
 	

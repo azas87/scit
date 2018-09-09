@@ -57,43 +57,43 @@ language="java" pageEncoding="UTF-8"%>
 .star-input>.input>label:hover~label{
     background-image: none;
 }
-.star-input>.input>label[for="p1"]{ 
+.star-input>.input>label[for="p1"]{
     width: 10px;
     z-index: 10;
 }
-.star-input>.input>label[for="p2"]{ 
+.star-input>.input>label[for="p2"]{
     width: 20px;
     z-index: 9;
 }
-.star-input>.input>label[for="p3"]{ 
+.star-input>.input>label[for="p3"]{
     width: 30px;
     z-index: 8;
 }
-.star-input>.input>label[for="p4"]{ 
+.star-input>.input>label[for="p4"]{
     width: 40px;
     z-index: 7;
 }
-.star-input>.input>label[for="p5"]{ 
+.star-input>.input>label[for="p5"]{
     width: 50px;
     z-index: 6;
 }
-.star-input>.input>label[for="p6"]{ 
+.star-input>.input>label[for="p6"]{
     width: 60px;
     z-index: 5;
 }
-.star-input>.input>label[for="p7"]{ 
+.star-input>.input>label[for="p7"]{
     width: 70px;
     z-index: 4;
 }
-.star-input>.input>label[for="p8"]{ 
+.star-input>.input>label[for="p8"]{
     width: 80px;
     z-index: 3;
 }
-.star-input>.input>label[for="p9"]{ 
+.star-input>.input>label[for="p9"]{
     width: 90px;
     z-index: 2;
 }
-.star-input>.input>label[for="p10"]{ 
+.star-input>.input>label[for="p10"]{
     width: 100px;
     z-index: 1;
 }
@@ -112,6 +112,8 @@ language="java" pageEncoding="UTF-8"%>
 
 <script>
 //star rating
+$(function () {
+
 var starRating = function(){
   var $star = $(".star-input"),
       $result = $star.find("output>b");
@@ -135,6 +137,7 @@ var starRating = function(){
   })
     .on("mouseleave", ".star-input>.input", function(){
     var $checked = $star.find(":checked");
+		console.log($checked.length);
     if($checked.length === 0){
       $result.text("0");
     } else {
@@ -143,24 +146,56 @@ var starRating = function(){
   });
 };
 starRating();
+
+});
+function review() {
+
+	var comment = $('#reviewComment').val();
+	var star=$("output>b").text();
+	var buyNum=$( "#buyNum", opener.document ).val();
+	var sellerId=$( "#sellerId", opener.document ).val();
+	var obj = new Object();
+	obj.reviewComment = comment;
+	obj.star = star;
+	obj.buyNum = buyNum;
+	obj.sellerId =sellerId;
+	$.ajax({
+		url:"insertReview",
+		type:"get",
+		data:obj,
+		success:function(data){
+			window.close();
+		},
+		error:function(){
+			alert("통신실패");
+		}
+	});
+
+}
+
+
 </script>
 <body>
-  
-  <span class="star-input">
-  <span class="input">
-    <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
-    <input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
-    <input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
-    <input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
-    <input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
-    <input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
-    <input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
-    <input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
-    <input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
-    <input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
-  </span>
-  <output for="star-input"><b>0</b>점</output>
-</span>
+
+
+
+   	コメント<input type="text" id="reviewComment"><br>
+  	<span class="star-input">
+  	<span class="input">
+    <input type="radio" name="star" id="p1" value="1"><label for="p1">1</label>
+    <input type="radio" name="star" id="p2" value="2"><label for="p2">2</label>
+    <input type="radio" name="star" id="p3" value="3"><label for="p3">3</label>
+    <input type="radio" name="star" id="p4" value="4"><label for="p4">4</label>
+    <input type="radio" name="star" id="p5" value="5"><label for="p5">5</label>
+    <input type="radio" name="star" id="p6" value="6"><label for="p6">6</label>
+    <input type="radio" name="star" id="p7" value="7"><label for="p7">7</label>
+    <input type="radio" name="star" id="p8" value="8"><label for="p8">8</label>
+    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
+    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
+  	</span>
+  	<output for="star-input"><b>0</b>点</output>
+	</span>
+	<input type="button" value="登録" onclick="review()">
 
 
 </body>

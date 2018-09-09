@@ -48,8 +48,6 @@ public class HomeController {
 		
 	}
 	
-
-	
 	//첫 메인화면에서 전체구매리스트+검색
 	@RequestMapping(value = "/")
 	public String home(
@@ -61,7 +59,7 @@ public class HomeController {
 		return "home";
 	}	
 	
-	
+	//첫 메인화면에서 전체 리스트
 	@RequestMapping(value = "/allBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String allBuyList() {			
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
@@ -94,6 +92,7 @@ public class HomeController {
 		return jsonPlace;
 	}
 	
+
 	//판매자선택
 	@RequestMapping(value = "/selectSeller", method = RequestMethod.GET)
 	public String selectSeller(String buyNum, HttpSession session, Model model){
@@ -101,4 +100,5 @@ public class HomeController {
 		dao.selectSeller(buyNum);
 		return "home";
 	}
+
 }

@@ -141,6 +141,7 @@
       function drawHistogram() 
     {
     	  var dataChart = [["Element", "Density", { role: "style" } ]];
+    	  
       	<c:forEach items="${list}" var="item" varStatus="status">
       		dataChart.push(["${status.count}",Number("${item}"), "gold"]);
   
@@ -210,7 +211,7 @@
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var period = "${period}"	
+		var period = "${period}"
 		buyList(period);
 		//다운로드를 위한 period
 		$('#period').text(period);
@@ -232,7 +233,34 @@
 				$("#jqGrid").jqGrid('filterInput', self.value);
 			},0);
 		});
+		
+		$("#search").on("click",function(){
+			 var data = $("#searchData").val()
+			 var searchType = $("#searchType").val();
+			 var rows = $("[title ='Records per Page']").val();
+			 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
+
+			 rowData = null;
+			
+			 $("#jqGrid").jqGrid("clearGridData", true);
+			
+			 $("#jqGrid").setGridParam({
+			 datatype	: "json",
+				 postData	: postData,
+				 loadComplete	: function(data) {
+					 console.log(data);
+				 }
+			 }).trigger("reloadGrid");
+		});
+		 
+		 $(window).resize(function() {
+
+				$("jqGrid").setGridWidth($(this).width() * .100);
+
+			});
 	});
+	
+	
 	
 	</script>
 	<br><br>
@@ -253,5 +281,11 @@
 		<input type="hidden" id="period" name="period">
 		<input type="submit" value="ダウンロード">
 	</form>
+	
+	<!-- 리뷰등록을 위해사용 -->
+	<input type="hidden" id="buyNum" name="buyNum">
+	<input type="hidden" id="sellerId" name="sellerId">
+	<!-- 판매자상세정보를 위해 사용 -->
+	<input type="hidden" id="sellerInfo" name="sellerInfo">
 </body>
 </html>

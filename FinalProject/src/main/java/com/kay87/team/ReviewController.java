@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.vo.Review;
 
 @Controller
@@ -24,14 +26,17 @@ public class ReviewController {
 	//구매글쓰기
 	@RequestMapping(value = "/reviewForm", method = RequestMethod.GET)
 	public String reviewForm(){
-		System.out.println(11);
+		
 		return "reviewForm";
 	}
 	
-
+	//리뷰등록
 	@RequestMapping(value = "/insertReview", method = RequestMethod.GET)
-	public String insertReview(Review review){
+	public @ResponseBody String insertReview(Review review){
 		System.out.println(review);
+		ReviewMapper dao=sql.getMapper(ReviewMapper.class);
+		int result = dao.insertReview(review);
+		
 		return "home";
 	}
 

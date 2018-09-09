@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		values
 		(
-			#{buyNum.nextval},
+			buyNum.nextval,
 			#{fishName},
 			#{buyerId},
 			#{registDate},
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{weight},
 			#{saleStatus},
 			#{price},
-			#{successSellerId },
+			#{successSellerId},
 			#{buyListComment},
 			#{location}
 		)
@@ -146,7 +146,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from 
 			BuyList
 		where			
-			saleStatus = 'onSale'				
+			saleStatus = 'onSale'
+		order by buyNum asc
 	</select>
 	
 	
@@ -154,24 +155,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--나의구매리스트, 검색은 없음 -->		
 	<select id="myBuyList" resultType="BuyList" parameterType="string">
 		select 
-			buyNum
-			,fishName
-			,buyerId
-			,registDate
-			,uploadDate
-			,deadline
-			,weight
-			,saleStatus
-			,price
-			,successSellerId
-			,buyListComment
-			,location
-		from 
-			BuyList
-		where			
-			buyerId = #{buyerId}
-		and
-			saleStatus = 'onSale'				
+			b.buyNum,
+			fishName,
+			buyerId,
+			registDate,
+			uploadDate,
+			deadline,
+			weight,
+			saleStatus,
+			price,
+			s.sellerid as successSellerId,
+			buyListComment,
+			location 
+		from BuyList b, SaleList s
+		where b.buynum=s.buynum 
+		and buyerId = #{buyerId}
+		and saleStatus = 'onSale'	
+		order by buyNum asc			
 	</select>	
 	
 	
@@ -242,6 +242,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</update>
 	
+
 	<!-- 판매자 선택  -->
 	<update id="selectSeller" parameterType="string">
 		UPDATE buylist
@@ -249,5 +250,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      		,successSellerId=#{successSellerId}
     	WHERE buyNum = #{buyNum}
 	</update>
+
+	<update id="refund" parameterType="string">
+ 
+  	 	UPDATE buylist
+     	SET saleStatus = 'refund'
+    	WHERE buyNum = #{buyNum}
+
+	</update>
+
 	
 </mapper>

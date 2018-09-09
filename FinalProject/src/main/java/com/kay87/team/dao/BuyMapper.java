@@ -38,6 +38,8 @@ public interface BuyMapper {
 
 	public int selectSeller(String buyNum);//sql문은 update임
 
+	public int refund(String buyNum);
+
 
 
 }

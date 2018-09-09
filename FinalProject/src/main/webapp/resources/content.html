@@ -1,0 +1,129 @@
+
+<div class="popdown-content">
+	<header>
+		<h2>신규 글 알림</h2>
+	</header>
+	
+	<section class="body">
+			<table id="jqGrid1">	</table>
+			<div id="jqGridPager1"></div>
+			<table id="jqPivot"></table>
+			<div id="jqGridPivotPager1"></div>
+	</section>
+	
+	<footer>
+		<button class="close-popdown">Close</button>
+	</footer>
+	
+	<script>
+	$(document).ready(function() {
+		jqGridmyBuyList();
+	});
+	
+	function jqGridmyBuyList()
+	{
+			$("#jqGrid1").jqGrid({
+				url : 'myBuyList',
+				mtype : "GET",
+				datatype : "json",
+				colModel : 
+				[ 
+					{
+		 				label : '히든',
+		 				name : 'buyNum',
+		 				align:'center',
+		 				hidden:true
+		 			}, {
+						label : '購買日付',
+						name : 'deadline',
+						width : 150,
+						height : 200,
+						align:'center'
+					}, {
+						label : '品種',
+						name : 'fishName',
+						width : 150,
+						height : 200,
+						align:'center'
+					}, {
+						label : '産地',
+						name : 'location',
+						width : 80,
+						height : 200,
+						align:'center'
+					}, {
+						label : '重量',
+						name : 'weight',
+						width : 60,
+						height : 200,
+						align:'center'
+					}, {
+						label : '価格',
+						name : 'price',
+						width : 80,
+						height : 200,
+						align:'center'
+					}, {
+						label : '販売者ID',
+						name : 'successSellerId',
+						width : 100,
+						height : 200,
+						align:'center'
+					}, {
+						label : '再購入1',
+						name : '再購入2',
+						width : 100,
+						height : 200,
+						formatter: rebuy,
+						align:'center'
+					},
+
+				],
+				viewrecords : true,
+				width : 940,
+				height : 400,
+				rowNum : 10,
+				rowList:[10,20,30],
+				pager : "#jqGridPager1",
+				loadonce: true,
+				sortname:'buyNum',
+				grouping: true,
+				groupingView: {
+				    groupField: ['buyNum'],
+				    groupColumnShow : [false],
+				},
+				loadComplete:function(data)
+				{
+					console.log("loadComplete");
+					$('.bigSize').hover(function(){
+						console.log("test");
+						var title = $(this).attr('title');
+						$(this).data('tipText', title).removeAttr('title');
+						$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+					},
+					function() {
+						$(this).attr('title',$(this).data('tipText'));
+						$('.tooltip').remove();
+					}).mousemove(function(e) {
+						var mousex = e.pageX + 20;
+						var mousey = e.pageY + 10;
+						$('.tooltip').css({top : mousey,left : mousex});
+					});
+				},
+				gridComplete: function(){
+				},
+				onCellSelect: function(rowid, index, contents, event) 
+		    	{    
+		    		var cm = $(this).jqGrid('getGridParam','colModel');    
+		    		if(cm[index].name == "再購入2")
+		    		{	
+		       		 	console.log(jQuery("#jqGrid").getRowData(rowid));
+		       		 	location.href="writeBuyBoardForm";
+		    			
+		    		} 
+		    	},
+			});
+	}
+	</script>
+	
+</div>

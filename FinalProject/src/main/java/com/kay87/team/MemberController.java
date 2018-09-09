@@ -1,6 +1,8 @@
 package com.kay87.team;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.vo.MemberInfo;
+import com.kay87.team.vo.SellerInfo;
 
 
 @Controller
@@ -64,7 +67,7 @@ public class MemberController {
 		return checkedId;
 	}
 	
-
+	// logOut
 	@RequestMapping(value = "/logOut", method = RequestMethod.GET)
 	public String LogOut(HttpSession session, Model model) {
 
@@ -72,8 +75,21 @@ public class MemberController {
 		return "home";
 	}
 
+	@RequestMapping(value = "/sellerDetail", method = RequestMethod.GET)
+	public String sellerDetail() {
+
+		return "sellerDetail";
+	}
 	
-	
+	@RequestMapping(value = "/getSellerInfo", method = RequestMethod.POST)
+	public @ResponseBody  List<SellerInfo> getSellerInfo(String sellerId) {
+		System.out.println(1);
+		
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		List<SellerInfo> sellerInfo = dao.getSellerInfo(sellerId);
+		
+		return sellerInfo;
+	}
 	
 	
 }
