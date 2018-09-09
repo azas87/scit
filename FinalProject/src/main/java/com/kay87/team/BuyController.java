@@ -1,5 +1,6 @@
 package com.kay87.team;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class BuyController {
 	//구매글쓰기
 	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.GET)
 	public String writeBuyBoard(BuyList buyList, HttpSession session){
-		System.out.println("writeBuyBoard buyList => " + buyList);
+//		System.out.println("writeBuyBoard buyList => " + buyList);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		buyList.setBuyerId((String)session.getAttribute("loginId"));
 		dao.insertBuyList(buyList);
@@ -114,13 +115,23 @@ public class BuyController {
 		
 		return result ;
 	}
+	//환불
+	@RequestMapping(value = "/refund", method = RequestMethod.GET)
+	public @ResponseBody int refund(String buyNum) {
+		
+		System.out.println(buyNum);
+		BuyMapper dao=sql.getMapper(BuyMapper.class);
+		int result =dao.refund(buyNum);
+		
+		return 0;
+	}
 
-	// 구매 목록 페이지의 구매내역 전체 리스트
 	@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+
 	public @ResponseBody String jqgrid(
 		   @RequestParam(value="period", defaultValue="1") String period,
 		   String page, String rows, HttpSession session) {
-		
+		System.out.println("컨트롤러");
 		String id =(String)session.getAttribute("loginId");
 		List<BuyList> buyListHistory = getBuyListHistory(id, period);
 		
@@ -131,11 +142,11 @@ public class BuyController {
 		
 		return jsonPlace;
 	}
+
 	
 	//환불리스트
 	@RequestMapping(value = "/refundList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String refundList(String page, String rows, HttpSession session) {
-		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));
 		
@@ -167,7 +178,7 @@ public class BuyController {
 	    map.put("period", period);
 	    map.put("id", id);
 		List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
-		
+	
 		return buyListHistory;
 	}
 }

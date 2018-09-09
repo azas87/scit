@@ -34,6 +34,8 @@ public interface BuyMapper {
 
 	public List<BuyList> getRefundsBuyList(String attribute);
 
+	public int refund(String buyNum);
+
 
 
 }

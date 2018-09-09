@@ -59,13 +59,20 @@ function rebuy (cellvalue, options, rowObject) {
 	 return '再購入'; 
 };
 
-
-
 function rebuy2 (cellvalue, options, rowObject) {
 	//console.log(rowObject);
 	return '確認'; 
 };
  
+function rebuy3 (cellvalue, options, rowObject) {
+	//console.log(rowObject);
+	return '返金'; 
+};
+function sellerDetail (seller) {
+	
+	$('#sellerInfo').val(seller);
+	window.open("sellerDetail", "sellerDetail", "width=400px,height=300px,left=500px,top=200px");
+};
  
  
  
@@ -118,6 +125,14 @@ function rebuy2 (cellvalue, options, rowObject) {
  				label : '受け取り確認',
  				name : '確認',
  				formatter: rebuy2,
+ 				align:'center'
+ 			},
+ 			{
+ 				label : '返金',
+ 				name : '払い戻し',
+ 				width : 100,
+ 				height : 200,
+ 				formatter: rebuy3,
  				align:'center'
  			},
 
@@ -202,9 +217,18 @@ function rebuy2 (cellvalue, options, rowObject) {
      		if(cm[index].name == "再購入2")
      		{	
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
-     		}else if(cm[index].name == "確認") {
+     		}
+     		else if(cm[index].name == "確認") {
      			confirm($("#jqGrid").getRowData(rowid));
-     			console.log($("#jqGrid").getRowData(rowid));
+     			//console.log($("#jqGrid").getRowData(rowid));
+     		}
+     		else if(cm[index].name == "払い戻し") {
+     			refund($("#jqGrid").getRowData(rowid));
+     			
+     		}
+     		else if(cm[index].name == "successSellerId") {
+     			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
+     			
      		}
      	},
      	
@@ -261,21 +285,8 @@ function reset () {
 function confirm(obj) {
 	//리뷰등록을 위해 buyNum 저장해두기
 	$('#buyNum').val(obj.buyNum);
+	$('#sellerId').val(obj.successSellerId);
 	//수취확인
-	$.ajax({
-			url:"confirm",
-			type:"get",
-			data:{"buyNum":obj.buyNum,
-				  },
-			success:function(data){
-		
-			},
-			error:function(){
-				alert("통신실패");
-			}
-		});
-	
-	
 	reset();
 	alertify.set({ buttonReverse: true });
 	alertify.confirm("レビューを登録されますか", function (e) {
@@ -290,10 +301,7 @@ function confirm(obj) {
 	
 }
 //환불여부
-function refund() {
-
-	var buyNum = $(this).attr("data");
-	$('#buyNum').val(buyNum);
+function refund(obj) {
 
 	reset();
 	alertify.set({ buttonReverse: true });
@@ -304,10 +312,10 @@ function refund() {
 			$.ajax({
 				url:"refund",
 				type:"get",
-				data:{"buyNum":buyNum,
+				data:{"buyNum":obj.buyNum,
 					  },
 				success:function(data){
-			
+					ResetBuyList();
 				},
 				error:function(){
 					alert("통신실패");
@@ -321,4 +329,6 @@ function refund() {
 	return false;
 	
 	}
-
+function ResetBuyList() {	
+	$( "#jqGrid").jqGrid().setGridParam({url:'jqgrid_R',datatype:'json'}).trigger('reloadGrid');
+}

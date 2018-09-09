@@ -142,9 +142,6 @@
     {
     	  var dataChart = [["Element", "Density", { role: "style" } ]];
     	  
-    	  console.log(${list}})
-    	  
-    	  
       	<c:forEach items="${list}" var="item" varStatus="status">
       		dataChart.push(["${status.count}",Number("${item}"), "gold"]);
   
@@ -210,7 +207,7 @@
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var period = "${period}"	
+		var period = "${period}"
 		buyList(period);
 		//다운로드를 위한 period
 		$('#period').text(period);
@@ -259,6 +256,8 @@
 			});
 	});
 	
+	
+	
 	</script>
 	<br><br>
 	<a href="buyListHistory?period=1week">1週間</a>
@@ -278,5 +277,11 @@
 		<input type="hidden" id="period" name="period">
 		<input type="submit" value="ダウンロード">
 	</form>
+	
+	<!-- 리뷰등록을 위해사용 -->
+	<input type="hidden" id="buyNum" name="buyNum">
+	<input type="hidden" id="sellerId" name="sellerId">
+	<!-- 판매자상세정보를 위해 사용 -->
+	<input type="hidden" id="sellerInfo" name="sellerInfo">
 </body>
 </html>
