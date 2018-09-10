@@ -43,9 +43,7 @@ $(function(){
 				if(data.length==0){
 					temp='該当する魚は販売しておりません。'
 				}
-				if(data.length==1){
-					getLocation(data[0].locations);
-				}
+				
 				for(i in data){
 					
 					temp +='<a class="fishName" data-name="'+data[i].fishName+'" data-loca="'+data[i].locations+'">'+data[i].fishName+'</a>';
@@ -53,6 +51,14 @@ $(function(){
 				
 				$('#myDropdown').html(temp);
 				$("a.fishName").click(getFishName);
+				if(data.length==1){
+					getLocation(data[0].locations);
+					var fish = data[0].fishName;
+					if(fish.length==fishName.length){
+						$('#myDropdown').html('');
+					}
+				}
+				
 			},
 			
 			error:function(){
@@ -60,9 +66,7 @@ $(function(){
 			}
 		});//ajax
 	});//keyup
-	
-	
-	
+
 	});//onload
 
 
@@ -72,8 +76,8 @@ function getFishName() {
 	var locationList = $(this).attr("data-loca");
 	var fishName = $(this).attr("data-name");
 	$('#fishName').val(fishName);
-	
 	getLocation(locationList);
+	$('#myDropdown').html('');
 }
 
 //히라가나를 카타카나로
@@ -132,11 +136,10 @@ function check() {
 	var startDate = new Date();
 		//예약 안하는경우
 		if(loadDate.length==0){
-			$('#uploadDate').val(startDate);
+			$('#uploadDate').val("");
 	}	//예약하는경우
 		else{
-			startDate = new Date(startTime);
-			$('#uploadDate').val(new Date(startDate));
+			$('#uploadDate').val(startTime);
 	}
 	//마감시간계산
 	var takenTime = $('#finishHour').val();
@@ -191,7 +194,13 @@ function plusTime(finishTime, takenTime){
 
 	var minute = takenTime*60;
 	finishTime.setMinutes(finishTime.getMinutes() + minute);
-	
-	return finishTime;
+	var yyyy = finishTime.getFullYear();
+	var mm = finishTime.getMonth() < 9 ? "0" + (finishTime.getMonth() + 1) : (finishTime.getMonth() + 1); // getMonth() is zero-based
+	var dd  = finishTime.getDate() < 10 ? "0" + finishTime.getDate() : finishTime.getDate();
+	var hh = finishTime.getHours() < 10 ? "0" + finishTime.getHours() : finishTime.getHours();
+	var min = finishTime.getMinutes() < 10 ? "0" + finishTime.getMinutes() : finishTime.getMinutes();
+	var ss = finishTime.getSeconds() < 10 ? "0" + finishTime.getSeconds() : finishTime.getSeconds();
+
+	return yyyy +"/" + mm +"/"+ dd+" " + hh + ":" + min + ":" + ss;
 	
 }

@@ -206,11 +206,7 @@
 	</div>
 
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var period = "${period}"
-		buyList(period);
-		//다운로드를 위한 period
-		$('#period').text(period);
+/* 	$(document).ready(function() {
 		
 		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
 		    search: false, // show search button on the toolbar
@@ -255,7 +251,7 @@
 
 			});
 	});
-	
+	 */
 	
 	
 	</script>
@@ -265,6 +261,11 @@
 	<a href="buyListHistory?period=3month">3ヶ月</a>
 	<a href="buyListHistory?period=1year">1年</a>
 	
+	<form action="buyListHistory">
+	<input type="date" name="startDay">
+	<input type="date" name="endDay">
+	<input type="submit" value="検索">
+	</form>
 	<table border="1">
 	<tr><td>魚種</td><td>魚種別総額</td></tr>
 	<c:forEach items="${sumPricebyFishName}" var="item">
@@ -273,15 +274,21 @@
     <tr><td>総額</td><td id="sum"></td></tr>
 	
 	</table>
+	
+	<!-- 기간검색--jqgrid위해/다운로드위해 사용 -->
 	<form action="download">
-		<input type="hidden" id="period" name="period">
+		<input type="hidden" id="period" name="period" value="${period}">
+		<input type="hidden" id="startDay" name ="startDay" value="${startDay}">
+		<input type="hidden" id="endDay" name ="endDay" value="${endDay}">
 		<input type="submit" value="ダウンロード">
 	</form>
 	
 	<!-- 리뷰등록을 위해사용 -->
 	<input type="hidden" id="buyNum" name="buyNum">
 	<input type="hidden" id="sellerId" name="sellerId">
+	
 	<!-- 판매자상세정보를 위해 사용 -->
 	<input type="hidden" id="sellerInfo" name="sellerInfo">
+	
 </body>
 </html>

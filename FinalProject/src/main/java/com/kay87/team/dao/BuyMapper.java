@@ -26,7 +26,7 @@ public interface BuyMapper {
 	
 	public int GetTotalRefundListCount(String search);
 	
-	public List<BuyList> sumPricebyFishName(Map<String, String> map);
+	public List<BuyList> sumPricebyFishName(Map<String, Object> map);
 
 	public List<BuyList> sumPricebyMonth(String userid);
 

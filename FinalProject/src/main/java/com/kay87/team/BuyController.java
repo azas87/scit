@@ -1,6 +1,6 @@
 package com.kay87.team;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +50,7 @@ public class BuyController {
 	//구매글쓰기
 	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.GET)
 	public String writeBuyBoard(BuyList buyList, HttpSession session){
-//		System.out.println("writeBuyBoard buyList => " + buyList);
+		System.out.println("writeBuyBoard buyList => " + buyList);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		buyList.setBuyerId((String)session.getAttribute("loginId"));
 		dao.insertBuyList(buyList);
@@ -70,24 +72,28 @@ public class BuyController {
 	//구매완료내역출력
 	@RequestMapping(value = "/buyListHistory", method = RequestMethod.GET)
 	public String buyListHistory(Model model, HttpSession session,
-			@RequestParam(value="period", defaultValue="1") String period) {
+			@RequestParam(value="period", defaultValue="1") String period,
+			@RequestParam(value="startDay", defaultValue="") String startDay,
+			@RequestParam(value="endDay", defaultValue="") String endDay  ) {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		String id = (String)session.getAttribute("loginId");
 
-		
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("period", period);
 	    map.put("id", id);
-		
+	    if(startDay.length()!=0) {
+	    	map.put("startDay", startDay);
+	    	map.put("endDay", endDay);
+	    }
 		//생선별 구매합계
 		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
-	
+
 		//월별 구매합계
 		List<BuyList> sumPricebyMonth= dao.sumPricebyMonth(id);
 		int[] list = new int[12];
 		int month=0;
-		
+
 		for(int j=0;j<sumPricebyMonth.size();j++) {
 			for(int i=0;i<list.length;i++) {
 				month = Integer.parseInt(sumPricebyMonth.get(j).getFishName());
@@ -98,10 +104,13 @@ public class BuyController {
 					
 			}
 		}
-		
+
+		model.addAttribute("startDay", startDay);
+		model.addAttribute("endDay", endDay);
 		model.addAttribute("period", period);
 		model.addAttribute("list", list);
 		model.addAttribute("sumPricebyFishName", sumPricebyFishName);
+		
 		return "buyListHistory";
 	}
 	
@@ -130,10 +139,10 @@ public class BuyController {
 
 	public @ResponseBody String jqgrid(
 		   @RequestParam(value="period", defaultValue="1") String period,
-		   String page, String rows, HttpSession session) {
-		System.out.println("컨트롤러");
+		   String startDay, String endDay, String page, String rows, HttpSession session) {
+
 		String id =(String)session.getAttribute("loginId");
-		List<BuyList> buyListHistory = getBuyListHistory(id, period);
+		List<BuyList> buyListHistory = getBuyListHistory(id, period,startDay,endDay);
 		
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
@@ -160,10 +169,11 @@ public class BuyController {
 	
 	//엑셀로 다운로드
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public String download(String period, HttpSession session, Model model){
-		
+	public String download(
+			String period,String startDay, String endDay, HttpSession session, Model model){
+		System.out.println(period+"s:"+startDay);
 		String id =(String)session.getAttribute("loginId");
-		List<BuyList> buyListHistory = getBuyListHistory(id, period);
+		List<BuyList> buyListHistory = getBuyListHistory(id, period, startDay, endDay);
 		model.addAttribute("list", buyListHistory);
 		model.addAttribute("date", "2018-09-06");
 		return "listSave";
@@ -171,12 +181,21 @@ public class BuyController {
 
 	
 	//판매이력가져오기
-	public List<BuyList> getBuyListHistory(String id, String period){
+	public List<BuyList> getBuyListHistory(String id, String period, String startDay, String endDay){
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		Map<String, String> map = new HashMap<String, String>();
+		System.out.println(1);
 	    map.put("period", period);
+	    System.out.println(2);
 	    map.put("id", id);
+	    if(startDay.length()!=0) {
+	    
+	    	System.out.println(3);
+	    	map.put("startDay", startDay);
+	    	System.out.println(4);
+	    map.put("endDay", endDay);
+	    }
 		List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
 	
 		return buyListHistory;
