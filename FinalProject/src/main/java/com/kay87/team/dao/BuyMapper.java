@@ -21,6 +21,8 @@ public interface BuyMapper {
 	public List<BuyList> allBuyList();
 	
 	public List<BuyList> myBuyList(String userId);
+	
+	public List<BuyList> mySaleList(String userId);
 
 	public int GetTotalListCount(String string);
 	

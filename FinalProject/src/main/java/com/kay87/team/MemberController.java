@@ -48,6 +48,8 @@ public class MemberController {
 		if(user!=null) 
 		{
 			session.setAttribute("loginId", user.getId());
+			session.setAttribute("userMode", user.getGrade());
+			System.out.println("userMode : " + session.getAttribute("userMode"));
 			return "home";
 		}
 		else

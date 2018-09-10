@@ -7,6 +7,7 @@ $(document).ready(function() {
 	$('.popdown').popdown();
 	
 	 homeList('allBuyList');
+	 
 	//myBuyList();
 	 printClock();
 	 
@@ -136,8 +137,13 @@ function homeList(url2) {
 		colModel : 
 		[ 
 			{
- 				label : '히든',
+ 				label : 'buyNum',
  				name : 'buyNum',
+ 				align:'center',
+ 				hidden:true
+ 			}, {
+ 				label : 'saleStatus',
+ 				name : 'saleStatus',
  				align:'center',
  				hidden:true
  			}, {
@@ -225,7 +231,6 @@ function homeList(url2) {
     		{	
        		 	console.log(jQuery("#jqGrid").getRowData(rowid));
        		 	location.href="writeBuyBoardForm";
-    			
     		} 
     	},
     	
@@ -250,17 +255,27 @@ function rebuy (cellvalue, options, rowObject) {
 	 
 	 
 
-	
-
 function allBuyList() {	
 	console.log("allBuyList");
 	listMode = "allBuyList";
 	ListRefresh();
 }
 
-function myBuyList() {		
+function myList() {		
 	console.log("myBuylist");
-	listMode = "myBuyList";
+	
+	var userMode = $("#userMode").val();
+	console.log(userMode);
+	if(userMode==1)
+	{
+		listMode = "myBuyList";
+	}
+	else
+	{
+		listMode = "mySaleList";
+	}
+	
+	
 	ListRefresh();
 }
 
@@ -271,13 +286,33 @@ function ListRefresh()
 	var grouping = false;
 	console.log("ListRefresh");
 	console.log(listMode);
-	if(listMode == "myBuyList")
+	
+	var jqGridObj = {url:listMode, datatype:'json',grouping:true};
+	
+	if(listMode=="myBuyList")
 	{
-		grouping= true;
+		jqGridObj.grouping = true;
+		jqGridObj.groupingView= {
+		    groupField: ['buyNum'],
+		    groupColumnShow : [false],
+		};
 	}
+	else if(listMode=="mySaleList")
+	{
+		jqGridObj.groupingView= {
+			    groupField: ['saleStatus'],
+			    groupColumnShow : [false],
+			};
+	}
+	else
+	{
+		jqGridObj.grouping=false;
+	}
+	
 	console.log(grouping);
 	
-	$("#jqGrid").jqGrid().setGridParam({url:listMode, datatype:'json',grouping: grouping}).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
+	//$("#jqGrid").jqGrid().setGridParam({url:listMode, datatype:'json',grouping: grouping}).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
+	$("#jqGrid").jqGrid().setGridParam(jqGridObj).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
 }
 
 
