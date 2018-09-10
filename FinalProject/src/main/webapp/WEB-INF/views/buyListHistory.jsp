@@ -187,6 +187,7 @@
 	
 	<input id="search_cells" type="search"/>
 	<table id="jqGrid"></table>
+	<table id="jqGrid2"></table>
 	<div id="jqGridPager"></div>
 	
 	<div><br></div>
@@ -266,14 +267,7 @@
 	<input type="date" name="endDay">
 	<input type="submit" value="検索">
 	</form>
-	<table border="1">
-	<tr><td>魚種</td><td>魚種別総額</td></tr>
-	<c:forEach items="${sumPricebyFishName}" var="item">
-    		<tr><td>${item.fishName}</td><td>${item.price}</td></tr>
-    </c:forEach> 
-    <tr><td>総額</td><td id="sum"></td></tr>
-	
-	</table>
+
 	
 	<!-- 기간검색--jqgrid위해/다운로드위해 사용 -->
 	<form action="download">

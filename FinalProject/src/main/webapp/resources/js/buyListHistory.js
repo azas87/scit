@@ -6,7 +6,8 @@ window.onload = function() { //실행될 코드 }
 		var endDay = $('#endDay').val();
 		
 		buyList(period, startDay, endDay);
-
+		sumList(period, startDay, endDay);
+		
 		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
 		    search: false, // show search button on the toolbar
 		    add: false,
@@ -78,8 +79,7 @@ function sellerDetail (seller) {
  
  
  function buyList(period, startDay, endDay) {
- 	alert(startDay);
-	
+
  	$("#jqGrid").jqGrid({
  		/* 환불 url:'refundList'*/
  		url : 'jqgrid_R?period='+period+"&startDay="+startDay+"&endDay="+endDay,
@@ -345,63 +345,20 @@ function searchByDate() {
 
 //sumList
 function sumList(period, startDay, endDay) {
- 	alert(startDay);
 	
- 	$("#jqGrid").jqGrid({
- 		/* 환불 url:'refundList'*/
- 		url : 'jqgrid_R?period='+period+"&startDay="+startDay+"&endDay="+endDay,
+ 	$("#jqGrid2").jqGrid({
+ 		url : 'sumList?period='+period+"&startDay="+startDay+"&endDay="+endDay,
  		mtype : "GET",
  		datatype : "json",
  		colModel : 
  		[ 
  			{
- 				label : '히든',
- 				name : 'buyNum',
- 				align:'center',
- 				hidden:true
- 			},
- 			{
- 				label : '購買日付',
- 				name : 'deadline',
- 				width:'200',
- 				align:'center'
- 			}, {
  				label : '品種',
  				name : 'fishName',
  				align:'center'
  			}, {
- 				label : '産地',
- 				name : 'location',
- 				align:'center'
- 			}, {
- 				label : '重量',
- 				name : 'weight',
- 				align:'center'
- 			}, {
  				label : '価格',
  				name : 'price',
- 				align:'center'
- 			}, {
- 				label : '販売者ID',
- 				name : 'successSellerId',
- 				align:'center'
- 			}, {
- 				label : '再購入1',
- 				name : '再購入2',
- 				formatter: rebuy,
- 				align:'center'
- 			},{
- 				label : '受け取り確認',
- 				name : '確認',
- 				formatter: rebuy2,
- 				align:'center'
- 			},
- 			{
- 				label : '返金',
- 				name : '払い戻し',
- 				width : 100,
- 				height : 200,
- 				formatter: rebuy3,
  				align:'center'
  			},
 
@@ -417,7 +374,7 @@ function sumList(period, startDay, endDay) {
  		userDataOnFooter : true,
  		loadComplete:function(data)
  		{
- 			
+ 	
 
  			$('.bigSize').hover(function(){
  				console.log("test");
@@ -437,11 +394,6 @@ function sumList(period, startDay, endDay) {
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
  			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
  			
- 			/*var widthSum = $('#grid tr:first td:eq(0)').width(); 
- 			widthSum += $('#grid tr:first td:eq(1)').width();
- 			widthSum += $('#grid tr:first td:eq(2)').width();
- 			widthSum += $('#grid tr:first td:eq(3)').width();
- 			*/
  			
  			$('table.ui-jqgrid-ftable td:eq(2)').hide(); 
  			$('table.ui-jqgrid-ftable td:eq(3)').hide();
@@ -484,22 +436,11 @@ function sumList(period, startDay, endDay) {
  		onCellSelect: function(rowid, index, contents, event) 
      	{    
      		var cm = $(this).jqGrid('getGridParam','colModel');    
-     		if(cm[index].name == "再購入2")
+     		/*if(cm[index].name == "再購入2")
      		{	
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
-     		}
-     		else if(cm[index].name == "確認") {
-     			confirm($("#jqGrid").getRowData(rowid));
-     			//console.log($("#jqGrid").getRowData(rowid));
-     		}
-     		else if(cm[index].name == "払い戻し") {
-     			refund($("#jqGrid").getRowData(rowid));
-     			
-     		}
-     		else if(cm[index].name == "successSellerId") {
-     			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
-     			
-     		}
+     		}*/
+     		
      	},
      	
  	});

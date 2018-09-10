@@ -79,16 +79,6 @@ public class BuyController {
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		String id = (String)session.getAttribute("loginId");
 
-		Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("period", period);
-	    map.put("id", id);
-	    if(startDay.length()!=0) {
-	    	map.put("startDay", startDay);
-	    	map.put("endDay", endDay);
-	    }
-		//생선별 구매합계
-		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
-
 		//월별 구매합계
 		List<BuyList> sumPricebyMonth= dao.sumPricebyMonth(id);
 		int[] list = new int[12];
@@ -104,12 +94,13 @@ public class BuyController {
 					
 			}
 		}
-
+		
 		model.addAttribute("startDay", startDay);
 		model.addAttribute("endDay", endDay);
 		model.addAttribute("period", period);
 		model.addAttribute("list", list);
-		model.addAttribute("sumPricebyFishName", sumPricebyFishName);
+		//생선별합계
+		model.addAttribute("sumPricebyFishName", sumPrice(id, period, startDay, endDay));
 		
 		return "buyListHistory";
 	}
@@ -151,7 +142,24 @@ public class BuyController {
 		
 		return jsonPlace;
 	}
+	
+	//생선별 합계 표
+	@RequestMapping(value = "/sumList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 
+	public @ResponseBody String sumList(
+		   @RequestParam(value="period", defaultValue="1") String period,
+		   String startDay, String endDay, String page, String rows, HttpSession session) {
+		System.out.println("생선별합계");
+		String id =(String)session.getAttribute("loginId");
+		List<BuyList> sumPricebyFishName = sumPrice(id, period,startDay,endDay);
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(sumPricebyFishName) + "}";
+		System.out.println("여기"+jsonPlace);
+		
+		return jsonPlace;
+	}
 	
 	//환불리스트
 	@RequestMapping(value = "/refundList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
@@ -171,7 +179,7 @@ public class BuyController {
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public String download(
 			String period,String startDay, String endDay, HttpSession session, Model model){
-		System.out.println(period+"s:"+startDay);
+		
 		String id =(String)session.getAttribute("loginId");
 		List<BuyList> buyListHistory = getBuyListHistory(id, period, startDay, endDay);
 		model.addAttribute("list", buyListHistory);
@@ -185,19 +193,30 @@ public class BuyController {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(1);
+
 	    map.put("period", period);
-	    System.out.println(2);
 	    map.put("id", id);
 	    if(startDay.length()!=0) {
-	    
-	    	System.out.println(3);
 	    	map.put("startDay", startDay);
-	    	System.out.println(4);
-	    map.put("endDay", endDay);
+	    	map.put("endDay", endDay);
 	    }
 		List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
 	
 		return buyListHistory;
 	}
+	//생선별 구매합계
+	public List<BuyList> sumPrice(String id, String period, String startDay, String endDay){
+			
+		BuyMapper dao=sql.getMapper(BuyMapper.class);
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("period", period);
+	    map.put("id", id);
+	    if(startDay.length()!=0) {
+	    	map.put("startDay", startDay);
+	    	map.put("endDay", endDay);
+	    }
+		
+		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
+		return sumPricebyFishName;
+}
 }
