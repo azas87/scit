@@ -65,6 +65,8 @@ public class MemberController {
 		if(user!=null) 
 		{
 			session.setAttribute("loginId", user.getId());
+			session.setAttribute("userMode", user.getGrade());
+			System.out.println("userMode : " + session.getAttribute("userMode"));
 			return "home";
 		}
 		else
@@ -89,6 +91,17 @@ public class MemberController {
 	public String LogOut(HttpSession session, Model model) {
 
 		session.invalidate();
+		return "home";
+	}
+
+	// 회원탈퇴
+	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+	public String cancel(HttpSession session, Model model) {
+		
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		String userid = (String) session.getAttribute("loginId");
+		dao.cancel(userid);
+		
 		return "home";
 	}
 	

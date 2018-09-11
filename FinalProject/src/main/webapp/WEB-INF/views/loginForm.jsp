@@ -5,16 +5,62 @@ language="java" pageEncoding="UTF-8"%>
 <head>
 	<title>Home</title>
 </head>
-<body>
-	<form action="login" method="post">
+
+<link href="./resources/css/login.css" rel="stylesheet" type="text/css" />
+
+<!--SCRIPTS-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<!--Slider-in icons-->
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".username").focus(function() {
+		$(".user-icon").css("left","-48px");
+	});
+	$(".username").blur(function() {
+		$(".user-icon").css("left","0px");
+	});
 	
-	 ログインID
-		<input type="text" id="userid" name="id">
-   	パスワード
-   		<input type="password" id="userpwd" name="password"　placeholder="半角数字11桁">
+	$(".password").focus(function() {
+		$(".pass-icon").css("left","-48px");
+	});
+	$(".password").blur(function() {
+		$(".pass-icon").css("left","0px");
+	});
+});
+</script>
+
+</head>
+<body>
+
+<!--WRAPPER-->
+<div id="wrapper">
+
+	<!--SLIDE-IN ICONS-->
+    <div class="user-icon"></div>
+    <div class="pass-icon"></div>
    
-		<input type="submit"  onclick="return check()" value="ログイン">
-	</form>
-	<div>${msg}</div>
+<form action="login" method="post" class="login-form"  name="login-form">
+
+    <div class="header">
+  	<h1>Login Form</h1>
+    <!--DESCRIPTION--><span></span><!--END DESCRIPTION-->
+    </div>
+  
+	
+    <div class="content">
+	<!--USERNAME--><input name="id" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
+    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+    </div>
+  
+    
+    <div class="footer">
+    <input type="submit" name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
+   <!--  <input type="submit" name="submit" value="Register" class="register" />END REGISTER BUTTON -->
+    </div>
+</form>
+</div>
+<div class="gradient"></div>	
+
+<div>${msg}</div>
 </body>
 </html>

@@ -216,13 +216,57 @@ insert into memberinfo(id, password, name, address, email, alarm, grade, first, 
 
 insert into memberinfo(id, password, name, address, email, alarm, grade, first, memberStatus) 
               values('2', '2'    ,'kim', '구미'  ,'2@com2','1'  ,'1'   , 'first','join'     );
-            
+
+              
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (1  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 10000,'id1'          , '인천'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (2  , 'ホタルイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 20000,'id2'          , '서울'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (3  , 'スルメイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 30000,'id3'          , '광주'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (4  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 20000,'id2'          , '부산'   );               
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (5  , 'クルマエビ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 30000,'id3'          , '제주'   );               
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (6  , 'アオリイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 10000,'id1'          , '인천'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (7  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 20000,'id2'          , '서울'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (8  , 'すずき',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 30000,'id3'          , '경주'   );               
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (9  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 10000,'id1'          , '인천'   );            
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (10  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 20000,'id2'          , '강릉'   );            
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (11  , 'アオリイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 30000,'id3'          , '광양'   );
+
 insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
             values (12  , 'クマエビ',  '2'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'saleComplete'  , 10000,'id1'          , '여수'   );
 insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
             values (13  , 'ジンドウイカ',  '2'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'saleComplete'  , 40000,'id3'          , '원산'   );
+            
+            
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (14  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 60000,'id3'          , '개성'   );               
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (15  , 'マサバ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 10000,'id1'          , '인천'   );               
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (16  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 10000,'id2'          , '평양'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (17  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 90000,'id1'          , '인천'   );
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (18  , 'キンメダイ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 70000,'id1'          , '인천'   );               
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (19  , 'ジンドウイカ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 50000,'id1'          , '고흥'   );            
+insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
+            values (20  , 'トリガイ',  'id1'  , sysdate  , SYSDATE+1 ,SYSDATE+1, 2     , 'onSale'  , 65000,'id2'          , '울릉'   ); 
+
+            
 
 
+
+            
 
         
 insert into buyList(buyNum, fishName, buyerId, registDate, uploadDate, deadline, weight, saleStatus, price,successSellerId, location) 
@@ -256,4 +300,6 @@ insert into saleList(salenum, buynum, sellerid) values(4,2,'id3');
 insert into saleList(salenum, buynum, sellerid) values(5,3,'id1');
 insert into saleList(salenum, buynum, sellerid) values(6,3,'id2');
 insert into saleList(salenum, buynum, sellerid) values(7,3,'id3');
+
+
 

@@ -48,32 +48,18 @@
 }
 .items 
 {
+	border:1px solid #cccccc;
 	display: flex;
 	flex-direction: row;
-	height:150px;
-	line-height:150px;
-	width:200px;
+	width:995px;
 }
 
 .item{
 	margin:0px;
-	text-align: left;
-	display: flex;
-	border:1px solid #cccccc;
-	text-align: center;
+	flex-grow: 1;
+	text-align: right;
 }
 
-.itemSub
-{
-	list-style: none;
-	margin:0px;
-	text-align: left;
-	border:1px solid #cccccc;
-	margin: 1px;
-	text-align: center;
-	font-size:1.5em;
-	width:200px;
-}
 
 
 
@@ -129,7 +115,7 @@
     	var data = google.visualization.arrayToDataTable(dataChart);
         var view = new google.visualization.DataView(data);
         var options = {
-          title: 'My Daily Activities',
+          title: '魚種別購入額',
           is3D: true,
         };
 
@@ -158,7 +144,7 @@
                              2]);
 
             var options = {
-              title: "Density of Precious Metals, in g/cm^3",
+              title: "月間購入額",
               width: 600,
               height: 400,
               bar: {groupWidth: "95%"},
@@ -174,25 +160,50 @@
 
 <body>
 
- <div id="columnchart_values" style="width: 700px; height: 300px;"></div>
- <div style="width: 700px; height: 300px;"></div>
- <div id="piechart_3d" style="width: 700px; height: 500px;"></div>
+
  
 <div id="contain">
 	<div id="header">
-		<div id="chart_div"></div>
+		<div id="chart_div" class="items">
+			 <div id="columnchart_values" style="width: 500px; height: 400px;"></div>
+			 <!-- <div style="width: 700px; height: 300px;"></div> -->
+			 <div id="piechart_3d" style="width: 490px; height: 400px;"></div>
+		</div>
 	</div>
 	
+	<br><br>
+	<div class="items">
+		<div class="item">
+			<a href="buyListHistory?period=1week">1週間</a>
+			<a href="buyListHistory?period=1month">1ヶ月</a>
+			<a href="buyListHistory?period=3month">3ヶ月</a>
+			
+		</div>
+		<div class="item">
+			<form action="buyListHistory">
+					<input type="date" name="startDay">
+					<input type="date" name="endDay">
+					<input type="submit" value="検索">
+			</form>
+		</div>
+	</div>
+	
+	
+
+	
+	
 	<div><br></div>
 	
-	<input id="search_cells" type="search"/>
+	<div ><input id="search_cells" type="search"/></div>
 	<table id="jqGrid"></table>
-	<table id="jqGrid2"></table>
 	<div id="jqGridPager"></div>
+	<div><Br></div>
+	<table id="jqGrid2"></table>
+	<div id="jqGrid2Pager"></div>
 	
 	<div><br></div>
 	
-	<div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
+	<!-- <div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
 	    <select class = "form-control" style = "width : 10%; float : left;" id = "searchType">
 	        <option value = "All" selected>전체 검색</option>
 	        <option value = "user_status">회원상태</option>
@@ -204,70 +215,18 @@
 	    <button class = "btn btn-info btn-fill" id = "search" value = "검색 " style = "width : 10%; float : left; margin-left : 10px;">
 	      검색
 	    </button>
-	</div>
+	</div> -->
 
-	<script type="text/javascript">
-/* 	$(document).ready(function() {
-		
-		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-		    search: false, // show search button on the toolbar
-		    add: false,
-		    edit: false,
-		    del: false,
-		    refresh: true
-		});
-		
-		var timer;
-		$("#search_cells").on("keyup", function() {
-			var self = this;
-			if(timer) { clearTimeout(timer); }
-			timer = setTimeout(function(){
-				//timer = null;
-				$("#jqGrid").jqGrid('filterInput', self.value);
-			},0);
-		});
-		
-		$("#search").on("click",function(){
-			 var data = $("#searchData").val()
-			 var searchType = $("#searchType").val();
-			 var rows = $("[title ='Records per Page']").val();
-			 var postData  = {'data' : data , 'searchType' : searchType, 'rows' :  rows }
-
-			 rowData = null;
-			
-			 $("#jqGrid").jqGrid("clearGridData", true);
-			
-			 $("#jqGrid").setGridParam({
-			 datatype	: "json",
-				 postData	: postData,
-				 loadComplete	: function(data) {
-					 console.log(data);
-				 }
-			 }).trigger("reloadGrid");
-		});
-		 
-		 $(window).resize(function() {
-
-				$("jqGrid").setGridWidth($(this).width() * .100);
-
-			});
-	});
-	 */
 	
 	
-	</script>
-	<br><br>
-	<a href="buyListHistory?period=1week">1週間</a>
-	<a href="buyListHistory?period=1month">1ヶ月</a>
-	<a href="buyListHistory?period=3month">3ヶ月</a>
-	<a href="buyListHistory?period=1year">1年</a>
+	<!-- 리뷰등록을 위해사용 -->
+	<input type="hidden" id="buyNum" name="buyNum">
+	<input type="hidden" id="sellerId" name="sellerId">
 	
-	<form action="buyListHistory">
-	<input type="date" name="startDay">
-	<input type="date" name="endDay">
-	<input type="submit" value="検索">
-	</form>
-
+	<!-- 판매자상세정보를 위해 사용 -->
+	<input type="hidden" id="sellerInfo" name="sellerInfo">
+	
+	<div><br></div>
 	
 	<!-- 기간검색--jqgrid위해/다운로드위해 사용 -->
 	<form action="download">
@@ -276,13 +235,6 @@
 		<input type="hidden" id="endDay" name ="endDay" value="${endDay}">
 		<input type="submit" value="ダウンロード">
 	</form>
-	
-	<!-- 리뷰등록을 위해사용 -->
-	<input type="hidden" id="buyNum" name="buyNum">
-	<input type="hidden" id="sellerId" name="sellerId">
-	
-	<!-- 판매자상세정보를 위해 사용 -->
-	<input type="hidden" id="sellerInfo" name="sellerInfo">
 	
 </body>
 </html>

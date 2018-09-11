@@ -16,6 +16,14 @@ window.onload = function() { //실행될 코드 }
 		    refresh: true
 		});
 		
+		$('#jqGrid2').jqGrid('navGrid',"#jqGrid2Pager", {                
+		    search: false, // show search button on the toolbar
+		    add: false,
+		    edit: false,
+		    del: false,
+		    refresh: true
+		});
+		
 		var timer;
 		$("#search_cells").on("keyup", function() {
 			var self = this;
@@ -92,39 +100,46 @@ function sellerDetail (seller) {
  				name : 'buyNum',
  				align:'center',
  				hidden:true
- 			},
- 			{
+ 			}, {
  				label : '購買日付',
  				name : 'deadline',
  				width:'200',
  				align:'center'
+ 			
  			}, {
  				label : '品種',
  				name : 'fishName',
- 				align:'center'
+ 				width:'120',
+ 				align:'center' 				
  			}, {
  				label : '産地',
  				name : 'location',
+ 				width:'120',
  				align:'center'
  			}, {
  				label : '重量',
  				name : 'weight',
+ 				width:'60',
  				align:'center'
  			}, {
  				label : '価格',
  				name : 'price',
+ 				width:'100',
  				align:'center'
  			}, {
  				label : '販売者ID',
  				name : 'successSellerId',
+ 				width:'100',
  				align:'center'
  			}, {
  				label : '再購入1',
+ 				width:'80',
  				name : '再購入2',
  				formatter: rebuy,
  				align:'center'
  			},{
  				label : '受け取り確認',
+ 				width:'75',
  				name : '確認',
  				formatter: rebuy2,
  				align:'center'
@@ -132,27 +147,28 @@ function sellerDetail (seller) {
  			{
  				label : '返金',
  				name : '払い戻し',
- 				width : 100,
- 				height : 200,
+ 				width : '75',
  				formatter: rebuy3,
  				align:'center'
  			},
 
  		],
  		viewrecords : true,
+ 		autowidth:true,
+ 		//width:985,
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:400,
+ 		height:245,
  		pager : "#jqGridPager",
  		loadonce: true,
- 		shrinkToFit : false,
+ 		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
  		footerrow:true,
  		userDataOnFooter : true,
  		loadComplete:function(data)
  		{
  			
-
- 			$('.bigSize').hover(function(){
+ 			// 나중에 생긴 테이블에 한번만 적용해야 함.
+/* 			$('.bigSize').hover(function(){
  				console.log("test");
  				var title = $(this).attr('title');
  				$(this).data('tipText', title).removeAttr('title');
@@ -166,15 +182,12 @@ function sellerDetail (seller) {
  				var mousey = e.pageY + 10;
  				$('.tooltip').css({top : mousey,left : mousex});
  			});
+ 			*/
  			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
  			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
  			
- 			/*var widthSum = $('#grid tr:first td:eq(0)').width(); 
- 			widthSum += $('#grid tr:first td:eq(1)').width();
- 			widthSum += $('#grid tr:first td:eq(2)').width();
- 			widthSum += $('#grid tr:first td:eq(3)').width();
- 			*/
+
  			
  			$('table.ui-jqgrid-ftable td:eq(2)').hide(); 
  			$('table.ui-jqgrid-ftable td:eq(3)').hide();
@@ -182,6 +195,7 @@ function sellerDetail (seller) {
  			$('table.ui-jqgrid-ftable td:eq(6)').hide();
  			$('table.ui-jqgrid-ftable td:eq(7)').hide();
  			$('table.ui-jqgrid-ftable td:eq(8)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(9)').hide();
  			
  			
  			var footer = $("table.ui-jqgrid-ftable tr:first td:eq(0)");	
@@ -196,6 +210,14 @@ function sellerDetail (seller) {
  			$('table.ui-jqgrid-ftable tr:first td:eq(1), table.ui-jqgrid-ftable tr:first td:eq(5)').css("padding-top","8px");
  			$('table.ui-jqgrid-ftable tr:first td:eq(5)').append(" \u00A0");
 
+ 			
+ 			/*var widthSum = $('#grid tr:first td:eq(0)').width(); 
+ 			widthSum += $('#grid tr:first td:eq(1)').width();
+ 			widthSum += $('#grid tr:first td:eq(2)').width();
+ 			widthSum += $('#grid tr:first td:eq(3)').width();
+ 			*/
+ 			
+ 			
 /* 			var $grid = $(this);
  	        var columns = $grid.jqGrid('getGridParam', 'colModel');
 
@@ -355,27 +377,30 @@ function sumList(period, startDay, endDay) {
  			{
  				label : '品種',
  				name : 'fishName',
+ 				autowidth:true,
  				align:'center'
  			}, {
  				label : '価格',
+ 				autowidth:true,
  				name : 'price',
  				align:'center'
  			},
 
  		],
  		viewrecords : true,
+ 		autowidth:true,
+ 		
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:400,
- 		pager : "#jqGridPager",
+ 		height:230,
+ 		pager : "#jqGrid2Pager",
  		loadonce: true,
- 		shrinkToFit : false,
- 		footerrow:true,
- 		userDataOnFooter : true,
+ 		shrinkToFit : true,
+ 		footerrow:false,
+ 		userDataOnFooter : false,
  		loadComplete:function(data)
  		{
  	
-
  			$('.bigSize').hover(function(){
  				console.log("test");
  				var title = $(this).attr('title');
@@ -391,45 +416,6 @@ function sumList(period, startDay, endDay) {
  				$('.tooltip').css({top : mousey,left : mousex});
  			});
  			
- 			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
- 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
- 			
- 			
- 			$('table.ui-jqgrid-ftable td:eq(2)').hide(); 
- 			$('table.ui-jqgrid-ftable td:eq(3)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(4)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(6)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(7)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(8)').hide();
- 			
- 			
- 			var footer = $("table.ui-jqgrid-ftable tr:first td:eq(0)");	
- 			footer.css("color", "#2e6e9e"); 
- 			//footer.css("text-align", "left");
- 			//footer.css("width", widthSum); 
- 			
- 			$('table.ui-jqgrid-ftable tr:first').children("td").css("background-color", "#dfeffc");
- 			$('table.ui-jqgrid-ftable tr:first td:eq(1)').css("width","13px");
- 			$('table.ui-jqgrid-ftable tr:first td:eq(5)').css("text-align", "right");
- 			$('table.ui-jqgrid-ftable tr:first td:eq(1), table.ui-jqgrid-ftable tr:first td:eq(5)').css("padding-bottom","8px");
- 			$('table.ui-jqgrid-ftable tr:first td:eq(1), table.ui-jqgrid-ftable tr:first td:eq(5)').css("padding-top","8px");
- 			$('table.ui-jqgrid-ftable tr:first td:eq(5)').append(" \u00A0");
-
-/* 			var $grid = $(this);
- 	        var columns = $grid.jqGrid('getGridParam', 'colModel');
-
- 	        var colsTotalWidth = 0;
- 	        for (var i = 0; columns[i]; i++) {
- 	            colsTotalWidth += columns[i].width;
- 	            $grid.setColProp(columns[i].name, { width: columns[i].width, widthOrg: columns[i].width });
- 	        }
-
- 	        colsTotalWidth += 50;
- 	        $(this).jqGrid('setGridWidth', colsTotalWidth, true);*/
- 	        
- 	       //resizeJqGridWidth('grid_container', $('#grid_container').width(), true);
- 				
-
  		},
  		gridComplete: function(){
  		},

@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{id}
 			
 			AND 
-                saleStatus !='onSale' and saleStatus !='refund'
+                saleStatus = 'saleComplete'
    			<if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -180,18 +180,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			location 
 		from BuyList b, SaleList s
 		where b.buynum=s.buynum 
-		and buyerId = #{buyerId}
+		and buyerId = #{userId}
 		and saleStatus = 'onSale'	
 		order by buyNum asc			
 	</select>	
 	
-	<!-- <select id="mygetTotal" resultType="int" parameterType="string">
-		select count(*) from BuyList
-		where		
-			buyerId = #{buyerId}		
+<!--나의 참여리스트, 검색은 없음 -->		
+	<select id="mySaleList" resultType="BuyList" parameterType="string">	
+		select 
+			b.buyNum,
+			fishName,
+			buyerId,
+			registDate,
+			uploadDate,
+			deadline,
+			weight,
+			saleStatus,
+			price,
+			buyListComment,
+			location 
+		from BuyList b, (select * from SaleList where  sellerid=#{userId}) s
+		where b.buynum = s.buyNum
+		order by saleStatus asc
 	</select>
-	 -->
-	
+
 
 	<select id="GetTotalListCount" resultType="int" parameterType="string">
 		SELECT COUNT(*) FROM buyList <if test="_parameter != null"> WHERE buyerId = #{search}  </if>
@@ -210,7 +222,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 		where 
 	 			buyerid = #{id}
 	 		and 
-                saleStatus !='onSale' and saleStatus !='refund'
+                saleStatus = 'saleComplete'
             <if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -252,7 +264,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and
    			buyerid = #{id}
 		and 
-		    saleStatus !='onSale' and saleStatus !='refund'
+		    saleStatus = 'saleComplete'
 		group by 
 		    to_char(deadline, 'MM')
 		order by
