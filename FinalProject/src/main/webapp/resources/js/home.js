@@ -28,18 +28,22 @@ $(document).ready(function() {
 		
 	}, refreshInterver);
 	 
-	 
+	
+	    
 	  $(".item").mouseenter(function(){
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"3.5em");
 	      $(this).css('background-color',"powderblue");
 	    });
 	    
-	    $(".item").mouseleave(function(){
+	  $(".item").mouseleave(function(){
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"1em");
 	      $(this).css('background-color',"white");
 	    });
+	  
+	// 버튼이 커지니까 일단 돋보기는 제외
+	    /*
 	    $('.item').hover(function(){
 	        // Hover over code
 	        var title = $(this).attr('title');
@@ -56,7 +60,7 @@ $(document).ready(function() {
 		        var mousex = e.pageX + 20; //Get X coordinates
 		        var mousey = e.pageY + 10; //Get Y coordinates
 		        $('.tooltip').css({ top: mousey, left: mousex })
-		});
+		});*/
 	
 	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
        search: false, // show search button on the toolbar
