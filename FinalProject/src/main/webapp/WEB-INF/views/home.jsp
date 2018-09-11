@@ -77,17 +77,22 @@
 			</div>
 		</div>
 	</div>
-	
-	
-
 </div>
 
- <div id="list">
+
+<div id="bestSeller">
+	<table id="jqGridbestSeller"></table>
+	<div id="jqGridPagerbestSeller"></div>
+</div>	
+
+
+	
+<div id="list">
 		<div>
 			<table id="jqGrid"></table>
 			<div id="jqGridPager"></div>
 		</div>	
-	</div>
+</div>
 
 	
 	

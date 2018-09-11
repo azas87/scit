@@ -10,4 +10,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</insert>
 	
+	<select id="bestSeller" resultType="BestSeller">
+		select 
+			f.fishName, buy.location, f.unit, buy.total from fishList f, 
+		(select fishName, location, sum(price) as total from buylist b group by fishName, location) buy
+		where 
+			f.fishName = buy.fishName
+		order by 
+			buy.total desc
+	</select>
+	
+	<select id="seasonInfo" parameterType="string" resultType="BestSeller">
+		select 
+			f.fishName, buy.location, f.unit, buy.total from fishList f, 
+		(select fishName, location, sum(price) as total from buylist b group by fishName, location) buy
+		where 
+			f.fishName = buy.fishName
+		and 
+			f.SEASONINFO like '%' || #{season} || '%'
+		order by 
+			buy.total desc;
+	</select>
+	
 </mapper>

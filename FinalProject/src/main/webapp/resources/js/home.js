@@ -190,7 +190,7 @@ function homeList(url2) {
 				height : 200,
 				formatter: select,
 				align:'center'
-			}
+			},
 
 		],
 		viewrecords : true,
@@ -239,12 +239,102 @@ function homeList(url2) {
     			var obj = $("#jqGrid").getRowData(rowid);
        		 	location.href="selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum;
     			
-    		}
-    		
-    	},
-    	
+    		}    		
+    	},    	
 	});
 }
+
+
+/*function bestSeller(url2) {
+	console.log("bestSeller");
+	$("#jqGridbestSeller").jqGrid({
+		url : url2,
+		mtype : "GET",
+		datatype : "json",
+		colModel : 
+		[ 
+			{
+ 				label : '히든',
+ 				name : 'buyNum',
+ 				align:'center',
+ 				hidden:true
+ 			}, {
+				label : '品種',
+				name : 'fishName',
+				width : 150,
+				height : 200,
+				align:'center'
+			}, {
+				label : '産地',
+				name : 'location',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '単位',
+				name : 'unit',
+				width : 60,
+				height : 200,
+				align:'center'
+			}, {
+				label : '市価',
+				name : 'market price',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, 
+		],
+		viewrecords : true,
+		width : 900,
+		height : 400,
+		rowNum : 3,
+		rowList:[10,20,30],
+		pager : "#jqGridPagerbestSeller",
+		loadonce: true,
+		grouping: false,
+		groupingView: {
+		    groupField: ['buyNum'],
+		    groupColumnShow : [false],
+		},
+		loadComplete:function(data)
+		{
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				console.log("test");
+				var title = $(this).attr('title');
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		},
+		gridComplete: function(){
+		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+    		var cm = $(this).jqGrid('getGridParam','colModel');    
+    		if(cm[index].name == "再購入2")
+    		{	alert('구입')
+       		 	console.log(jQuery("#jqGrid").getRowData(rowid));
+       		 	location.href="writeBuyBoardForm";
+    			
+    		}else if(cm[index].name == "sellerSelect"){    			
+    			alert('이벤트')
+    			console.log(jQuery("#jqGrid").getRowData(rowid));
+    			var obj = $("#jqGrid").getRowData(rowid);
+       		 	location.href="selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum;
+    			
+    		}    		
+    	},    	
+	});
+}*/
+
 
 function addZeros(num, digit) { // 자릿수 맞춰주기
 	  var zero = '';
