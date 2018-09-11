@@ -31,9 +31,15 @@ $(document).ready(function() {
 	
 	    
 	  $(".item").mouseenter(function(){
-	      $(this).css('flex-grow',1);
-	      $(this).css('font-size',"3.5em");
-	      $(this).css('background-color',"powderblue");
+		  if($(this).attr('class') != "item search")
+		  {
+			  $(this).css('flex-grow',1);
+		      $(this).css('font-size',"3.5em");
+		      $(this).css('background-color',"powderblue");
+	/*	      $('input').css('line-height', '60px');
+		      $('input').css('width', '200px');*/
+		  }
+	     
 	    });
 	    
 	  $(".item").mouseleave(function(){
@@ -42,9 +48,9 @@ $(document).ready(function() {
 	      $(this).css('background-color',"white");
 	    });
 	  
-	// 버튼이 커지니까 일단 돋보기는 제외
-	    /*
-	    $('.item').hover(function(){
+
+	    
+	    $('.search').hover(function(){
 	        // Hover over code
 	        var title = $(this).attr('title');
 	        $(this).data('tipText', title).removeAttr('title');
@@ -60,7 +66,7 @@ $(document).ready(function() {
 		        var mousex = e.pageX + 20; //Get X coordinates
 		        var mousey = e.pageY + 10; //Get Y coordinates
 		        $('.tooltip').css({ top: mousey, left: mousex })
-		});*/
+		});
 	
 	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
        search: false, // show search button on the toolbar
@@ -211,10 +217,12 @@ function homeList(url2) {
 		{
 			console.log("loadComplete");
 			$('.bigSize').hover(function(){
-				console.log("test");
 				var title = $(this).attr('title');
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
 			},
 			function() {
 				$(this).attr('title',$(this).data('tipText'));

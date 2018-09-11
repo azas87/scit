@@ -56,30 +56,30 @@
 		<div class="items">
 			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
-					<div class="item " title="로그인"><a href="loginForm?">로그인</a></div>
-					<div class="item " title="회원가입"><a href="joinForm?">회원가입</a></div>
+					<div class="item " ><a href="loginForm?">로그인</a></div>
+					<div class="item " ><a href="joinForm?">회원가입</a></div>
 				</c:when>
 				
 				<c:when test="${sessionScope.loginId != null }">
-					<div class="item" title="로그인"><a href="logOut?">로그아웃</a></div>
-					<div class="item" title="글등록"><a href="writeBuyBoardForm?">글등록</a></div>
-					<div class="item" title="구매내역"><a href="buyListHistory?">구매내역</a></div>
+					<div class="item" ><a href="logOut?">로그아웃</a></div>
+					<div class="item" ><a href="writeBuyBoardForm?">글등록</a></div>
+					<div class="item" ><a href="buyListHistory?">구매내역</a></div>
 				</c:when>
 			</c:choose>
 			<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 		</div>
 		<div class="items">
-			<div class="item" title="Content Demo"><a href="./resources/content.html" class=" popdown btn">알림창 데모</a></div>
+			<div class="item" ><a href="./resources/content.html" class=" popdown btn">알림창 데모</a></div>
 		</div>
 		<div id="tab">
 			<div class="items">
-				<div class="item " title="전체 글" onclick="allBuyList()">전체 글</a></div>
+				<div class="item "  onclick="allBuyList()">전체 글</a></div>
 				<c:choose>
 					<c:when test="${sessionScope.loginId != null }">
-						<div class="item " title="나의 품목" onclick="myList()">나의 품목</a></div>
+						<div class="item "  onclick="myList()">나의 품목</a></div>
 					</c:when>
 				</c:choose>
-				<div class="item">검색 : <input type="text" id="search_cells" title=""></div>
+				<div class="item search" title="검색어">검색 : <input type="text" id="search_cells" title=""></div>
 			</div>
 		</div>
 	</div>
