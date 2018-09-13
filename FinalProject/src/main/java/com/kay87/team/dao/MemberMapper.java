@@ -15,4 +15,6 @@ public interface MemberMapper {
 
 	public List<SellerInfo> getSellerInfo(String sellerId);
 
+	public void cancel(String userid);
+
 }

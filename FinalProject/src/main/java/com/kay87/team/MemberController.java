@@ -94,6 +94,19 @@ public class MemberController {
 		return "home";
 	}
 
+
+	// 회원탈퇴
+	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+	public String cancel(HttpSession session, Model model) {
+		
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		String userid = (String) session.getAttribute("loginId");
+		dao.cancel(userid);
+		
+		return "home";
+	}
+	
+
 	@RequestMapping(value = "/sellerDetail", method = RequestMethod.GET)
 	public String sellerDetail() {
 

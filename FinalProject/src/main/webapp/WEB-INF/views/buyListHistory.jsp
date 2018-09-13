@@ -115,7 +115,7 @@
     	var data = google.visualization.arrayToDataTable(dataChart);
         var view = new google.visualization.DataView(data);
         var options = {
-          title: 'My Daily Activities',
+          title: '魚種別購入額',
           is3D: true,
         };
 
@@ -144,7 +144,7 @@
                              2]);
 
             var options = {
-              title: "Density of Precious Metals, in g/cm^3",
+              title: "月間購入額",
               width: 600,
               height: 400,
               bar: {groupWidth: "95%"},
@@ -189,7 +189,6 @@
 			</form>
 		</div>
 	</div>
-	
 	
 
 	

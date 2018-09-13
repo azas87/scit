@@ -59,4 +59,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<update id="cancel" parameterType="string">
+		
+		UPDATE memberinfo
+     	SET memberstatus = 'cancel'
+    	WHERE id = #{id}
+    	
+	</update>
+	
 </mapper>

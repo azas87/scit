@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{id}
 			
 			AND 
-                saleStatus !='onSale' and saleStatus !='refund'
+                saleStatus = 'saleComplete'
    			<if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -248,7 +248,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 		where 
 	 			buyerid = #{id}
 	 		and 
-                saleStatus !='onSale' and saleStatus !='refund'
+                saleStatus = 'saleComplete'
             <if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -290,7 +290,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and
    			buyerid = #{id}
 		and 
-		    saleStatus !='onSale' and saleStatus !='refund'
+		    saleStatus = 'saleComplete'
 		group by 
 		    to_char(deadline, 'MM')
 		order by
@@ -324,10 +324,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</update>
 	
+
 	<!--나의 구매목록에서 글삭제  -->
 	<!-- <delete id="deletemySaleList" parameterType="string">
 		delete BuyList where buynum=#{buynum}
 	</delete> -->
+
+
+	<select id="TodayAvgList" resultType="TodayAvgList">
+		select f.fishName,nvl(trunc((SUM(price)/count(*))),0) as avgPrice
+		from fishList f ,buyList b where f.fishName = b.fishName
+		group by f.fishName order by f.fishName;
+	</select>
+	
+	<select id="getWeekAvgList" resultType="WeekAvgList">
+		select fishname,avgprice,dates from weekavglist where fishname = '갈치' order by dates
+	</select>
+	
+	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
+		insert into buyList
+		(
+			avgListNum
+			,fishName
+			, avgPrice
+			, date
+		)
+		values
+		(
+			avgListNum.nextval
+			,fishName
+			, avgPrice
+			, to_char(sysdate,YYYY/MM/DD);
+		)
+	</insert> -->
+	
+<!-- 	
+	  <select id="selectBestseller" resultType="hashmap">
+   	SELECT
+   		b.bookcode,
+   		b.title,
+   		b.price,
+   		s.purchasecnt
+   	FROM
+   		book b, sale s
+   	WHERE
+   		b.bookcode=s.bookcode
+   	AND
+   		s.purchasecnt
+   	IN (
+   		SELECT
+   			MAX(purchasecnt)
+   		FROM
+   			sale
+   	)
+   </select> -->
 
 	
 </mapper>

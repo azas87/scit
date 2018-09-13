@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
+import com.kay87.team.vo.WeekAvgList;
 
 public interface BuyMapper {
 	
@@ -44,6 +45,8 @@ public interface BuyMapper {
 	public int selectSeller(Map<String, String> map);//sql문은 update임
 
 	public int refund(String buyNum);
+	
+	public List<WeekAvgList> getWeekAvgList();
 
 	
 
