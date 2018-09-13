@@ -1,3 +1,5 @@
+
+
 /*******************
 LOGIN FORM STYLESHEET
 by: Amit Jakhu
@@ -34,7 +36,7 @@ BODY STYLING
 }
 
 body {
-	background: url(../img/bg.png) repeat;
+	background:url(../img/bg.png) repeat;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight:300;
 	text-align: left;

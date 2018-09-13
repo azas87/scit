@@ -101,9 +101,7 @@ $(document).ready(function()
 <body>
 	<div id="contain">
 		
-
-
-			<form action="join" method="post" >
+	<form action="join" method="post" >
 
         <h1>Sign Up</h1>
 
