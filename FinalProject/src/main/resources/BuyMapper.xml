@@ -294,6 +294,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by f.fishName order by f.fishName;
 	</select>
 	
+	<select id="getWeekAvgList" resultType="WeekAvgList">
+		select fishname,avgprice,dates from weekavglist where fishname = '갈치' order by dates
+	</select>
+	
 	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
 		insert into buyList
 		(

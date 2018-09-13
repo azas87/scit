@@ -1,13 +1,11 @@
 package com.kay87.team;
 
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
-import com.kay87.team.util.PageNavigator;
 import com.kay87.team.vo.BuyList;
-import com.kay87.team.vo.MemberInfo;
+import com.kay87.team.vo.WeekAvgList;
+import com.kay87.team.vo.WishAvgList;
 
 
 @Controller
@@ -56,6 +54,28 @@ public class HomeController {
 			,@RequestParam(value = "page", defaultValue="1") int page
 			,Model model) {				
 		System.out.println("qq");
+		
+		BuyMapper mapper = sql.getMapper(BuyMapper.class);
+		List<WeekAvgList> list = mapper.getWeekAvgList();
+		
+		System.out.println(list);
+		List<WishAvgList> WishAvgList = new ArrayList<WishAvgList>();
+		
+		for(int i = 0; i<list.size(); i++)
+		{
+			WishAvgList wish = new WishAvgList();
+			wish.setFishName(list.get(i).getFishName());
+			wish.setDates(list.get(i).getDates());
+			ArrayList<Integer> tempList = new ArrayList<Integer>();
+			for(int j = 0; j<7; j++)
+			{
+				tempList.add(list.get(j).getAvgPrice());
+			}
+			wish.setAvgList(tempList);
+			WishAvgList.add(wish);
+		}
+		System.out.println(WishAvgList);
+		model.addAttribute("list",WishAvgList);
 		
 		return "home";
 	}	

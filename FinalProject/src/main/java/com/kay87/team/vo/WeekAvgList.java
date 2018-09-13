@@ -4,13 +4,13 @@ public class WeekAvgList {
 	private int avgListNum;
 	private String fishName;
 	private int avgPrice;
-	private String date;
-	public WeekAvgList(int avgListNum, String fishName, int avgPrice, String date) {
+	private String dates;
+	public WeekAvgList(int avgListNum, String fishName, int avgPrice, String dates) {
 		super();
 		this.avgListNum = avgListNum;
 		this.fishName = fishName;
 		this.avgPrice = avgPrice;
-		this.date = date;
+		this.dates = dates;
 	}
 	public WeekAvgList() {
 		super();
@@ -33,16 +33,16 @@ public class WeekAvgList {
 	public void setAvgPrice(int avgPrice) {
 		this.avgPrice = avgPrice;
 	}
-	public String getDate() {
-		return date;
+	public String getDates() {
+		return dates;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDates(String dates) {
+		this.dates = dates;
 	}
 	@Override
 	public String toString() {
-		return "WeekAvgList [avgListNum=" + avgListNum + ", fishName=" + fishName + ", avgPrice=" + avgPrice + ", date="
-				+ date + "]";
+		return "WeekAvgList [avgListNum=" + avgListNum + ", fishName=" + fishName + ", avgPrice=" + avgPrice
+				+ ", dates=" + dates + "]";
 	}
 	
 }

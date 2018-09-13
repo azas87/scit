@@ -13,12 +13,12 @@
 	
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/home.css" />
 
+
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
 <link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
 
-<script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
@@ -40,6 +40,56 @@
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
  <script>
+ $(document).ready(function() {
+	 google.charts.load("current", {packages:["annotationchart"]});
+	 google.charts.setOnLoadCallback(drawChart);
+ 
+	 
+ 	 function drawChart() {
+	        var data = new google.visualization.DataTable();
+	        
+	        console.log();
+	        
+	        data.addColumn('date', 'Date');
+	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[0].fishName}');
+	        /* <c:forEach items="${list}" var="item">
+	        	data.addColumn('number', '${item.fishName}');
+	    	</c:forEach>  */
+	    	
+	    	/* console.log(new Date(2314, 2, 15));
+	    	console.log('${list[0].dates}');
+	    	console.log(new Date('${list[0].dates}')); */
+	        
+	        data.addRows([
+	        //[new Date('${list[0].dates}'),5600,1234,4534,5676,789,89890,234234]
+	           <c:forEach items="${list}" var="item">
+	        	[new Date('${item.dates}'),
+	        		<c:forEach items="${item.avgList}" var="avgPrice">
+	        			Number('${avgPrice}'),
+	        		</c:forEach>	
+	        		
+	        	], 
+	    	</c:forEach>
+	        	
+	        ]);
+	        
+	        //console.log(data);
+
+	        var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+
+	        var options = {
+	          displayAnnotations: true
+	        };
+
+	        chart.draw(data, options);
+	      } 
+ });
  
  </script>
 	
@@ -47,10 +97,12 @@
 <body>
 
 <!-- <a href="cancel?">退会</a> -->
+<div id="chart_div"></div>
 <div id="contain">
 
 	<div id="header">
 		<div id="clock">	</div>
+		
 	</div>
 	<div id="nav">
 		<div class="items">
