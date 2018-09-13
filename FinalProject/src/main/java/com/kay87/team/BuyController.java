@@ -162,8 +162,8 @@ public class BuyController {
 	@RequestMapping(value = "/refundList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String refundList(String page, String rows, HttpSession session) {
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
-		List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));
-		
+		List<BuyList> refundBuyList= dao.getRefundsBuyList((String)session.getAttribute("loginId"));		
+
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
 		String jsonPlace = "{\"rows\":"+ gson.toJson(refundBuyList) + "}";

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kay87.team.dao.BuyMapper;
 import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.vo.MemberInfo;
@@ -94,18 +95,20 @@ public class MemberController {
 		return "home";
 	}
 
+
 	// 회원탈퇴
-	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
-	public String cancel(HttpSession session, Model model) {
+	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
+	public @ResponseBody int cancel(HttpSession session, Model model, MemberInfo member) {
 		
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		String userid = (String) session.getAttribute("loginId");
-		dao.cancel(userid);
+		member.setId(userid);
+		int result = dao.cancel(member);
 		
-		return "home";
+		return result;
 	}
 	
-
+	
 	@RequestMapping(value = "/sellerDetail", method = RequestMethod.GET)
 	public String sellerDetail() {
 
@@ -114,13 +117,37 @@ public class MemberController {
 	
 	@RequestMapping(value = "/getSellerInfo", method = RequestMethod.POST)
 	public @ResponseBody  List<SellerInfo> getSellerInfo(String sellerId) {
-		System.out.println(1);
-		
+	
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		List<SellerInfo> sellerInfo = dao.getSellerInfo(sellerId);
 		
 		return sellerInfo;
 	}
+	
+	@RequestMapping(value = "/checkingStatus", method = RequestMethod.GET)
+	public String checkingStatus(MemberInfo member) {
+		System.out.println(member);
+		if(member.getGrade().equals("reentrance")) {
+			return "reentrance";
+		}
+		else if(member.getMemberStatus().equals("seller")) {
+			
+		}else {
+			
+			return "joinForm";
+		}
+		return "joinForm";
+	}
+	
+	@RequestMapping(value = "/checkingEmail", method = RequestMethod.POST)
+	public @ResponseBody MemberInfo  checkingEmail(MemberInfo member) {
+		System.out.println(member);
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		MemberInfo m = dao.checkingEmail(member);
+		System.out.println("null"+m);
+		return m;
+	}
+	
 	
 	
 }

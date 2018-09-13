@@ -156,6 +156,8 @@
     });
 
 	
+	
+	
 </script>
 
 <body>
@@ -202,7 +204,9 @@
 	
 	<div><br></div>
 	
+
 	<!-- <div style = "margin-top : 20px; margin-left : 15px; font-size : 12px;">
+
 	    <select class = "form-control" style = "width : 10%; float : left;" id = "searchType">
 	        <option value = "All" selected>전체 검색</option>
 	        <option value = "user_status">회원상태</option>
@@ -214,6 +218,7 @@
 	    <button class = "btn btn-info btn-fill" id = "search" value = "검색 " style = "width : 10%; float : left; margin-left : 10px;">
 	      검색
 	    </button>
+
 	</div> -->
 
 	

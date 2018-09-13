@@ -3,6 +3,7 @@ package com.kay87.team.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
 import com.kay87.team.vo.WeekAvgList;
@@ -24,6 +25,8 @@ public interface BuyMapper {
 	public List<BuyList> myBuyList(String userId);
 	
 	public List<BuyList> mySaleList(String userId);
+	
+	public List<BuyList> myAllList(String userId);
 
 	public int GetTotalListCount(String string);
 	
@@ -36,11 +39,17 @@ public interface BuyMapper {
 	public int saleComplete(String buyNum);
 
 	public List<BuyList> getRefundsBuyList(String attribute);
+	
+	
+
+	public int selectSeller(Map<String, String> map);//sql문은 update임
 
 	public int refund(String buyNum);
 	
 	public List<WeekAvgList> getWeekAvgList();
 
+	
 
+	
 
 }

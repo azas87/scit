@@ -113,7 +113,4 @@ public class BuyList {
 				+ ", saleStatus=" + saleStatus + ", price=" + price + ", successSellerId=" + successSellerId
 				+ ", buyListComment=" + buyListComment + ", location=" + location + "]";
 	}
-	
-	
-
 }

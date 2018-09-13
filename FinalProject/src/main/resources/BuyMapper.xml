@@ -141,6 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!--전체구매리스트,검색은 없음-->	
 	<select id="allBuyList" resultType="BuyList" >
+
 		SELECT 
 			buyNum,
 			fishName,
@@ -154,6 +155,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			successSellerId,
 			buyListComment,
 			location 
+
 		from 
 			BuyList
 		where			
@@ -185,6 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by buyNum asc			
 	</select>	
 	
+
 <!--나의 참여리스트, 검색은 없음 -->		
 	<select id="mySaleList" resultType="BuyList" parameterType="string">	
 		select 
@@ -202,6 +205,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from BuyList b, (select * from SaleList where  sellerid=#{userId}) s
 		where b.buynum = s.buyNum
 		order by saleStatus asc
+	</select>
+
+<!--나의 모든리스트-->		
+	<select id="myAllList" resultType="BuyList" parameterType="string">	
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
+		from 
+			BuyList
+		where			
+			buyerId=#{userId}
+		order by buyNum asc
 	</select>
 
 
@@ -280,6 +306,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</update>
 	
+
+	<!-- 판매자 선택  -->
+	<update id="selectSeller" parameterType="map">
+		UPDATE buylist
+     	SET saleStatus = 'saleComplete'
+     		,successSellerId=#{SellerId}
+    	WHERE buyNum = #{buyNum}
+	</update>
+
+
 	<update id="refund" parameterType="string">
  
   	 	UPDATE buylist
@@ -288,6 +324,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</update>
 	
+
+	<!--나의 구매목록에서 글삭제  -->
+	<!-- <delete id="deletemySaleList" parameterType="string">
+		delete BuyList where buynum=#{buynum}
+	</delete> -->
+
+
 	<select id="TodayAvgList" resultType="TodayAvgList">
 		select f.fishName,nvl(trunc((SUM(price)/count(*))),0) as avgPrice
 		from fishList f ,buyList b where f.fishName = b.fishName
@@ -335,5 +378,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    			sale
    	)
    </select> -->
+
 	
 </mapper>

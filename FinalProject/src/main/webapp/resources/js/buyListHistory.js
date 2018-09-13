@@ -143,8 +143,7 @@ function sellerDetail (seller) {
  				name : '確認',
  				formatter: rebuy2,
  				align:'center'
- 			},
- 			{
+ 			},{
  				label : '返金',
  				name : '払い戻し',
  				width : '75',
