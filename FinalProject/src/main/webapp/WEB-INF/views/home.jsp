@@ -39,11 +39,14 @@
  
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
+ <script>
  
+ </script>
 	
 </head>
 <body>
 <div id="contain">
+
 	<div id="header">
 		<div id="clock">	</div>
 	</div>
@@ -61,16 +64,18 @@
 					<div class="item" title="구매내역"><a href="buyListHistory?">구매내역</a></div>
 				</c:when>
 			</c:choose>
+			<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 		</div>
 		<div class="items">
 			<div class="item" title="Content Demo"><a href="./resources/content.html" class=" popdown btn">알림창 데모</a></div>
 		</div>
 		<div id="tab">
 			<div class="items">
-				<div class="item " title="전체 글" onclick="allBuyList()">전체 글</a></div>
+				<div class="item " title="전체 글" onclick="allBuyList()">전체 글</div>
 				<c:choose>
 					<c:when test="${sessionScope.loginId != null }">
-						<div class="item " title="나의 품목" onclick="myBuyList()">나의 품목</a></div>
+						<div class="item " title="진행중인리스트" onclick="myList()">진행중인리스트</div>
+						<div class="item " title="내글 목록" onclick="myAllList()">내글 목록</div>
 					</c:when>
 				</c:choose>
 				<div class="item">검색 : <input type="text" id="search_cells" title=""></div>
@@ -80,22 +85,27 @@
 </div>
 
 
-<div id="bestSeller">
-	<table id="jqGridbestSeller"></table>
-	<div id="jqGridPagerbestSeller"></div>
+<div>
+bestSeller
+	<table id="jqGridbestSeller"></table><!--상위3개만  -->			
+	<!-- <div id="jqGridPagerbestSeller"></div> -->
 </div>	
 
+<div>
+seasonInfo,제철정보
+	<table id="jqGridseasonInfo"></table><!--상위3개만  -->			
+	<!-- <div id="jqGridPagerseasonInfo"></div> -->
+</div>	
 
-	
 <div id="list">
-		<div>
-			<table id="jqGrid"></table>
-			<div id="jqGridPager"></div>
-		</div>	
+	<div>
+		<table id="jqGrid"></table>			
+		<div id="jqGridPager"></div>
+	</div>	
 </div>
 
-	
-	
+		
+
 
 </body>
 </html>

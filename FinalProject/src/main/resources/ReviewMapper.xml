@@ -3,13 +3,36 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kay87.team.dao.ReviewMapper">
-
-	<insert id="insertReview" parameterType="Review">
 	
-		insert into review values(reviewNum.nextval,#{buyNum},#{star},#{sellerId},#{reviewComment})
+	<insert id="insertReview" parameterType="Review">
+		insert into review
+		(
+				reviewNum
+				<if test="buyNum!=null">
+				, buyNum
+				</if>
+				, star
+				, sellerId
+				<if test="reviewComment">
+				, reviewComment
+				</if>
+				)
+		values
+		(
+				reviewNum.nextval
+				<if test="buyNum!=null">
+				,#{buyNum}
+				</if>
+				,#{star}
+				,#{sellerId}
+				<if test="reviewComment">
+				,#{reviewComment}
+				</if>
+		)
 	
 	</insert>
 	
+	<!--bestSeller  -->
 	<select id="bestSeller" resultType="BestSeller">
 		select 
 			f.fishName, buy.location, f.unit, buy.total from fishList f, 
@@ -20,7 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buy.total desc
 	</select>
 	
-	<select id="seasonInfo" parameterType="string" resultType="BestSeller">
+	<!--제철정보  -->            <!--resultType의 BestSeller를 변경해야할수도있다  -->
+	<select id="seasonInfo" parameterType="string" resultType="BestSeller">  
 		select 
 			f.fishName, buy.location, f.unit, buy.total from fishList f, 
 		(select fishName, location, sum(price) as total from buylist b group by fishName, location) buy
@@ -29,7 +53,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and 
 			f.SEASONINFO like '%' || #{season} || '%'
 		order by 
-			buy.total desc;
+			buy.total desc
 	</select>
-	
 </mapper>

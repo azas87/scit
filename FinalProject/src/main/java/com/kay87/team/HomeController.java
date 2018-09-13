@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.util.PageNavigator;
+import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.MemberInfo;
 
@@ -93,11 +95,26 @@ public class HomeController {
 		return jsonPlace;
 	}
 	
+	//첫 메인화면에서 나의 모든 리스트
+	@RequestMapping(value = "/myAllList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String myAllList(HttpSession session) {			
+		System.out.println("myAllList");
+		BuyMapper mapper = sql.getMapper(BuyMapper.class);
+		String userId = (String) session.getAttribute("loginId");	
+		List<BuyList> myAllList = mapper.myAllList(userId);			
+		System.out.println(myAllList);
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(myAllList) + "}";
+		System.out.println(jsonPlace);		
+		
+		return jsonPlace;
+	}	
 
 	//판매자선택
 	@RequestMapping(value = "/selectSeller", method = RequestMethod.GET)
-	public String selectSeller(HttpSession session, String SellerId, 
-			String buyNum, Model model){
+	public String selectSeller(String SellerId, String buyNum, Model model){
 		
 		BuyMapper dao = sql.getMapper(BuyMapper.class);				
 		Map<String, String> map = new HashMap<String, String>();
@@ -108,4 +125,38 @@ public class HomeController {
 		return "home";
 	}
 
+	
+	//bestSeller
+	@RequestMapping(value = "/bestSeller", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String bestSeller(HttpSession session, Model model){		
+		
+		ReviewMapper dao = sql.getMapper(ReviewMapper.class);			
+		List<BestSeller> bestSeller = dao.bestSeller();
+		//System.out.println(bestSeller);
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(bestSeller) + "}";
+		System.out.println(jsonPlace);		
+		return jsonPlace;
+	}
+	
+	//제철정보
+	@RequestMapping(value = "/seasonInfo", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String seasonInfo(String season, HttpSession session, Model model){		
+		System.out.println(season);
+		ReviewMapper dao = sql.getMapper(ReviewMapper.class);			
+		List<BestSeller> seasonInfo = dao.seasonInfo(season);
+		//System.out.println(seasonInfo);
+		
+		for(BestSeller info : seasonInfo) {
+			System.out.println(info);
+		}
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(seasonInfo) + "}";
+		System.out.println(jsonPlace);		
+		return jsonPlace;
+	}
 }

@@ -7,6 +7,8 @@ $(document).ready(function() {
 	$('.popdown').popdown();
 	
 	 homeList('allBuyList');
+	 bestSeller();
+	 seasonInfo();
 	//myBuyList();
 	 printClock();
 	 
@@ -136,8 +138,13 @@ function homeList(url2) {
 		colModel : 
 		[ 
 			{
- 				label : '히든',
+ 				label : 'buyNum',
  				name : 'buyNum',
+ 				align:'center',
+ 				hidden:true
+ 			}, {
+ 				label : 'saleStatus',
+ 				name : 'saleStatus',
  				align:'center',
  				hidden:true
  			}, {
@@ -232,6 +239,7 @@ function homeList(url2) {
     		{	alert('구입')
        		 	console.log(jQuery("#jqGrid").getRowData(rowid));
        		 	location.href="writeBuyBoardForm";
+
     			
     		}else if(cm[index].name == "sellerSelect"){    			
     			alert('이벤트')
@@ -240,28 +248,28 @@ function homeList(url2) {
        		 	location.href="selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum;
     			
     		}    		
-    	},    	
+    	},   
 	});
 }
 
+function myAllList() {	
+	console.log("myAllList");
+	listMode = "myAllList";
+	ListRefresh();
+}
 
-/*function bestSeller(url2) {
+
+function bestSeller() {
 	console.log("bestSeller");
 	$("#jqGridbestSeller").jqGrid({
-		url : url2,
+		url : "bestSeller",
 		mtype : "GET",
 		datatype : "json",
 		colModel : 
 		[ 
 			{
- 				label : '히든',
- 				name : 'buyNum',
- 				align:'center',
- 				hidden:true
- 			}, {
 				label : '品種',
 				name : 'fishName',
-				width : 150,
 				height : 200,
 				align:'center'
 			}, {
@@ -273,20 +281,18 @@ function homeList(url2) {
 			}, {
 				label : '単位',
 				name : 'unit',
-				width : 60,
 				height : 200,
 				align:'center'
 			}, {
 				label : '市価',
-				name : 'market price',
-				width : 80,
+				name : 'total',
 				height : 200,
 				align:'center'
 			}, 
 		],
 		viewrecords : true,
-		width : 900,
-		height : 400,
+		width : 500,
+		height : 73,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerbestSeller",
@@ -316,7 +322,7 @@ function homeList(url2) {
 		},
 		gridComplete: function(){
 		},
-		onCellSelect: function(rowid, index, contents, event) 
+		/*onCellSelect: function(rowid, index, contents, event) 
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")
@@ -331,10 +337,113 @@ function homeList(url2) {
        		 	location.href="selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum;
     			
     		}    		
-    	},    	
+    	},    	*/
 	});
-}*/
+}
 
+
+function seasonInfo() {
+	var currentDate = new Date()
+	var year = currentDate.getFullYear();
+	var month = currentDate.getMonth() + 1;
+    var day = currentDate.getDate();
+    var my_date = year+"-"+month+"-"+day;	
+	console.log(my_date);
+	
+	
+	var season = ""; 
+	if((month==3)|| (month==4)|| (month==5)){
+		season = "春";
+	}else if((month==6)|| (month==7)|| (month==8)){
+		season = "夏";
+	}else if((month==9)|| (month==10)|| (month==11)){
+		season = "秋";
+	}else if((month==12)|| (month==1)|| (month==2)){
+		season = "冬";
+	}
+	console.log(season);
+	
+	
+	console.log("seasonInfo");
+	$("#jqGridseasonInfo").jqGrid({
+		url : "seasonInfo?season="+season,
+		mtype : "GET",
+		datatype : "json",
+		colModel : 
+		[ 
+			{
+				label : '品種',
+				name : 'fishName',
+				height : 200,
+				align:'center'
+			}, {
+				label : '産地',
+				name : 'location',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '単位',
+				name : 'unit',
+				height : 200,
+				align:'center'
+			}, {
+				label : '市価',
+				name : 'total',
+				height : 200,
+				align:'center'
+			}, 
+		],
+		viewrecords : true,
+		width : 500,
+		height : 73,
+		rowNum : 3,
+		rowList:[10,20,30],
+		pager : "#jqGridPagerseasonInfo",
+		loadonce: true,
+		grouping: false,
+		groupingView: {
+		    groupField: ['buyNum'],
+		    groupColumnShow : [false],
+		},
+		loadComplete:function(data)
+		{
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				console.log("test");
+				var title = $(this).attr('title');
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		},
+		gridComplete: function(){
+		},
+		/*onCellSelect: function(rowid, index, contents, event) 
+    	{    
+    		var cm = $(this).jqGrid('getGridParam','colModel');    
+    		if(cm[index].name == "再購入2")
+    		{	alert('구입')
+       		 	console.log(jQuery("#jqGrid").getRowData(rowid));
+       		 	location.href="writeBuyBoardForm";
+    			
+    		}else if(cm[index].name == "sellerSelect"){    			
+    			alert('이벤트')
+    			console.log(jQuery("#jqGrid").getRowData(rowid));
+    			var obj = $("#jqGrid").getRowData(rowid);
+       		 	location.href="selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum;
+    			
+    		}    		
+    	},    	*/
+	});
+}
 
 function addZeros(num, digit) { // 자릿수 맞춰주기
 	  var zero = '';
@@ -357,19 +466,30 @@ function select (cellvalue, options, rowObject) {
 	};	
 	 
 
-	
-
 function allBuyList() {	
 	console.log("allBuyList");
 	listMode = "allBuyList";
 	ListRefresh();
 }
 
-function myBuyList() {		
+function myList() {		
 	console.log("myBuylist");
-	listMode = "myBuyList";
+	
+	var userMode = $("#userMode").val();
+	console.log(userMode);
+	if(userMode==1)
+	{
+		listMode = "myBuyList";
+	}
+	else
+	{
+		listMode = "mySaleList";
+	}
+	
+	
 	ListRefresh();
 }
+
 
 
 function ListRefresh()
@@ -378,13 +498,33 @@ function ListRefresh()
 	var grouping = false;
 	console.log("ListRefresh");
 	console.log(listMode);
-	if(listMode == "myBuyList")
+	
+	var jqGridObj = {url:listMode, datatype:'json',grouping:true};
+	
+	if(listMode=="myBuyList")
 	{
-		grouping= true;
+		jqGridObj.grouping = true;
+		jqGridObj.groupingView= {
+		    groupField: ['buyNum'],
+		    groupColumnShow : [false],
+		};
 	}
+	else if(listMode=="mySaleList")
+	{
+		jqGridObj.groupingView= {
+			    groupField: ['saleStatus'],
+			    groupColumnShow : [false],
+			};
+	}
+	else
+	{
+		jqGridObj.grouping=false;
+	}
+	
 	console.log(grouping);
 	
-	$("#jqGrid").jqGrid().setGridParam({url:listMode, datatype:'json',grouping: grouping}).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
+	//$("#jqGrid").jqGrid().setGridParam({url:listMode, datatype:'json',grouping: grouping}).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
+	$("#jqGrid").jqGrid().setGridParam(jqGridObj).trigger('reloadGrid'); //url 안 넣어주면 한번만 함.
 }
 
 

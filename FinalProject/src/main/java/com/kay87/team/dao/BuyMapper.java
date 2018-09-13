@@ -3,6 +3,7 @@ package com.kay87.team.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
 
@@ -21,12 +22,16 @@ public interface BuyMapper {
 	public List<BuyList> allBuyList();
 	
 	public List<BuyList> myBuyList(String userId);
+	
+	public List<BuyList> mySaleList(String userId);
+	
+	public List<BuyList> myAllList(String userId);
 
 	public int GetTotalListCount(String string);
 	
 	public int GetTotalRefundListCount(String search);
 	
-	public List<BuyList> sumPricebyFishName(Map<String, String> map);
+	public List<BuyList> sumPricebyFishName(Map<String, Object> map);
 
 	public List<BuyList> sumPricebyMonth(String userid);
 
@@ -40,6 +45,8 @@ public interface BuyMapper {
 
 	public int refund(String buyNum);
 
+	
 
+	
 
 }
