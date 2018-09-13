@@ -64,7 +64,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE memberinfo
      	SET memberstatus = 'cancel'
     	WHERE id = #{id}
-    	
+		AND password = #{password}    	
+	
 	</update>
+	
+	<select id="checkingEmail" parameterType="Member" resultType="Member">
+	
+		select * from memberinfo where email = #{email} and id = #{id} and memberstatus ='cancel'
+	
+	</select>
 	
 </mapper>

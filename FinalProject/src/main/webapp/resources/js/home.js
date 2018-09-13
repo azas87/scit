@@ -2,7 +2,6 @@ var listMode = "allBuyList";
 var refreshInterver = 600000; // 1000 = 1초
 
 
-
 $(document).ready(function() {
 	$('.popdown').popdown();
 	
@@ -11,6 +10,8 @@ $(document).ready(function() {
 	//myBuyList();
 	 printClock();
 	 
+
+
 	 
 	 /*
 	 // 자동 글쓰기 테스트.

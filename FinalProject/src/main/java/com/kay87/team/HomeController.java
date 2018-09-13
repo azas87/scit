@@ -49,6 +49,7 @@ public class HomeController {
 		
 	}
 	
+	
 	//첫 메인화면에서 전체구매리스트+검색
 	@RequestMapping(value = "/")
 	public String home(

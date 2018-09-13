@@ -58,6 +58,11 @@ label.control-label {
 }
 
 
+.box { 
+ width: 200px; /* 원하는 너비설정 */
+ }
+
+
 </style>
 
 
@@ -121,12 +126,23 @@ $(document).ready(function() {
               </div> -->
             </div>
           </div>
+          
+         <!--  
+           <div class='form-group'>
+            <label class='control-label col-md-2 col-md-offset-2' for='id_title'>産地</label>
+            <div class='col-md-8'>
+              <div class='col-md-2'>
+                <div class='form-group internal'>
+               	<select id="location" name="location" class='form-control'> </select>
+                </div>
+              </div>
+           -->
           <div class='form-group'>
             <label class='control-label col-md-2 col-md-offset-2' for='id_adults'>重量</label>
             <div class='col-md-8'>
               <div class='col-md-2'>
                 <div class='form-group internal'>
-                  <input type="number" class='form-control' id ="weight" name="weight"/></br>
+                  <input type="number" class='form-control' id ="weight" name="weight"/>
                 </div>
               </div>
               <!-- <div class='col-md-3 indent-small'>
@@ -189,7 +205,7 @@ $(document).ready(function() {
               <div class='col-md-3'>
                 <div class='form-group internal input-group'>
               	<select id="priority1" name="priority3" class='form-control' >
-						<option value="">未定</option>		
+					<option value="">未定</option>
 					<c:forEach var="buy" items="${buylist}">
 					  <option value="${buy.successSellerId}">${buy.successSellerId}</option>
 					</c:forEach>
@@ -210,7 +226,7 @@ $(document).ready(function() {
             <label class='control-label col-md-2 col-md-offset-2' for='id_pets'>予約日時</label>
             <div class='col-md-8'>
               <div class='make-switch' data-off-label='NO' data-on-label='YES' id='id_pets_switch'>
-           <select id="loadDate" >
+           <select id="loadDate"  >
 		 		<option value="">未定</option>
 		 	</select>
        	 
@@ -269,25 +285,6 @@ $(document).ready(function() {
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>
