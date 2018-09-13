@@ -37,7 +37,6 @@
  <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
  <script type="text/javascript" src="./resources/js/home.js"></script>
  
-<<<<<<< HEAD
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
  <script>
@@ -93,7 +92,6 @@
  });
  
  </script>
-=======
  <link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  <script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
 
@@ -103,7 +101,6 @@
 <script type="text/javascript" src="./resources/js/alertify.js"></script>
 <script type="text/javascript" src="./resources/js/alertify.min.js"></script>
 
->>>>>>> refs/remotes/origin/mina
 	
 </head>
 
@@ -230,10 +227,8 @@ function cancel() {
 </script>
 <body>
 
-<<<<<<< HEAD
 <!-- <a href="cancel?">退会</a> -->
 <div id="chart_div"></div>
-=======
 
 <div class="hover_bkgr_fricc">
     <span class="helper"></span>
@@ -252,7 +247,6 @@ function cancel() {
 
 
 <input type="button" value="退会" onclick="cancel()">
->>>>>>> refs/remotes/origin/mina
 <div id="contain">
 
 	<div id="header">
@@ -263,13 +257,9 @@ function cancel() {
 		<div class="items">
 			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
-<<<<<<< HEAD
+
 					<div class="item " ><a href="loginForm?">로그인</a></div>
-					<div class="item " ><a href="joinForm?">회원가입</a></div>
-=======
-					<div class="item " title="로그인"><a href="loginForm?">로그인</a></div>
-					<div class="item " title="회원가입"><a class="trigger_popup_fricc">회원가입</a></div>
->>>>>>> refs/remotes/origin/mina
+					<div class="item " ><a class="trigger_popup_fricc">회원가입</a></div>
 				</c:when>
 				
 				<c:when test="${sessionScope.loginId != null }">
