@@ -61,20 +61,25 @@ public class HomeController {
 		System.out.println(list);
 		List<WishAvgList> WishAvgList = new ArrayList<WishAvgList>();
 		
-		for(int i = 0; i<list.size(); i++)
+		for(int i = 0; i<7; i++)
 		{
 			WishAvgList wish = new WishAvgList();
 			wish.setFishName(list.get(i).getFishName());
 			wish.setDates(list.get(i).getDates());
 			ArrayList<Integer> tempList = new ArrayList<Integer>();
-			for(int j = 0; j<7; j++)
+			for(int j = 0; j<list.size()/7; j++)
 			{
-				tempList.add(list.get(j).getAvgPrice());
+				tempList.add(list.get(i+j*7).getAvgPrice());
 			}
 			wish.setAvgList(tempList);
 			WishAvgList.add(wish);
 		}
-		System.out.println(WishAvgList);
+		
+		
+		for(WishAvgList v : WishAvgList)
+		{
+			System.out.println(v);
+		}
 		model.addAttribute("list",WishAvgList);
 		
 		return "home";

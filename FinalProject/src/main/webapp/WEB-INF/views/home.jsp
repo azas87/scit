@@ -52,12 +52,12 @@
 	        
 	        data.addColumn('date', 'Date');
 	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
+	        data.addColumn('number', '${list[1].fishName}');
+	        data.addColumn('number', '${list[2].fishName}');
+	        data.addColumn('number', '${list[3].fishName}');
+	        data.addColumn('number', '${list[4].fishName}');
+	        data.addColumn('number', '${list[5].fishName}');
+	        data.addColumn('number', '${list[6].fishName}');
 	        /* <c:forEach items="${list}" var="item">
 	        	data.addColumn('number', '${item.fishName}');
 	    	</c:forEach>  */
