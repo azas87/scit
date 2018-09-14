@@ -36,6 +36,24 @@
     	z-index: 1000;
     }
 
+.smallList{
+	width:1010px;
+	height:130px;
+	margin: 0 auto;
+    border:0px;	
+}
+.smallList .flexs {
+    display: flex;
+    flex-direction: row;
+  }
+  
+.smallList .flex {
+    line-height: 80px;
+    margin:0px;
+    flex-grow: 1;
+    font-size: 50px;
+  }
+
 		
 
 		#header{
@@ -47,6 +65,7 @@
 			font-size:100px;
 			text-align:center;
 		}
+		
 
 		#nav{
 			width:980px;

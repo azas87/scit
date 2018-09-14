@@ -26,7 +26,7 @@ import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.util.PageNavigator;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
-import com.kay87.team.vo.WeekAvgList;
+import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.WishAvgList;
 
 
@@ -63,10 +63,10 @@ public class HomeController {
 		System.out.println("qq");
 		
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
-		List<WeekAvgList> list = mapper.getWeekAvgList();
+		List<AvgList> list = mapper.getWeekAvgList();
 		
 		
-		for(WeekAvgList l: list)
+		for(AvgList l: list)
 		{
 			System.out.println(l);
 		}

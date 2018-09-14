@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kay87.team.vo.SellerInfo" alias="SellerInfo"/>
 		<typeAlias type="com.kay87.team.vo.BestSeller" alias="BestSeller"/>
 		<typeAlias type="com.kay87.team.vo.TodayAvgList" alias="TodayAvgList"/>
-		<typeAlias type="com.kay87.team.vo.WeekAvgList" alias="WeekAvgList"/>
+		<typeAlias type="com.kay87.team.vo.AvgList" alias="AvgList"/>
 
 	</typeAliases>
 	

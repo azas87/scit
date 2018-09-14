@@ -1,31 +1,39 @@
 package com.kay87.team.vo;
 
-public class WeekAvgList {
-	private int avgListNum;
+public class AvgList {
 	private String fishName;
+	private int total;
+	private int weight;
 	private int avgPrice;
 	private String dates;
-	public WeekAvgList(int avgListNum, String fishName, int avgPrice, String dates) {
+	public AvgList(String fishName, int total, int weight, int avgPrice, String dates) {
 		super();
-		this.avgListNum = avgListNum;
 		this.fishName = fishName;
+		this.total = total;
+		this.weight = weight;
 		this.avgPrice = avgPrice;
 		this.dates = dates;
 	}
-	public WeekAvgList() {
+	public AvgList() {
 		super();
-	}
-	public int getAvgListNum() {
-		return avgListNum;
-	}
-	public void setAvgListNum(int avgListNum) {
-		this.avgListNum = avgListNum;
 	}
 	public String getFishName() {
 		return fishName;
 	}
 	public void setFishName(String fishName) {
 		this.fishName = fishName;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 	public int getAvgPrice() {
 		return avgPrice;
@@ -41,8 +49,10 @@ public class WeekAvgList {
 	}
 	@Override
 	public String toString() {
-		return "WeekAvgList [avgListNum=" + avgListNum + ", fishName=" + fishName + ", avgPrice=" + avgPrice
+		return "AvgList [fishName=" + fishName + ", total=" + total + ", weight=" + weight + ", avgPrice=" + avgPrice
 				+ ", dates=" + dates + "]";
 	}
+	
+	
 	
 }

@@ -62,7 +62,7 @@
 			 
 			          var data = new google.visualization.DataTable();
 			          //그래프에 표시할 컬럼 추가
-			          data.addColumn('date', 'Date(yy/MM/dd)');
+			          data.addColumn('date', 'Date');
 				     data.addColumn('number', '${list[0].fishName}');
 				     data.addColumn('number', '${list[1].fishName}');
 				     data.addColumn('number', '${list[2].fishName}');
@@ -292,6 +292,25 @@ function cancel() {
           <div id="controlsArea" style="display:none"></div>
         </div>
 
+<div class="smallList">
+	<div class="flexs">
+		<div class="flex">bestSeller</div>
+		<div class="flex">seasonInfo</div>
+	</div>
+	<div class="flexs">
+		<div class="flex">
+			<table id="jqGridbestSeller"></table><!--상위3개만  -->	
+		</div>
+		<div class="flex">
+			<table id="jqGridseasonInfo"></table><!--상위3개만  -->			
+		</div>
+	</div>	
+</div>	
+
+<div><br></div>
+<div><br></div>
+<div><br></div>
+
 
 
 <div class="hover_bkgr_fricc">
@@ -310,7 +329,6 @@ function cancel() {
 </div>
 
 
-<input type="button" value="退会" onclick="cancel()">
 <div id="contain">
 
 	<div id="header">
@@ -322,7 +340,7 @@ function cancel() {
 			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
 
-					<div class="item " ><a href="loginForm?">로그인</a></div>
+					<div class="item" ><a href="loginForm?">로그인</a></div>
 					<div class="item " ><a class="trigger_popup_fricc">회원가입</a></div>
 				</c:when>
 				
@@ -330,6 +348,8 @@ function cancel() {
 					<div class="item" ><a href="logOut?">로그아웃</a></div>
 					<div class="item" ><a href="writeBuyBoardForm?">글등록</a></div>
 					<div class="item" ><a href="buyListHistory?">구매내역</a></div>
+					<div class="item" ><a href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a></div>
+
 				</c:when>
 			</c:choose>
 			<input type="hidden" id="userMode" value="${sessionScope.userMode}">
@@ -354,17 +374,7 @@ function cancel() {
 </div>
 
 
-<div>
-bestSeller
-	<table id="jqGridbestSeller"></table><!--상위3개만  -->			
-	<!-- <div id="jqGridPagerbestSeller"></div> -->
-</div>	
 
-<div>
-seasonInfo,제철정보
-	<table id="jqGridseasonInfo"></table><!--상위3개만  -->			
-	<!-- <div id="jqGridPagerseasonInfo"></div> -->
-</div>	
 
 <div id="list">
 	<div>
@@ -374,15 +384,6 @@ seasonInfo,제철정보
 </div>
 
 		
-
-
- <div id="list">
-		<div>
-			<table id="jqGrid"></table>
-			<div id="jqGridPager"></div>
-		</div>	
-	</div>
-	
 
 
 </body>
