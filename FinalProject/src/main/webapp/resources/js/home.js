@@ -9,7 +9,7 @@ $(document).ready(function() {
 	 bestSeller();
 	 seasonInfo();
 	//myBuyList();
-	 //printClock();
+	///printClock();
 	 
 
 
@@ -312,7 +312,7 @@ function bestSeller() {
 		hidegrid : false,
 		hidden:false,
 		viewrecords : true,
-		height : 150,
+		height : 152,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerbestSeller",
@@ -403,7 +403,7 @@ function seasonInfo() {
 				name : 'location',
 				align:'center'
 			}, {
-				label : '単位',
+				label : '単位', 
 				name : 'unit',
 				align:'center'
 			}, {
@@ -416,7 +416,7 @@ function seasonInfo() {
 		caption:"seasonInfo",
 		hidegrid : false,
 		viewrecords : true,
-		height : 150,
+		height : 152,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerseasonInfo",
