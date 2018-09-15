@@ -266,8 +266,15 @@ function homeList(url2) {
 
 function myAllList() {	
 	console.log("myAllList");
-	listMode = "myAllList";
-	ListRefresh();
+	
+	var userMode = $("#userMode").val();
+	console.log(userMode);
+	if(userMode==1){
+		listMode = "myAllList_buyer";
+	}else{
+		listMode = "myAllList_seller";
+	}	
+	ListRefresh();	
 }
 
 

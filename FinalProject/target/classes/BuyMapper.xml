@@ -326,8 +326,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<!--나의 구매목록에서 글삭제  -->
-	<!-- <delete id="deletemySaleList" parameterType="string">
-		delete BuyList where buynum=#{buynum}
+	<!-- <delete id="deleteMyList" parameterType="string">
+		delete 
+			BuyList 
+		where 
+			buynum=#{buynum} 
+		and
+			saleStatus = 'onSale'
 	</delete> -->
 
 

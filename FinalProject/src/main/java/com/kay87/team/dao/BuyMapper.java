@@ -48,6 +48,8 @@ public interface BuyMapper {
 	
 	public List<WeekAvgList> getWeekAvgList();
 
+	public int deleteMyList(String buyNum);
+
 	
 
 	
