@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kay87.team.dao.BoardMapper">
+	
+	<select id="getQnaList" resultType="QnA">
+		SELECT * FROM qna
+	</select>
+	
+
+	<insert id="writeBoard" parameterType="QnA">
+		insert into qna
+		values(qnaNum.nextval, #{id}, sysdate, #{title}, #{content},0)
+	</insert>
+</mapper>
