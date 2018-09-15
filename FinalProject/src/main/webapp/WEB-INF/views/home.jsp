@@ -97,7 +97,7 @@
 			                                                                  years : {format: ['yy/']},
 			                                                                  months: {format: ['MM/']},
 			                                                                  days  : {format: ['dd']}}
-			                                                                },textStyle: {fontSize:35}},
+			                                                                },textStyle: {fontSize:25}},
 			                               vAxis              : {minValue: 100,viewWindow:{min:0},gridlines:{count:-1},textStyle:{fontSize:35}},
 
 			                animation        : {startup: true,duration: 100,easing: 'in' },
@@ -294,22 +294,12 @@ function cancel() {
 
 <div class="smallList">
 	<div class="flexs">
-		<div class="flex">bestSeller</div>
-		<div class="flex">seasonInfo</div>
+		<table id="jqGridbestSeller" ></table><!--상위3개만  -->
 	</div>
-	<div class="flexs">
-		<div class="flex">
-			<table id="jqGridbestSeller"></table><!--상위3개만  -->	
-		</div>
-		<div class="flex">
-			<table id="jqGridseasonInfo"></table><!--상위3개만  -->			
-		</div>
+	<div class="flexs">	
+		<table id="jqGridseasonInfo"  class="flexs"></table><!--상위3개만  -->			
 	</div>	
 </div>	
-
-<div><br></div>
-<div><br></div>
-<div><br></div>
 
 
 
@@ -328,13 +318,14 @@ function cancel() {
     </div>
 </div>
 
+<div><Br></div>
 
 <div id="contain">
 
-	<div id="header">
+<!-- 	<div id="header">
 		<div id="clock">	</div>
 		
-	</div>
+	</div> -->
 	<div id="nav">
 		<div class="items">
 			<c:choose>
@@ -373,7 +364,7 @@ function cancel() {
 
 </div>
 
-
+<div><Br></div>
 
 
 <div id="list">
