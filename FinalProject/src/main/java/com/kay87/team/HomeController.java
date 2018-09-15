@@ -26,7 +26,7 @@ import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.util.PageNavigator;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
-import com.kay87.team.vo.WeekAvgList;
+import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.WishAvgList;
 
 
@@ -63,25 +63,36 @@ public class HomeController {
 		System.out.println("qq");
 		
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
-		List<WeekAvgList> list = mapper.getWeekAvgList();
+		List<AvgList> list = mapper.getWeekAvgList();
 		
-		System.out.println(list);
+		
+		for(AvgList l: list)
+		{
+			System.out.println(l);
+		}
 		List<WishAvgList> WishAvgList = new ArrayList<WishAvgList>();
 		
-		for(int i = 0; i<list.size(); i++)
+		ArrayList<Integer> tempList = new ArrayList<Integer>();
+		WishAvgList wish = new WishAvgList();
+		for(int i = 0; i<7; i++)
 		{
-			WishAvgList wish = new WishAvgList();
 			wish.setFishName(list.get(i).getFishName());
-			wish.setDates(list.get(i).getDates());
-			ArrayList<Integer> tempList = new ArrayList<Integer>();
-			for(int j = 0; j<7; j++)
+			wish.setDates(list.get(i*5).getDates());
+			for(int j = 0; j<5; j++)
 			{
-				tempList.add(list.get(j).getAvgPrice());
+				tempList.add(list.get(i+j).getAvgPrice());
 			}
 			wish.setAvgList(tempList);
 			WishAvgList.add(wish);
+			
+			wish = new WishAvgList();
+			tempList = new ArrayList<Integer>();
 		}
-		System.out.println(WishAvgList);
+		
+		for(WishAvgList v : WishAvgList)
+		{
+			System.out.println(v);
+		}
 		model.addAttribute("list",WishAvgList);
 		
 		return "home";

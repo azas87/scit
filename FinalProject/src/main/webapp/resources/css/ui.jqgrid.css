@@ -4,7 +4,7 @@
 	-moz-box-sizing: content-box; 
 	-webkit-box-sizing: content-box; 
 	box-sizing: content-box;
-	font-size:11px;
+	//font-size:11px;
 }
 .ui-jqgrid .ui-jqgrid-view {
 	position: relative;
@@ -480,4 +480,51 @@ td.menu_text {
 {
 	font-size:inherit;
 	width:auto;
+}
+
+.ui-jqgrid .ui-pg-input, .ui-jqgrid .ui-jqgrid-toppager .ui-pg-input
+{
+	height: 30px !important;
+    font-size: 1.5em !important;
+    margin: 0 !important;
+    padding: 0px !important;
+}
+
+.ui-jqgrid .ui-pg-selbox, .ui-jqgrid .ui-jqgrid-toppager .ui-pg-selbox {
+    font-size: 1.5em !important;
+    height: 36px;
+}
+
+
+.ui-jqgrid .ui-jqgrid-titlebar 
+{
+	height:52px ;
+	font-size:2em; 
+	padding:0px;
+}
+
+.ui-jqgrid tr.jqgrow {
+outline-style: none;
+height: 50px;
+font-size: 1.5em;
+}
+
+.ui-jqgrid-labels
+{
+	height: 40px;
+	font-size:1.7em;	
+}
+.ui-jqgrid .ui-jqgrid-htable .ui-th-div 
+{
+	height: 50px;
+}
+
+#jqGridPager
+{
+	height: 50px;
+}
+
+.ui-jqgrid .ui-jqgrid-pager .ui-pager-table, .ui-jqgrid .ui-jqgrid-toppager .ui-pager-table {
+	height: 50px;
+	font-size:1.5em !important;
 }

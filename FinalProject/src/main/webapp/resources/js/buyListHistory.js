@@ -388,7 +388,7 @@ function sumList(period, startDay, endDay) {
  		],
  		viewrecords : true,
  		autowidth:true,
- 		
+ 		//altRows:true,	// tooltip 나오는 기능인데 차이가 없네? 이미 title에 값이 적혀 있어서 그런가?
  		rowNum : 10,
  		rowList:[10,20,30],
  		height:230,
@@ -400,7 +400,7 @@ function sumList(period, startDay, endDay) {
  		loadComplete:function(data)
  		{
  	
- 			$('.bigSize').hover(function(){
+ 			/*$('.bigSize').hover(function(){
  				console.log("test");
  				var title = $(this).attr('title');
  				$(this).data('tipText', title).removeAttr('title');
@@ -413,7 +413,7 @@ function sumList(period, startDay, endDay) {
  				var mousex = e.pageX + 20;
  				var mousey = e.pageY + 10;
  				$('.tooltip').css({top : mousey,left : mousex});
- 			});
+ 			});*/
  			
  		},
  		gridComplete: function(){

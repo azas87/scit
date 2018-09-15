@@ -302,4 +302,86 @@ insert into saleList(salenum, buynum, sellerid) values(6,3,'id2');
 insert into saleList(salenum, buynum, sellerid) values(7,3,'id3');
 
 
+create table WeekAvgList(
+AvgListNum varchar2(50) primary key,
+fishName varchar2(50),
+avgPrice int,
+dates date
+);
+
+drop table WeekAvgList;
+
+insert into WEEKAVGLIST
+		(
+			AvgListNum
+			,fishName
+			, avgPrice
+			, dates
+		)
+		values
+		(
+			avgListNum.nextval
+			,'erwr'
+			, '123143'
+			, sysdate
+		);
+
+create SEQUENCE avgListNum;
+
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '1000', sysdate);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '1500', sysdate);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '5500', sysdate);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '3200', sysdate);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1900', sysdate);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '950', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '3000', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '1400', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '5500', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1300', sysdate-1);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '980', sysdate-2);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '3300', sysdate-2);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '1420', sysdate-2);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '5500', sysdate-2);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1360', sysdate-2);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '1050', sysdate-3);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '3230', sysdate-3);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '1540', sysdate-3);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '4500', sysdate-3);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '2200', sysdate-3);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '560', sysdate-4);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '890', sysdate-4);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '1550', sysdate-4);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '5670', sysdate-4);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1990', sysdate-4);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '1780', sysdate-5);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '4000', sysdate-5);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '1870', sysdate-5);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '5120', sysdate-5);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1560', sysdate-5);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '650', sysdate-6);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '5600', sysdate-6);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '2000', sysdate-6);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '4000', sysdate-6);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1700', sysdate-6);
+
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'오징어', '950', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'갈치', '3000', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'참치', '1400', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'고등어', '5500', sysdate-1);
+insert into WEEKAVGLIST(AvgListNum,fishName, avgPrice, dates)values(avgListNum.nextval,'낙지', '1300', sysdate-1);
+
+
+
+
+
+create SEQUENCE avgListNum;
+
+
 

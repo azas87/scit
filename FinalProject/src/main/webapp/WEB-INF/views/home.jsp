@@ -11,7 +11,8 @@
 	<title>Home</title>
 	<title>Insert title here</title>
 	
-<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/home.css" />
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
@@ -19,7 +20,7 @@
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
 
@@ -39,58 +40,110 @@
  
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
+ 		<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/home.css" />
  <script>
- $(document).ready(function() {
-	 google.charts.load("current", {packages:["annotationchart"]});
-	 google.charts.setOnLoadCallback(drawChart);
- 
-	 
- 	 function drawChart() {
-	        var data = new google.visualization.DataTable();
-	        console.log("ㅎㅎ");
-	        console.log('${list}');
-	        
-	        data.addColumn('date', 'Date');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        data.addColumn('number', '${list[0].fishName}');
-	        /* <c:forEach items="${list}" var="item">
-	        	data.addColumn('number', '${item.fishName}');
-	    	</c:forEach>  */
-	    	
-	    	/* console.log(new Date(2314, 2, 15));
-	    	console.log('${list[0].dates}');
-	    	console.log(new Date('${list[0].dates}')); */
-	        
-	        data.addRows([
-	        //[new Date('${list[0].dates}'),5600,1234,4534,5676,789,89890,234234]
-	           <c:forEach items="${list}" var="item">
-	        	[new Date('${item.dates}'),
-	        		<c:forEach items="${item.avgList}" var="avgPrice">
-	        			Number('${avgPrice}'),
-	        		</c:forEach>	
-	        		
-	        	], 
-	    	</c:forEach>
-	        	
-	        ]);
-	        
-	        //console.log(data);
+	
+	   
+	   
+	    var chartDrowFun = {
+				 
+			    chartDrow : function(){
+			        var chartData = '';
+			 
+			        //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
+			        var chartDateformat     = 'yy/MM/dd';
+			        //라인차트의 라인 수
+			        var chartLineCount    = 10;
+			        //컨트롤러 바 차트의 라인 수
+			        var controlLineCount    = 10;
+			 
+			 
+			        function drawDashboard() {
+			 
+			          var data = new google.visualization.DataTable();
+			          //그래프에 표시할 컬럼 추가
+			          data.addColumn('date', 'Date');
+				     data.addColumn('number', '${list[0].fishName}');
+				     data.addColumn('number', '${list[1].fishName}');
+				     data.addColumn('number', '${list[2].fishName}');
+				     data.addColumn('number', '${list[3].fishName}');
+				     data.addColumn('number', '${list[4].fishName}');
+			 
+			          //그래프에 표시할 데이터
+			 
+			          data.addRows([
+			         	 <c:forEach items="${list}" var="item">
+				          	[new Date('${item.dates}'),
+				          		<c:forEach items="${item.avgList}" var="avgPrice">
+				          			Number('${avgPrice}'),
+				          		</c:forEach>	
+				          	], 
+				      	</c:forEach> 
+			          ]);
+			 
+			 
+			            var chart = new google.visualization.ChartWrapper({
+			              chartType   : 'LineChart',
+			              containerId : 'lineChartArea', //라인 차트 생성할 영역
+			              options     : {
+			                              isStacked   : 'percent',
+			                              focusTarget : 'category',
+			                              height          : 600,
+			                              width              : '100%',
+			                              legend          : { position: "top", textStyle: {fontSize: 30}},
+			                              pointSize        : 15,
+			                              tooltip          : {textStyle : {fontSize:50}, showColorCode : true,trigger: 'both'},
+			                              hAxis              : {format: chartDateformat, gridlines:{count:chartLineCount,units: {
+			                                                                  years : {format: ['yy/']},
+			                                                                  months: {format: ['MM/']},
+			                                                                  days  : {format: ['dd']}}
+			                                                                },textStyle: {fontSize:25}},
+			                               vAxis              : {minValue: 100,viewWindow:{min:0},gridlines:{count:-1},textStyle:{fontSize:35}},
 
-	        var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
-
-	        var options = {
-	          displayAnnotations: true
-	        };
-
-	        chart.draw(data, options);
-	      } 
- });
- 
+			                animation        : {startup: true,duration: 100,easing: 'in' },
+			               
+			              }
+			            });
+			 
+			            var control = new google.visualization.ControlWrapper({
+			              controlType: 'ChartRangeFilter',
+			              containerId: 'controlsArea',  //control bar를 생성할 영역
+			              options: {
+			                  ui:{
+			                        chartType: 'LineChart',
+			                        chartOptions: {
+			                        chartArea: {'width': '60%','height' : 80},
+			                          hAxis: {'baselineColor': 'none', format: chartDateformat, textStyle: {fontSize:12},
+			                            gridlines:{count:controlLineCount,units: {
+			                                  years : {format: ['yyyy년']},
+			                                  months: {format: ['MM월']},
+			                                  days  : {format: ['dd일']},
+			                                  hours : {format: ['HH시']}}
+			                            }}
+			                        }
+			                  },
+			                    filterColumnIndex: 0
+			                }
+			            });
+			 
+			             var date_formatter = new google.visualization.DateFormat({ pattern: chartDateformat});
+			            date_formatter.format(data, 0); 
+			 
+			            var dashboard = new google.visualization.Dashboard(document.getElementById('Line_Controls_Chart'));
+			            window.addEventListener('resize', function() { dashboard.draw(data); }, false); //화면 크기에 따라 그래프 크기 변경
+			            dashboard.bind([control], [chart]);
+			            dashboard.draw(data);
+			 
+			        }
+			          google.charts.setOnLoadCallback(drawDashboard);
+			 
+			      }
+			    }
+			 
+			$(document).ready(function(){
+			  google.charts.load('current', {'packages':['line','controls']});
+			  chartDrowFun.chartDrow(); //chartDrow() 실행
+			}); 
  </script>
  <link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  <script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
@@ -166,6 +219,11 @@
 /* Popup box BEGIN */
 
 
+.legend
+{
+	font-size: 20px;
+}
+
 </style>
 <script>
 
@@ -227,8 +285,23 @@ function cancel() {
 </script>
 <body>
 
-<!-- <a href="cancel?">退会</a> -->
-<div id="chart_div"></div>
+   <div id="Line_Controls_Chart">
+      <!-- 라인 차트 생성할 영역 -->
+          <div id="lineChartArea" style="padding:0px 20px 0px 0px;"></div>
+      <!-- 컨트롤바를 생성할 영역 -->
+          <div id="controlsArea" style="display:none"></div>
+        </div>
+
+<div class="smallList">
+	<div class="flexs">
+		<table id="jqGridbestSeller" ></table><!--상위3개만  -->
+	</div>
+	<div class="flexs">	
+		<table id="jqGridseasonInfo"  class="flexs"></table><!--상위3개만  -->			
+	</div>	
+</div>	
+
+
 
 <div class="hover_bkgr_fricc">
     <span class="helper"></span>
@@ -245,20 +318,20 @@ function cancel() {
     </div>
 </div>
 
+<div><Br></div>
 
-<input type="button" value="退会" onclick="cancel()">
 <div id="contain">
 
-	<div id="header">
+<!-- 	<div id="header">
 		<div id="clock">	</div>
 		
-	</div>
+	</div> -->
 	<div id="nav">
 		<div class="items">
 			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
 
-					<div class="item " ><a href="loginForm?">로그인</a></div>
+					<div class="item" ><a href="loginForm?">로그인</a></div>
 					<div class="item " ><a class="trigger_popup_fricc">회원가입</a></div>
 				</c:when>
 				
@@ -266,6 +339,8 @@ function cancel() {
 					<div class="item" ><a href="logOut?">로그아웃</a></div>
 					<div class="item" ><a href="writeBuyBoardForm?">글등록</a></div>
 					<div class="item" ><a href="buyListHistory?">구매내역</a></div>
+					<div class="item" ><a href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a></div>
+
 				</c:when>
 			</c:choose>
 			<input type="hidden" id="userMode" value="${sessionScope.userMode}">
@@ -289,18 +364,8 @@ function cancel() {
 
 </div>
 
+<div><Br></div>
 
-<div>
-bestSeller
-	<table id="jqGridbestSeller"></table><!--상위3개만  -->			
-	<!-- <div id="jqGridPagerbestSeller"></div> -->
-</div>	
-
-<div>
-seasonInfo,제철정보
-	<table id="jqGridseasonInfo"></table><!--상위3개만  -->			
-	<!-- <div id="jqGridPagerseasonInfo"></div> -->
-</div>	
 
 <div id="list">
 	<div>
@@ -312,16 +377,8 @@ seasonInfo,제철정보
 		
 
 
- <div id="list">
-		<div>
-			<table id="jqGrid"></table>
-			<div id="jqGridPager"></div>
-		</div>	
-	</div>
-	
-
-
 </body>
+
 </html>
 </head>
 <body>
