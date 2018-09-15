@@ -13,4 +13,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into qna
 		values(qnaNum.nextval, #{id}, sysdate, #{title}, #{content},0)
 	</insert>
+	
+	<!-- 게시판내용가져오기 -->
+	<select id="getBoard" parameterType="int" resultType="QnA">
+	select 
+		qnanum, 
+		id,
+		title,
+		content,
+		hitcount,
+		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
+	from qna
+	where qnanum=#{qnaNum}
+	order by qnanum desc
+	</select>
+	
+	<update id="hitBoardCount" parameterType="QnA">
+	update qna
+	set hitcount = #{hitcount}
+	where qnanum = #{qnaNum}
+	</update>
+	
+	<delete id="deleteQna" parameterType="int">
+	delete from qna
+	where qnanum = #{value}
+	</delete>
+	
+	
+	<update id="updateQna" parameterType="QnA">
+		update qna
+		set title = #{title},
+			content = #{content}
+		where qnanum = #{qnaNum}
+	</update>
+	 
+	<insert id="insertReply" parameterType="Reply">
+		insert into QnAreply
+		values(replyNum.nextval, #{qnaNum}, #{id}, #{replyContent},sysdate)
+	</insert>
+
+	<select id="getReplyList" resultType="Reply" parameterType="int">
+		SELECT * FROM QnAreply where qnaNum = #{qnaNum}
+	</select>
+	
 </mapper>

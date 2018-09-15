@@ -301,7 +301,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="saleComplete" parameterType="string">
  
   	 	UPDATE buylist
-     	SET saleStatus = 'saleComplete'
+     	SET saleStatus = 'getComplete'
     	WHERE buyNum = #{buyNum}
 
 	</update>

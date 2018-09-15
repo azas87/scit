@@ -4,6 +4,14 @@ $(document).ready(function() {
 
 	getQnaTable();
 	
+	$('#jqGridBoard').jqGrid('navGrid',"#jqGridPager", {                
+	       search: false, // show search button on the toolbar
+	       add: false,
+	       edit: false,
+	       del: false,
+	       refresh: true
+	   });
+	
 });
 
 
@@ -50,11 +58,11 @@ function getQnaTable() {
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-		pager : "#jqGridPager",
+		/*pager : "#jqGridPager",*/
 		loadonce: true,
 		grouping: false,
 		groupingView: {
-		    groupField: ['buyNum'],
+		    groupField: ['qnaNum'],
 		    groupColumnShow : [false],
 		},
 		loadComplete:function(data)
@@ -81,7 +89,15 @@ function getQnaTable() {
 		},
 		onCellSelect: function(rowid, index, contents, event) 
     	{    
-    		var cm = $(this).jqGrid('getGridParam','colModel');    
+    	
+        	var cm = $(this).jqGrid('getGridParam','colModel');    
+        	if(cm[index].name == "title")
+        	{
+        		var obj = $("#jqGridBoard").getRowData(rowid);
+           		alert(JSON.stringify(obj));
+        		location.href="boardDetail?qnaNum="+obj.qnaNum;
+
+        	}
     		
     	},   
 	});

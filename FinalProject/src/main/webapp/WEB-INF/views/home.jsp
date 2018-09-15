@@ -71,10 +71,10 @@
 	           <c:forEach items="${list}" var="item">
 	        	[new Date('${item.dates}'),
 	        		<c:forEach items="${item.avgList}" var="avgPrice">
-	        			Number('${avgPrice}')
+	        			Number('${avgPrice}'),
 	        		</c:forEach>	
 	        		
-	        	] 
+	        	],
 	    	</c:forEach>
 	        	
 	        ]);
