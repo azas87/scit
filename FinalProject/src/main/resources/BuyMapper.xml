@@ -326,20 +326,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<!--나의 구매목록에서 글삭제  -->
-	<!-- <delete id="deletemySaleList" parameterType="string">
-		delete BuyList where buynum=#{buynum}
+	<!-- <delete id="deleteMyList" parameterType="string">
+		delete 
+			BuyList 
+		where 
+			buynum=#{buynum} 
+		and
+			saleStatus = 'onSale'
 	</delete> -->
 
 
-	<select id="TodayAvgList" resultType="TodayAvgList">
-		select f.fishName,nvl(trunc((SUM(price)/count(*))),0) as avgPrice
-		from fishList f ,buyList b where f.fishName = b.fishName
-		group by f.fishName order by f.fishName;
+	<select id="getTodayAvgList" resultType="AvgList">
+		select f.fishName,nvl(sum(b.PRICE),0) as total, nvl(sum(b.WEIGHT),0) as weight, nvl(trunc((SUM(price)/count(*))),0) as avgprice, TO_DATE(b.deadline, 'YY/MM/DD') as dates
+		from fishList f left outer join buyList b on(f.fishName = b.fishName)
+		group by f.fishName, TO_DATE(b.deadline, 'YY/MM/DD') having TO_DATE(b.DEADLINE, 'YY/MM/DD') = TO_date(sysdate, 'YY/MM/DD') order by f.fishName
+		
 	</select>
 	
-	<select id="getWeekAvgList" resultType="WeekAvgList">
-		select fishname,avgprice,dates from weekavglist where fishname = '갈치' order by dates
+	<select id="getWeekAvgList" resultType="AvgList">
+		select fishname,avgprice,dates from weekavglist order by dates
 	</select>
+	
+	<insert id="setWeekAvgList" parameterType="AvgList">
+		insert into WEEKAVGLIST
+		(
+			AvgListNum
+			,fishName
+			, avgPrice
+			, dates
+		)
+		values
+		(
+			avgListNum.nextval
+			,#{fishName}
+			,#{avgPrice}
+			,sysdate
+		)
+	</insert>
 	
 	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
 		insert into buyList

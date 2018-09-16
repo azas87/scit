@@ -1,6 +1,11 @@
+/* .google-visualization-atl .legend
+{
+	font-size:20px !important;
+} */
+
 		 #contain
 		{
-			width:1000px;
+			width:1100px;
 			margin: 0 auto;
 			overflow: hidden;
 		}
@@ -13,9 +18,10 @@
 		
 		#list {
 			border:1px solid #cccccc;
-			width:900px;
+			width:1100px;
 			margin: 0 auto;
 			overflow: hidden;
+			box-sizing: true
 		}
 
     .tooltip
@@ -32,10 +38,20 @@
     	z-index: 1000;
     }
 
-		
+.smallList{
+	width:1150px;
+	height:300px;
+	margin: 0 auto;
+    border:0px;	
+     display: flex;
+}
+.smallList .flexs {
+    flex-grow: 1;
+  }
+  
 
 		#header{
-			width:980px;
+			width:180px;
 			
 			line-height:100px;
 			
@@ -43,9 +59,10 @@
 			font-size:100px;
 			text-align:center;
 		}
+		
 
 		#nav{
-			width:980px;
+			width:1080px;
 		}
 
     #nav .items {

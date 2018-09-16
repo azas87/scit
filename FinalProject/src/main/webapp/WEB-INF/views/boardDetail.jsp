@@ -22,16 +22,16 @@ function deleteBoard(qnaNum) {
 }
 
 $(function(){
-	
+	init();
 	$("#insertReply").on('click',function(){
 		$.ajax({
 			url:"insertReply",
 			type:"get",
 			data:{"content":$("#reviewContent").val(),
-				"qnaNum":$("#boardnum").val()
+				"qnaNum":$("#qnaNum").val()
 				},
 			success:function(data){
-				
+				init();
 			},
 			error:function(){
 				alert("실패");
@@ -41,32 +41,90 @@ $(function(){
 
 	});
 		
-		$(".updateRelpy").on('click',function(){
-			alert('왜안와');
-			var input = '<input type="text" class="updateReply">';
-			$(this).parent().children(".reviewContent").html(input);
-			$(this).parent().children(".updateRelpy").val("완료");
-	});	
-		
 		
 });
 	
-/* 	
-	 $.ajax({
-		url:"updateReview",
+function updateForm() {
+	alert('이벤트');
+	var input = '<textarea class="updateContent" cols="100" rows="8">';
+	$(this).parent().children(".reviewContent").html(input);
+	$(this).parent().children(".updateRelpy").val("완료");
+	$(".updateRelpy").off('click', updateForm);
+	$(".updateRelpy").on('click', update);
+}
+
+function update() {
+	
+	var replyNum = $(this).parent().children(".reviewNum").val();
+	var updateContet = $(this).parent().children(".reviewContent").children(".updateContent").val();
+	/* location.href="updateReply?replyNum="+replyNum+"&replyContent="+updateContet+"&"; */
+	alert('안녕');
+		$.ajax({
+			url:"updateReply",
+			type:"get",
+			data:{"replyNum":replyNum,
+				"replyContent":updateContet
+				},
+			success:function(data){
+				init();
+			},
+			error:function(){
+				alert("실패");
+			}
+	
+	});
+
+	
+}
+
+function remove() {
+	var replyNum = $(this).parent().children(".reviewNum").val();
+	
+	$.ajax({
+		url:"deleteReply",
 		type:"get",
-		data:{"reviewSeq":$("#reviewNum").val()},
+		data:{"replyNum":replyNum
+			},
 		success:function(data){
-			var input = '<input type="text" id="updateReply">' 
-			document.div.innerHTML+=input;
+			init();
 		},
 		error:function(){
 			alert("실패");
-		} 
+		}
 
-}); */
+});
+}
+
+function init() {
+	$(".reviewContent").val("");
+	var qnaNum = $('#qnaNum').val();
+	$.ajax({
+		method : 'post'
+		, url  : 'selectAllRelpy'
+		,data:{"qnaNum":qnaNum}
+		, success : output
+	});
+}
+
+function output(resp) {
+
+	 var result ='';
 	
+	for(var i in resp) {
+		
+		result += '<tr><td style="word-break:break-all; height:28px; padding-left:34px;"> ';
+		result += '<strong style="font-size: large;">'+resp[i].id+'</strong>&nbsp;&nbsp;&nbsp;&nbsp;'+resp[i].replyRegdate;
+		result += '</br><div class="reviewContent">'+resp[i].replyContent+'</div>';
+		result += '<input type="hidden" class="reviewNum" value="'+resp[i].replyNum+'">'
+		result += '<input type="button" value="수정" class="updateRelpy"/>';
+		result += '<input type="button" value="삭제" class="deleteRelpy"/></td>';
 
+	}
+	
+	$('#replyTable').html(result);
+	$("input:button.deleteRelpy").click(remove);
+	$("input:button.updateRelpy").click(updateForm);
+}
 </script>
 <body>
 <form>
@@ -128,7 +186,7 @@ $(function(){
 <tr height="20"> </tr>
     <td id="btn" >
     <!-- <strong>댓글</strong>&nbsp;&nbsp;&nbsp;&nbsp; -->
-    <input type="hidden" id="boardnum" value="${qna.qnaNum}">
+    <input type="hidden" id="qnaNum" value="${qna.qnaNum}">
     <textarea id="reviewContent" cols="100" rows="8"></textarea>
 	<input type="button" id="insertReply" value="댓글등록"/>
 	
@@ -139,18 +197,19 @@ $(function(){
 
 
 <tr><td>
- <table class="tab" width=100% cellpadding=0 cellspacing=0>
-  
+ <table class="tab" width=100% cellpadding=0 cellspacing=0 id="replyTable">
+
    <c:forEach var="reply" items="${replyList}">
     <tr>
     	<td style='word-break:break-all; height:28px; padding-left:34px;'>
 		<strong style="font-size: large;">${reply.id}</strong>&nbsp;&nbsp;&nbsp;&nbsp;${reply.replyRegdate}
 		</br><div class="reviewContent">${reply.replyContent}</div>
 		<input type="hidden" class="reviewNum" value="${reply.replyNum}">
-		<input type="button" value="수정" class="updateRelpy"/></td>
-
-    </tr>
+		<input type="button" value="수정" class="updateRelpy"/>
+		<input type="button" value="삭제" class="deleteRelpy"/></td>
+	</tr>
     </c:forEach>
+
     </table>
 	</td></tr>
 	

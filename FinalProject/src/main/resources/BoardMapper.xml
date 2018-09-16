@@ -56,4 +56,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM QnAreply where qnaNum = #{qnaNum}
 	</select>
 	
+	<update id="updateReply" parameterType="Reply">
+		update QnAreply
+		set replycontent = #{replyContent}
+		where replyNum = #{replyNum}
+	
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+	delete
+		QnAreply
+	where
+		replynum = #{replynum}
+	</delete>
+	
 </mapper>

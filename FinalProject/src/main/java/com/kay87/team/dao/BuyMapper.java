@@ -6,7 +6,7 @@ import java.util.Map;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
-import com.kay87.team.vo.WeekAvgList;
+import com.kay87.team.vo.AvgList;
 
 public interface BuyMapper {
 	
@@ -46,7 +46,15 @@ public interface BuyMapper {
 
 	public int refund(String buyNum);
 	
-	public List<WeekAvgList> getWeekAvgList();
+	public List<AvgList> getWeekAvgList();
+	
+	public List<AvgList> getTodayAvgList();
+	
+	public int setWeekAvgList(AvgList weekAvgList);
+	
+	
+
+	public int deleteMyList(String buyNum);
 
 	
 

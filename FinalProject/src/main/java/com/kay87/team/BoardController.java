@@ -116,6 +116,27 @@ public class BoardController {
 			return "ok";
 			}
 		
+		@RequestMapping(value="/updateReply", method=RequestMethod.GET)
+		public @ResponseBody String updateReply(String replyNum, String replyContent, Model model) {
+			System.out.println("수정후내용"+replyContent);
+			QnAreply reply = new QnAreply();
+			reply.setReplyNum(Integer.parseInt(replyNum));
+			reply.setReplyContent(replyContent);
+			BoardMapper dao = sql.getMapper(BoardMapper.class);
+			dao.updateReply(reply);
+		
+			return "ok";
+			}
+		
+		@RequestMapping(value="/deleteReply", method=RequestMethod.GET)
+		public @ResponseBody String deleteReply(String replyNum, String replyContent, Model model) {
+	
+			BoardMapper dao = sql.getMapper(BoardMapper.class);
+			dao.deleteReply(Integer.parseInt(replyNum));
+		
+			return "ok";
+			}
+		
 		@RequestMapping(value="/deleteQna", method=RequestMethod.GET)
 		public String deleteBoard(int qnaNum, Model model) {
 			BoardMapper dao = sql.getMapper(BoardMapper.class);
@@ -123,6 +144,19 @@ public class BoardController {
 			
 			return "redirect:/qnaForm";
 			}
+		
+		
+		
+		
+		@RequestMapping(value="/selectAllRelpy", method=RequestMethod.POST)
+		public @ResponseBody List<QnAreply> selectAllRelpy(String qnaNum) {
+	
+			BoardMapper dao = sql.getMapper(BoardMapper.class);
+			List<QnAreply> replyList=dao.getReplyList(Integer.parseInt(qnaNum));
+		
+			return replyList;
+			}
+		
 	
 		public QnA getBoard(String qnaNum){
 			
@@ -131,5 +165,7 @@ public class BoardController {
 				
 			return qna;
 			}
+		
+		
 	
 }

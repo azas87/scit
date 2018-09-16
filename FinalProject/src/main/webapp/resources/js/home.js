@@ -9,7 +9,7 @@ $(document).ready(function() {
 	 bestSeller();
 	 seasonInfo();
 	//myBuyList();
-	 printClock();
+	///printClock();
 	 
 
 
@@ -75,7 +75,7 @@ $(document).ready(function() {
        add: false,
        edit: false,
        del: false,
-       refresh: true
+       refresh: true,
    });
 	
 	var timer;
@@ -160,7 +160,7 @@ function homeList(url2) {
  			}, {
 				label : '購買日付',
 				name : 'deadline',
-				width : 150,
+				width : 250,
 				height : 200,
 				align:'center'
 			}, {
@@ -211,8 +211,9 @@ function homeList(url2) {
 
 		],
 		viewrecords : true,
-		width : 900,
-		height : 400,
+		//altRows:true,
+		width : 1100,
+		height : 500,
 		rowNum : 10,
 		rowList:[10,20,30],
 		pager : "#jqGridPager",
@@ -266,8 +267,15 @@ function homeList(url2) {
 
 function myAllList() {	
 	console.log("myAllList");
-	listMode = "myAllList";
-	ListRefresh();
+	
+	var userMode = $("#userMode").val();
+	console.log(userMode);
+	if(userMode==1){
+		listMode = "myAllList_buyer";
+	}else{
+		listMode = "myAllList_seller";
+	}	
+	ListRefresh();	
 }
 
 
@@ -282,34 +290,35 @@ function bestSeller() {
 			{
 				label : '品種',
 				name : 'fishName',
-				height : 200,
+				width : 180,
 				align:'center'
 			}, {
 				label : '産地',
-				name : 'location',
 				width : 80,
-				height : 200,
+				name : 'location',
 				align:'center'
 			}, {
 				label : '単位',
 				name : 'unit',
-				height : 200,
 				align:'center'
 			}, {
 				label : '市価',
 				name : 'total',
-				height : 200,
+				width : 130,
 				align:'center'
 			}, 
 		],
+		caption:"bestSeller",
+		hidegrid : false,
+		hidden:false,
 		viewrecords : true,
-		width : 500,
-		height : 73,
+		height : 152,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerbestSeller",
 		loadonce: true,
 		grouping: false,
+		//shrinkToFit:true,
 		groupingView: {
 		    groupField: ['buyNum'],
 		    groupColumnShow : [false],
@@ -386,29 +395,28 @@ function seasonInfo() {
 			{
 				label : '品種',
 				name : 'fishName',
-				height : 200,
+				width : 180,
 				align:'center'
 			}, {
 				label : '産地',
-				name : 'location',
 				width : 80,
-				height : 200,
+				name : 'location',
 				align:'center'
 			}, {
-				label : '単位',
+				label : '単位', 
 				name : 'unit',
-				height : 200,
 				align:'center'
 			}, {
 				label : '市価',
 				name : 'total',
-				height : 200,
+				width : 130,
 				align:'center'
 			}, 
 		],
+		caption:"seasonInfo",
+		hidegrid : false,
 		viewrecords : true,
-		width : 500,
-		height : 73,
+		height : 152,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerseasonInfo",
