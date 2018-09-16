@@ -56,12 +56,30 @@ public class HomeController {
 	
 	//첫 메인화면에서 전체구매리스트+검색
 	@RequestMapping(value = "/")
-	public String home(
-			@RequestParam(value = "searchText", defaultValue="") String searchText
-			,@RequestParam(value = "page", defaultValue="1") int page
-			,Model model) {				
+	public String home() {				
 		System.out.println("qq");
 		
+		return "home";
+	}	
+	
+	//첫 메인화면에서 전체 리스트
+	@RequestMapping(value = "/allBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String allBuyList() {			
+		BuyMapper mapper = sql.getMapper(BuyMapper.class);
+		System.out.println("allBuyList");
+		List<BuyList> allbuylist = mapper.allBuyList();			
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(allbuylist) + "}";
+		System.out.println(jsonPlace);		
+		
+		return jsonPlace;
+	}	
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public String main(Model model)
+	{
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
 		List<AvgList> list = mapper.getWeekAvgList();
 		
@@ -95,49 +113,54 @@ public class HomeController {
 		}
 		model.addAttribute("list",WishAvgList);
 		
-		return "home";
-	}	
+		return "main";
+	}
 	
-	//첫 메인화면에서 전체 리스트
-	@RequestMapping(value = "/allBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String allBuyList() {			
-		BuyMapper mapper = sql.getMapper(BuyMapper.class);
-		System.out.println("allBuyList");
-		List<BuyList> allbuylist = mapper.allBuyList();			
-		
-		Gson gson = new Gson();
-		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
-		String jsonPlace = "{\"rows\":"+ gson.toJson(allbuylist) + "}";
-		System.out.println(jsonPlace);		
-		
-		return jsonPlace;
-	}	
-	
-	//첫 메인화면에서 나의구매리스트+검색
-	@RequestMapping(value = "/myBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String myBuyList(HttpSession session) {
-		System.out.println("myBuyList");
+	//구매자 메인화면에서 나의진행중인리스트
+	@RequestMapping(value = "/myList_ing_buyer", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String myList_ing_buyer(HttpSession session) {
+		System.out.println("myList_ing_buyer");
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);		
 		String userId = (String) session.getAttribute("loginId");		
 		
-		List<BuyList> mybuylist = mapper.myBuyList(userId);
-		System.out.println(mybuylist);		
+		List<BuyList> myList_ing_buyer = mapper.myList_ing_buyer(userId);
+		System.out.println(myList_ing_buyer);		
 		
 		
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
-		String jsonPlace = "{\"rows\":"+ gson.toJson(mybuylist) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(myList_ing_buyer) + "}";
 		System.out.println(jsonPlace);
 		return jsonPlace;
 	}
 	
-	//구매자 메인화면에서 나의 모든 리스트
+	
+	//판매자 메인화면에서 나의진행중인리스트=참여리스트
+	@RequestMapping(value = "/myList_ing_seller", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String myList_ing_seller(HttpSession session) {
+		System.out.println("myList_ing_seller");
+		BuyMapper mapper = sql.getMapper(BuyMapper.class);		
+		String userId = (String) session.getAttribute("loginId");		
+		
+		List<BuyList> myList_ing_seller = mapper.myList_ing_seller(userId);
+		System.out.println(myList_ing_seller);		
+		
+		
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(myList_ing_seller) + "}";
+		System.out.println(jsonPlace);
+		return jsonPlace;
+	}
+	
+	
+	//구매자 메인화면에서 내글 목록
 	@RequestMapping(value = "/myAllList_buyer", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String myAllList_buyer(HttpSession session) {			
 		System.out.println("myAllList_buyer");
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
 		String userId = (String) session.getAttribute("loginId");	
-		List<BuyList> myAllList_buyer = mapper.myAllList(userId);			
+		List<BuyList> myAllList_buyer = mapper.myAllList_buyer(userId);			
 		System.out.println(myAllList_buyer);
 		
 		Gson gson = new Gson();
@@ -146,9 +169,9 @@ public class HomeController {
 		System.out.println(jsonPlace);		
 		
 		return jsonPlace;
-	}	
+	}
 	
-	//판매자 메인화면에서 나의 모든 리스트
+	/*//판매자 메인화면에서 나의 모든 리스트
 	@RequestMapping(value = "/myAllList_seller", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String myAllList_seller(HttpSession session) {			
 		System.out.println("myAllList_seller");
@@ -163,7 +186,7 @@ public class HomeController {
 		System.out.println(jsonPlace);		
 		
 		return jsonPlace;
-	}	
+	}	*/
 
 	//판매자선택
 	@RequestMapping(value = "/selectSeller", method = RequestMethod.GET)
@@ -175,7 +198,7 @@ public class HomeController {
 	    map.put("buyNum", buyNum);
 	    dao.selectSeller(map);
 	    
-		return "home";
+		return "redirect:/";
 	}
 
 	
@@ -213,20 +236,32 @@ public class HomeController {
 		return jsonPlace;
 	}
 	
-
-	/*//구매자 글 삭제(진행중인 리스트에서)
-	@RequestMapping(value = "/deleteMyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String deleteMyList(String buyNum){		
+	//구매자 글 삭제(진행중인 리스트에서)
+	@RequestMapping(value = "/deleteMyList_buyer", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public String deleteMyList_buyer(String buyNum){
+		System.out.println("deleteMyList_buyer");
+		System.out.println(buyNum);
 		BuyMapper dao = sql.getMapper(BuyMapper.class);	
-		dao.deleteMyList(buyNum);0+
+		dao.deleteMyList_buyer(buyNum);
 		
-		Gson gson = new Gson();
-		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
-		String jsonPlace = "{\"rows\":"+ gson.toJson(seasonInfo) + "}";
-		System.out.println(jsonPlace);		
-		return jsonPlace;
+		return "redirect:/";		
+	}
+	
+	// 판매자 참여리스트에서의 취소(삭제)
+	@RequestMapping(value = "/deleteMyList_seller", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public String deleteMyList(String buyNum,HttpSession session){
+		System.out.println("deleteMyList_seller");
+		System.out.println(buyNum);		
+		String userId = (String) session.getAttribute("loginId");
 		
-	}*/
-
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("buyNum", buyNum);
+	    map.put("userId", userId);
+	    
+	    BuyMapper dao = sql.getMapper(BuyMapper.class);			
+		dao.deleteMyList_seller(map);
+		
+		return "redirect:/";		
+	}
 	
 }

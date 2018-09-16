@@ -34,7 +34,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/qnaForm", method = RequestMethod.GET)
 	public String qnaForm(){
-		
+		System.out.println("qnaForm");
 		return "qnaForm";
 	}
 	
