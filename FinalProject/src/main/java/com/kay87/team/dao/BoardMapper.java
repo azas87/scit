@@ -1,5 +1,6 @@
 package com.kay87.team.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kay87.team.vo.Notice;
@@ -28,6 +29,10 @@ public interface BoardMapper {
 	public void updateReply(QnAreply reply);
 
 	public void deleteReply(int parseInt);
+
+	public List<HashMap<String, String>> getJoinList();
+
+	public List<QnAreply> getRelplyList();
 
 
 }

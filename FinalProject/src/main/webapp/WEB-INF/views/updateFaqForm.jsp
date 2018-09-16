@@ -11,13 +11,13 @@ language="java" pageEncoding="UTF-8"%>
 
 <script>
 function boardList(){
-	location.href="noticeForm?";
+	location.href="faqForm?";
 }
 
 
 </script>
 <body>
-<form action="updateNotice">
+<form action="updateFaq">
 <table width="97%" align="center" cellpadding="0" cellspacing="0"><tr><td>
 
 
@@ -29,7 +29,7 @@ function boardList(){
     <table class="tab" width=100% cellpadding=0 cellspacing=0>
     <tr>
     	<td style='word-break:break-all; height:28px; padding-left:34px;'>
-		<strong>제목</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="title" value="${Notice.title}"/></td>
+		<strong>제목</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="title" value="${faq.title}"/></td>
 
     </tr>
     </table></td></tr>
@@ -38,11 +38,11 @@ function boardList(){
 <td>
 <table class="tab" border=0 width="100%"><tr>
 <td height=28 style='padding-left:20px' width="50%">
-	<strong>글쓴이</strong>&nbsp;&nbsp;${Notice.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>글쓴이</strong>&nbsp;&nbsp;${faq.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </td><td style='padding-left:20px'>
-	<strong>날짜</strong>&nbsp;&nbsp; ${Notice.writeBoardDate} &nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>날짜</strong>&nbsp;&nbsp; ${faq.writeBoardDate} &nbsp;&nbsp;&nbsp;&nbsp;
     </td><td style='padding-left:20px'>
-	<strong>조회수</strong>&nbsp;&nbsp;&nbsp;&nbsp; ${Notice.hitcount}&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>조회수</strong>&nbsp;&nbsp;&nbsp;&nbsp; ${faq.hitcount}&nbsp;&nbsp;&nbsp;&nbsp;
   
     </td>
 </tr></table>
@@ -52,13 +52,13 @@ function boardList(){
 
 <tr> 
     <td id="content" height="500">
-    <textarea name="content" rows="40" cols="100">${Notice.content}</textarea>
+    <textarea name="content" rows="40" cols="100">${faq.content}</textarea>
 </td>
 </tr>
 
 <tr>
 <td id="btn" height="40">
-<input type="hidden" name="noticeNum" value="${Notice.noticeNum}"/>
+<input type="hidden" name="FAQNum" value="${faq.FAQNum}"/>
 <input type="submit" value="확인">
 
 <input type="button" value="목록으로" onclick="boardList()"></td>
@@ -69,3 +69,5 @@ function boardList(){
 </tr>
 </table>
 </form>
+</body>
+</html>

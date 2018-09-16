@@ -5,7 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.kay87.team.dao.NoticeMapper">
 	
 	<select id="getNoticeList" resultType="Notice">
-		SELECT * FROM notice
+		SELECT 
+		Noticenum, 
+		id,
+		title,
+		content,
+		hitcount,
+		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
+		FROM notice
 	</select>
 	
 
@@ -36,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deleteNotice" parameterType="int">
 	delete from Notice
-	where Noticenum = #{value}
+	where noticeNum = #{value}
 	</delete>
 	
 	

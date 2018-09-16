@@ -1,5 +1,6 @@
 package com.kay87.team;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -43,7 +44,17 @@ public class BoardController {
 		BoardMapper dao = sql.getMapper(BoardMapper.class);			
 		List<QnA> QnaList = dao.getQnaList();
 		System.out.println(QnaList);
-			
+		/*List<HashMap<String, String>> list = dao.getJoinList();	*/
+		List<QnAreply> replyList = dao.getRelplyList();
+		for(QnA q:QnaList) {
+				q.setContent("未処理");
+			for(QnAreply r:replyList) {
+				if(q.getQnaNum()==r.getQnaNum()) {
+					q.setContent("回答済み");
+				}
+			}
+		}
+		
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
 		String jsonPlace = "{\"rows\":"+ gson.toJson(QnaList) + "}";

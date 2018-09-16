@@ -12,13 +12,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 function boardList(){
-	location.href="noticeForm?";
+	location.href="faqForm?";
 }
-function update(noticeNum) {
-	location.href="updateNoticeForm?noticeNum="+noticeNum;
+function update(FAQNum) {
+	location.href="updateFaqForm?FAQNum="+FAQNum;
 }
-function deleteBoard(noticeNum) {
-	location.href="deleteNotice?noticeNum="+noticeNum;
+function deleteBoard(FAQNum) {
+	location.href="deleteFaq?FAQNum="+FAQNum;
 }
 
 </script>
@@ -36,7 +36,7 @@ function deleteBoard(noticeNum) {
     <table class="tab" width=100% cellpadding=0 cellspacing=0>
     <tr>
     	<td style='word-break:break-all; height:28px; padding-left:34px;'>
-		<strong>제목</strong>&nbsp;&nbsp;&nbsp;&nbsp;${notice.title}</td>
+		<strong>제목</strong>&nbsp;&nbsp;&nbsp;&nbsp;${faq.title}</td>
 
     </tr>
     </table></td></tr>
@@ -46,11 +46,11 @@ function deleteBoard(noticeNum) {
 <table class="tab" border=0 w/f;flidth="100%"><tr>
 <td height=28 style='padding-left:20px' width="70%">
 
-	<strong>글쓴이</strong>&nbsp;&nbsp;&nbsp;&nbsp;${notice.id}&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>글쓴이</strong>&nbsp;&nbsp;&nbsp;&nbsp;${faq.id}&nbsp;&nbsp;&nbsp;&nbsp;
     </td><td style='padding-left:20px'>
-	<strong>날짜</strong>&nbsp;&nbsp; ${notice.writeBoardDate} &nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>날짜</strong>&nbsp;&nbsp; ${faq.writeBoardDate} &nbsp;&nbsp;&nbsp;&nbsp;
     </td><td style='padding-left:40px'>
-	<strong>조회수</strong>&nbsp;&nbsp;&nbsp;&nbsp; ${notice.hitcount}&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>조회수</strong>&nbsp;&nbsp;&nbsp;&nbsp; ${faq.hitcount}&nbsp;&nbsp;&nbsp;&nbsp;
     
     </td>
 </tr></table>
@@ -59,22 +59,26 @@ function deleteBoard(noticeNum) {
 
 <tr> 
     <td id="content" height="600">
-     ${notice.content}    
+     ${faq.content}    
 </td>
 </tr>
 
 <tr>
 <td id="btn" height="40" align="center">
 
+
 <div class="div">
 <p class="p">
 <input type="button" value="목록으로" onclick="boardList()"/>
-<input type="button" value="수정" onclick="update(${notice.noticeNum})"/>
-<input type="button" value="삭제" onclick="deleteBoard(${notice.noticeNum})"/>
+<input type="button" value="수정" onclick="update(${faq.FAQNum})"/>
+<input type="button" value="삭제" onclick="deleteBoard(${faq.FAQNum})"/>
 </p>
 </div>
 </td>
 </tr>
+
+
+
 <tr><td height=1 bgcolor=#A1B4E1></td></tr>
 
 
@@ -88,3 +92,5 @@ function deleteBoard(noticeNum) {
 </tr>
 </table>
 </form>
+</body>
+</html>

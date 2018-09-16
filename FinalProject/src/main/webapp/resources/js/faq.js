@@ -19,14 +19,14 @@ $(document).ready(function() {
 function getQnaTable() {
 	
 	$("#jqGridBoard").jqGrid({
-		url : "getQnaList",
+		url : "getFaqList",
 		mtype : "GET",
 		datatype : "json",
 		colModel : 
 		[ 
 			{
 				label : '番号',
-				name : 'qnaNum',
+				name : 'FAQNum',
 				height : 200,
 				align:'center'
 			}, {
@@ -52,12 +52,6 @@ function getQnaTable() {
 				height : 200,
 				align:'center'
 			}, 
-			 {
-				label : '状態',
-				name : 'content',
-				height : 200,
-				align:'center'
-			},
 		],
 		viewrecords : true,
 		width : 900,
@@ -68,7 +62,7 @@ function getQnaTable() {
 		loadonce: true,
 		grouping: false,
 		groupingView: {
-		    groupField: ['qnaNum'],
+		    groupField: ['FAQNum'],
 		    groupColumnShow : [false],
 		},
 		loadComplete:function(data)
@@ -100,8 +94,7 @@ function getQnaTable() {
         	if(cm[index].name == "title")
         	{
         		var obj = $("#jqGridBoard").getRowData(rowid);
-           		alert(JSON.stringify(obj));
-        		location.href="boardDetail?qnaNum="+obj.qnaNum;
+        		location.href="FAQDetail?FAQNum="+obj.FAQNum;
 
         	}
     		

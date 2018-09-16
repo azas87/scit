@@ -18,5 +18,7 @@ public interface NoticeMapper {
 
 	public void updateNotice(Notice notice);
 
+	public void deleteNotice(int noticeNum);
+
 
 }
