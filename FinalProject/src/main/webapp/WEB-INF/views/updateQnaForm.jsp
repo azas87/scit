@@ -29,7 +29,7 @@ function boardList(){
     <table class="tab" width=100% cellpadding=0 cellspacing=0>
     <tr>
     	<td style='word-break:break-all; height:28px; padding-left:34px;'>
-		<strong>제목</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="title"/></td>
+		<strong>제목</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="title" value="${qna.title}"/></td>
 
     </tr>
     </table></td></tr>
@@ -52,7 +52,7 @@ function boardList(){
 
 <tr> 
     <td id="content" height="500">
-    <textarea name="content" rows="40" cols="100"></textarea>
+    <textarea name="content" rows="40" cols="100">${qna.content}</textarea>
 </td>
 </tr>
 
@@ -69,3 +69,5 @@ function boardList(){
 </tr>
 </table>
 </form>
+</body>
+</html>

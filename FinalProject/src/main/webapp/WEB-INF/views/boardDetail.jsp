@@ -14,7 +14,7 @@
 function boardList(){
 	location.href="qnaForm?";
 }
-function update(qnaNum) {
+function updateQna(qnaNum) {
 	location.href="updateQnaForm?qnaNum="+qnaNum;
 }
 function deleteBoard(qnaNum) {
@@ -58,7 +58,7 @@ function update() {
 	var replyNum = $(this).parent().children(".reviewNum").val();
 	var updateContet = $(this).parent().children(".reviewContent").children(".updateContent").val();
 	/* location.href="updateReply?replyNum="+replyNum+"&replyContent="+updateContet+"&"; */
-	alert('안녕');
+	
 		$.ajax({
 			url:"updateReply",
 			type:"get",
@@ -173,7 +173,7 @@ function output(resp) {
 <div class="div">
 <p class="p">
 <input type="button" value="목록으로" onclick="boardList()"/>
-<input type="button" value="수정" onclick="update(${qna.qnaNum})"/>
+<input type="button" value="수정" onclick="updateQna(${qna.qnaNum})"/>
 <input type="button" value="삭제" onclick="deleteBoard(${qna.qnaNum})"/>
 </p>
 </div>
