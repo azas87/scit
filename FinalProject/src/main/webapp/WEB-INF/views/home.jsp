@@ -325,6 +325,7 @@ function cancel() {
 <a href="qnaForm?">QnA</a>
 <a href="noticeForm?">Notice</a>
 <a href="faqForm?">FAQ</a>
+<a href="fishInfoList?">생선정보</a>
 <Br>
 
 
