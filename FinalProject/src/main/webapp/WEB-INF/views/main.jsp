@@ -257,11 +257,16 @@ var chartDrowFun = {
 
 <div id="tab">
 	<div class="items">
-		<div class="item " onclick="allBuyList()">전체 글</div>
+		<div class="item " onclick="homeList()">전체 글</div>
 		<c:choose>
-			<c:when test="${sessionScope.loginId != null }">
-				<div class="item " onclick="myList()">진행중인리스트</div>
-				<div class="item " onclick="myAllList()">내글 목록</div>
+			<c:when test="${sessionScope.userMode == '1' }">
+				<div class="item " onclick="myList_ing_buyer()">진행중인리스트</div>
+				<div class="item " onclick="myAllList_buyer()">내글 목록</div>
+			</c:when>
+			<c:when test="${sessionScope.userMode == '2' }">
+				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
+				<div class="item " >선호리스트</div>
+				<div class="item " onclick="myList_ing_seller()">참여리스트</div>
 			</c:when>
 		</c:choose>
 		<div class="item search" title="검색어">검색 : <input type="text" id="search_cells" title=""></div>

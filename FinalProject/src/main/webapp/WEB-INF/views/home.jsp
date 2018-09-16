@@ -11,18 +11,10 @@
 	<title>Home</title>
 	<title>Insert title here</title>
 	
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
-<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/jquery-ui.css" />
-<!-- The link to the CSS that the grid needs -->
-<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
 
 
  <!-- The jQuery library is a prerequisite for all jqSuite products -->
@@ -31,11 +23,6 @@
  <!-- This is the Javascript file of jqGrid -->   
 
 
- <!-- This is the localization file of the grid controlling messages, labels, etc.
- <!-- We support more than 40 localizations -->
- <script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
- 
- <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
  <script type="text/javascript" src="./resources/js/home.js"></script>
  
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
