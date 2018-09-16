@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	
-<!--전체구매리스트,검색은 없음-->	
+<!--전체구매리스트-->	
 	<select id="allBuyList" resultType="BuyList" >
 
 		SELECT 
@@ -165,8 +165,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-<!--나의구매리스트, 검색은 없음 -->		
-	<select id="myBuyList" resultType="BuyList" parameterType="string">
+<!--구매자 진행중인 리스트-->		
+	<select id="myList_ing_buyer" resultType="BuyList" parameterType="string">
 		select 
 			b.buyNum,
 			fishName,
@@ -188,15 +188,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>	
 	
 
-<!--나의 참여리스트, 검색은 없음 -->		
-	<select id="mySaleList" resultType="BuyList" parameterType="string">	
+<!--판매자 참여리스트-->		
+	<select id="myList_ing_seller" resultType="BuyList" parameterType="string">	
 		select 
 			b.buyNum,
 			fishName,
 			buyerId,
-			registDate,
-			uploadDate,
-			deadline,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -207,8 +207,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by saleStatus asc
 	</select>
 
-<!--나의 모든리스트-->		
-	<select id="myAllList" resultType="BuyList" parameterType="string">	
+<!--구매자 내글 목록-->		
+ 	<select id="myAllList_buyer" resultType="BuyList" parameterType="string">	
 		SELECT 
 			buyNum,
 			fishName,
@@ -229,6 +229,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId=#{userId}
 		order by buyNum asc
 	</select>
+	
+<!--판매자 나의 모든리스트-->		
+<!-- 	<select id="myAllList_seller" resultType="BuyList" parameterType="string">	
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
+		from 
+			BuyList
+		where			
+			buyerId=#{userId}
+		order by buyNum asc
+	</select> -->
 
 
 	<select id="GetTotalListCount" resultType="int" parameterType="string">
@@ -325,15 +348,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 
-	<!--나의 구매목록에서 글삭제  -->
-	<!-- <delete id="deleteMyList" parameterType="string">
+	<!--구매자 구매목록에서 글삭제  -->
+	<delete id="deleteMyList_buyer" parameterType="string">
 		delete 
 			BuyList 
 		where 
-			buynum=#{buynum} 
-		and
-			saleStatus = 'onSale'
-	</delete> -->
+			buyNum=#{buyNum} 		
+	</delete>
+	
+	<!--판매자 구매목록에서 글삭제(취소)-->
+	<delete id="deleteMyList_seller" parameterType="string">
+		delete 
+			saleList
+		where 
+			buyNum=#{buyNum} 		
+	</delete>
 
 
 	<select id="getTodayAvgList" resultType="AvgList">

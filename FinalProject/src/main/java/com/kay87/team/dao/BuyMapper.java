@@ -22,11 +22,13 @@ public interface BuyMapper {
 		
 	public List<BuyList> allBuyList();
 	
-	public List<BuyList> myBuyList(String userId);
+	public List<BuyList> myList_ing_buyer(String userId);
 	
-	public List<BuyList> mySaleList(String userId);
+	public List<BuyList> myList_ing_seller(String userId);
 	
-	public List<BuyList> myAllList(String userId);
+	public List<BuyList> myAllList_buyer(String userId);//구매자 메인화면에서 내글 목록
+	
+	//public List<BuyList> myAllList_seller(String userId);
 
 	public int GetTotalListCount(String string);
 	
@@ -54,7 +56,9 @@ public interface BuyMapper {
 	
 	
 
-	public int deleteMyList(String buyNum);
+	public int deleteMyList_buyer(String buyNum);
+
+	public void deleteMyList_seller(Map<String, String> map);//판매자참여리스트취소
 
 	
 
