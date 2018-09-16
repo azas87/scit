@@ -24,7 +24,7 @@ language="java" pageEncoding="UTF-8"%>
 </head>
 <body>
 
-<div>
+<div style="width:1100px; margin:0 auto;">
 
 	<table id="jqGridBoard"></table>
 	<div id="jqGridPager"></div>

@@ -24,11 +24,11 @@ language="java" pageEncoding="UTF-8"%>
 </head>
 <body>
 
-<div>
+<div  style="width:1100px; margin:0 auto;">
 
 	<table id="jqGridBoard"></table>
 	<div id="jqGridPager"></div>
-	<a href="writeBoardForm?">글등록</a>	
+	<a href="writeBoardForm?">QnA 글등록</a>	
 </div>	
 
 

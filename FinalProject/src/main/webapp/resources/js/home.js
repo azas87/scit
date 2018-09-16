@@ -2,94 +2,6 @@ var listMode = "allBuyList";
 var refreshInterver = 600000; // 1000 = 1초
 
 
-$(document).ready(function() {
-	$('.popdown').popdown();
-	
-	 homeList('allBuyList');
-	 bestSeller();
-	 seasonInfo();
-	//myBuyList();
-	///printClock();
-	 
-
-
-	 
-	 /*
-	 // 자동 글쓰기 테스트.
-	 setTimeout(function(){
-		 console.log("settimeout");
-		 autoWriteTest();
-		ListRefresh();
-	}, 60000);
-		*/
-	 
-	 // 10분 마다 자동갱신
-	 setInterval(function(){
-		 console.log(new Date());
-		 ListRefresh();
-		
-	}, refreshInterver);
-	 
-	
-	    
-	  $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
-		  {
-			  $(this).css('flex-grow',1);
-		      $(this).css('font-size',"3.5em");
-		      $(this).css('background-color',"powderblue");
-	/*	      $('input').css('line-height', '60px');
-		      $('input').css('width', '200px');*/
-		  }
-	     
-	    });
-	    
-	  $(".item").mouseleave(function(){
-	      $(this).css('flex-grow',1);
-	      $(this).css('font-size',"1em");
-	      $(this).css('background-color',"white");
-	    });
-	  
-
-	    
-	    $('.search').hover(function(){
-	        // Hover over code
-	        var title = $(this).attr('title');
-	        $(this).data('tipText', title).removeAttr('title');
-	        $('<p class="tooltip"></p>')
-	        .text(title)
-	        .appendTo('body')
-	        .fadeIn('slow');
-		}, function() {
-		        // Hover out code
-		        $(this).attr('title', $(this).data('tipText'));
-		        $('.tooltip').remove();
-		}).mousemove(function(e) {
-		        var mousex = e.pageX + 20; //Get X coordinates
-		        var mousey = e.pageY + 10; //Get Y coordinates
-		        $('.tooltip').css({ top: mousey, left: mousex })
-		});
-	
-	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-       search: false, // show search button on the toolbar
-       add: false,
-       edit: false,
-       del: false,
-       refresh: true,
-   });
-	
-	var timer;
-	$("#search_cells").on("keyup", function() {
-		var self = this;
-		if(timer) { clearTimeout(timer); }
-		timer = setTimeout(function(){
-			//timer = null;
-			$("#jqGrid").jqGrid('filterInput', self.value);
-		},0);
-	});
-	
-	tab('#tab',0);
-});
 
 
 function tab(e, num){
@@ -114,6 +26,14 @@ function tab(e, num){
         select.addClass('on');
         con.eq(i).show();
     });
+}
+
+function newPage(action)
+{
+ 	console.log("newPage");
+ 	console.log(action);
+	//$("#f_main").src=action;*/
+	$('#f_main').attr('src', action);
 }
 
 function printClock() {

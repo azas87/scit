@@ -34,7 +34,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "/noticeForm", method = RequestMethod.GET)
 	public String NoticeForm(){
-		
+		System.out.println("noticeForm");
 		return "noticeForm";
 	}
 	
