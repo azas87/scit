@@ -47,7 +47,7 @@
 	   
 	    var chartDrowFun = {
 				 
-			    chartDrow : function(){
+			    chartDrow : function(){[]
 			        var chartData = '';
 			 
 			        //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
