@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kay87.team.dao.FaQMapper">
+	
+	<select id="getfaqList" resultType="FAQ">
+		SELECT 
+		FAQNum, 
+		id,
+		title,
+		content,
+		hitcount,
+		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
+		FROM faq
+	</select>
+	
+
+	<insert id="writeFaq" parameterType="FAQ">
+		insert into faq
+		values(faqNum.nextval, #{id}, sysdate, #{title}, #{content},0)
+	</insert>
+
+	<!-- 게시판내용가져오기 -->
+	<select id="getBoard" parameterType="int" resultType="FAQ">
+	select 
+		FAQNum, 
+		id,
+		title,
+		content,
+		hitcount,
+		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
+	from faq
+	where FAQNum=#{FAQNum}
+	order by FAQNum desc
+	</select>
+	
+	<update id="hitBoardCount" parameterType="FAQ">
+	update FAQ
+	set hitcount = #{hitcount}
+	where FAQnum = #{FAQNum}
+	</update>
+	
+	<delete id="deletefaq" parameterType="int">
+	delete from FAQ
+	where FAQNum = #{value}
+	</delete>
+	
+	
+	<update id="updatefaq" parameterType="FAQ">
+		update FAQ
+		set title = #{title},
+			content = #{content}
+		where FAQnum = #{FAQNum}
+	</update>
+	
+	
+	
+</mapper>

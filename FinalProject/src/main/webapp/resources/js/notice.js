@@ -36,11 +36,6 @@ function getQnaTable() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '作成者',
-				name : 'id',
-				height : 200,
-				align:'center'
-			}, {
 				label : '登録日付',
 				name : 'writeBoardDate',
 				height : 200,

@@ -100,7 +100,7 @@ public class NoticeController {
 			NoticeMapper dao = sql.getMapper(NoticeMapper.class);
 			dao.updateNotice(Notice);
 		
-			return "redirect:/NoticeForm";
+			return "redirect:/noticeForm";
 			}
 		
 		/*@RequestMapping(value="/insertReply", method=RequestMethod.GET)
@@ -136,19 +136,19 @@ public class NoticeController {
 		
 			return "ok";
 			}
-		
+		*/
 		@RequestMapping(value="/deleteNotice", method=RequestMethod.GET)
 		public String deleteBoard(int noticeNum, Model model) {
 			NoticeMapper dao = sql.getMapper(NoticeMapper.class);
 			dao.deleteNotice(noticeNum);
-			
-			return "redirect:/NoticeForm";
+			System.out.println("디비 다녀온후");
+			return "redirect:/noticeForm";
 			}
 		
 		
 		
 		
-		@RequestMapping(value="/selectAllRelpy", method=RequestMethod.POST)
+	/*	@RequestMapping(value="/selectAllRelpy", method=RequestMethod.POST)
 		public @ResponseBody List<Noticereply> selectAllRelpy(String noticeNum) {
 	
 			NoticeMapper dao = sql.getMapper(NoticeMapper.class);
