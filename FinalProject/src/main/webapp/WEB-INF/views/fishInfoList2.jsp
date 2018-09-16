@@ -40,9 +40,7 @@
               <div class="card h-100">
                 <a href="#"></a>
                 <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">ホタデガイ</a>
-                  </h4>
+                  <h4 class="card-title">ホタデガイ</h4>
                   <h5>産地</h5>
                   <p class="card-text">岡山、青山</p>
                   <h5>旬</h5>
