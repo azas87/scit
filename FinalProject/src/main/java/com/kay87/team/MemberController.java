@@ -125,15 +125,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/checkingStatus", method = RequestMethod.GET)
-	public String checkingStatus(MemberInfo member) {
+	public String checkingStatus(MemberInfo member, Model model) {
 		System.out.println(member);
-		if(member.getGrade().equals("reentrance")) {
+		if(member.getGrade().equals("seller")&&member.getMemberStatus().equals("reentrance")) {
+			model.addAttribute("grade", "seller");
+			return "reentrance";
+		}
+		else if(member.getGrade().equals("buyer")&&member.getMemberStatus().equals("reentrance")) {
+			model.addAttribute("grade", "buyer");
 			return "reentrance";
 		}
 		else if(member.getMemberStatus().equals("seller")) {
 			
 		}else {
-			
+			model.addAttribute("grade", "buyer");
 			return "joinForm";
 		}
 		return "joinForm";
@@ -141,11 +146,21 @@ public class MemberController {
 	
 	@RequestMapping(value = "/checkingEmail", method = RequestMethod.POST)
 	public @ResponseBody MemberInfo  checkingEmail(MemberInfo member) {
-		System.out.println(member);
+
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		MemberInfo m = dao.checkingEmail(member);
 		System.out.println("null"+m);
 		return m;
+	}
+	
+
+	@RequestMapping(value = "/reenterance", method = RequestMethod.POST)
+	public String  reenterance(MemberInfo member) {
+	
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		dao.reenterance(member);
+		
+		return "home";
 	}
 	
 	

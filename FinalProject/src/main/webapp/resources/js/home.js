@@ -9,7 +9,7 @@ $(document).ready(function() {
 	 bestSeller();
 	 seasonInfo();
 	//myBuyList();
-	 //printClock();
+	///printClock();
 	 
 
 
@@ -267,8 +267,15 @@ function homeList(url2) {
 
 function myAllList() {	
 	console.log("myAllList");
-	listMode = "myAllList";
-	ListRefresh();
+	
+	var userMode = $("#userMode").val();
+	console.log(userMode);
+	if(userMode==1){
+		listMode = "myAllList_buyer";
+	}else{
+		listMode = "myAllList_seller";
+	}	
+	ListRefresh();	
 }
 
 
@@ -305,7 +312,7 @@ function bestSeller() {
 		hidegrid : false,
 		hidden:false,
 		viewrecords : true,
-		height : 150,
+		height : 152,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerbestSeller",
@@ -396,7 +403,7 @@ function seasonInfo() {
 				name : 'location',
 				align:'center'
 			}, {
-				label : '単位',
+				label : '単位', 
 				name : 'unit',
 				align:'center'
 			}, {
@@ -409,7 +416,7 @@ function seasonInfo() {
 		caption:"seasonInfo",
 		hidegrid : false,
 		viewrecords : true,
-		height : 150,
+		height : 152,
 		rowNum : 3,
 		rowList:[10,20,30],
 		pager : "#jqGridPagerseasonInfo",

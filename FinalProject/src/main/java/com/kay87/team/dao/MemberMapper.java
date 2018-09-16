@@ -19,4 +19,6 @@ public interface MemberMapper {
 
 	public MemberInfo checkingEmail(MemberInfo member);
 
+	public void reenterance(MemberInfo member);
+
 }

@@ -54,6 +54,8 @@ public interface BuyMapper {
 	
 	
 
+	public int deleteMyList(String buyNum);
+
 	
 
 	

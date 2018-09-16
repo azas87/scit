@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kay87.team.dao.NoticeMapper">
+	
+	<select id="getNoticeList" resultType="Notice">
+		SELECT * FROM notice
+	</select>
+	
+
+	<insert id="writeBoard" parameterType="Notice">
+		insert into notice
+		values(noticeNum.nextval, #{id}, sysdate, #{title}, #{content},0)
+	</insert>
+
+	<!-- 게시판내용가져오기 -->
+	<select id="getBoard" parameterType="int" resultType="Notice">
+	select 
+		Noticenum, 
+		id,
+		title,
+		content,
+		hitcount,
+		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
+	from Notice
+	where Noticenum=#{noticeNum}
+	order by Noticenum desc
+	</select>
+	
+	<update id="hitBoardCount" parameterType="Notice">
+	update Notice
+	set hitcount = #{hitcount}
+	where Noticenum = #{noticeNum}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="int">
+	delete from Notice
+	where Noticenum = #{value}
+	</delete>
+	
+	
+	<update id="updateNotice" parameterType="Notice">
+		update Notice
+		set title = #{title},
+			content = #{content}
+		where Noticenum = #{noticeNum}
+	</update>
+	 
+	<insert id="insertReply" parameterType="Reply">
+		insert into Noticereply
+		values(replyNum.nextval, #{NoticeNum}, #{id}, #{replyContent},sysdate)
+	</insert>
+
+	<select id="getReplyList" resultType="Reply" parameterType="int">
+		SELECT * FROM Noticereply where NoticeNum = #{NoticeNum}
+	</select>
+	
+	<update id="updateReply" parameterType="Reply">
+		update Noticereply
+		set replycontent = #{replyContent}
+		where replyNum = #{replyNum}
+	
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+	delete
+		Noticereply
+	where
+		replynum = #{replynum}
+	</delete>
+	
+</mapper>

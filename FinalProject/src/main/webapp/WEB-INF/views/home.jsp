@@ -42,9 +42,8 @@
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
  		<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/home.css" />
  <script>
-	
-	   
-	   
+
+   
 	    var chartDrowFun = {
 				 
 			    chartDrow : function(){[]
@@ -209,13 +208,7 @@
 .popupCloseButton:hover {
     background-color: #ccc;
 }
-.trigger_popup_fricc {
-    cursor: pointer;
-    font-size: 20px;
-    margin: 20px;
-    display: inline-block;
-    font-weight: bold;
-}
+
 /* Popup box BEGIN */
 
 
@@ -235,6 +228,12 @@ $(window).load(function () {
     $('.popupCloseButton').click(function(){
         $('.hover_bkgr_fricc').hide();
     });
+   
+    $('#close').click(function(){
+    	
+        $('.hover_bkgr_fricc').hide();
+    }); 
+    
 });
 
 function reset () {
@@ -282,6 +281,8 @@ function cancel() {
 
 
 
+
+
 </script>
 <body>
 
@@ -308,17 +309,24 @@ function cancel() {
     <div>
         <div class="popupCloseButton">X</div>
         <form action="checkingStatus">
-        	<input type="radio" name="grade" value="newResitration">新規登録
-			<input type="radio" name="grade" value="reentrance">再登録<br>
+        	<input type="radio" name="memberStatus" value="newResitration">新規登録
+			<input type="radio" name="memberStatus" value="reentrance">再登録<br>
 		
-			<input type="radio" name="memberStatus" value="seller">購入者
-			<input type="radio" name="memberStatus" value="buyer">販売者<br>
-			<input type="submit" value="確認">
+			<input type="radio" name="grade" value="buyer">購入者
+			<input type="radio" name="grade" value="seller">販売者<br>
+			<input type="submit" value="会員登録へ進む">
+			<input type="button" value="閉じる" id="close">
     	</form>
     </div>
 </div>
 
-<div><Br></div>
+
+<input type="button" value="退会" onclick="cancel()">
+<a href="qnaForm?">QnA</a>
+<a href="noticeForm?">Notice</a>
+<a href="faqForm?">FAQ</a>
+<Br>
+
 
 <div id="contain">
 

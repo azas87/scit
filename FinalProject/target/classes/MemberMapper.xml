@@ -74,4 +74,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<update id="reenterance" parameterType="Member">
+
+		UPDATE memberinfo
+     	SET memberstatus = 'join' , password = #{password}
+    	WHERE id = #{id}
+	
+	</update>
+	
 </mapper>
