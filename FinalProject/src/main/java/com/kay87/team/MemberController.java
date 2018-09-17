@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.dao.FishInfoListMapper;
 import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.dao.ReviewMapper;
+import com.kay87.team.vo.FishCategoryList;
 import com.kay87.team.vo.MemberInfo;
 import com.kay87.team.vo.Review;
 import com.kay87.team.vo.SellerInfo;
@@ -63,17 +65,37 @@ public class MemberController {
 		MemberInfo user=dao.login(member);
 
 		if(user!=null) 
-		{
+		{	
 			session.setAttribute("loginId", user.getId());
 			session.setAttribute("userMode", user.getGrade());
 			System.out.println("userMode : " + session.getAttribute("userMode"));
-			return "home";
+			
+			if(user.getFirst().equals("first")) {
+				
+				FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
+				List<FishCategoryList> categoryList = mapper.getCategory();
+				model.addAttribute("categoryList", categoryList);
+				
+				return "selectWishList";
+			}
+			else {
+				return "redirect:/";
+			}
 		}
 		else
 		{
 			model.addAttribute("msg", "로그인 실패");
 			return "loginForm";
 		}
+	}
+	
+	
+	@RequestMapping(value = "/setWishList", method = RequestMethod.GET)
+	public String setWishList() {
+		
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+
+		return "setWishList";
 	}
 	
 	//id중복체크

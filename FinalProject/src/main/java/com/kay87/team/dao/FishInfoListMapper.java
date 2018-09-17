@@ -21,4 +21,6 @@ public interface FishInfoListMapper {
 
 	public void updateFishInfo(FishList fishInfo);
 
+	public List<FishList> getFishList(String fishCategoryNum);
+
 }
