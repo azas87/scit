@@ -903,9 +903,13 @@ function select (cellvalue, options, rowObject) {
 //console.log(rowObject);	
    return '選択';
 };	
-function deletee (cellvalue, options, rowObject) {
+function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1줄을 읽는것,jgride함수에 적혀있음
 //console.log(rowObject);	
-   return '削除';
+	if(rowObject.successSellerId==null){
+		return '削除';
+	}else{	
+		return "";
+	}
 };		 
 
 
