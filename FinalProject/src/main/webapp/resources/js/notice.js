@@ -14,6 +14,9 @@ $(document).ready(function() {
 	
 });
 
+function writeNoticeForm() {
+	location.href='writeNoticeForm?';
+}
 
 
 function getQnaTable() {

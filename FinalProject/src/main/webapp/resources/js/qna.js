@@ -14,8 +14,9 @@ $(document).ready(function() {
 	
 });
 
-
-
+function writeBoardForm() {
+	location.href="writeBoardForm?";
+}
 function getQnaTable() {
 	
 	$("#jqGridBoard").jqGrid({

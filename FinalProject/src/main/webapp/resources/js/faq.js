@@ -14,6 +14,9 @@ $(document).ready(function() {
 	
 });
 
+function writeFaqForm() {
+	location.href="writeFaqForm?";
+}
 
 
 function getQnaTable() {

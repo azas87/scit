@@ -4,7 +4,7 @@ language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>Home</title>
-
+<link rel="stylesheet" href="./resources/css/button.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
@@ -20,16 +20,21 @@ language="java" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="./resources/js/notice.js"></script>
 
 
-
 </head>
+
+
 <body>
 
-<div style="width:1100px; margin:0 auto;">
-
+	<div style="width: 900px; margin: 0 auto; padding-top: 80px;">
 	<table id="jqGridBoard"></table>
 	<div id="jqGridPager"></div>
-	<a href="writeNoticeForm?">공지사항 글등록</a>	
-</div>	
+	</div>
+	<c:if test="${sessionScope.userMode=='manager'}">
+	<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
+	<button onclick="writeNoticeForm()">投稿</button>
+	</div>
+	</c:if>
+
 
 
 </body>

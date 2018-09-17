@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="BoardMapper.xml" />
 		<mapper resource="NoticeMapper.xml" />
 		<mapper resource="FaQMapper.xml" />
+		<mapper resource="FishInfoListMapper.xml" />
 	</mappers>
 	
 </configuration>
