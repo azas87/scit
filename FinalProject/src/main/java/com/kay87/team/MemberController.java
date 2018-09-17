@@ -62,7 +62,6 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		MemberInfo user=dao.login(member);
 
-
 		if(user!=null) 
 		{
 			session.setAttribute("loginId", user.getId());

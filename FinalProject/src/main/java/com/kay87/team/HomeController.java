@@ -247,6 +247,8 @@ public class HomeController {
 		return "redirect:/";		
 	}
 	
+
+	
 	// 판매자 참여리스트에서의 취소(삭제)
 	@RequestMapping(value = "/deleteMyList_seller", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String deleteMyList(String buyNum,HttpSession session){

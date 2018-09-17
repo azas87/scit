@@ -184,6 +184,7 @@ function output(resp) {
 <tr> 
 
 <tr height="20"> </tr>
+<c:if test="${sessionScope.userMode=='manager'}">
     <td id="btn" >
     <!-- <strong>댓글</strong>&nbsp;&nbsp;&nbsp;&nbsp; -->
     <input type="hidden" id="qnaNum" value="${qna.qnaNum}">
@@ -191,6 +192,7 @@ function output(resp) {
 	<input type="button" id="insertReply" value="댓글등록"/>
 	
 </td>
+</c:if>
 <br><br>
 </tr>
 <tr height="20"> </tr>
@@ -205,8 +207,10 @@ function output(resp) {
 		<strong style="font-size: large;">${reply.id}</strong>&nbsp;&nbsp;&nbsp;&nbsp;${reply.replyRegdate}
 		</br><div class="reviewContent">${reply.replyContent}</div>
 		<input type="hidden" class="reviewNum" value="${reply.replyNum}">
+		<c:if test="${sessionScope.userMode=='manager'}">
 		<input type="button" value="수정" class="updateRelpy"/>
-		<input type="button" value="삭제" class="deleteRelpy"/></td>
+		<input type="button" value="삭제" class="deleteRelpy"/></c:if></td>
+		
 	</tr>
     </c:forEach>
 
