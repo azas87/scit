@@ -259,6 +259,7 @@ function reset () {
     </div>
 </div>
 <a href="fishInfoList?">생선정보</a>
+<a href="selectWish?">생선정보</a>
 </body>
 
 </html>
