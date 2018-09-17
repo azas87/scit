@@ -89,7 +89,7 @@ $(document).ready(function() {
 
   <div class='container'>
     <div class='panel panel-primary dialog-panel'>
-      <div class='panel-heading'>
+      <div class='panel-heading' style="background-color: #3aa9d5;">
         <h5>ご購入</h5>
       </div>
       <div class='panel-body'>
@@ -273,12 +273,12 @@ $(document).ready(function() {
           </div>
           <div class='form-group'>
             <div class='col-md-offset-4 col-md-3'>
-              <button class='btn-lg btn-primary' type='submit'  id="btn2" onclick="return check()">Request Reservation</button>
+              <!-- <button class='btn-lg btn-primary' type='submit'  >Request Reservation</button> -->
                	
    
             </div>
             <div class='col-md-3'>
-              <button class='btn-lg btn-danger' style='float:right' type='submit'>Cancel</button>
+              <button class='btn-lg btn-danger' style="float:right;background-color:#3aa9d5;border-color:#3aa9d5; float:right;" type='submit' onclick="return check()"  id="btn2">登録</button>
             </div>
           </div>
         </form>
