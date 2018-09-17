@@ -14,7 +14,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 
 
  <!-- The jQuery library is a prerequisite for all jqSuite products -->
@@ -137,6 +137,8 @@ $(window).load(function () {
 	      $(this).css('font-size',"1.5em");
 	      $(this).css('background-color',"white");
 	    });
+	  var audio = new Audio('./resources/alram.wav');
+	  audio.play();
 });
 
 function cancel() {
@@ -179,6 +181,9 @@ function reset () {
 		buttonReverse : false,
 		buttonFocus   : "ok"
 	});
+	
+	var audio = new Audio('./resources/alram.wav');
+	audio.play();
 }
 </script>
 
@@ -218,6 +223,7 @@ function reset () {
 			<div class="item " onclick="newPage('noticeForm?')">공지사항</div>
 			<div class="item " onclick="newPage('qnaForm?')">QnA</div>
 			<div class="item " onclick="newPage('faqForm?')">FAQ</div>
+			<div ></div>
 		</div>
 	</div>
 </div>
@@ -234,14 +240,19 @@ function reset () {
     <span class="helper"></span>
     <div>
         <div class="popupCloseButton">X</div>
-        <form action="checkingStatus">
-        	<input type="radio" name="memberStatus" value="newResitration">新規登録
-			<input type="radio" name="memberStatus" value="reentrance">再登録<br>
-		
-			<input type="radio" name="grade" value="buyer">購入者
-			<input type="radio" name="grade" value="seller">販売者<br>
-			<input type="submit" value="会員登録へ進む">
-			<input type="button" value="閉じる" id="close">
+        <form id="outForm" action="checkingStatus">
+			<div class="items">
+				<div class="item" ><input type="radio" name="memberStatus" value="newResitration">新規登録</div>
+				<div class="item "><input type="radio" name="memberStatus" value="reentrance">再登録<br></div>
+			</div>
+			<div class="items">
+				<div class="item" ><input type="radio" name="grade" value="buyer">購入者</div>
+				<div class="item "><input type="radio" name="grade" value="seller">販売者<br></div>
+			</div>
+			<div class="items">
+				<div class="item" ><input type="submit" value="会員登録へ進む"></div>
+				<div class="item" ><input type="button" value="閉じる" id="close"></div>
+			</div>
     	</form>
     </div>
 </div>

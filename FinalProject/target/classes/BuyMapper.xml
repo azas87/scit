@@ -373,7 +373,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getWeekAvgList" resultType="AvgList">
-		select fishname,avgprice,dates from weekavglist order by dates
+		<!-- select fishname,avgprice,dates from weekavglist order by dates, fishname -->
+		select * from WEEKAVGLIST where fishname in('すずき','イセエビ','キダイ','キンメダイ','クマエビ') order by dates, fishname
 	</select>
 	
 	<insert id="setWeekAvgList" parameterType="AvgList">

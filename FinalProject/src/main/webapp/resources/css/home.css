@@ -2,17 +2,16 @@
 {
 	font-size:20px !important;
 } */
-
 #blank_div
 {
-	height:135px;
+	height:145px;
 }
 
 #menu_wrap {
 	position: fixed;
-	top: 0px;
+	top: px;
 	left: 0px;
-	height: 135px;
+	height: 145px;
 	overflow-y: auto;
 	z-index: 1000;
 	width: 100%;
@@ -34,6 +33,7 @@
 {
 	width:1100px;
 	margin: 0 auto;
+	margin-top:10px;
 }
 
  #contain div{
@@ -90,14 +90,14 @@
 	width:1080px;
 }
 
-    #nav .items {
+    #outForm .items, #nav .items {
     border:0px;	
     display: flex;
     flex-direction: row;
     height:60px;
 
   }
-  #nav .item
+  #nav .item, #outForm .item
   {
     line-height: 60px;
     list-style: none;
@@ -163,3 +163,5 @@ a { text-decoration:none; color:#000; }
 .tab li.on { background-color:#eee; color:#f00; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
 .tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
+
+	

@@ -179,6 +179,7 @@ var chartDrowFun = {
             options     : {
                             isStacked   : 'percent',
                             focusTarget : 'category',
+                            //chartArea:{left:300,top:50,width:"1000px",height:"500px"},
                             height          : 600,
                             width              : '100%',
                             legend          : { position: "top", textStyle: {fontSize: 30}},
@@ -221,7 +222,7 @@ var chartDrowFun = {
           date_formatter.format(data, 0); 
 
           var dashboard = new google.visualization.Dashboard(document.getElementById('Line_Controls_Chart'));
-          window.addEventListener('resize', function() { dashboard.draw(data); }, false); //화면 크기에 따라 그래프 크기 변경
+         // window.addEventListener('resize', function() { dashboard.draw(data); }, false); //화면 크기에 따라 그래프 크기 변경
           dashboard.bind([control], [chart]);
           dashboard.draw(data);
 
@@ -240,7 +241,7 @@ var chartDrowFun = {
 <body>
    <div id="Line_Controls_Chart">
    <!-- 라인 차트 생성할 영역 -->
-       <div id="lineChartArea" style="padding:0px; margin-top:-30px; margin"></div>
+       <div id="lineChartArea" "></div>
    <!-- 컨트롤바를 생성할 영역 -->
        <div id="controlsArea" style="display:none"></div>
      </div>
