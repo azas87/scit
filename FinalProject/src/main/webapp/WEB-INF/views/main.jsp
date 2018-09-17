@@ -241,7 +241,7 @@ var chartDrowFun = {
 <body>
    <div id="Line_Controls_Chart">
    <!-- 라인 차트 생성할 영역 -->
-       <div id="lineChartArea" "></div>
+       <div id="lineChartArea"></div>
    <!-- 컨트롤바를 생성할 영역 -->
        <div id="controlsArea" style="display:none"></div>
      </div>

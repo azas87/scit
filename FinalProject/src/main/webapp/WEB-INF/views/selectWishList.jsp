@@ -16,15 +16,15 @@ language="java" pageEncoding="UTF-8"%>
 <script>
 
 $(function() {
-	 $("input:radio[name=category]").click(function() { 
-		getFishList(); 
+	 /* $("input:radio[name=category]").click(function() { */
+	$(".category").click(function() {
+		getFishList($(this).attr('data-value')); 
 	});
-	 $(".button").click(function() { 
+	 /* $(".button").click(function() { 
 		setWishList(); 
-		});
+		}); */
 });
-function getFishList(){ 
-	var fishCategoryNum = $('input[name="category"]:checked').val();
+function getFishList(fishCategoryNum){ 
 	$.ajax({
 		url:"getFishList",
 		type:"get",
@@ -33,9 +33,14 @@ function getFishList(){
 		success:function(resp){
 			var temp="";
 			for(i in resp){
-			temp += '<li><input type="radio" name="fishName" value="'+resp[i].fishName+'"/>'+resp[i].fishName;
+			/* temp += '<li><input type="radio" name="fishName" value="'+resp[i].fishName+'"/>'+resp[i].fishName; */
+			temp += '<li><div class="fishName" data-value="'+resp[i].fishName+'">'+resp[i].fishName+'</div></li>'
+			
+			
 		}
 			$('#fishList').html(temp);
+			
+			$(".fishName").click(function(){ setWishList(); });
 		},
 		
 		error:function(){
@@ -44,10 +49,10 @@ function getFishList(){
 	});//ajax
 }
 function setWishList() {
-	var fishName = $('input[name="fishName"]:checked').val();
+	var fishName = $('.fishName').attr('data-value');
+	console.log(fishName);
 	if(fishName==null){
 		alert('값넣어줘');
-		
 	}
 	else{
 		location.href="setWishList?fishName="+fishName;
@@ -60,7 +65,7 @@ function setWishList() {
 <body style="background:url(./resources/img/bg.png) repeat;">
 
 <!-- contact-form -->	
-<div class="message warning" style="width: 800px; height: 720px; position: absolute;top: 22%; left:27%;margin-top: -120px; border: none;">
+<div class="message warning" style="width: 800px; height: 720px;  border: none;">
 <div class="inset" style="height: 500px;">
 	<div class="login-head" style="background: #d4dedf;">
 		<h1 style="color: black; margin: 0 auto; position:relative; left:290px; font-weight: 900" >よく販売する業種</h1>
@@ -72,8 +77,9 @@ function setWishList() {
 		<form style="height: 530px;">
 		<div style="width: 200px; float: left;"><ul>
 			<c:forEach items="${categoryList}" var="category">
-		 	<li><input type="radio" name="category" value="${category.fishCategoryNum}" /> ${category.categoryName}
-		 </c:forEach>
+		 	<%-- <li><input type="radio" name="category" value="${category.fishCategoryNum}" /> ${category.categoryName} --%>
+		 		<li><div class="category" data-value="${category.fishCategoryNum}">${category.categoryName}</div></li>
+		 	</c:forEach>
 		</ul></div>	
 		
 		<ul id="fishList">
