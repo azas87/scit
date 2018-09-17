@@ -35,7 +35,7 @@
 				ok     : "<button class=\"alertify-button alertify-button-ok\" id=\"alertify-ok\">{{ok}}</button>",
 				cancel : "<button class=\"alertify-button alertify-button-cancel\" id=\"alertify-cancel\">{{cancel}}</button>"
 			},
-			input   : "<div class=\"alertify-text-wrapper\"><input type=\"text\" class=\"alertify-text\" id=\"alertify-text\"></div>",
+			input   : "<div class=\"alertify-text-wrapper\"><input type=\"password\" class=\"alertify-text\" id=\"alertify-text\"></div>",
 			message : "<p class=\"alertify-message\">{{message}}</p>",
 			log     : "<article class=\"alertify-log{{class}}\">{{message}}</article>"
 		};
@@ -282,7 +282,8 @@
 					html = html.replace("{{ok}}", this.labels.ok).replace("{{cancel}}", this.labels.cancel);
 					break;
 				case "prompt":
-					html = html.replace("{{buttons}}", this.appendButtons(dialogs.buttons.cancel, dialogs.buttons.submit));
+					//html = html.replace("{{buttons}}", this.appendButtons(dialogs.buttons.cancel, dialogs.buttons.submit));
+					html = html.replace("{{buttons}}", this.appendButtons(dialogs.buttons.submit, dialogs.buttons.cancel));
 					html = html.replace("{{ok}}", this.labels.ok).replace("{{cancel}}", this.labels.cancel);
 					break;
 				case "alert":

@@ -17,33 +17,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		insert into buyList
 		(
-			buyNum,
-			fishName,
-			buyerId,
-			registDate,
-			uploadDate,
-			deadline,
-			weight,
-			saleStatus,
-			price,
-			successSellerId,
-			buyListComment,
-			location
+			buyNum
+			, fishName
+			, buyerId
+			<if test="uploadDate !=null">
+			, uploadDate
+			</if>
+			, deadline
+			, weight
+			, price
+			<if test="buyListComment !=null">
+			, buyListComment
+			</if>
+			, location
 		)
 		values
 		(
-			#{buyNum.nextval},
-			#{fishName},
-			#{buyerId},
-			#{registDate},
-			#{uploadDate},
-			#{deadline},
-			#{weight},
-			#{saleStatus},
-			#{price},
-			#{successSellerId },
-			#{buyListComment},
-			#{location}
+			buyNum.nextval
+			, #{fishName}
+			, #{buyerId}
+			<if test="uploadDate !=null">
+			, TO_DATE(#{uploadDate}, 'yyyy/mm/dd hh24:mi:ss')
+			</if>
+			, TO_DATE(#{deadline}, 'yyyy/mm/dd hh24:mi:ss')
+			, #{weight}
+			, #{price}
+			<if test="buyListComment !=null">
+			, #{buyListComment}
+			</if>
+			, #{location}
 		)
 
 	</insert>
@@ -61,15 +63,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 구매이력 가져오기 -->
-	<select id="getSuccessBuyList" parameterType="string" resultType="BuyList">
+	<select id="getSuccessBuyList" parameterType="map" resultType="BuyList">
 	
 			SELECT
 				buyNum,
 				fishName,
 				buyerId,
-				registDate,
-				uploadDate,
-				deadline,
+				TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+				TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+				TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+				weight,
+				saleStatus,
+				price,
+				successSellerId,
+				buyListComment,
+				location 
+			FROM 
+				buyList
+				
+			WHERE buyerId = #{id}
+			
+			AND 
+                saleStatus = 'saleComplete'
+   			<if test="period !=null and period=='1week'">
+            AND 
+            	deadline >= sysdate-7
+            </if>
+            <if test="period !=null and period=='3week'">
+            AND 
+            	deadline >= sysdate-21
+            </if>
+            <if test="period !=null and period=='1month'">
+            AND 
+            	deadline >= sysdate-30
+            </if>
+             <if test="period !=null and period=='1year'">
+            AND 
+            	deadline >= sysdate-365
+            </if>
+            <if test="startDay !=null">
+            <![CDATA[
+            AND 
+            	deadline >= #{startDay}
+        	AND 
+            	deadline <= #{endDay}
+             ]]>
+            </if>
+            
+	
+	</select>
+	
+	<!-- 환불이력가져오기 -->
+	<select id="getRefundsBuyList" parameterType="string" resultType="BuyList">
+	
+			SELECT
+				buyNum,
+				fishName,
+				buyerId,
+				TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+				TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+				TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
 				weight,
 				saleStatus,
 				price,
@@ -82,55 +135,169 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{search}
 			
 			and 
-                saleStatus !='onSale' and saleStatus !='refundComplete'
+                saleStatus ='refund'
 	</select>
 
 	
-<!--전체구매리스트,검색은 없음-->	
+<!--전체구매리스트-->	
 	<select id="allBuyList" resultType="BuyList" >
-		select 
-			*
+
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
 		from 
 			BuyList
 		where			
-			saleStatus = 'onSale'				
+			saleStatus = 'onSale'
+		order by buyNum asc
 	</select>
 	
 	
 	
-<!--나의구매리스트, 검색은 없음 -->		
-	<select id="myBuyList" resultType="BuyList" parameterType="string">
+<!--구매자 진행중인 리스트-->		
+	<select id="myList_ing_buyer" resultType="BuyList" parameterType="string">
 		select 
-			*
-		from 
-			BuyList
-		where			
-			buyerId = #{buyerId}
-		and
-			saleStatus = 'onSale'				
+			b.buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			s.sellerid as successSellerId,
+			buyListComment,
+			location 
+		from BuyList b, SaleList s
+		where b.buynum=s.buynum 
+		and buyerId = #{userId}
+		and saleStatus = 'onSale'	
+		order by buyNum asc			
 	</select>	
 	
-	<!-- <select id="mygetTotal" resultType="int" parameterType="string">
-		select count(*) from BuyList
-		where		
-			buyerId = #{buyerId}		
+
+<!--판매자 참여리스트-->		
+	<select id="myList_ing_seller" resultType="BuyList" parameterType="string">	
+		select 
+			b.buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			buyListComment,
+			location 
+		from BuyList b, (select * from SaleList where  sellerid=#{userId}) s
+		where b.buynum = s.buyNum
+		order by saleStatus asc
 	</select>
-	 -->
+
+<!--구매자 내글 목록-->		
+ 	<select id="myAllList_buyer" resultType="BuyList" parameterType="string">	
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
+		from 
+			BuyList
+		where			
+			buyerId=#{userId}
+		order by buyNum asc
+	</select>
 	
+<!--판매자 나의 모든리스트-->		
+<!-- 	<select id="myAllList_seller" resultType="BuyList" parameterType="string">	
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
+		from 
+			BuyList
+		where			
+			buyerId=#{userId}
+		order by buyNum asc
+	</select> -->
+
 
 	<select id="GetTotalListCount" resultType="int" parameterType="string">
 		SELECT COUNT(*) FROM buyList <if test="_parameter != null"> WHERE buyerId = #{search}  </if>
 	</select>
 	
+	<select id="GetTotalRefundListCount" resultType="int" parameterType="string">
+		SELECT COUNT(*) FROM buyList <if test="_parameter != null"> WHERE buyerId = #{search}  </if>
+		AND saleStatus = 'refund'
+	</select>
+	
 	<!-- 생선별 구매 합계 -->
-	<select id="sumPricebyFishName" parameterType="string" resultType="BuyList">
+	<select id="sumPricebyFishName" parameterType="map" resultType="BuyList">
 		SELECT SUM(price) as price ,fishName
 			FROM 
 				buyList
 	 		where 
 	 			buyerid = #{id}
 	 		and 
-                saleStatus !='onSale' and saleStatus !='refundComplete'
+                saleStatus = 'saleComplete'
+            <if test="period !=null and period=='1week'">
+            AND 
+            	deadline >= sysdate-7
+            </if>
+            <if test="period !=null and period=='3week'">
+            AND 
+            	deadline >= sysdate-21
+            </if>
+            <if test="period !=null and period=='1month'">
+            AND 
+            	deadline >= sysdate-30
+            </if>
+           
+             <if test="period !=null and period=='1year'">
+            AND 
+            	deadline >= sysdate-365
+            </if>
+             
+            <if test="startDay !=null">
+            <![CDATA[
+            AND 
+            	deadline >= #{startDay}
+        	AND 
+            	deadline <= #{endDay}
+             ]]>
+            </if>
             group by 
                 fishName
     </select>
@@ -146,7 +313,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and
    			buyerid = #{id}
 		and 
-		    saleStatus !='onSale' and saleStatus !='refundComplete'
+		    saleStatus = 'saleComplete'
 		group by 
 		    to_char(deadline, 'MM')
 		order by
@@ -157,15 +324,96 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="saleComplete" parameterType="string">
  
   	 	UPDATE buylist
-     	SET saleStatus = 'saleComplete'
+     	SET saleStatus = 'getComplete'
     	WHERE buyNum = #{buyNum}
 
 	</update>
+	
+
+	<!-- 판매자 선택  -->
+	<update id="selectSeller" parameterType="map">
+		UPDATE buylist
+     	SET saleStatus = 'saleComplete'
+     		,successSellerId=#{SellerId}
+    	WHERE buyNum = #{buyNum}
+	</update>
+
+
+	<update id="refund" parameterType="string">
+ 
+  	 	UPDATE buylist
+     	SET saleStatus = 'refund'
+    	WHERE buyNum = #{buyNum}
+
+	</update>
+	
+
+	<!--구매자 구매목록에서 글삭제  -->
+	<delete id="deleteMyList_buyer" parameterType="string">
+		delete 
+			BuyList 
+		where 
+			buyNum=#{buyNum} 		
+	</delete>
+	
+	<!--판매자 구매목록에서 글삭제(취소)-->
+	<delete id="deleteMyList_seller" parameterType="string">
+		delete 
+			saleList
+		where 
+			buyNum=#{buyNum} 		
+	</delete>
+
+
+	<select id="getTodayAvgList" resultType="AvgList">
+		select f.fishName,nvl(sum(b.PRICE),0) as total, nvl(sum(b.WEIGHT),0) as weight, nvl(trunc((SUM(price)/count(*))),0) as avgprice, TO_DATE(b.deadline, 'YY/MM/DD') as dates
+		from fishList f left outer join buyList b on(f.fishName = b.fishName)
+		group by f.fishName, TO_DATE(b.deadline, 'YY/MM/DD') having TO_DATE(b.DEADLINE, 'YY/MM/DD') = TO_date(sysdate, 'YY/MM/DD') order by f.fishName
+		
+	</select>
+	
+	<select id="getWeekAvgList" resultType="AvgList">
+		<!-- select fishname,avgprice,dates from weekavglist order by dates, fishname -->
+		select * from WEEKAVGLIST where fishname in('すずき','イセエビ','キダイ','キンメダイ','クマエビ') order by dates, fishname
+	</select>
+	
+	<insert id="setWeekAvgList" parameterType="AvgList">
+		insert into WEEKAVGLIST
+		(
+			AvgListNum
+			,fishName
+			, avgPrice
+			, dates
+		)
+		values
+		(
+			avgListNum.nextval
+			,#{fishName}
+			,#{avgPrice}
+			,sysdate
+		)
+	</insert>
+	
+	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
+		insert into buyList
+		(
+			avgListNum
+			,fishName
+			, avgPrice
+			, date
+		)
+		values
+		(
+			avgListNum.nextval
+			,fishName
+			, avgPrice
+			, to_char(sysdate,YYYY/MM/DD);
+		)
+	</insert> -->
+	
 <!-- 	
 	  <select id="selectBestseller" resultType="hashmap">
    	SELECT
-  
-   	
    		b.bookcode,
    		b.title,
    		b.price,
@@ -183,5 +431,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    			sale
    	)
    </select> -->
+
 	
 </mapper>

@@ -4,17 +4,15 @@ public class QnA {
 	private int qnaNum;
 	private String id;
 	private String writeBoardDate;
-	private String updateBoardDate;
 	private String title;
 	private String content;
 	private int hitcount;
-	public QnA(int qnaNum, String id, String writeBoardDate, String updateBoardDate, String title, String content,
+	public QnA(int qnaNum, String id, String writeBoardDate, String title, String content,
 			int hitcount) {
 		super();
 		this.qnaNum = qnaNum;
 		this.id = id;
 		this.writeBoardDate = writeBoardDate;
-		this.updateBoardDate = updateBoardDate;
 		this.title = title;
 		this.content = content;
 		this.hitcount = hitcount;
@@ -40,12 +38,7 @@ public class QnA {
 	public void setWriteBoardDate(String writeBoardDate) {
 		this.writeBoardDate = writeBoardDate;
 	}
-	public String getUpdateBoardDate() {
-		return updateBoardDate;
-	}
-	public void setUpdateBoardDate(String updateBoardDate) {
-		this.updateBoardDate = updateBoardDate;
-	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -66,8 +59,7 @@ public class QnA {
 	}
 	@Override
 	public String toString() {
-		return "QnA [qnaNum=" + qnaNum + ", id=" + id + ", writeBoardDate=" + writeBoardDate + ", updateBoardDate="
-				+ updateBoardDate + ", title=" + title + ", content=" + content + ", hitcount=" + hitcount + "]";
+		return "QnA [qnaNum=" + qnaNum + ", id=" + id + ", writeBoardDate=" + writeBoardDate + ", title=" + title + ", content=" + content + ", hitcount=" + hitcount + "]";
 	}
 	
 	

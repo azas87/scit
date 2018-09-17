@@ -46,4 +46,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<select id="getSellerInfo" parameterType="string" resultType="SellerInfo">
+	
+		SELECT 
+			round(avg(star),0) as star , sellerId as id, name, namekana, address, wish
+		FROM 
+			memberinfo m ,review r, wishlist w
+		WHERE 
+			m.id = #{id} AND m.id=r.sellerId AND w.id=m.id
+		GROUP BY 
+			sellerId, name, namekana, address, wish
+	
+	</select>
+	
+	<update id="cancel" parameterType="string">
+		
+		UPDATE memberinfo
+     	SET memberstatus = 'cancel'
+    	WHERE id = #{id}
+		AND password = #{password}    	
+	
+	</update>
+	
+	<select id="checkingEmail" parameterType="Member" resultType="Member">
+	
+		select * from memberinfo where email = #{email} and id = #{id} and memberstatus ='cancel'
+	
+	</select>
+	
+	<update id="reenterance" parameterType="Member">
+
+		UPDATE memberinfo
+     	SET memberstatus = 'join' , password = #{password}
+    	WHERE id = #{id}
+	
+	</update>
+	
 </mapper>

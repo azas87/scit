@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kay87.team.dao.FishInfoListMapper">
+	
+	<select id="getFishInfo" resultType="FishList">
+	
+		SELECT * FROM fishlist
+		
+	</select>
+	
+	<select id="getCategory" resultType="FishCategoryList">
+		
+		SELECT * FROM FISHCATEGORYLIST
+		
+	</select>
+
+	
+	<insert id="newFishInfo" parameterType="FishList">
+		
+		insert into fishlist values(#{fishName},#{fishCategoryNum},#{locations},#{seasonInfo},#{fishInfo},#{unit})
+	
+	</insert>
+	
+	<delete id="deleteFishInfo" parameterType="string">
+	
+		delete from fishlist
+		where fishName = #{fishName}
+		
+	</delete>
+	
+	<select id="selectOneFish" parameterType="string" resultType="FishList">
+	
+		SELECT * FROM fishlist
+		WHERE fishName = #{fishName}
+		
+	</select>
+
+	<update id="updateFishInfo" parameterType="FishList">
+	
+		UPDATE fishlist 
+		SET fishCategoryNum	= #{fishCategoryNum},	
+			locations = #{locations},
+			seasonInfo = #{seasonInfo},
+			fishInfo = #{fishInfo},
+			unit = #{unit}
+		where fishName = #{fishName}
+			
+	</update>
+
+</mapper>

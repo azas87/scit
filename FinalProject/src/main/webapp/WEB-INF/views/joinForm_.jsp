@@ -24,13 +24,7 @@
 <body>
   <table id="jqGrid"></table>
   <div id="jqGridPager"></div>
-  <dvi>
-	<table>
-	<tr>
-		<td>123</td>
-	</tr>
-	</table>
-  </dvi>
+  
 
   <script type="text/javascript">
         $(document).ready(function () {

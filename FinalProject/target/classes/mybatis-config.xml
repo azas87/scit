@@ -8,10 +8,27 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kay87.team.vo.MemberInfo" alias="Member"/>
 		<typeAlias type="com.kay87.team.vo.BuyList" alias="BuyList"/>
 		<typeAlias type="com.kay87.team.vo.FishList" alias="FishList"/>
+		<typeAlias type="com.kay87.team.vo.Review" alias="Review"/>
+		<typeAlias type="com.kay87.team.vo.SellerInfo" alias="SellerInfo"/>
+		<typeAlias type="com.kay87.team.vo.BestSeller" alias="BestSeller"/>
+		<typeAlias type="com.kay87.team.vo.TodayAvgList" alias="TodayAvgList"/>
+		<typeAlias type="com.kay87.team.vo.AvgList" alias="AvgList"/>
+		<typeAlias type="com.kay87.team.vo.QnA" alias="QnA"/>
+		<typeAlias type="com.kay87.team.vo.QnAreply" alias="Reply"/>
+		<typeAlias type="com.kay87.team.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kay87.team.vo.FAQ" alias="FAQ"/>
+		<typeAlias type="com.kay87.team.vo.FishList" alias="FishList"/>
+		<typeAlias type="com.kay87.team.vo.FishCategoryList" alias="FishCategoryList"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="MemberMapper.xml" />
 		<mapper resource="BuyMapper.xml" />
+		<mapper resource="ReviewMapper.xml" />
+		<mapper resource="BoardMapper.xml" />
+		<mapper resource="NoticeMapper.xml" />
+		<mapper resource="FaQMapper.xml" />
+		<mapper resource="FishInfoListMapper.xml" />
 	</mappers>
+	
 </configuration>

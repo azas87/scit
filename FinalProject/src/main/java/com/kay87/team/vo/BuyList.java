@@ -6,16 +6,16 @@ public class BuyList {
 	private String buyNum;
 	private String fishName;
 	private String buyerId;
-	private Date registDate;
-	private Date uploadDate;
-	private Date deadline;
+	private String registDate;
+	private String uploadDate;
+	private String deadline;
 	private int weight;
 	private String saleStatus;
 	private int price;
 	private String successSellerId;
 	private String buyListComment;
 	private String location;
-	public BuyList(String buyNum, String fishName, String buyerId, Date registDate, Date uploadDate, Date deadline,
+	public BuyList(String buyNum, String fishName, String buyerId, String registDate, String uploadDate, String deadline,
 			int weight, String saleStatus, int price, String successSellerId, String buyListComment, String location) {
 		super();
 		this.buyNum = buyNum;
@@ -52,22 +52,22 @@ public class BuyList {
 	public void setBuyerId(String buyerId) {
 		this.buyerId = buyerId;
 	}
-	public Date getRegistDate() {
+	public String getRegistDate() {
 		return registDate;
 	}
-	public void setRegistDate(Date registDate) {
+	public void setRegistDate(String registDate) {
 		this.registDate = registDate;
 	}
-	public Date getUploadDate() {
+	public String getUploadDate() {
 		return uploadDate;
 	}
-	public void setUploadDate(Date uploadDate) {
+	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
-	public Date getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
-	public void setDeadline(Date deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 	public int getWeight() {
@@ -113,7 +113,4 @@ public class BuyList {
 				+ ", saleStatus=" + saleStatus + ", price=" + price + ", successSellerId=" + successSellerId
 				+ ", buyListComment=" + buyListComment + ", location=" + location + "]";
 	}
-	
-	
-
 }
