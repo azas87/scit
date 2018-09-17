@@ -200,7 +200,7 @@ function reset () {
 			<c:choose>
 				<c:when test="${sessionScope.loginId == null }">
 
-					<div class="item" ><a href="loginForm?">로그인</a></div>
+					<div class="item" ><a href="loginForm?">로그인1</a></div>
 					<div class="item " ><a class="trigger_popup_fricc">회원가입</a></div>
 				</c:when>
 				

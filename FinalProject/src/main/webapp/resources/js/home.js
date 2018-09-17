@@ -238,6 +238,7 @@ function myList_ing_buyer() {
 				name : 'successSellerId',
 				width : 100,
 				height : 200,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '再購入1',
@@ -245,6 +246,7 @@ function myList_ing_buyer() {
 				width : 100,
 				height : 200,
 				formatter: rebuy,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '販売者選択',
@@ -252,6 +254,7 @@ function myList_ing_buyer() {
 				width : 100,
 				height : 200,
 				formatter: select,
+				cellattr:mouseCursor,
 				align:'center'
 			}, 
 
@@ -489,6 +492,7 @@ function myAllList_buyer() {
 				name : 'successSellerId',
 				width : 100,
 				height : 200,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '再購入1',
@@ -496,6 +500,7 @@ function myAllList_buyer() {
 				width : 100,
 				height : 200,
 				formatter: rebuy,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '削除',
@@ -503,6 +508,7 @@ function myAllList_buyer() {
 				width : 100,
 				height : 200,
 				formatter: deletee,
+				cellattr:mouseCursor,
 				align:'center'
 			},
 
@@ -896,7 +902,6 @@ function selectCancel (cellvalue, options, rowObject) {
    return '取り消し'; 
 };
 function rebuy (cellvalue, options, rowObject) {
- //console.log(rowObject);
    return '再購入'; 
 };
 function select (cellvalue, options, rowObject) {
@@ -910,7 +915,11 @@ function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1�
 	}else{	
 		return "";
 	}
-};		 
+};	
+
+function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
+	return "style='cursor:pointer'";
+}
 
 
 function myList() {		
