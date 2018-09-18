@@ -106,45 +106,45 @@ function sellerDetail (seller) {
  			}, {
  				label : '購買日付',
  				name : 'deadline',
- 				width:'200',
+ 				width:295,
  				align:'center'
  			
  			}, {
  				label : '品種',
  				name : 'fishName',
- 				width:'120',
+ 				width:200,
  				align:'center' 				
  			}, {
  				label : '産地',
  				name : 'location',
- 				width:'120',
+ 				width:130,
  				align:'center'
  			}, {
  				label : '重量',
  				name : 'weight',
- 				width:'60',
+ 				width:80,
  				align:'center'
  			}, {
  				label : '価格',
  				name : 'price',
- 				width:'100',
+ 				width:130,
  				align:'center'
  			}, {
- 				label : '販売者ID',
+ 				label : '販売者',
  				name : 'successSellerId',
- 				width:'100',
+ 				width: 120,
  				cellattr:mouseCursor,
  				align:'center'
  			}, {
- 				label : '再購入1',
- 				width:'80',
- 				name : '再購入2',
+ 				label : '再購入',
+ 				width:100,
+ 				name : '再購入',
  				formatter: rebuy,
  				cellattr:mouseCursor,
  				align:'center'
  			},{
- 				label : '受け取り確認',
- 				width:'75',
+ 				label : '確認',
+ 				width:100,
  				name : '確認',
  				formatter: rebuy2,
  				cellattr:mouseCursor,
@@ -152,7 +152,7 @@ function sellerDetail (seller) {
  			},{
  				label : '返金',
  				name : '払い戻し',
- 				width : '75',
+ 				width : 100,
  				formatter: rebuy3,
  				cellattr:mouseCursor,
  				align:'center'
@@ -160,8 +160,7 @@ function sellerDetail (seller) {
 
  		],
  		viewrecords : true,
- 		autowidth:true,
- 		//width:985,
+ 		width:1300,
  		rowNum : 10,
  		rowList:[10,20,30],
  		height:500,
@@ -192,7 +191,7 @@ function sellerDetail (seller) {
  			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
  			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
- 			
+ 			$('.footrow').css('fontSize','1.5em');
 
  			
  			$('table.ui-jqgrid-ftable td:eq(2)').hide(); 
@@ -245,7 +244,7 @@ function sellerDetail (seller) {
  		onCellSelect: function(rowid, index, contents, event) 
      	{    
      		var cm = $(this).jqGrid('getGridParam','colModel');    
-     		if(cm[index].name == "再購入2")
+     		if(cm[index].name == "再購入")
      		{	
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
      		}
@@ -398,6 +397,7 @@ function sumList(period, startDay, endDay) {
 
  		],
  		viewrecords : true,
+ 		scrollOffset : 0,
  		autowidth:true,
  		//altRows:true,	// tooltip 나오는 기능인데 차이가 없네? 이미 title에 값이 적혀 있어서 그런가?
  		height:400,

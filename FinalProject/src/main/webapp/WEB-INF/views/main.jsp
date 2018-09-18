@@ -71,7 +71,7 @@ $(document).ready(function(){
 	 // 10분 마다 자동갱신
 	 setInterval(function(){
 		 console.log(new Date());
-		 ListRefresh();
+		 //ListRefresh();
 		
 	}, refreshInterver);
 	 
@@ -134,6 +134,10 @@ $(document).ready(function(){
 	});
 	
 	tab('#tab',0);
+	
+//	$("#popup").attr("href", "./resources/content.jsp");
+	$('#popup').trigger('click');
+		
 });
    
 var chartDrowFun = {
@@ -239,6 +243,10 @@ var chartDrowFun = {
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+	<!-- <div id="popup" class="popdown" >알림창 데모</div>-->
+	<a id="popup" href="./resources/content.jsp" class="popdown" style="display:none">알림창 데모</a> 
+</div>
    <div id="Line_Controls_Chart">
    <!-- 라인 차트 생성할 영역 -->
        <div id="lineChartArea"></div>
@@ -266,7 +274,7 @@ var chartDrowFun = {
 			</c:when>
 			<c:when test="${sessionScope.userMode == '2' }">
 				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
-				<div class="item " >선호리스트</div>
+				<div class="item " onclick="sellerWishList()">선호리스트</div>
 				<div class="item " onclick="myList_ing_seller()">참여리스트</div>
 			</c:when>
 		</c:choose>

@@ -137,8 +137,8 @@ $(window).load(function () {
 	      $(this).css('font-size',"1.5em");
 	      $(this).css('background-color',"white");
 	    });
-	  var audio = new Audio('./resources/alram.wav');
-	  audio.play();
+	  /* var audio = new Audio('./resources/alram.wav');
+	  audio.play(); */
 });
 
 function cancel() {
@@ -208,7 +208,7 @@ function reset () {
 					<div class="item" ><a href="logOut?">로그아웃</a></div>
 					<div class="item" ><a href="writeBuyBoardForm?">글등록</a></div>
 					<c:if test="${sessionScope.userMode ne 'manager'}">				
-					<div class="item" ><a href="buyListHistory?">구매내역</a></div>
+						<div class="item" onclick="newPage('buyListHistory?')">구매내역</div>
 					</c:if>
 					<div class="item" ><a href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a></div>
 
