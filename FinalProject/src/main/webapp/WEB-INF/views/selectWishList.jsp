@@ -16,7 +16,7 @@ language="java" pageEncoding="UTF-8"%>
 <script>
 
 $(function() {
-	 $("input:radio[name=category]").click(function() { 
+	 $("input:radio[name=radio]").click(function() { 
 		getFishList(); 
 	});
 	 $(".button").click(function() { 
@@ -24,7 +24,7 @@ $(function() {
 		});
 });
 function getFishList(){ 
-	var fishCategoryNum = $('input[name="category"]:checked').val();
+	var fishCategoryNum = $('input[name="radio"]:checked').val();
 	$.ajax({
 		url:"getFishList",
 		type:"get",
@@ -58,7 +58,7 @@ function setWishList() {
 </script>
 </head>
 <body style="background:url(./resources/img/bg.png) repeat;">
-
+<%-- 
 <!-- contact-form -->	
 <div class="message warning" style="width: 800px; height: 720px; position: absolute;top: 22%; left:27%;margin-top: -120px; border: none;">
 <div class="inset" style="height: 500px;">
@@ -69,22 +69,20 @@ function setWishList() {
 		 		 
 		 </div> 			
 	</div>
-		<form style="height: 530px;">
-		<div style="width: 200px; float: left;"><ul>
-			<c:forEach items="${categoryList}" var="category">
-		 	<li><input type="radio" name="category" value="${category.fishCategoryNum}" /> ${category.categoryName}
-		 </c:forEach>
-		</ul></div>	
-		
-		<ul id="fishList">
-		</ul>
-				
-		</form>
+<form style="height: 530px;">
+	<div style="width: 200px; float: left;">
+		<c:forEach items="${categoryList}" var="category" varStatus="status">
+			<div class="test">	
+				<input type="radio" name="radio" class="radio" id="radio${status.count}" value="${category.fishCategoryNum}" style="display: none;"/>
+				<label for="radio${status.count}">${category.categoryName}</label>
+			</div>
+		</c:forEach>
+	</div>
+</form>
 		</div>					
 	</div>
+ --%>
 
-	<!-- <div class="clear"> </div> -->
-<!--- footer --->
 
 </body>
 </html>
