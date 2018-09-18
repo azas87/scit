@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kay87.team.vo.MemberInfo;
 import com.kay87.team.vo.SellerInfo;
+import com.kay87.team.vo.WishList;
 
 public interface MemberMapper {
 
@@ -20,5 +21,17 @@ public interface MemberMapper {
 	public MemberInfo checkingEmail(MemberInfo member);
 
 	public void reenterance(MemberInfo member);
+
+	public void setWishList(WishList w);
+
+	public int getwishListCount(String id);
+
+	public List<WishList> getWishList(String id);
+
+	public int deleteWishList(WishList w);
+
+	public WishList checkWishList(WishList w);
+
+	public void updateUserFirst(String id);
 
 }

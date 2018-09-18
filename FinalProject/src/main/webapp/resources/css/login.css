@@ -144,7 +144,7 @@ CONTENT
 
 /* Input field */
 .login-form .content .input {
-	width: 188px;
+	width: 245px;
 	padding: 15px 25px;
 	
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -197,12 +197,12 @@ CONTENT
 }
 
 .user-icon {
-	top:147px; /* Positioning fix for slide-in, got lazy to think up of simpler method. */
+	top:115px; /* Positioning fix for slide-in, got lazy to think up of simpler method. */
 	background: rgba(65,72,72,0.75) url(../img/user-icon.png) no-repeat center;	
 }
 
 .pass-icon {
-	top:221px;
+	top:188px;
 	background: rgba(65,72,72,0.75) url(../img/pass-icon.png) no-repeat center;
 }
 

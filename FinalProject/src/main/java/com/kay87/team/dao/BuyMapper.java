@@ -60,6 +60,8 @@ public interface BuyMapper {
 
 	public void deleteMyList_seller(Map<String, String> map);//판매자참여리스트취소
 
+	public BuyList selectOneBuylist(int parseInt);
+
 	
 
 	

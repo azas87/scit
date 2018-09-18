@@ -54,8 +54,9 @@ public class FAQController {
 		return "writeFaqForm";
 	}
 	
-	@RequestMapping(value = "/writeFaq", method = RequestMethod.GET)
+	@RequestMapping(value = "/writeFaq", method = RequestMethod.POST)
 	public String writeBoard(FAQ faq, HttpSession session){
+		System.out.println(faq);
 
 		faq.setId((String) session.getAttribute("loginId"));
 		FaQMapper dao = sql.getMapper(FaQMapper.class);

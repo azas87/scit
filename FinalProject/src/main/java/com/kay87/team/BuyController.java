@@ -34,18 +34,20 @@ public class BuyController {
 	
 	//구매글쓰기 폼 불러오기
 	@RequestMapping(value = "/writeBuyBoardForm", method = RequestMethod.GET)
-	public String writeBuyBoardForm(Model model, HttpSession session, 
-			BuyList buylistFromHistory) {
+	public String writeBuyBoardForm(Model model, HttpSession session, String buyNum, BuyList buylistFromHistory) {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
-		List<BuyList> buylist=dao.getHistorySellerId((String)session.getAttribute("loginId"));
+		List<BuyList> buylist = dao.getHistorySellerId((String)session.getAttribute("loginId"));
+		if(buyNum!=null) {
+			buylistFromHistory = dao.selectOneBuylist(Integer.parseInt(buyNum));
+		}
 		model.addAttribute("buylist", buylist);
 		model.addAttribute("buylistFromHistory", buylistFromHistory);
 		
 		return "writeBuyBoardForm";
 	}
 	//구매글쓰기
-	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.GET)
+	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.POST)
 	public String writeBuyBoard(BuyList buyList, HttpSession session){
 		System.out.println("writeBuyBoard buyList => " + buyList);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);

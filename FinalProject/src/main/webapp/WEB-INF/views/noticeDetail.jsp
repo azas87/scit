@@ -69,8 +69,10 @@ function deleteBoard(noticeNum) {
 <div class="div">
 <p class="p">
 <input type="button" value="목록으로" onclick="boardList()"/>
+<c:if test="${sessionScope.loginId eq notice.id }">
 <input type="button" value="수정" onclick="update(${notice.noticeNum})"/>
 <input type="button" value="삭제" onclick="deleteBoard(${notice.noticeNum})"/>
+</c:if>
 </p>
 </div>
 </td>

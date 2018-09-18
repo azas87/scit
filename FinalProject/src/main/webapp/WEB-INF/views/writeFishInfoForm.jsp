@@ -5,19 +5,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+<!-- <link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css' rel='stylesheet' type='text/css'>
+<link href='https://davidstutz.github.io/bootstrap-multiselect/css/bootstrap-multiselect.css' rel='stylesheet' type='text/css'>
+<script src='https://davidstutz.github.io/bootstrap-multiselect/js/bootstrap-multiselect.js' type='text/javascript'></script>
+ -->
 <link rel="stylesheet" href="./resources/css/writeBuyBoardForm.css"/>
-<link href='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-  <link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css' rel='stylesheet' type='text/css'>
+
+<link href='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' rel='stylesheet' type='text/css'>  
   <link href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/css/bootstrap-switch.css' rel='stylesheet' type='text/css'>
-  <link href='https://davidstutz.github.io/bootstrap-multiselect/css/bootstrap-multiselect.css' rel='stylesheet' type='text/css'>
+  
   <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js' type='text/javascript'></script>
   <script src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js' type='text/javascript'></script>
   <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
   <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/js/bootstrap-switch.min.js' type='text/javascript'></script>
-  <script src='https://davidstutz.github.io/bootstrap-multiselect/js/bootstrap-multiselect.js' type='text/javascript'></script>
+  
 </head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script type="text/javascript" src="./resources/js/WriteBuyBoard.js" ></script>
 <style>
 
@@ -69,8 +75,8 @@ label.control-label {
 
 <script>
 $(document).ready(function() {  
-	  $('.multiselect').multiselect();
-	  $('.datepicker').datepicker();  
+//	  $('.multiselect').multiselect();
+//	  $('.datepicker').datepicker();  
 	});
 
 </script>
@@ -90,7 +96,7 @@ $(document).ready(function() {
             <label class='control-label col-md-2 col-md-offset-2' for='id_accomodation'>魚種</label>
             <div class='col-md-2'>	
             	<div class="dropdown">
-				<input type="text" id ="fishName" name="fishName" class='form-control' />
+				<input type="text" id ="fishName" name="fishName" class='form-control' autocomplete="off" />
          	  
 			</div>
             </div>
@@ -147,7 +153,7 @@ $(document).ready(function() {
           <div class='form-group'>
             <label class='control-label col-md-2 col-md-offset-2' for='id_comments'>基本情報</label>
             <div class='col-md-6'>
-              <textarea class='form-control' id='fishInfo' placeholder='Additional comments' rows='20' name="fishInfo"></textarea>
+              <textarea class='form-control' id='fishInfo' placeholder='Additional comments1' rows='20' name="fishInfo"></textarea>
             </div>
           </div>
           <div class='form-group'>

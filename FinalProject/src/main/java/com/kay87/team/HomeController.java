@@ -83,7 +83,6 @@ public class HomeController {
 		BuyMapper mapper = sql.getMapper(BuyMapper.class);
 		List<AvgList> list = mapper.getWeekAvgList();
 		
-		
 		for(AvgList l: list)
 		{
 			System.out.println(l);
