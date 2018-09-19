@@ -5,6 +5,8 @@ window.onload = function() { //실행될 코드 }
 		var startDay = $('#startDay').val();
 		var endDay = $('#endDay').val();
 		
+		console.log("dddd = "+ endDay);
+		
 		buyList(period, startDay, endDay);
 		sumList(period, startDay, endDay);
 		
