@@ -260,6 +260,7 @@ function reset () {
 </div>
 <a href="fishInfoList?">생선정보</a>
 <a href="updateWishList?">선호품목변경</a>
+<a href="marketPrice?">시세</a>
 </body>
 
 </html>

@@ -22,46 +22,35 @@ function writeFaqForm() {
 function getQnaTable() {
 	
 	$("#jqGridBoard").jqGrid({
-		url : "getFaqList",
+		url : "getMarketPrice",
 		mtype : "GET",
 		datatype : "json",
 		colModel : 
 		[ 
 			{
-				label : '番号',
-				name : 'FAQNum',
+				label : '魚種',
+				name : 'fishName',
 				height : 200,
 				align:'center'
 			}, {
-				label : '件名',
-				name : 'title',
+				label : '市価',
+				name : 'avgPrice',
 				width : 80,
 				height : 200,
 				align:'center'
 			}, {
-				label : '作成者',
-				name : 'id',
+				label : '日付',
+				name : 'dates',
 				height : 200,
 				align:'center'
-			}, {
-				label : '登録日付',
-				name : 'writeBoardDate',
-				height : 200,
-				align:'center'
-			}, 
-			 {
-				label : '閲覧数',
-				name : 'hitcount',
-				height : 200,
-				align:'center'
-			}, 
+			},
 		],
 		viewrecords : true,
 		width : 900,
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-	/*	pager : "#jqGridPager",*/
+		/*pager : "#jqGridPager",*/
 		loadonce: true,
 		grouping: false,
 		groupingView: {
@@ -94,13 +83,7 @@ function getQnaTable() {
     	{    
     	
         	var cm = $(this).jqGrid('getGridParam','colModel');    
-        	if(cm[index].name == "title")
-        	{
-        		var obj = $("#jqGridBoard").getRowData(rowid);
-        		location.href="FAQDetail?FAQNum="+obj.FAQNum;
-
-        	}
-    		
+        	
     	},   
 	});
 }

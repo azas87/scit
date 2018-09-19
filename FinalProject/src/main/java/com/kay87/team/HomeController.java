@@ -53,6 +53,15 @@ public class HomeController {
 		
 	}
 	
+	//시세 
+	@RequestMapping(value = "/marketPrice", method = RequestMethod.GET)
+	public String marketPrice() {
+	
+		return "marketPrice";
+		
+	}
+	
+	
 	
 	//첫 메인화면에서 전체구매리스트+검색
 	@RequestMapping(value = "/")

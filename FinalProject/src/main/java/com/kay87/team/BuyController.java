@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.dao.FaQMapper;
+import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.BuyList;
+import com.kay87.team.vo.FAQ;
 import com.kay87.team.vo.FishList;
 
 
@@ -187,9 +190,27 @@ public class BuyController {
 	}
 
 	
+	@RequestMapping(value = "/getMarketPrice", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String getMarketPrice(HttpSession session, Model model){		
+		
+		BuyMapper dao=sql.getMapper(BuyMapper.class);	
+		List<AvgList> list = dao.getMarketPrice();
+		System.out.println(list);
+			
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(list) + "}";
+		System.out.println(jsonPlace);		
+		return jsonPlace;
+		}
+	
+	
+	
 	//판매이력가져오기
 	public List<BuyList> getBuyListHistory(String id, String period, String startDay, String endDay){
-		
+		System.out.println(startDay);
+		System.out.println(endDay);
+		System.out.println(period);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		Map<String, String> map = new HashMap<String, String>();
 
@@ -218,4 +239,5 @@ public class BuyController {
 		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
 		return sumPricebyFishName;
 }
+	
 }

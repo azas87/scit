@@ -415,27 +415,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, to_char(sysdate,YYYY/MM/DD);
 		)
 	</insert> -->
+
+	<select id="getMarketPrice" resultType="AvgList">
 	
-<!-- 	
-	  <select id="selectBestseller" resultType="hashmap">
-   	SELECT
-   		b.bookcode,
-   		b.title,
-   		b.price,
-   		s.purchasecnt
-   	FROM
-   		book b, sale s
-   	WHERE
-   		b.bookcode=s.bookcode
-   	AND
-   		s.purchasecnt
-   	IN (
-   		SELECT
-   			MAX(purchasecnt)
-   		FROM
-   			sale
-   	)
-   </select> -->
+		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
+		
+	</select>
 
 	
 </mapper>

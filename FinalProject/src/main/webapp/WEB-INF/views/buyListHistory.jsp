@@ -293,5 +293,7 @@
 		<a class="myButton"　href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
 		</div>
 	</div>
+	
+	
 </body>
 </html>
