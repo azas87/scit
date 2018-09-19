@@ -44,7 +44,7 @@ public class HomeController {
 	
 	
 	}
-	
+
 	//로그인 폼 불러오기
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public String login() {
@@ -265,5 +265,22 @@ public class HomeController {
 		
 		return "redirect:/";		
 	}
+	
+	// 판매자 메인화면에서 선호 목록_k
+		@RequestMapping(value = "/sellerWishList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+		public @ResponseBody String sellerWishList(HttpSession session) {			
+			System.out.println("sellerWishList");
+			BuyMapper mapper = sql.getMapper(BuyMapper.class);
+			String userId = (String) session.getAttribute("loginId");	
+			List<BuyList> myWishList_seller = mapper.sellerWishList(userId);			
+			System.out.println(myWishList_seller);
+			
+			Gson gson = new Gson();
+			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+			String jsonPlace = "{\"rows\":"+ gson.toJson(myWishList_seller) + "}";
+			System.out.println(jsonPlace);		
+			
+			return jsonPlace;
+		}
 	
 }

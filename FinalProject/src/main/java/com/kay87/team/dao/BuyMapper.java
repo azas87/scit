@@ -54,11 +54,15 @@ public interface BuyMapper {
 	
 	public int setWeekAvgList(AvgList weekAvgList);
 	
+	public List<BuyList> sellerWishList(String userid);
+	
 	
 
 	public int deleteMyList_buyer(String buyNum);
 
 	public void deleteMyList_seller(Map<String, String> map);//판매자참여리스트취소
+	
+	public int insertAvgList(AvgList AvgList);
 
 	
 

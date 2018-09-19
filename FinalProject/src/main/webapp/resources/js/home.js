@@ -145,6 +145,7 @@ function homeList() {
 
 		],
 		viewrecords : true,
+		scrollOffset : 0,
 		//altRows:true,
 		width : 1100,
 		height : 505,
@@ -182,6 +183,97 @@ function homeList() {
 		
 	});
 }
+
+
+
+function sellerWishList() {
+	console.log("sellerWishList");
+	$.jgrid.gridUnload('#jqGrid');
+	$("#jqGrid").jqGrid({
+		url : "sellerWishList",
+		mtype : "GET",
+		datatype : "json",
+		colModel : 
+		[ 
+			{
+ 				label : 'buyNum',
+ 				name : 'buyNum',
+ 				align:'center',
+ 				hidden:true
+ 			}, {
+ 				label : 'saleStatus',
+ 				name : 'saleStatus',
+ 				align:'center',
+ 				hidden:true
+ 			}, {
+				label : '購買日付',
+				name : 'deadline',
+				width : 250,
+				height : 200,
+				align:'center'
+			}, {
+				label : '品種',
+				name : 'fishName',
+				width : 150,
+				height : 200,
+				align:'center'
+			}, {
+				label : '産地',
+				name : 'location',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, {
+				label : '重量',
+				name : 'weight',
+				width : 60,
+				height : 200,
+				align:'center'
+			}, {
+				label : '価格',
+				name : 'price',
+				width : 80,
+				height : 200,
+				align:'center'
+			}, 
+		],
+		viewrecords : true,
+		//altRows:true,
+		width : 1100,
+		height : 505,
+		rowNum : 10,
+		rowList:[10,20,30],
+		pager : "#jqGridPager",
+		loadonce: true,
+		grouping: false,
+		groupingView: {
+		    groupField: ['buyNum'],
+		    groupColumnShow : [false],
+		},
+		loadComplete:function(data)
+		{
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		}, 
+	});
+}
+
+
 
 //구매자 진행중인 리스트
 function myList_ing_buyer() {
@@ -238,6 +330,7 @@ function myList_ing_buyer() {
 				name : 'successSellerId',
 				width : 100,
 				height : 200,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '再購入1',
@@ -245,6 +338,7 @@ function myList_ing_buyer() {
 				width : 100,
 				height : 200,
 				formatter: rebuy,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '販売者選択',
@@ -252,6 +346,7 @@ function myList_ing_buyer() {
 				width : 100,
 				height : 200,
 				formatter: select,
+				cellattr:mouseCursor,
 				align:'center'
 			}, 
 
@@ -489,6 +584,7 @@ function myAllList_buyer() {
 				name : 'successSellerId',
 				width : 100,
 				height : 200,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '再購入1',
@@ -496,6 +592,7 @@ function myAllList_buyer() {
 				width : 100,
 				height : 200,
 				formatter: rebuy,
+				cellattr:mouseCursor,
 				align:'center'
 			}, {
 				label : '削除',
@@ -503,6 +600,7 @@ function myAllList_buyer() {
 				width : 100,
 				height : 200,
 				formatter: deletee,
+				cellattr:mouseCursor,
 				align:'center'
 			},
 
@@ -725,6 +823,7 @@ function bestSeller() {
 			}, 
 		],
 		caption:"bestSeller",
+		scrollOffset : 0,
 		hidegrid : false,
 		hidden:false,
 		viewrecords : true,
@@ -830,6 +929,7 @@ function seasonInfo() {
 			}, 
 		],
 		caption:"seasonInfo",
+		scrollOffset : 0,
 		hidegrid : false,
 		viewrecords : true,
 		height : 152,
@@ -896,7 +996,6 @@ function selectCancel (cellvalue, options, rowObject) {
    return '取り消し'; 
 };
 function rebuy (cellvalue, options, rowObject) {
- //console.log(rowObject);
    return '再購入'; 
 };
 function select (cellvalue, options, rowObject) {
@@ -910,7 +1009,11 @@ function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1�
 	}else{	
 		return "";
 	}
-};		 
+};	
+
+function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
+	return "style='cursor:pointer'";
+}
 
 
 function myList() {		

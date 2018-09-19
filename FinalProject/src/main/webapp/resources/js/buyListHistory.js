@@ -5,24 +5,31 @@ window.onload = function() { //실행될 코드 }
 		var startDay = $('#startDay').val();
 		var endDay = $('#endDay').val();
 		
+		console.log("dddd = "+ endDay);
+		
 		buyList(period, startDay, endDay);
 		sumList(period, startDay, endDay);
 		
-		$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-		    search: false, // show search button on the toolbar
-		    add: false,
-		    edit: false,
-		    del: false,
-		    refresh: true
-		});
 		
-		$('#jqGrid2').jqGrid('navGrid',"#jqGrid2Pager", {                
-		    search: false, // show search button on the toolbar
-		    add: false,
-		    edit: false,
-		    del: false,
-		    refresh: true
-		});
+		$('#jqGridPager_left').css('display','none');
+		$('#jqGridPager_center').css('width','600px');
+		$('#jqGridPager_right').css('padding-right','26px');
+		
+		
+		$('#input_jqGridPager').css('width','600px');
+		$('#input_jqGrid2Pager').css('width','600px');
+		
+		$('.ui-pg-input').css('width','60px');
+		
+		$('#input_jqGridPager').css('font-size','1.5em');
+		$('#input_jqGrid2Pager').css('font-size','1.5em');
+		
+		$('#jqGrid2Pager_left').css('display','none');
+		$('#jqGrid2Pager_center').css('width','530px');
+		$('#jqGrid2Pager_center').css('padding-left','50px');
+		$('#jqGrid2Pager_right').css('padding-right','26px');
+		
+		$('#jqGrid2Pager').css('height','50px');
 		
 		var timer;
 		$("#search_cells").on("keyup", function() {
@@ -58,8 +65,6 @@ window.onload = function() { //실행될 코드 }
 				$("jqGrid").setGridWidth($(this).width() * .100);
 
 			});
-		 
-		 
 }
 //	});
 
@@ -103,61 +108,64 @@ function sellerDetail (seller) {
  			}, {
  				label : '購買日付',
  				name : 'deadline',
- 				width:'200',
+ 				width:295,
  				align:'center'
  			
  			}, {
  				label : '品種',
  				name : 'fishName',
- 				width:'120',
+ 				width:200,
  				align:'center' 				
  			}, {
  				label : '産地',
  				name : 'location',
- 				width:'120',
+ 				width:130,
  				align:'center'
  			}, {
  				label : '重量',
  				name : 'weight',
- 				width:'60',
+ 				width:80,
  				align:'center'
  			}, {
  				label : '価格',
  				name : 'price',
- 				width:'100',
+ 				width:130,
  				align:'center'
  			}, {
- 				label : '販売者ID',
+ 				label : '販売者',
  				name : 'successSellerId',
- 				width:'100',
+ 				width: 120,
+ 				cellattr:mouseCursor,
  				align:'center'
  			}, {
- 				label : '再購入1',
- 				width:'80',
- 				name : '再購入2',
+ 				label : '再購入',
+ 				width:100,
+ 				name : '再購入',
  				formatter: rebuy,
+ 				cellattr:mouseCursor,
  				align:'center'
  			},{
- 				label : '受け取り確認',
- 				width:'75',
+ 				label : '確認',
+ 				width:100,
  				name : '確認',
  				formatter: rebuy2,
+ 				cellattr:mouseCursor,
  				align:'center'
  			},{
  				label : '返金',
  				name : '払い戻し',
- 				width : '75',
+ 				width : 100,
  				formatter: rebuy3,
+ 				cellattr:mouseCursor,
  				align:'center'
  			},
 
  		],
  		viewrecords : true,
- 		autowidth:true,
- 		//width:985,
+ 		width:1300,
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:245,
+ 		height:500,
  		pager : "#jqGridPager",
  		loadonce: true,
  		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
@@ -185,7 +193,7 @@ function sellerDetail (seller) {
  			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
  			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
- 			
+ 			$('.footrow').css('fontSize','1.5em');
 
  			
  			$('table.ui-jqgrid-ftable td:eq(2)').hide(); 
@@ -238,7 +246,7 @@ function sellerDetail (seller) {
  		onCellSelect: function(rowid, index, contents, event) 
      	{    
      		var cm = $(this).jqGrid('getGridParam','colModel');    
-     		if(cm[index].name == "再購入2")
+     		if(cm[index].name == "再購入")
      		{	
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
      		}
@@ -364,6 +372,10 @@ function searchByDate() {
 	location.href="buyListHistory?startDay="+startDay+"&endDay="+endDay;
 }
 
+function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
+	return "style='cursor:pointer'";
+}
+
 //sumList
 function sumList(period, startDay, endDay) {
 	
@@ -387,20 +399,17 @@ function sumList(period, startDay, endDay) {
 
  		],
  		viewrecords : true,
+ 		scrollOffset : 0,
  		autowidth:true,
  		//altRows:true,	// tooltip 나오는 기능인데 차이가 없네? 이미 title에 값이 적혀 있어서 그런가?
- 		rowNum : 10,
- 		rowList:[10,20,30],
- 		height:230,
+ 		height:400,
  		pager : "#jqGrid2Pager",
  		loadonce: true,
  		shrinkToFit : true,
- 		footerrow:false,
- 		userDataOnFooter : false,
  		loadComplete:function(data)
  		{
  	
- 			/*$('.bigSize').hover(function(){
+ 			$('.bigSize').hover(function(){
  				console.log("test");
  				var title = $(this).attr('title');
  				$(this).data('tipText', title).removeAttr('title');
@@ -413,21 +422,9 @@ function sumList(period, startDay, endDay) {
  				var mousex = e.pageX + 20;
  				var mousey = e.pageY + 10;
  				$('.tooltip').css({top : mousey,left : mousex});
- 			});*/
+ 			});
  			
- 		},
- 		gridComplete: function(){
- 		},
- 		onCellSelect: function(rowid, index, contents, event) 
-     	{    
-     		var cm = $(this).jqGrid('getGridParam','colModel');    
-     		/*if(cm[index].name == "再購入2")
-     		{	
-        		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
-     		}*/
-     		
-     	},
-     	
+ 		}     	
  	});
  };			
 

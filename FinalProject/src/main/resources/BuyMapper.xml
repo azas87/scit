@@ -394,7 +394,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
+	<select id="sellerWishList" resultType="BuyList" parameterType="string">
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
+		from 
+			BuyList b, wishlist w
+		where			
+			b.buyerid=w.id 
+			and w.wish=b.fishname
+			and b.buyerid=#{userid}
+			and b.salestatus='onSale'
+		order by b.buyNum asc
+	</select>
+	
+	<insert id="insertAvgList" parameterType="AvgList">
 		insert into buyList
 		(
 			avgListNum
@@ -408,8 +433,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,fishName
 			, avgPrice
 			, to_char(sysdate,YYYY/MM/DD);
-		)
-	</insert> -->
+		)	
+	</insert>
 	
 <!-- 	
 	  <select id="selectBestseller" resultType="hashmap">

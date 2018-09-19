@@ -128,6 +128,8 @@ public class BuyController {
 	public @ResponseBody String jqgrid(
 		   @RequestParam(value="period", defaultValue="1") String period,
 		   String startDay, String endDay, String page, String rows, HttpSession session) {
+		System.out.println("jqgrid_R");
+		System.out.println(endDay);
 
 		String id =(String)session.getAttribute("loginId");
 		List<BuyList> buyListHistory = getBuyListHistory(id, period,startDay,endDay);
@@ -190,7 +192,20 @@ public class BuyController {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		Map<String, String> map = new HashMap<String, String>();
+		
+		System.out.println("getBuyListHistory");
+		System.out.println(startDay);
+		
+		if(startDay == null)
+		{
+			System.out.println("startDay null");
+		}
+		else
+		{
+			System.out.println("startDay not null");
+		}
 
+			
 	    map.put("period", period);
 	    map.put("id", id);
 	    if(startDay.length()!=0) {
@@ -198,6 +213,8 @@ public class BuyController {
 	    	map.put("endDay", endDay);
 	    }
 		List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
+		
+		System.out.println("get = " + buyListHistory);
 	
 		return buyListHistory;
 	}

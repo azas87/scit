@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kay87.team.dao.FishInfoListMapper;
+import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.vo.FishCategoryList;
 import com.kay87.team.vo.FishList;
 
@@ -89,6 +91,19 @@ public class FishInfoListController {
 		return"redirect:/fishInfoList";
 	
 	}
+	
+	
+	@RequestMapping(value = "/getFishList", method = RequestMethod.GET)
+	public @ResponseBody List<FishList> checkId(String fishCategoryNum) {
+		
+		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
+		List<FishList> list=mapper.getFishList(fishCategoryNum);
+		
+		System.out.println(list);
+		
+		return list;
+	}
+	
 /*	//첫 메인화면에서 전체 리스트
 	@RequestMapping(value = "/allBuyList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String allBuyList() {			
