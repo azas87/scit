@@ -23,6 +23,7 @@ import com.kay87.team.vo.FishCategoryList;
 import com.kay87.team.vo.MemberInfo;
 import com.kay87.team.vo.Review;
 import com.kay87.team.vo.SellerInfo;
+import com.kay87.team.vo.WishList;
 
 
 @Controller
@@ -41,6 +42,16 @@ public class MemberController {
 		dao.joinMember(member);
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = "/updateWishList", method = RequestMethod.GET)
+	public String updateWishList(Model model) {
+		
+		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
+		List<FishCategoryList> categoryList = mapper.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
+		return "selectWishList";
 	}
 	
 	//판매자회원가입
@@ -91,11 +102,47 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/setWishList", method = RequestMethod.GET)
-	public String setWishList() {
+	public @ResponseBody int setWishList(String fishName, HttpSession session) {
 		
+		String id = (String)session.getAttribute("loginId");
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
-
-		return "setWishList";
+		dao.updateUserFirst(id);
+		
+		WishList w = new WishList();
+		w.setId(id);
+		w.setWish(fishName);
+		
+		WishList wishlist = dao.checkWishList(w);
+		int wishCount = dao.getwishListCount(id);
+		if(wishCount<5) {
+		dao.setWishList(w);
+		}
+		if(wishlist!=null) {
+			wishCount=10;
+		}
+		return wishCount;
+	}
+	
+	@RequestMapping(value = "/getWishList", method = RequestMethod.GET)
+	public @ResponseBody List<WishList> getWishList(String fishName, HttpSession session) {
+		
+		String id = (String)session.getAttribute("loginId");
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		List<WishList> list = dao.getWishList(id);
+		
+		return list;
+	}
+	@RequestMapping(value = "/deleteWishList", method = RequestMethod.GET)
+	public @ResponseBody int deleteWishList(String fishName, HttpSession session) {
+		
+		String id = (String)session.getAttribute("loginId");
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		WishList w = new WishList();
+		w.setId(id);
+		w.setWish(fishName);
+		int result = dao.deleteWishList(w);
+		
+		return result;
 	}
 	
 	//id중복체크

@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.dao.FaQMapper;
+import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.BuyList;
+import com.kay87.team.vo.FAQ;
 import com.kay87.team.vo.FishList;
 
 
@@ -34,18 +37,20 @@ public class BuyController {
 	
 	//구매글쓰기 폼 불러오기
 	@RequestMapping(value = "/writeBuyBoardForm", method = RequestMethod.GET)
-	public String writeBuyBoardForm(Model model, HttpSession session, 
-			BuyList buylistFromHistory) {
+	public String writeBuyBoardForm(Model model, HttpSession session, String buyNum, BuyList buylistFromHistory) {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
-		List<BuyList> buylist=dao.getHistorySellerId((String)session.getAttribute("loginId"));
+		List<BuyList> buylist = dao.getHistorySellerId((String)session.getAttribute("loginId"));
+		if(buyNum!=null) {
+			buylistFromHistory = dao.selectOneBuylist(Integer.parseInt(buyNum));
+		}
 		model.addAttribute("buylist", buylist);
 		model.addAttribute("buylistFromHistory", buylistFromHistory);
 		
 		return "writeBuyBoardForm";
 	}
 	//구매글쓰기
-	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.GET)
+	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.POST)
 	public String writeBuyBoard(BuyList buyList, HttpSession session){
 		System.out.println("writeBuyBoard buyList => " + buyList);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
@@ -187,9 +192,27 @@ public class BuyController {
 	}
 
 	
+	@RequestMapping(value = "/getMarketPrice", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String getMarketPrice(HttpSession session, Model model){		
+		
+		BuyMapper dao=sql.getMapper(BuyMapper.class);	
+		List<AvgList> list = dao.getMarketPrice();
+		System.out.println(list);
+			
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(list) + "}";
+		System.out.println(jsonPlace);		
+		return jsonPlace;
+		}
+	
+	
+	
 	//판매이력가져오기
 	public List<BuyList> getBuyListHistory(String id, String period, String startDay, String endDay){
-		
+		System.out.println(startDay);
+		System.out.println(endDay);
+		System.out.println(period);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		Map<String, String> map = new HashMap<String, String>();
 		
@@ -250,4 +273,5 @@ public class BuyController {
 		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
 		return sumPricebyFishName;
 }
+	
 }

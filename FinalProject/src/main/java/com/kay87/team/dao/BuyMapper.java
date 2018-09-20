@@ -64,6 +64,12 @@ public interface BuyMapper {
 	
 	public int insertAvgList(AvgList AvgList);
 
+	public BuyList selectOneBuylist(int parseInt);
+
+	public List<AvgList> marketPrice();
+
+	public List<AvgList> getMarketPrice();
+
 	
 
 	

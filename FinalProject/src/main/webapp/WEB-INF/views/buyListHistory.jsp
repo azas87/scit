@@ -111,6 +111,7 @@
 
 
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+ <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
@@ -288,12 +289,14 @@
 	<div><br></div>
 	
 	<!-- 기간검색--jqgrid위해/다운로드위해 사용 -->
-	<form action="download">
-		<input type="hidden" id="period" name="period" value="${period}">
-		<input type="hidden" id="startDay" name ="startDay" value="${startDay}">
-		<input type="hidden" id="endDay" name ="endDay" value="${endDay}">
-		<input type="submit" value="ダウンロード">
-	</form>
+		<div style="margin: 0 auto; width: 550px;">
+		<input type="hidden" id="period" value="${period}">
+		<input type="hidden" id="startDay" value="${startDay}">
+		<input type="hidden" id="endDay" value="${endDay}">
+		<a class="myButton"　href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
+		</div>
 	</div>
+	
+	
 </body>
 </html>

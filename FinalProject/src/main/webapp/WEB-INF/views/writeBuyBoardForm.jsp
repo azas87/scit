@@ -90,7 +90,7 @@ $(document).ready(function() {
         <h5>ご購入</h5>
       </div>
       <div class='panel-body'>
-        <form class='form-horizontal' role='form'  action="writeBuyBoard">
+        <form class='form-horizontal' role='form'  action="writeBuyBoard" method="post">
         	<input type="hidden" id ="uploadDate" name="uploadDate"/>
 		 <input type="hidden" id ="deadline" name="deadline"/>
 	
