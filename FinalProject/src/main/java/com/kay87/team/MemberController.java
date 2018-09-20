@@ -116,10 +116,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "/getSellerInfo", method = RequestMethod.POST)
 	public @ResponseBody  List<SellerInfo> getSellerInfo(String sellerId) {
-	
+		System.out.println(sellerId);
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		List<SellerInfo> sellerInfo = dao.getSellerInfo(sellerId);
-		
+		System.out.println(sellerInfo);
 		return sellerInfo;
 	}
 	

@@ -249,8 +249,33 @@ function reset () {
       			<li class="nav-item">
        				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
       			</li>
+      			
 			</c:when>			
-		</c:choose>		   
+		</c:choose>
+      		
+    <!--   <li class="nav-item dropdown dmenu">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Dropdown link
+      </a>
+      <div class="dropdown-menu sm-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+      </div>
+    </li>
+     <li class="nav-item dropdown dmenu">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Dropdown link
+      </a>
+      <div class="dropdown-menu sm-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+        <a class="dropdown-item" href="#">Link 4</a>
+        <a class="dropdown-item" href="#">Link 5</a>
+        <a class="dropdown-item" href="#">Link 6</a>
+      </div>
+    </li> -->
     </ul>
     
     <form class="form-inline my-2 my-lg-0">
@@ -275,6 +300,40 @@ function reset () {
   </div>
 </nav>
 
+<%-- 	
+	<div id="nav">
+		<div class="items">
+			<c:choose>
+				<c:when test="${sessionScope.loginId == null }">
+
+					<div class="item" ><a class="navbar-brand" href="loginForm?">로그인</a><a href="loginForm?">로그인</a></div>
+					<div class="item " ><a class="trigger_popup_fricc">회원가입</a></div>
+				</c:when>
+				
+				<c:when test="${sessionScope.loginId != null }">
+					<div class="item" ><a href="logOut?">로그아웃</a></div>
+					<div class="item" ><a href="writeBuyBoardForm?">글등록</a></div>
+					<c:if test="${sessionScope.userMode ne 'manager'}">				
+					<div class="item" ><a href="buyListHistory?">구매내역</a></div>
+					</c:if>
+					<div class="item" ><a href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a></div>
+
+				</c:when>
+			</c:choose>
+			<input type="hidden" id="userMode" value="${sessionScope.userMode}">
+		</div>
+		<!-- <div class="items">
+			<div class="item" ><a href="./resources/content.html" class=" popdown btn">알림창 데모</a></div>
+		</div> -->
+		<div class="items">
+			<div class="item " onclick="newPage('main?')">메인</div>
+			<div class="item " onclick="">시세</div>
+			<div class="item " onclick="newPage('noticeForm?')">공지사항</div>
+			<div class="item " onclick="newPage('qnaForm?')">QnA</div>
+			<div class="item " onclick="newPage('faqForm?')">FAQ</div>
+		</div>
+	</div>
+	 --%>
 </div>
 </div>
 

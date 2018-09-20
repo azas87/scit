@@ -38,7 +38,7 @@ language="java" pageEncoding="UTF-8"%>
 $(function() {
 
 var sellerId = $("#sellerInfo", opener.document ).val();
-
+alert('sellerId'+sellerId);
 $.ajax({
 	url:"getSellerInfo",
 	type:"post",
