@@ -196,15 +196,19 @@ public class BuyController {
 		System.out.println("getBuyListHistory");
 		System.out.println(startDay);
 		
+
 		if(startDay == null)
 		{
 			System.out.println("startDay null");
+		}
+		else if(startDay == "")
+		{
+			System.out.println("startDay 공백");
 		}
 		else
 		{
 			System.out.println("startDay not null");
 		}
-
 			
 	    map.put("period", period);
 	    map.put("id", id);
@@ -212,6 +216,19 @@ public class BuyController {
 	    	map.put("startDay", startDay);
 	    	map.put("endDay", endDay);
 	    }
+	    
+	    System.out.println("map");
+	    System.out.println(map.get(startDay));
+	    
+		if(map.get(startDay) == null)
+		{
+			System.out.println("startDay null");
+		}
+		else
+		{
+			System.out.println("startDay not null");
+		}
+		
 		List<BuyList> buyListHistory = dao.getSuccessBuyList(map);
 		
 		System.out.println("get = " + buyListHistory);
