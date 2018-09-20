@@ -290,6 +290,9 @@
 	
 	<!-- 기간검색--jqgrid위해/다운로드위해 사용 -->
 		<div style="margin: 0 auto; width: 550px;">
+		<input type="hidden" id="period" value="${period}">
+		<input type="hidden" id="startDay" value="${startDay}">
+		<input type="hidden" id="endDay" value="${endDay}">
 		<a class="myButton"　href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
 		</div>
 	</div>

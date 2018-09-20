@@ -4,11 +4,11 @@ window.onload = function() { //실행될 코드 }
 		var period = $('#period').val();
 		var startDay = $('#startDay').val();
 		var endDay = $('#endDay').val();
-		if(startDay==null){
+		/*if(startDay==null){
 			period = null;
 			startDay = null;
 			endDay = null;
-		}
+		}*/
 		buyList(period, startDay, endDay);
 		sumList(period, startDay, endDay);
 		
