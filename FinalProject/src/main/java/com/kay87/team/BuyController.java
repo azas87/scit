@@ -111,7 +111,7 @@ public class BuyController {
 	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public @ResponseBody int confirm(String buyNum) {
 		
-		System.out.println(buyNum);
+		System.out.println("수취확인"+buyNum);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		int result =dao.saleComplete(buyNum);
 		
@@ -138,7 +138,7 @@ public class BuyController {
 
 		String id =(String)session.getAttribute("loginId");
 		List<BuyList> buyListHistory = getBuyListHistory(id, period,startDay,endDay);
-		
+		System.out.println(buyListHistory);
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
 		String jsonPlace = "{\"rows\":"+ gson.toJson(buyListHistory) + "}";

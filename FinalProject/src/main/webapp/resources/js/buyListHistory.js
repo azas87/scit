@@ -72,8 +72,14 @@ function rebuy (cellvalue, options, rowObject) {
 };
 
 function rebuy2 (cellvalue, options, rowObject) {
-	//console.log(rowObject);
-	return '確認'; 
+
+	/*alert(rowObject.saleStatus);*/
+
+	if(rowObject.saleStatus=='saleComplete')
+		return '確認';
+	else
+		return"";
+
 };
  
 function rebuy3 (cellvalue, options, rowObject) {
@@ -89,9 +95,10 @@ function sellerDetail (seller) {
  
  
  function buyList(period, startDay, endDay) {
-
+	
  	$("#jqGrid").jqGrid({
  		/* 환불 url:'refundList'*/
+ 		
  		url : 'jqgrid_R?period='+period+"&startDay="+startDay+"&endDay="+endDay,
  		mtype : "GET",
  		datatype : "json",
@@ -102,7 +109,13 @@ function sellerDetail (seller) {
  				name : 'buyNum',
  				align:'center',
  				hidden:true
- 			}, {
+ 			},{
+ 				label : '수취히든',
+ 				name : 'saleStatus',
+ 				align:'center',
+ 				hidden:true
+ 			},  
+ 			{
  				label : '購買日付',
  				name : 'deadline',
  				width:295,
@@ -142,7 +155,7 @@ function sellerDetail (seller) {
  				cellattr:mouseCursor,
  				align:'center'
  			},{
- 				label : '確認',
+ 				label : '受取',
  				width:100,
  				name : '確認',
  				formatter: rebuy2,
@@ -318,6 +331,19 @@ function confirm(obj) {
 	$('#buyNum').val(obj.buyNum);
 	$('#sellerId').val(obj.successSellerId);
 	//수취확인
+	$.ajax({
+		url:"confirm",
+		type:"get",
+		data:{"buyNum":obj.buyNum,
+			  },
+		success:function(data){
+			ResetBuyList();
+		},
+		error:function(){
+			alert("통신실패");
+		}
+	});
+
 	reset();
 	alertify.set({ buttonReverse: true });
 	alertify.confirm("レビューを登録されますか", function (e) {
