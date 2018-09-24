@@ -194,12 +194,15 @@ function reset () {
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
- 	<a class="navbar-brand" onclick="newPage('main?')">メイン<span class="sr-only">(current)</span></a>
+ 	<!-- <a class="navbar-brand" onclick="newPage('main?')">メイン<span class="sr-only">(current)</span></a> -->
 	
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">         
       <c:choose>
-			<c:when test="${sessionScope.loginId == null }">      			
+			<c:when test="${sessionScope.loginId == null }">
+				<li class="nav-item item bigSize">
+       				<a class="nav-link" onclick="newPage('main?')">メイン</a>
+      			</li>      			
       			<li class="nav-item item bigSize">
        				<a class="nav-link" onclick="newPage('marketPrice?')">市価</a>
       			</li>
@@ -216,9 +219,16 @@ function reset () {
       		
 
       		<c:when test="${sessionScope.loginId != null }">
+      			<li class="nav-item item bigSize">
+       				<a class="nav-link" onclick="newPage('main?')">メイン</a>
+      			</li>      			
       			<c:if test="${sessionScope.userMode == '1' }">      			
 	      			<li class="nav-item item bigSize">
 						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
+					</li>
+					
+					<li class="nav-item item bigSize">
+						<a class="nav-link" onclick="newPage('updateWishList?')">선호</a>
 					</li>
 				</c:if>					
 					<c:if test="${sessionScope.userMode ne 'manager'}">	
@@ -232,6 +242,7 @@ function reset () {
 					<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('marketPrice?')">市価</a>
 	      			</li>
+	      			
 	      			<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
 	      			</li>
@@ -241,11 +252,14 @@ function reset () {
 	      			<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
 	      			</li>
+	      			<li class="nav-item item bigSize">
+						<a class="nav-link" onclick="newPage('fishInfoList?')">어종</a>
+					</li>
 			</c:when>			
 		</c:choose>		   
     </ul>
     
-    <form class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0">
     <c:choose>
     	<c:when test="${sessionScope.loginId == null }">
     		<li class="nav-item item bigSize">
@@ -265,7 +279,7 @@ function reset () {
       		</li>	
       	</c:when>
     </c:choose>
-    </form>
+    </div>
    
   </div>
 </nav>

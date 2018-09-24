@@ -33,7 +33,8 @@
 	}
 .alertify {
 	position: fixed; z-index: 99999;
-	top: 50px; left: 50%;
+	top: 950px;
+	left: 50%;
 	width: 550px;
 	margin-left: -275px;
 	opacity: 1;
