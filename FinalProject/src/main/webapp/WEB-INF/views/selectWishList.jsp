@@ -28,7 +28,8 @@ $(function() {
 			
 			$('#wishFishList').html(temp);
 		},
-		error:function(){
+		error:function(test){
+			console.log(test);
 			alert("통신실패")
 		}
 	});//ajax

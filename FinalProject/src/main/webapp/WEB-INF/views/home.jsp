@@ -231,11 +231,11 @@ function reset () {
       		
       		<c:when test="${sessionScope.loginId != null }">      			
       			<li class="nav-item">
-					<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">글등록</a>
+					<a class="nav-link" href="writeBuyBoardForm?">글등록</a>
 				</li>			
 				<c:if test="${sessionScope.userMode ne 'manager'}">	
 				<li class="nav-item">								
-					<a class="nav-link" onclick="newPage('buyListHistory?')">구매내역</a>
+					<a class="nav-link" href="buyListHistory?">구매내역</a>
 				</li>	
 				</c:if>
 				<li class="nav-item">	
@@ -264,7 +264,7 @@ function reset () {
     <c:choose>
     	<c:when test="${sessionScope.loginId == null }">
     		<li class="nav-item">
-       			<a class="nav-link" onclick="newPage('loginForm?')">로그인</a>
+       			<a class="nav-link" href="loginForm?">로그인</a>
       		</li>
       		<li class="nav-item">
        			<a class="trigger_popup_fricc nav-link">회원가입</a>

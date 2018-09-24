@@ -246,11 +246,11 @@ html, body {
 </head>
 
 <body>
-	<ul class="breadcrumb-counter-nav">
+<!-- <ul class="breadcrumb-counter-nav">
   <li class="breadcrumb-counter-nav-item"><a href="#">Setup</a></li>
   <li class="breadcrumb-counter-nav-item current"><a href="#">Sample Analysis</a></li>
   <li class="breadcrumb-counter-nav-item"><a href="#">Sort Layout</a></li>
-</ul>
+</ul> -->
 
 
   <div class="slide" style="border:0">
@@ -306,11 +306,11 @@ html, body {
 		  <div class="col s12 z-depth-4 card-panel">
 		    <form class="login-form">
 		      <div class="row">
-		        <div class="input-field col s12 center">
+		        <!-- <div class="input-field col s12 center">
 			          <h2>Register</h2>
 			          <p class="center">Join to our community now !</p>
 			        </div>
-			    </div>
+			    </div> -->
 			
 			      <div class="row margin">
 			        <div class="input-field col s12">
@@ -338,53 +338,14 @@ html, body {
 			          <label for="address">address</label>
 			        </div>
 			      </div>
-			      
+			      <div class="input-field col s12">
+			          <button type="submit" id="submit_btn" class="btn waves-effect waves-light col s12" >REGISTER NOW</button>
+		        </div>
 			    </form>
 			  </div>
 			</div>
 		</div>
       </li>
-      <li>
-        <div style="width:800px; margin:0 auto;">
-           <div id="login-page" class="row">
-		  <div class="col s12 z-depth-4 card-panel">
-		    <form class="login-form">
-		      <div class="row">
-			      <div class="input-field col s12 center">
-				          <h2>Register</h2>
-				          <p class="center">Join to our community now !</p>
-				        </div>
-				      </div>
-				      
-			      
-			
-			      <div class="row margin">
-			        <div class="input-field col s12">
-			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
-			          <i class="material-icons prefix">email</i>
-			          <input id="email" name="email" type="text" class="input_size" style="cursor: auto;" />
-			          <label for="email">Email</label>
-			        </div>
-			      </div>
-			
-			      <div class="row margin">
-			        <div class="input-field col s12">
-			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
-			          <i class="material-icons prefix">fingerprint</i>
-			          <input id="join_number" name="join_number" class="input_size" type="number" />
-			          <label for="join_number">인증번호</label>
-			        </div>
-			      </div>
-			      
-			      <div class="input-field col s12">
-			          <button type="submit" id="submit_btn" class="btn waves-effect waves-light col s12" >REGISTER NOW</button>
-		        </div>
-
-				</form>
-				</div>
-			  </div>
-			</div>
-		</li>
 		</ul>
 	          <i id="next" class="material-icons prefix" style="">arrow_forward</i>
         </div>       
