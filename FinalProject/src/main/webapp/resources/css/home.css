@@ -4,20 +4,25 @@
 } */
 #blank_div
 {
-	height:145px;
+	height:100px;
 }
 
+body
+{
+	background:url(../img/bg.png) repeat;
+}
 #menu_wrap {
 	position: fixed;
 	top: px;
 	left: 0px;
-	height: 70px;
+	height: 100px;
 	overflow-y: auto;
 	z-index: 1000;
 	width: 100%;
 	background-color: #ffffff;
   	left: 0px;
   	margin:0px auto;
+  	background:url(../img/bg.png) repeat;
 }
 
 
@@ -31,17 +36,17 @@
 
  #contain
 {
-	width:1100px;
+	width:1200px;
 	margin: 0 auto;
-	margin-top:10px;
+	display:flex;
 }
 
- #contain div{
+/*  #contain div{
 	border:1px solid #cccccc;
 	padding:1px;
 	margin: 1px;
 	text-align: center;
-}
+} */
 
 #list {
 	border:1px solid #cccccc;
@@ -164,9 +169,7 @@ a { text-decoration:none; color:#000; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
 .tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
 
-<<<<<<< HEAD
-	
-=======
+
 
 .bg-light{
 	background: #0c73cc !important;
@@ -202,4 +205,41 @@ a { text-decoration:none; color:#000; }
     color:red !important;
     
 }
->>>>>>> refs/remotes/origin/TaeWoo2
+
+#navbarTogglerDemo03{
+	height:80px;
+	
+}
+
+.nav-item
+{
+	flex-grow: 1;
+	font-size: 2em; 
+	line-height:60px;
+	height:80px;
+	border-right:1px solid #cccccc;
+	
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.nav-item:nth-child(1)
+{
+	border-left:1px solid #cccccc;
+}
+
+.bg-light
+{
+	width:1200px !important;
+}
+
+
+.switch
+{
+	width:150px;
+}
+
+#audio
+{
+	display:flex;
+	flex-direction: column;
+}
