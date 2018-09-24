@@ -392,6 +392,8 @@ function myList_ing_buyer() {
 				var mousey = e.pageY + 10;
 				$('.tooltip').css({top : mousey,left : mousex});
 			});
+			
+			$(".jqGridghead_0").css('font-size','1.5em');
 		},
 		gridComplete: function(){
 		},
@@ -1025,6 +1027,10 @@ function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1�
 	}else{	
 		return "";
 	}
+};	
+
+function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
+	return "style='cursor:pointer'";
 };		 
 function sellerDetail (seller) {
 	$('#sellerInfo').val(seller);
@@ -1034,7 +1040,7 @@ function sellerDetail (seller) {
 
 function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
 	return "style='cursor:pointer'";
-}
+};
 
 function myList() {		
 	console.log("myBuylist");

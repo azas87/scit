@@ -31,33 +31,34 @@ $(document).ready(function() {
 
 </head>
 <body>
-
-<!--WRAPPER-->
-<div id="wrapper">
-
-	<!--SLIDE-IN ICONS-->
-    <div class="user-icon"></div>
-    <div class="pass-icon"></div>
-   
-<form action="login" method="post" class="login-form"  name="login-form" method="post">
-
-    <div class="header">
-  	<h1>Login Form</h1>
-    <!--DESCRIPTION--><span></span><!--END DESCRIPTION-->
-    </div>
-  
+<div>
+	<!--WRAPPER-->
+	<div id="wrapper">
 	
-    <div class="content">
-	<!--USERNAME--><input name="id" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
-    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
-    </div>
-  
-    
-    <div class="footer">
-    <input type="submit" name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
-   <!--  <input type="submit" name="submit" value="Register" class="register" />END REGISTER BUTTON -->
-    </div>
-</form>
+		<!--SLIDE-IN ICONS-->
+	    <div class="user-icon"></div>
+	    <div class="pass-icon"></div>
+	   
+	<form action="login" method="post" class="login-form"  name="login-form" method="post">
+	
+	    <div class="header">
+	  	<h1>Login Form</h1>
+	    <!--DESCRIPTION--><span></span><!--END DESCRIPTION-->
+	    </div>
+	  
+		
+	    <div class="content">
+		<!--USERNAME--><input name="id" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
+	    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+	    </div>
+	  
+	    
+	    <div class="footer">
+	    <input type="submit" name="submit" value="Login" class="button" style="height:65px"/><!--END LOGIN BUTTON-->
+	   <!--  <input type="submit" name="submit" value="Register" class="register" />END REGISTER BUTTON -->
+	    </div>
+	</form>
+	</div>
 </div>
 <div class="gradient"></div>	
 

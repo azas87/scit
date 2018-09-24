@@ -165,6 +165,7 @@ a { text-decoration:none; color:#000; }
 .tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
 
 
+
 .bg-light{
 	background: #0c73cc !important;
 }
@@ -200,3 +201,7 @@ a { text-decoration:none; color:#000; }
     
 }
 
+#navbarTogglerDemo03{
+	height:55px;
+	font-size: 3em; 
+}

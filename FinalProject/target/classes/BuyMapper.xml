@@ -84,7 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{id}
 			
 			AND 
-                saleStatus = 'saleComplete'
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
    			<if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -412,9 +414,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from 
 			BuyList b, wishlist w
 		where			
-			b.buyerid=w.id 
+			w.id = #{userid} 
 			and w.wish=b.fishname
-			and b.buyerid=#{userid}
 			and b.salestatus='onSale'
 		order by b.buyNum asc
 	</select>
@@ -438,15 +439,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,fishName
 			, avgPrice
 			, to_char(sysdate,YYYY/MM/DD);
-<<<<<<< HEAD
-		)	
-	</insert>
-=======
 		)
 	</insert> -->
 
 	<select id="getMarketPrice" resultType="AvgList">
->>>>>>> refs/remotes/origin/mina
 	
 		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
 		

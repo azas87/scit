@@ -1,12 +1,8 @@
 package com.kay87.team.common;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Date;
 import java.util.Properties;
- 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,7 +15,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
  
 public class MailSendComponent {
  

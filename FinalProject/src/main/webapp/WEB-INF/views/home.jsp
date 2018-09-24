@@ -142,8 +142,7 @@ $(window).load(function () {
 	      $(this).css('font-size',"1.5em");
 	      $(this).css('background-color',"white");
 	    });
-	  /* var audio = new Audio('./resources/alram.wav');
-	  audio.play(); */
+	  
 });
 
 function cancel() {
@@ -209,52 +208,52 @@ function reset () {
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
- 	<a class="navbar-brand" onclick="newPage('main?')">메인<span class="sr-only">(current)</span></a>
+ 	<a class="navbar-brand" onclick="newPage('main?')">メイン<span class="sr-only">(current)</span></a>
 	
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">         
       <c:choose>
 			<c:when test="${sessionScope.loginId == null }">      			
       			<li class="nav-item">
-       				<a class="nav-link" onclick="">시세정보</a>
+       				<a class="nav-link" onclick="">市価</a>
       			</li>
       			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('noticeForm?')">공지사항</a>
+       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
       			</li>
       			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
+       				<a class="nav-link" onclick="newPage('qnaForm?')">お問い合わせ</a>
       			</li>
       			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
+       				<a class="nav-link" onclick="newPage('faqForm?')">よくある質問</a>
       			</li>
       		</c:when>
       		
       		<c:when test="${sessionScope.loginId != null }">
       			<c:if test="${sessionScope.userMode == '1' }">      			
 	      			<li class="nav-item">
-						<a class="nav-link" href="writeBuyBoardForm?">글등록</a>
+						<a class="nav-link" href="writeBuyBoardForm?">購入される方</a>
 					</li>
 				</c:if>					
 					<c:if test="${sessionScope.userMode ne 'manager'}">	
 					<li class="nav-item">								
-						<a class="nav-link" href="buyListHistory?">구매내역</a>
+						<a class="nav-link" href="buyListHistory?">履歴</a>
 					</li>	
 					</c:if>
 					<!-- <li class="nav-item">	
 						<a class="nav-link" href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a>
 					</li> -->
 					<li class="nav-item">
-	       				<a class="nav-link" onclick="">시세정보</a>
+	       				<a class="nav-link" onclick="">市価</a>
+	      			</li>
+	      			<!-- <li class="nav-item">
+	       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
 	      			</li>
 	      			<li class="nav-item">
-	       				<a class="nav-link" onclick="newPage('noticeForm?')">공지사항</a>
+	       				<a class="nav-link" onclick="newPage('qnaForm?')">お問い合わせ</a>
 	      			</li>
 	      			<li class="nav-item">
-	       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
-	      			</li>
-	      			<li class="nav-item">
-	       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
-	      			</li>
+	       				<a class="nav-link" onclick="newPage('faqForm?')">よくある質問</a>
+	      			</li> -->
 			</c:when>			
 		</c:choose>		   
     </ul>
@@ -263,19 +262,19 @@ function reset () {
     <c:choose>
     	<c:when test="${sessionScope.loginId == null }">
     		<li class="nav-item">
-       			<a class="nav-link" href="loginForm?">로그인</a>
+       			<a class="nav-link" href="loginForm?">入場</a>
       		</li>
       		<li class="nav-item">
-       			<a class="trigger_popup_fricc nav-link">회원가입</a>
+       			<a class="trigger_popup_fricc nav-link">退場</a>
       		</li>
     	</c:when>    
     
    		<c:when test="${sessionScope.loginId != null }"> 
    			<li class="nav-item">
-      			<a class="nav-link" href="logOut?">로그아웃</a>
+      			<a class="nav-link" href="logOut?">退場</a>
       		</li>
       		<li class="nav-item">
-      			<a class="nav-link">회원정보수정</a>
+      			<a class="nav-link">会員情報修正</a>
       		</li>	
       	</c:when>
     </c:choose>
@@ -291,7 +290,8 @@ function reset () {
 
 <div id="page-wrapper">
 	<!-- frameborder="1" -->
-	<iframe name="f_main" id="f_main" src="main?"  width="100%" height="100%" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" allowtransparency="true" ></iframe>
+	<!-- <iframe name="f_main" id="f_main" src="main?"  width="100%" height="100%" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" allowtransparency="true" ></iframe> -->
+	<iframe name="f_main" id="f_main" src="main?"  frameborder="0" width="100%" marginwidth="0" marginheight="0" scrolling="no" style="border: 0px" onload="window.scrollTo(0,0)" height="100%"></iframe>
 </div>
 
 <div class="hover_bkgr_fricc">

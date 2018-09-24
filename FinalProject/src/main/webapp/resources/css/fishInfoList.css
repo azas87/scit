@@ -55,6 +55,9 @@ body{
   font-size: 14px;
 }
 
+
+
+
 @media (min-width: 320px) and (max-width: 640px) {
     .accordion-group-one{
       padding-left: 15px !important;
