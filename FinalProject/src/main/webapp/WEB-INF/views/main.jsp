@@ -292,7 +292,7 @@ var chartDrowFun = {
 	</div>	
 </div>
 
-		
+<input type="hidden" id="sellerInfo" name="sellerInfo">
 
 </body>
 </html>

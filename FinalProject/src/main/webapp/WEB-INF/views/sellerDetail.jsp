@@ -109,7 +109,7 @@ margin-left:-150px;
 $(function() {
 
 var sellerId = $("#sellerInfo", opener.document ).val();
-
+alert('sellerId'+sellerId);
 $.ajax({
 	url:"getSellerInfo",
 	type:"post",

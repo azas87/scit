@@ -3,6 +3,14 @@ var refreshInterver = 600000; // 1000 = 1초
 
 
 $(document).ready(function() {
+	
+	$('.navbar-light .dmenu').hover(function () {
+        $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
+    }, function () {
+        $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
+    });
+	
+	
 	$('.popdown').popdown();
 	 
 	
@@ -277,6 +285,7 @@ function sellerWishList() {
 
 //구매자 진행중인 리스트
 function myList_ing_buyer() {
+	
 	console.log("myList_ing_buyer");
 	$.jgrid.gridUnload('#jqGrid');
 	$("#jqGrid").jqGrid({
@@ -400,6 +409,7 @@ function myList_ing_buyer() {
     					return;
     				}    			
     		}else if(cm[index].name == "sellerSelect"){
+    			
     			var con = confirm('정말 선택하시겠습니까?');
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
@@ -408,10 +418,13 @@ function myList_ing_buyer() {
     				}else{
     					return;
     				}
-    		}
+    		} else if(cm[index].name == "successSellerId"){
+    			alert('이벤트');
+     			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
+     		}
     	},   
 	});
-}
+};
 
 //판매자 참여리스트
 function myList_ing_seller() {
@@ -662,7 +675,10 @@ function myAllList_buyer() {
     			}else{
     				return;
     			}    			
-    		}    		    		
+    		}else if(cm[index].name == "successSellerId"){
+    			alert('이벤트');
+     			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
+     		}    		    		
     	},   
 	});
 }
@@ -1015,8 +1031,11 @@ function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1�
 
 function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
 	return "style='cursor:pointer'";
-}
-
+};		 
+function sellerDetail (seller) {
+	$('#sellerInfo').val(seller);
+	window.open("sellerDetail", "sellerDetail", "width=400px,height=300px,left=500px,top=200px");
+};
 
 function myList() {		
 	console.log("myBuylist");
