@@ -28,7 +28,7 @@
  
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
- 		<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/home.css" />
+ 		
  
  <link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  <script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
@@ -44,6 +44,8 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/home.css" />
 
 </head>
 
@@ -126,24 +128,6 @@ $(window).load(function () {
     
     $('.popdown').popdown();
     
-    $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
-		  {
-			  $(this).css('flex-grow',1);
-		      $(this).css('font-size',"3em");
-		      $(this).css('background-color',"powderblue");
-	/*	      $('input').css('line-height', '60px');
-		      $('input').css('width', '200px');*/
-		  }
-	     
-	    });
-	    
-	  $(".item").mouseleave(function(){
-	      $(this).css('flex-grow',1);
-	      $(this).css('font-size',"1.5em");
-	      $(this).css('background-color',"white");
-	    });
-	  
 });
 
 function cancel() {
@@ -197,6 +181,7 @@ function reset () {
 <body>
 
 <div id="menu_wrap">
+
 <div id="contain">
 
 <!-- 	<div id="header">
@@ -209,54 +194,53 @@ function reset () {
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
- 	<a class="navbar-brand" onclick="newPage('main?')" >메인<span class="sr-only">(current)</span></a>
-	<!-- <a class="nav-link" onclick="newPage('main?')">메인 <span class="sr-only">(current)</span></a> -->
-
+ 	<a class="navbar-brand" onclick="newPage('main?')">メイン<span class="sr-only">(current)</span></a>
+	
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">         
       <c:choose>
 			<c:when test="${sessionScope.loginId == null }">      			
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="">시세정보</a>
+      			<li class="nav-item item bigSize">
+       				<a class="nav-link" onclick="newPage('marketPrice?')">市価</a>
       			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('noticeForm?')">공지사항</a>
+      			<li class="nav-item item bigSize">
+       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
       			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
+      			<li class="nav-item item bigSize">
+       				<a class="nav-link" onclick="newPage('qnaForm?')">お問い合わせ</a>
       			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
-      			</li>   			
+      			<li class="nav-item item bigSize">
+       				<a class="nav-link" onclick="newPage('faqForm?')">よくある質問</a>
+      			</li>
       		</c:when>
       		
-      		<c:when test="${sessionScope.loginId != null }">      			
-      			<li class="nav-item">
-					<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">글등록</a>
-				</li>			
-				<c:if test="${sessionScope.userMode ne 'manager'}">	
-				<li class="nav-item">								
-					<a class="nav-link" onclick="newPage('buyListHistory?')">구매내역</a>
-				</li>	
-				</c:if>
-				<li class="nav-item">	
-					<a class="nav-link" href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a>
-				</li>
-				<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('marketPrice?')">시세정보</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('noticeForm?')">공지사항</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('updateWishList?')">선호품목</a>
-      			</li>
+
+      		<c:when test="${sessionScope.loginId != null }">
+      			<c:if test="${sessionScope.userMode == '1' }">      			
+	      			<li class="nav-item item bigSize">
+						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
+					</li>
+				</c:if>					
+					<c:if test="${sessionScope.userMode ne 'manager'}">	
+					<li class="nav-item item bigSize">								
+						<a class="nav-link" onclick="newPage('buyListHistory?')">履歴</a>
+					</li>	
+					</c:if>
+					<!-- <li class="nav-item item bigSize">	
+						<a class="nav-link" href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a>
+					</li> -->
+					<li class="nav-item item bigSize">
+	       				<a class="nav-link" onclick="newPage('marketPrice?')">市価</a>
+	      			</li>
+	      			<li class="nav-item item bigSize">
+	       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
+	      			</li>
+	      			<li class="nav-item item bigSize">
+	       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
+	      			</li>
+	      			<li class="nav-item item bigSize">
+	       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
+	      			</li>
 			</c:when>			
 		</c:choose>		   
     </ul>
@@ -264,19 +248,22 @@ function reset () {
     <form class="form-inline my-2 my-lg-0">
     <c:choose>
     	<c:when test="${sessionScope.loginId == null }">
-    		<li class="nav-item">
-       			<a class="nav-link" onclick="newPage('loginForm?')">로그인</a>
+    		<li class="nav-item item bigSize">
+       			<a class="nav-link" href="loginForm?">入場</a>
       		</li>
-      		<li class="nav-item">
-       			<a class="trigger_popup_fricc nav-link">회원가입</a>
+      		<li class="nav-item item bigSize">
+       			<a class="trigger_popup_fricc nav-link">退場</a>
       		</li>
     	</c:when>    
     
    		<c:when test="${sessionScope.loginId != null }"> 
-   			<li class="nav-item">
-      			<a class="nav-link" href="logOut?">로그아웃</a>
+   			<li class="nav-item item bigSize">
+      			<a class="nav-link" href="logOut?">退場</a>
+      		</li>
+      		<li class="nav-item item bigSize">
+      			<a class="nav-link">会員情報修正</a>
       		</li>	
-   		</c:when>
+      	</c:when>
     </c:choose>
     </form>
    
@@ -284,6 +271,11 @@ function reset () {
 </nav>
 
 </div>
+
+
+
+
+
 </div>
 
 <div id=blank_div></div>
@@ -331,6 +323,12 @@ function reset () {
     	</form>
     </div>
 </div>
+
+<input type="hidden" id="userMode" value="${sessionScope.userMode}">
+<a href="fishInfoList?">생선정보</a>
+
+<a href="updateWishList?">선호품목변경</a>
+<a href="marketPrice?">시세</a>
 </body>
 
 </html>

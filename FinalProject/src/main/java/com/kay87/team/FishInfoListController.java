@@ -26,7 +26,7 @@ public class FishInfoListController {
 	SqlSession sql;	
 	
 
-	@RequestMapping(value = "/fishInfoList", method = RequestMethod.GET, produces = "application/text; charset=utf8" )
+	@RequestMapping(value = "/fishInfoList", method = RequestMethod.GET)
 	public String fishInfoList(Model model) {
 		
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
@@ -37,7 +37,7 @@ public class FishInfoListController {
 	
 	}
 	
-	@RequestMapping(value = "/writeFishInfoForm", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/writeFishInfoForm", method = RequestMethod.GET)
 	public String writeFishInfoForm(Model model) {
 
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
@@ -48,7 +48,7 @@ public class FishInfoListController {
 	
 	}
 	
-	@RequestMapping(value = "/newFishInfo", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/newFishInfo", method = RequestMethod.GET)
 	public String newFishInfo(Model model, FishList fishInfo) {
 	
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
@@ -59,7 +59,7 @@ public class FishInfoListController {
 	}
 	
 
-	@RequestMapping(value = "/deleteFishInfo", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/deleteFishInfo", method = RequestMethod.GET)
 	public String deleteFishInfo(String fishName) {
 	
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
@@ -69,7 +69,7 @@ public class FishInfoListController {
 	
 	}
 	
-	@RequestMapping(value = "/updateFishInfoForm", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/updateFishInfoForm", method = RequestMethod.GET)
 	public String editFishInfo(String fishName, Model model) {
 	
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
@@ -82,7 +82,7 @@ public class FishInfoListController {
 	
 	}
 	
-	@RequestMapping(value = "/updateFishInfo", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/updateFishInfo", method = RequestMethod.GET)
 	public String updateFishInfo(FishList fishInfo) {
 		System.out.println("제대로오는지"+fishInfo);
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
@@ -93,7 +93,7 @@ public class FishInfoListController {
 	}
 	
 	
-	@RequestMapping(value = "/getFishList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/getFishList", method = RequestMethod.GET)
 	public @ResponseBody List<FishList> checkId(String fishCategoryNum) {
 		System.out.println("컨트롤러");
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);

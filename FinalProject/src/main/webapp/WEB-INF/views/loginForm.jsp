@@ -42,19 +42,18 @@ $(document).ready(function() {
 	<form action="login" method="post" class="login-form"  name="login-form" method="post">
 	
 	    <div class="header">
-	  	<h1>Login Form</h1>
+	  	<h1>会員ページへ</h1>
 	    <!--DESCRIPTION--><span></span><!--END DESCRIPTION-->
 	    </div>
-	  
 		
 	    <div class="content">
-		<!--USERNAME--><input name="id" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
-	    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+		<!--USERNAME--><input name="id" type="text" class="input username"  placeholder="ニックネーム" onfocus="this.value=''" /><!--END USERNAME-->
+	    <!--PASSWORD--><input name="password" type="password" class="input password"  placeholder="暗証番号" onfocus="this.value=''" /><!--END PASSWORD-->
 	    </div>
 	  
 	    
 	    <div class="footer">
-	    <input type="submit" name="submit" value="Login" class="button" style="height:65px"/><!--END LOGIN BUTTON-->
+	    <input type="submit" name="submit" value="確認" class="button" style="height:65px"/><!--END LOGIN BUTTON-->
 	   <!--  <input type="submit" name="submit" value="Register" class="register" />END REGISTER BUTTON -->
 	    </div>
 	</form>

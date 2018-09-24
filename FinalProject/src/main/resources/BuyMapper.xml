@@ -272,8 +272,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				buyList
 	 		where 
 	 			buyerid = #{id}
-	 		and 
-                saleStatus = 'saleComplete'
+	 		AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
             <if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -314,8 +316,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		to_char(deadline, 'YYYYMMDD') between sysdate-365 and sysdate
 		and
    			buyerid = #{id}
-		and 
-		    saleStatus = 'saleComplete'
+		AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
 		group by 
 		    to_char(deadline, 'MM')
 		order by
