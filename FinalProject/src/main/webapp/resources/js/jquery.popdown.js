@@ -93,7 +93,7 @@
 		// options 값을 주지 않으면 아래 디폴트 값.
 		// 즉 아래 width가 폭이 됨
 		var defaults = {
-			width :1200,
+			width :1165,
 			height:'auto'
 		};
 

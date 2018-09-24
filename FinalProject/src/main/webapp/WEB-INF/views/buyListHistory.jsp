@@ -140,6 +140,23 @@
 <script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
+		
+		$(".item").mouseenter(function(){
+			  if($(this).attr('class') != "item search")
+			  {
+				  $(this).css('flex-grow',1);
+			      $(this).css('font-size',"3em");
+			      $(this).css('background-color',"powderblue");
+			  }
+		     
+		    });
+		    
+		  $(".item").mouseleave(function(){
+		      $(this).css('flex-grow',1);
+		      $(this).css('font-size',"1.5em");
+		      $(this).css('background-color',"white");
+		    });
+		  
       	google.charts.load("current", {packages:["corechart"]});
       	google.charts.setOnLoadCallback(drawPieChart);
       	google.charts.setOnLoadCallback(drawHistogram);
@@ -235,15 +252,15 @@
 	<br><br>
 	<div id="tab">
 		<div class="items">
-			<div class="item " onclick="buyListHistory?period=1week">1週間</div>
-			<div class="item " onclick="buyListHistory?period=1month">1ヶ月</div>
-			<div class="item " onclick="buyListHistory?period=3month">3ヶ月</div>
+			<div class="item "><a href="buyListHistory?period=1week">1週間</a></div>
+			<div class="item "><a href="buyListHistory?period=1month">1ヶ月</a></div>
+			<div class="item "><a href="buyListHistory?period=3month">3ヶ月</a></div>
 		</div>
 		<div class="items">
 			<form action="buyListHistory">
-					<input type="date" name="startDay">
-					<input type="date" name="endDay">
-					<input type="submit" value="検索">
+				<input type="date" name="startDay">
+				<input type="date" name="endDay">
+				<input type="submit" value="検索">
 			</form>
 		</div>
 	</div>

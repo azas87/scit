@@ -59,7 +59,7 @@ body{
 	margin: 0 23px;
 }
 form {
-	padding: 3em 2em;
+	/* padding: 3em 2em; */
 	background: #F2F2F2;
 	
 }
@@ -75,7 +75,7 @@ form li{
 
 }
 .button {
-	float:right;
+	
 	padding: 11px 25px;
 	
 	font-family: 'Bree Serif', serif;
@@ -319,12 +319,16 @@ input.radio:empty {
 	margin-left: -999px;
 }
 
+
+/* 라벨 넓이 높이 글자 마진 (text-indent) */
 /* style label */
 input.radio:empty ~ label {
 	position: relative;
 	float: left;
-	line-height: 2.5em;
+	/* line-height: 2.5em; */
+	line-height:4em;
 	text-indent: 3.25em;
+	text-align:center;
 	margin-top: 2em;
 	cursor: pointer;
 	-webkit-user-select: none;
@@ -340,15 +344,16 @@ input.radio:empty ~ label:before {
 	bottom: 0;
 	left: 0;
 	content: '';
-	width: 2.5em;
+	width: 4em;
 	background: #D1D3D4;
 	border-radius: 3px 0 0 3px;
+	text-align: center;
 }
 
 /* toggle hover */
 input.radio:hover:not(:checked) ~ label:before {
 	content:'\2714';
-	text-indent: .9em;
+	text-indent: initial;
 	color: #C2C2C2;
 }
 
@@ -359,7 +364,7 @@ input.radio:hover:not(:checked) ~ label {
 /* toggle on */
 input.radio:checked ~ label:before {
 	content:'\2714';
-	text-indent: .9em;
+	text-indent: initial;
 	color: #9CE2AE;
 	background-color: #4DCB6D;
 }

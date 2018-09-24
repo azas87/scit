@@ -383,6 +383,8 @@ function myList_ing_buyer() {
 				var mousey = e.pageY + 10;
 				$('.tooltip').css({top : mousey,left : mousex});
 			});
+			
+			$(".jqGridghead_0").css('font-size','1.5em');
 		},
 		gridComplete: function(){
 		},

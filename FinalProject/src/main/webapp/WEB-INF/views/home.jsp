@@ -137,8 +137,7 @@ $(window).load(function () {
 	      $(this).css('font-size',"1.5em");
 	      $(this).css('background-color',"white");
 	    });
-	  /* var audio = new Audio('./resources/alram.wav');
-	  audio.play(); */
+	  
 });
 
 function cancel() {
@@ -206,7 +205,7 @@ function reset () {
 				
 				<c:when test="${sessionScope.loginId != null }">
 					<div class="item" ><a href="logOut?">로그아웃</a></div>
-					<div class="item" ><a href="writeBuyBoardForm?">글등록</a></div>
+					<div class="item" onclick="newPage('writeBuyBoardForm?')">글등록</a></div>
 					<c:if test="${sessionScope.userMode ne 'manager'}">				
 						<div class="item" onclick="newPage('buyListHistory?')">구매내역</div>
 					</c:if>
@@ -221,11 +220,14 @@ function reset () {
 		</div> -->
 		<div class="items">
 			<div class="item " onclick="newPage('main?')">메인</div>
-			<div class="item " onclick="">시세</div>
+			<div class="item " onclick="newPage('marketPrice?')">시세</div>
 			<div class="item " onclick="newPage('noticeForm?')">공지사항</div>
 			<div class="item " onclick="newPage('qnaForm?')">QnA</div>
 			<div class="item " onclick="newPage('faqForm?')">FAQ</div>
-			<div ></div>
+			<div class="item " onclick="newPage('fishInfoList?')">생선정보</div>
+			<div class="item " onclick="newPage('updateWishList?')">선호품목</div>
+			
+		
 		</div>
 	</div>
 </div>
@@ -235,7 +237,8 @@ function reset () {
 
 <div id="page-wrapper">
 	<!-- frameborder="1" -->
-	<iframe name="f_main" id="f_main" src="main?"  width="100%" height="100%" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" allowtransparency="true" ></iframe>
+	<!-- <iframe name="f_main" id="f_main" src="main?"  width="100%" height="100%" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" allowtransparency="true" ></iframe> -->
+	<iframe name="f_main" id="f_main" src="main?"  frameborder="0" width="100%" marginwidth="0" marginheight="0" scrolling="no" style="border: 0px" onload="window.scrollTo(0,0)" height="100%"></iframe>
 </div>
 
 <div class="hover_bkgr_fricc">
@@ -258,9 +261,6 @@ function reset () {
     	</form>
     </div>
 </div>
-<a href="fishInfoList?">생선정보</a>
-<a href="updateWishList?">선호품목변경</a>
-<a href="marketPrice?">시세</a>
 </body>
 
 </html>
