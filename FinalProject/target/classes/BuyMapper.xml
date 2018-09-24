@@ -84,7 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{id}
 			
 			AND 
-                saleStatus = 'saleComplete'
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
    			<if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
