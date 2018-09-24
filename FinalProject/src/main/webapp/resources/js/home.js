@@ -22,7 +22,8 @@ $(document).ready(function() {
 		  if($(this).attr('class') != "item search")
 		  {
 			  $(this).css('flex-grow',1);
-		      $(this).css('font-size',"3.5em");
+		      $(this).css('font-size',"3em");
+		      $(this).css('font-weight','bold');
 /*		      $(this).css('background-color',"powderblue");
 */	/*	      $('input').css('line-height', '60px');
 		      $('input').css('width', '200px');*/
@@ -33,6 +34,7 @@ $(document).ready(function() {
 	  $(".item").mouseleave(function(){
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"2em");
+	      $(this).css('font-weight','normal');
 	      /*$(this).css('background-color',"white");*/
 	    });
 	  
