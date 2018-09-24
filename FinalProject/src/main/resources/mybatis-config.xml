@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kay87.team.vo.FAQ" alias="FAQ"/>
 		<typeAlias type="com.kay87.team.vo.FishList" alias="FishList"/>
 		<typeAlias type="com.kay87.team.vo.FishCategoryList" alias="FishCategoryList"/>
+		<typeAlias type="com.kay87.team.vo.WishList" alias="WishList"/>
 	</typeAliases>
 	
 	<mappers>

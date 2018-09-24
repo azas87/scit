@@ -39,7 +39,7 @@ $(document).ready(function() {
     <div class="user-icon"></div>
     <div class="pass-icon"></div>
    
-<form action="login" method="post" class="login-form"  name="login-form">
+<form action="login" method="post" class="login-form"  name="login-form" method="post">
 
     <div class="header">
   	<h1>Login Form</h1>

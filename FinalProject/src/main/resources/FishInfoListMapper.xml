@@ -48,5 +48,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fishName = #{fishName}
 			
 	</update>
+	
+	<select id="getFishList" parameterType="string" resultType="FishList">
+		
+		SELECT * FROM fishlist
+		WHERE fishcategorynum = #{value}
+	
+	</select>
 
 </mapper>

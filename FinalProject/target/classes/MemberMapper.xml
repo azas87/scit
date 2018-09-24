@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="login" parameterType="Member" resultType="Member">
 	
-		select * from memberinfo where id = #{id} and password = #{password}
+		select * from memberinfo where id = #{id} and password = #{password} and memberstatus='join'
 	
 	</select>
 	
@@ -80,6 +80,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	SET memberstatus = 'join' , password = #{password}
     	WHERE id = #{id}
 	
+	</update>
+
+	<insert id="setWishList" parameterType="WishList">
+	
+		INSERT INTO wishlist VALUES(wishNum.nextval, #{id},#{wish})
+	
+	</insert>
+	
+	<select id="getwishListCount" resultType="int" parameterType="string">
+		
+		SELECT count(*) FROM wishlist WHERE id = #{id}
+	
+	</select>
+	
+	<select id="getWishList" resultType="WishList" parameterType="string">
+		
+		SELECT * FROM wishlist WHERE id = #{id}
+	
+	</select>
+	
+	<delete id="deleteWishList" parameterType="WishList">
+	
+		DELETE FROM wishlist WHERE id = #{id} AND wish = #{wish}
+		
+	</delete>
+	
+	<select id="checkWishList" parameterType="WishList" resultType="WishList">
+	
+		SELECT * FROM wishlist WHERE id = #{id} AND wish = #{wish}
+	
+	</select>
+	
+	<update id="updateUserFirst" parameterType="string">
+	
+		UPDATE memberinfo SET first='notFirst' WHERE id = #{id}
+		
 	</update>
 	
 </mapper>

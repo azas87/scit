@@ -58,7 +58,7 @@ public class NoticeController {
 		return "writeNoticeForm";
 	}
 	
-	@RequestMapping(value = "/writeNotice", method = RequestMethod.GET)
+	@RequestMapping(value = "/writeNotice", method = RequestMethod.POST)
 	public String writeBoard(Notice notice, HttpSession session){
 
 		notice.setId((String) session.getAttribute("loginId"));

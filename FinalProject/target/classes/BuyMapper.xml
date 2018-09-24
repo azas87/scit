@@ -373,7 +373,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getWeekAvgList" resultType="AvgList">
-		select fishname,avgprice,dates from weekavglist order by dates
+		<!-- select fishname,avgprice,dates from weekavglist order by dates, fishname -->
+		select * from WEEKAVGLIST where fishname in('すずき','イセエビ','キダイ','キンメダイ','クマエビ') order by dates, fishname
 	</select>
 	
 	<insert id="setWeekAvgList" parameterType="AvgList">
@@ -393,6 +394,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<select id="sellerWishList" resultType="BuyList" parameterType="string">
+		SELECT 
+			buyNum,
+			fishName,
+			buyerId,
+			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			weight,
+			saleStatus,
+			price,
+			successSellerId,
+			buyListComment,
+			location 
+
+		from 
+			BuyList b, wishlist w
+		where			
+			b.buyerid=w.id 
+			and w.wish=b.fishname
+			and b.buyerid=#{userid}
+			and b.salestatus='onSale'
+		order by b.buyNum asc
+	</select>
+	
+	<select id="selectOneBuylist" parameterType="int" resultType="BuyList">
+		
+		SELECT * FROM buylist WHERE buyNum = #{value}
+		
+	</select>
 	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
 		insert into buyList
 		(
@@ -407,29 +438,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,fishName
 			, avgPrice
 			, to_char(sysdate,YYYY/MM/DD);
+<<<<<<< HEAD
+		)	
+	</insert>
+=======
 		)
 	</insert> -->
+
+	<select id="getMarketPrice" resultType="AvgList">
+>>>>>>> refs/remotes/origin/mina
 	
-<!-- 	
-	  <select id="selectBestseller" resultType="hashmap">
-   	SELECT
-   		b.bookcode,
-   		b.title,
-   		b.price,
-   		s.purchasecnt
-   	FROM
-   		book b, sale s
-   	WHERE
-   		b.bookcode=s.bookcode
-   	AND
-   		s.purchasecnt
-   	IN (
-   		SELECT
-   			MAX(purchasecnt)
-   		FROM
-   			sale
-   	)
-   </select> -->
+		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
+		
+	</select>
 
 	
 </mapper>

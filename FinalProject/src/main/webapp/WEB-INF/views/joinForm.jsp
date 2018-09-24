@@ -4,196 +4,476 @@ language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>Home</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
- <script type="text/javascript" src="./resources/js/joinForm.js" ></script>
-<!-- <script type="text/javascript" src="./resources/js/joinFormAJax.js" ></script> -->
-<style>
-div{
-			border:1px solid #cccccc;
-			padding:5px;
-			margin: 5px;
-			text-align: center;
-		}
-		
-		 .tooltip
-    {
-    	display:none;
-    	position:absolute;
-    	border:1px solid #333;
-    	background-color:#161616;
-    	border-radius:5px;
-    	padding:10px;
-    	color:#fff;
-    	font-size:3.5em Arial;
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/materialize.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<!-- 로그인 폼이랑 슬라이드 높이가 높이 -->
+
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
     }
 
-		#contain
-		{
-			width:800px;
-			margin: 0 auto;
-			overflow: hidden;
-		}
 
-		#header{
-			width:780px;
-			
-			line-height:100px;
-			
-			color:#666;
-			font-size:100px;
-			text-align:center;
-		}
+    .tooltip {
+      display: none;
+      position: absolute;
+      border: 1px solid #333;
+      background-color: #161616;
+      border-radius: 5px;
+      padding: 10px;
+      color: #fff;
+      font-size: 3.5em Arial;
+    }
 
-		#nav{
-			width:780px;
-			height:200px;
-		}
-.items {
-    display: flex;
-    flex-direction: row;
-    height:80px;    
+    .slide {
+      width: 1200px;
+      height: 600px;
+      overflow: hidden;
+      position: relative;
+      margin: 0 auto;
+    }
 
-  }
-.item{
-    line-height: 80px;
-    list-style: none;
-    margin:0px;
-    flex-grow: 1;
-    text-align: left;
-  }
-</style>
-<script>
-$(document).ready(function()
-  {
+    .slide ul {
+      width: 5000px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .slide ul li {
+      display: inline-block;
+      width: 1200px;
+      height:650px;
+
+    }
+
+    #back {
+      position: absolute;
+      top: 250px;
+      left: 0;
+      cursor: pointer;
+      z-index: 1;
+      font-size:8rem;
+    }
+
+    #next {
+      position: absolute;
+      top: 250px;
+      right: 0;
+      cursor: pointer;
+      z-index: 1;
+      font-size:8rem;
+    }
+    
+    
+    /**/
+    
+    .input_size
+    {
+    	width:640px !important;
+    	height:50px !important;
+    	padding-top:40px !important;
+    	font-size:3em !important;
+    }
+    
+    body{
+    
+    display: table-cell;
+    vertical-align: middle;
+    //background-color: #e0f2f1 !important; 
+    background:url(./resources/img/bg.png) repeat;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight:300;
+	text-align: left;
+	text-decoration: none;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+html, body {
+    height: 100%;
+}
+
+.medium-small {
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.login-form {
+    width: 780px;
+    height:600px;
+    
+}
+
+.login-form-text {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+.login-text {
+    margin-top: -6px;
+    margin-left: -6px !important;
+}
+
+.margin {
+    margin: 0 !important;
+}
+
+.pointer-events {
+    pointer-events: auto !important;
+}
+
+.input-field >.material-icons  {
+    padding-top:10px;
+}
+
+.input-field div.error{
+    position: relative;
+    top: -1rem;
+    left: 3rem;
+    font-size: 0.8rem;
+    color:#FF4081;
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
+}
+
+#submit_btn
+{
+	height:80px;
+	font-size:3em;
+}
+
+
+
+
 	
-    $(".item").mouseenter(function(){
-      $(this).css('flex-grow',1);
-      $(this).css('font-size',"2em");
-      $(this).css('background-color',"powderblue");
-    });
-    $(".item").mouseleave(function(){
-      $(this).css('flex-grow',1);
-      $(this).css('font-size',"1em");
-      $(this).css('background-color',"white");
-    });
+.breadcrumb-counter-nav {
+  margin: 0 auto;
+  margin-bottom:10px;
+  padding: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 800px;
+  list-style: none;
+  background: #2C3E50;
+}
 
-    $('.item').hover(function(){
-        // Hover over code
-        var title = $(this).attr('title');
-        $(this).data('tipText', title).removeAttr('title');
-        $('<p class="tooltip"></p>')
-        .text(title)
-        .appendTo('body')
-        .fadeIn('slow');
-}, function() {
-        // Hover out code
-        $(this).attr('title', $(this).data('tipText'));
-        $('.tooltip').remove();
-}).mousemove(function(e) {
-        var mousex = e.pageX + 20; //Get X coordinates
-        var mousey = e.pageY + 10; //Get Y coordinates
-        $('.tooltip').css({ top: mousey, left: mousex })
-});
-  });
-</script>
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item {
+  position: relative;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item:hover {
+  background: #1a252f;
+}
+
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item::before {
+  counter-increment: section;
+  content: counter(section);
+  position: relative;
+  background: #507192;
+  color: #fff;
+  right: 0.8rem;
+  border-radius: 50%;
+  padding: 0.2em 0.55em;
+}
+
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item.current {
+  background: #1a252f;
+}
+
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item.current::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1rem;
+  width: 0;
+  height: 0;
+  border-top: 1.75rem solid transparent;
+  border-bottom: 1.75rem solid transparent;
+  border-left: 1rem solid #1a252f;
+  z-index: 300;
+}
+
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item.current::before {
+  background-color: #88a4bf;
+}
+
+.breadcrumb-counter-nav .breadcrumb-counter-nav-item a {
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+@media only screen and (max-width: 52em) {
+  .breadcrumb-counter-nav {
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+
+
+    
+  </style>
+  <script>
+
+    
+  
+  
+  
+  </script>
 </head>
+
 <body>
-	<div id="contain">
-		
-	<form action="join" method="post" >
+	<ul class="breadcrumb-counter-nav">
+  <li class="breadcrumb-counter-nav-item"><a href="#">Setup</a></li>
+  <li class="breadcrumb-counter-nav-item current"><a href="#">Sample Analysis</a></li>
+  <li class="breadcrumb-counter-nav-item"><a href="#">Sort Layout</a></li>
+</ul>
 
-        <h1>Sign Up</h1>
 
-        <fieldset>
-          <legend><span class="number">1</span>ログイン情報</legend>
-
-					<div id="items">
-						<div class="item " title="Click button">
-							<label for="name"><strong class="star">*</strong>ログインID</label>
-		          			<input type="text" id="userid" name="id">
-		          			<button id="btn" type="button">ID CHECK</button>
-						</div>
-						<div class="item " title="Click button">
-							<label for="password"><strong class="star">*</strong>パスワード </label>
-		          			<input type="password" id="userpwd" name="password"　placeholder="半角数字11桁">
-		        　　　　　			
-						</div>
-						<div class="item " title="Click button">
-							<label for="password2"><strong class="star">*</strong>パスワードを再入力してください</label>
-		          			<input type="password" id="userpwd2" name="userpwd2">
-		          		</div>
-						<div class="item " title="Click button">
-							<label for="email"><strong class="star">*</strong>email</label>
-					        <input type="email" id="email" name="email">
-					    </div>
-					    <div class="item " title="Click button">
-					        　　　　<label for="email2"><strong class="star">*</strong>emailを再入力してください</label>
-					        <input type="text" name="nameKana"> 주소<input type="text" name="address">
-					     	<input type="hidden" name="grade"/>
-					     </div>
-						 <legend><span class="number">2</span>あなたの情報</legend>
-						
-						<div class="item " title="Click button">
-							<label for="username"><strong class="star">*</strong>氏名 </label>
-							<input type="text" id="name" name="name">
-							<label for="namekana"><strong class="star">*</strong>氏名（カナ) </label>
-							<input type="text" id="namekana" name="namekana">
-						</div>
-						<div class="item " title="Click button">
-							<label for="birth"><strong class="star">*</strong>生年月日:</label>
-					        <select id="birthYear" name="birthYear">
-						        <c:forEach begin="1920" end="2018" var="x" step="1">
-						        	<option value="${3938-x}">${3938-x}</option>
-						        </c:forEach>
-					        </select>年
-						</div>
-						<div class="item " title="Click button">
-							<select id="birthMonth" name="birthMonth">
-					          <c:forEach begin="1" end="12" var="x" step="1">
-					          	<option value="${x}">${x}</option>
-					          </c:forEach>
-		        	 		</select>月
-						</div>
-						<div class="item " title="Click button">
-							<select id="birthDate" name="birthDate">
-					        <c:forEach begin="1" end="31" var="x" step="1">
-					        	<option value="${x}">${x}</option>
-					        </c:forEach>
-					        </select>日
-						</div>
-						<div class="item " title="Click button">
-							<label><strong class="star">*</strong>学生・職業 :</label>
-					        <select id="work" name="work">
-						        <option value="高校１年生">高校１年生</option>
-						      	<option value="高校２年生">高校２年生</option>
-						      	<option value="高校３年生">高校３年生</option>
-						      	<option value="高校４年生">高校４年生</option>
-						      	<option value="高校生以外の学生">高校生以外の学生</option>
-						      	<option value="社会人">社会人</option>
-						      	<option value="先生">先生</option>
-						      	<option value="保護者">保護者</option>
-						      	<option value="日本への留学生">日本への留学生</option>
-					      		<option value="その他">その他</option>
-					      	 </select>
-						</div>
-						<div class="item " title="Click button">
-							<label>性別 :</label>
-				          <input type="radio" id="male" value="male" name="gender">男性
-				          <input type="radio" id="female" value="female" name="gender">女性
-				          </div>
-				        <div class="item " title="Click button">
-				        	<label for="phone">電話番号:</label>
-				        	<input type="text" id="phone" name="phone" placeholder="ハイフンなしの半角数字11桁">
-						</div>
-        </fieldset>
-
-        <button id="btn2" onclick="return check()">완료</button>
-      </form>
+  <div class="slide" style="border:0">
+    <i id="back" class="material-icons prefix" >arrow_back</i>
+    <ul>
+      <li>
+      	<div class="join_body" style="width:800px; margin:0 auto;">
+        <div id="login-page" class="row">
+		  <div class="col s12 z-depth-4 card-panel">
+		    <form class="login-form">
+		      <div class="row">
+		        <div class="input-field col s12 center">
+			          <h2>Register</h2>
+			          <p class="center">Join to our community now !</p>
+			        </div>
+			    </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
+			          <i class="material-icons prefix">account_box</i>
+			          <input id="usernid" name="userid" class="input_size" type="text"/>
+			          <label for="usernid">UserId</label>
+			        </div>
+			      </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">vpn_key</i>
+			          <input id="password" name="password" class="input_size" type="password" />
+			          <label for="password">Password</label>
+			        </div>
+			      </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">vpn_key</i>
+			          <input id="password_a" name="cpassword" class="input_size" type="password" />
+			          <label for="password_a">Password again</label>
+			        </div>
+			      </div>
+			      
+			    </form>
+			  </div>
+			</div>
 		</div>
+      </li>
+       <li>
+      	<div style="width:800px; margin:0 auto;">
+        <div id="login-page" class="row">
+		  <div class="col s12 z-depth-4 card-panel">
+		    <form class="login-form">
+		      <div class="row">
+		        <div class="input-field col s12 center">
+			          <h2>Register</h2>
+			          <p class="center">Join to our community now !</p>
+			        </div>
+			    </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="username" name="username" class="input_size" type="text"/>
+			          <label for="username">Username</label>
+			        </div>
+			      </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">assignment_ind</i>
+			          <input id="name_kana" name="name_kana" class="input_size" type="password" />
+			          <label for="name_kana">name_kana</label>
+			        </div>
+			      </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">account_balance</i>
+			          <input id="address" name="address" class="input_size" type="text" />
+			          <label for="address">address</label>
+			        </div>
+			      </div>
+			      
+			    </form>
+			  </div>
+			</div>
+		</div>
+      </li>
+      <li>
+        <div style="width:800px; margin:0 auto;">
+           <div id="login-page" class="row">
+		  <div class="col s12 z-depth-4 card-panel">
+		    <form class="login-form">
+		      <div class="row">
+			      <div class="input-field col s12 center">
+				          <h2>Register</h2>
+				          <p class="center">Join to our community now !</p>
+				        </div>
+				      </div>
+				      
+			      
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
+			          <i class="material-icons prefix">email</i>
+			          <input id="email" name="email" type="text" class="input_size" style="cursor: auto;" />
+			          <label for="email">Email</label>
+			        </div>
+			      </div>
+			
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">fingerprint</i>
+			          <input id="join_number" name="join_number" class="input_size" type="number" />
+			          <label for="join_number">인증번호</label>
+			        </div>
+			      </div>
+			      
+			      <div class="input-field col s12">
+			          <button type="submit" id="submit_btn" class="btn waves-effect waves-light col s12" >REGISTER NOW</button>
+		        </div>
 
+				</form>
+				</div>
+			  </div>
+			</div>
+		</li>
+		</ul>
+	          <i id="next" class="material-icons prefix" style="">arrow_forward</i>
+        </div>       
+    
+</body>
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    var imgs;
+    var img_count;
+    var img_position = 1;
+
+    imgs = $(".slide ul");
+    img_count = imgs.children().length;
+
+    //버튼을 클릭했을 때 함수 실행
+    $('#back').click(function() {
+      back();
+    });
+    $('#next').click(function() {
+      next();
+    });
+
+    function back() {
+      if (1 < img_position) {
+        imgs.animate({
+          left: '+=1200px'
+        });
+        img_position--;
+      }
+    }
+
+    function next() {
+      if (img_count > img_position) {
+        imgs.animate({
+          left: '-=1200px'
+        });
+        img_position++;
+      }
+    }
+    
+    $('.breadcrumb-counter-nav-item').click(function () {
+  	  $('.breadcrumb-counter-nav-item').removeClass('current');
+  	  $(this).addClass('current');
+  	});
+    
+   /*  $(".login-form").validate({
+  	  rules: {
+  	    username: {
+  	      required: true,
+  	      minlength: 4
+  	    },     
+  	    email: {
+  	      required: true,
+  	      email:true
+  	    },
+  	    password: {
+  	      required: true,
+  	      minlength: 5
+  	    },
+  	    cpassword: {
+  	      required: true,
+  	      minlength: 5,
+  	      equalTo: "#password"
+  	    }
+  	  },
+  	  //For custom messages
+  	  messages: {
+  	    username:{
+  	      required: "Enter a username",
+  	      minlength: "Enter at least 4 characters"
+  	    }
+  	  },
+  	  errorElement : 'div',
+  	  errorPlacement: function(error, element) {
+  	    var placement = $(element).data('error');
+  	    if (placement) {
+  	      $(placement).append(error)
+  	    } else {
+  	      error.insertAfter(element);
+  	    }
+  	  }
+  	}); */
+
+  });
+ 
+</script>
 
 
 </body>
+
 </html>

@@ -68,7 +68,7 @@ public class BoardController {
 		return "writeBoardForm";
 	}
 	
-	@RequestMapping(value = "/writeBoard", method = RequestMethod.GET)
+	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
 	public String writeBoard(QnA qna, HttpSession session){
 
 		qna.setId((String) session.getAttribute("loginId"));

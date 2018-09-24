@@ -88,10 +88,12 @@
 	 * @return void
 	 */
 	$.fn.popdown = function(options) {
+		
+		console.log("popdown_init");
 		// options 값을 주지 않으면 아래 디폴트 값.
 		// 즉 아래 width가 폭이 됨
 		var defaults = {
-			width :1000,
+			width :1200,
 			height:'auto'
 		};
 
@@ -137,8 +139,11 @@
 		return this.each(function() {
 
 			var self = $(this);
-
+			
 			self.bind('click', function(e){
+				console.log(self);
+				console.log(self.data('uri'));
+				console.log(self.attr('href'));
 
 				if(self.is('a')) {
 					e.preventDefault();
@@ -152,7 +157,8 @@
 					} else if(self.attr('href')) {
 						$.fn.show_popdown(self.attr('href'), options);
 					} else {
-						alert("No popdown dialog set for this action.");
+						$.fn.show_popdown("./resources/content.jsp", options);
+						//alert("No popdown dialog set for this action.");
 					}
 				}
 			});

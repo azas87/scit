@@ -25,14 +25,14 @@
 
 #contain
 {
-	width:1000px;
+	width:1300px;
 	margin: 0 auto;
 	overflow: hidden;
 }
 
 #header
 {
-	width:1000px;
+	width:1300px;
 
 	line-height:100px;
 
@@ -51,7 +51,7 @@
 	border:1px solid #cccccc;
 	display: flex;
 	flex-direction: row;
-	width:995px;
+	width:1295px;
 }
 
 .item{
@@ -60,7 +60,48 @@
 	text-align: right;
 }
 
+#tab
+  {
+  	box-sizing:true;
+  	border:1px solid #cccccc;
+	padding:1px;
+	margin: 1px;
+	text-align: center;
+	margin:0px auto;
+	margin-bottom: 10px;
+  }
+  
+   #tab div{
+			border:1px solid #cccccc;
+			padding:1px;
+			margin: 1px;
+			text-align: center;
+		}
 
+    #tab .items {
+    border:0px;	
+    display: flex;
+    flex-direction: row;
+    height:80px;
+
+  }
+  #tab .item
+  {
+    line-height: 80px;
+    list-style: none;
+    margin:0px;
+    flex-grow: 1;
+    //border:0;
+  }
+  
+  #tab .item:nth-child(4)
+  {
+  	border:0px;	
+    list-style: none;
+    margin:0px;
+    flex-grow: 1;
+    
+  }
 
 
 </style>
@@ -70,6 +111,7 @@
 
 
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+ <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
@@ -117,6 +159,15 @@
         var options = {
           title: '魚種別購入額',
           is3D: true,
+          fontSize:23,
+          tooltip          : {textStyle : {fontSize:30}, showColorCode : true,trigger: 'both'},
+          chartArea:{
+        	  	left:20,
+        	    right:10, // !!! works !!!
+        	    top:40,
+        	    width:"100%",
+        	    height:"100%"
+        	  }
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -145,10 +196,19 @@
 
             var options = {
               title: "月間購入額",
-              width: 600,
-              height: 400,
+              chartArea:{
+          	    left:100,
+          	    bottom:50,  // !!! works !!!
+          	    top:50,
+          	    width:"100%",
+          	    height:"100%"
+          	  },
               bar: {groupWidth: "95%"},
               legend: { position: "none" },
+              tooltip          : {textStyle : {fontSize:35}, showColorCode : true,trigger: 'both'},
+              hAxis              : {textStyle: {fontSize:25}},
+    		  vAxis              : {textStyle:{fontSize:25}},
+    		  fontSize:20
             };
             var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
             chart.draw(view, options);
@@ -167,21 +227,19 @@
 <div id="contain">
 	<div id="header">
 		<div id="chart_div" class="items">
-			 <div id="columnchart_values" style="width: 500px; height: 400px;"></div>
-			 <!-- <div style="width: 700px; height: 300px;"></div> -->
-			 <div id="piechart_3d" style="width: 490px; height: 400px;"></div>
+			 <div id="columnchart_values" style="width: 750px; height: 400px;"></div>
+			 <div id="piechart_3d" style="width: 600px; height: 400px;"></div>
 		</div>
 	</div>
 	
 	<br><br>
-	<div class="items">
-		<div class="item">
-			<a href="buyListHistory?period=1week">1週間</a>
-			<a href="buyListHistory?period=1month">1ヶ月</a>
-			<a href="buyListHistory?period=3month">3ヶ月</a>
-			
+	<div id="tab">
+		<div class="items">
+			<div class="item " onclick="buyListHistory?period=1week">1週間</div>
+			<div class="item " onclick="buyListHistory?period=1month">1ヶ月</div>
+			<div class="item " onclick="buyListHistory?period=3month">3ヶ月</div>
 		</div>
-		<div class="item">
+		<div class="items">
 			<form action="buyListHistory">
 					<input type="date" name="startDay">
 					<input type="date" name="endDay">
@@ -189,9 +247,7 @@
 			</form>
 		</div>
 	</div>
-	
 
-	
 	
 	<div><br></div>
 	
@@ -233,12 +289,14 @@
 	<div><br></div>
 	
 	<!-- 기간검색--jqgrid위해/다운로드위해 사용 -->
-	<form action="download">
-		<input type="hidden" id="period" name="period" value="${period}">
-		<input type="hidden" id="startDay" name ="startDay" value="${startDay}">
-		<input type="hidden" id="endDay" name ="endDay" value="${endDay}">
-		<input type="submit" value="ダウンロード">
-	</form>
+		<div style="margin: 0 auto; width: 550px;">
+		<input type="hidden" id="period" value="${period}">
+		<input type="hidden" id="startDay" value="${startDay}">
+		<input type="hidden" id="endDay" value="${endDay}">
+		<a class="myButton"　href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
+		</div>
+	</div>
+	
 	
 </body>
 </html>

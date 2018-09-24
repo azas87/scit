@@ -14,7 +14,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 
 
  <!-- The jQuery library is a prerequisite for all jqSuite products -->
@@ -142,6 +142,8 @@ $(window).load(function () {
 	      $(this).css('font-size',"1.5em");
 	      $(this).css('background-color',"white");
 	    });
+	  /* var audio = new Audio('./resources/alram.wav');
+	  audio.play(); */
 });
 
 function cancel() {
@@ -184,6 +186,9 @@ function reset () {
 		buttonReverse : false,
 		buttonFocus   : "ok"
 	});
+	
+	var audio = new Audio('./resources/alram.wav');
+	audio.play();
 }
 </script>
 
@@ -204,9 +209,8 @@ function reset () {
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
- 	<a class="navbar-brand" onclick="newPage('main?')" >메인<span class="sr-only">(current)</span></a>
-	<!-- <a class="nav-link" onclick="newPage('main?')">메인 <span class="sr-only">(current)</span></a> -->
-
+ 	<a class="navbar-brand" onclick="newPage('main?')">메인<span class="sr-only">(current)</span></a>
+	
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">         
       <c:choose>
@@ -222,33 +226,35 @@ function reset () {
       			</li>
       			<li class="nav-item">
        				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
-      			</li>   			
+      			</li>
       		</c:when>
       		
-      		<c:when test="${sessionScope.loginId != null }">      			
-      			<li class="nav-item">
-					<a class="nav-link" href="writeBuyBoardForm?">글등록</a>
-				</li>			
-				<c:if test="${sessionScope.userMode ne 'manager'}">	
-				<li class="nav-item">								
-					<a class="nav-link" href="buyListHistory?">구매내역</a>
-				</li>	
-				</c:if>
-				<li class="nav-item">	
-					<a class="nav-link" href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a>
-				</li>
-				<li class="nav-item">
-       				<a class="nav-link" onclick="">시세정보</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('noticeForm?')">공지사항</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
-      			</li>
+      		<c:when test="${sessionScope.loginId != null }">
+      			<c:if test="${sessionScope.userMode == '1' }">      			
+	      			<li class="nav-item">
+						<a class="nav-link" href="writeBuyBoardForm?">글등록</a>
+					</li>
+				</c:if>					
+					<c:if test="${sessionScope.userMode ne 'manager'}">	
+					<li class="nav-item">								
+						<a class="nav-link" href="buyListHistory?">구매내역</a>
+					</li>	
+					</c:if>
+					<!-- <li class="nav-item">	
+						<a class="nav-link" href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a>
+					</li> -->
+					<li class="nav-item">
+	       				<a class="nav-link" onclick="">시세정보</a>
+	      			</li>
+	      			<li class="nav-item">
+	       				<a class="nav-link" onclick="newPage('noticeForm?')">공지사항</a>
+	      			</li>
+	      			<li class="nav-item">
+	       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
+	      			</li>
+	      			<li class="nav-item">
+	       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
+	      			</li>
 			</c:when>			
 		</c:choose>		   
     </ul>
@@ -267,8 +273,11 @@ function reset () {
    		<c:when test="${sessionScope.loginId != null }"> 
    			<li class="nav-item">
       			<a class="nav-link" href="logOut?">로그아웃</a>
+      		</li>
+      		<li class="nav-item">
+      			<a class="nav-link">회원정보수정</a>
       		</li>	
-   		</c:when>
+      	</c:when>
     </c:choose>
     </form>
    
@@ -289,19 +298,26 @@ function reset () {
     <span class="helper"></span>
     <div>
         <div class="popupCloseButton">X</div>
-        <form action="checkingStatus">
-        	<input type="radio" name="memberStatus" value="newResitration">新規登録
-			<input type="radio" name="memberStatus" value="reentrance">再登録<br>
-		
-			<input type="radio" name="grade" value="buyer">購入者
-			<input type="radio" name="grade" value="seller">販売者<br>
-			<input type="submit" value="会員登録へ進む">
-			<input type="button" value="閉じる" id="close">
+        <form id="outForm" action="checkingStatus">
+			<div class="items">
+				<div class="item" ><input type="radio" name="memberStatus" value="newResitration">新規登録</div>
+				<div class="item "><input type="radio" name="memberStatus" value="reentrance">再登録<br></div>
+			</div>
+			<div class="items">
+				<div class="item" ><input type="radio" name="grade" value="buyer">購入者</div>
+				<div class="item "><input type="radio" name="grade" value="seller">販売者<br></div>
+			</div>
+			<div class="items">
+				<div class="item" ><input type="submit" value="会員登録へ進む"></div>
+				<div class="item" ><input type="button" value="閉じる" id="close"></div>
+			</div>
     	</form>
     </div>
 </div>
 <a href="fishInfoList?">생선정보</a>
 
+<a href="updateWishList?">선호품목변경</a>
+<a href="marketPrice?">시세</a>
 </body>
 
 </html>
