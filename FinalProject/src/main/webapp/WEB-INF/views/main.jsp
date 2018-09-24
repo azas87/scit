@@ -136,7 +136,10 @@ $(document).ready(function(){
 	tab('#tab',0);
 	
 //	$("#popup").attr("href", "./resources/content.jsp");
-	$('#popup').trigger('click');
+
+
+	// 팝업 띄우기
+	//$('#popup').trigger('click');
 		
 });
    
@@ -289,7 +292,7 @@ var chartDrowFun = {
 	</div>	
 </div>
 
-		
+<input type="hidden" id="sellerInfo" name="sellerInfo">
 
 </body>
 </html>
