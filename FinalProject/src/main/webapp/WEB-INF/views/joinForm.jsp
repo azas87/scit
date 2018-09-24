@@ -246,11 +246,11 @@ html, body {
 </head>
 
 <body>
-	<ul class="breadcrumb-counter-nav">
+<!-- 	<ul class="breadcrumb-counter-nav">
   <li class="breadcrumb-counter-nav-item"><a href="#">Setup</a></li>
   <li class="breadcrumb-counter-nav-item current"><a href="#">Sample Analysis</a></li>
   <li class="breadcrumb-counter-nav-item"><a href="#">Sort Layout</a></li>
-</ul>
+</ul> -->
 
 
   <div class="slide" style="border:0">
@@ -263,8 +263,8 @@ html, body {
 		    <form class="login-form">
 		      <div class="row">
 		        <div class="input-field col s12 center">
-			          <h2>Register</h2>
-			          <p class="center">Join to our community now !</p>
+			          <h2>会員登録のすすめ</h2>
+			          <p class="center">ニックネームと暗証番号を決めてください。</p>
 			        </div>
 			    </div>
 			
@@ -273,7 +273,7 @@ html, body {
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_box</i>
 			          <input id="usernid" name="userid" class="input_size" type="text"/>
-			          <label for="usernid">UserId</label>
+			          <label for="usernid">ニックネーム</label>
 			        </div>
 			      </div>
 			
@@ -282,7 +282,7 @@ html, body {
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">vpn_key</i>
 			          <input id="password" name="password" class="input_size" type="password" />
-			          <label for="password">Password</label>
+			          <label for="password">暗証番号</label>
 			        </div>
 			      </div>
 			
@@ -291,7 +291,7 @@ html, body {
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">vpn_key</i>
 			          <input id="password_a" name="cpassword" class="input_size" type="password" />
-			          <label for="password_a">Password again</label>
+			          <label for="password_a">暗証番号の再入力</label>
 			        </div>
 			      </div>
 			      
@@ -307,8 +307,8 @@ html, body {
 		    <form class="login-form">
 		      <div class="row">
 		        <div class="input-field col s12 center">
-			          <h2>Register</h2>
-			          <p class="center">Join to our community now !</p>
+			          <h2>会員登録のすすめ</h2>
+			          <p class="center">お名前とお住まいの都道府県を入力してください。</p>
 			        </div>
 			    </div>
 			
@@ -317,7 +317,7 @@ html, body {
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_circle</i>
 			          <input id="username" name="username" class="input_size" type="text"/>
-			          <label for="username">Username</label>
+			          <label for="username">お名前</label>
 			        </div>
 			      </div>
 			
@@ -326,7 +326,7 @@ html, body {
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">assignment_ind</i>
 			          <input id="name_kana" name="name_kana" class="input_size" type="password" />
-			          <label for="name_kana">name_kana</label>
+			          <label for="name_kana">ふりがな</label>
 			        </div>
 			      </div>
 			
@@ -335,7 +335,7 @@ html, body {
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_balance</i>
 			          <input id="address" name="address" class="input_size" type="text" />
-			          <label for="address">address</label>
+			          <label for="address">お住まいの都道府県</label>
 			        </div>
 			      </div>
 			      
@@ -351,8 +351,8 @@ html, body {
 		    <form class="login-form">
 		      <div class="row">
 			      <div class="input-field col s12 center">
-				          <h2>Register</h2>
-				          <p class="center">Join to our community now !</p>
+				          <h2>会員登録のすすめ</h2>
+				          <p class="center"></p>
 				        </div>
 				      </div>
 				      
