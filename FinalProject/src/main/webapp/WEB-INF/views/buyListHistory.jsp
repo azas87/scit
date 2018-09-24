@@ -310,7 +310,7 @@
 		<input type="hidden" id="period" value="${period}">
 		<input type="hidden" id="startDay" value="${startDay}">
 		<input type="hidden" id="endDay" value="${endDay}">
-		<a class="myButton"　href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
+		<a class="myButton" href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
 		</div>
 	</div>
 	

@@ -95,11 +95,11 @@ public class FishInfoListController {
 	
 	@RequestMapping(value = "/getFishList", method = RequestMethod.GET)
 	public @ResponseBody List<FishList> checkId(String fishCategoryNum) {
-		
+		System.out.println("컨트롤러");
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
 		List<FishList> list=mapper.getFishList(fishCategoryNum);
 		
-		System.out.println(list);
+		System.out.println("여기맞나"+list);
 		
 		return list;
 	}

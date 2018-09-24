@@ -4,7 +4,7 @@ language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>Home</title>
-<link rel="stylesheet" href="./resources/css/button.css"/>
+<link rel="stylesheet" href="./resources/css/smallButton.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 
@@ -96,18 +96,23 @@ width:300px;
 height:200px; 
 background-color:#CCCCCC; 
 position:absolute; 
-top:50%; 
+top:43%; 
 left:50%; 
 margin-top:-100px; 
 margin-left:-150px; 
 } 
+th{
+width: 100px;
+}
 </style>
 
 </head>
 
 <script>
 $(function() {
-
+	$('#nani').on('click', function(){
+		window.close();
+});
 var sellerId = $("#sellerInfo", opener.document ).val();
 alert('sellerId'+sellerId);
 $.ajax({
@@ -139,9 +144,6 @@ $.ajax({
 
 });
 
-function close() {
-	window.close();
-}
 </script>
 
 <body>
@@ -168,8 +170,9 @@ function close() {
 </td></tr>
 <tr><th>販売魚種</th><td id="wish"></td></tr>
 </table>  
-<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
-	<button onClick="window.close()">閉じる</button>
+<div style="width: 10px; height: 40px;"> </div>
+<div id="btn" style="width: 90px; height: 30px; margin: 0 auto;">
+	<button id="nani" type="button">閉じる</button>
 	</div>
 
 </div> 

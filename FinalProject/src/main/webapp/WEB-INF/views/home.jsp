@@ -11,7 +11,8 @@
 	<title>Home</title>
 	<title>Insert title here</title>
 	
-
+<link rel="stylesheet" href="./resources/css/smallButton.css"/>
+<link rel="stylesheet" href="./resources/css/selectWishList.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -290,17 +291,34 @@ function reset () {
     <div>
         <div class="popupCloseButton">X</div>
         <form id="outForm" action="checkingStatus">
+			<!--  <div class="items">  -->
+			
+<div>
+<input type="radio" name="memberStatus" id="radio1" class="radio" value="newResitration"/>
+<label for="radio1">新規登録</label>
+</div>
+
+<div>
+<input type="radio" name="memberStatus" id="radio2" class="radio"  value="reentrance" />
+<label for="radio2">再登録</label>
+</div>
+
+<div>
+<input type="radio" name="grade" id="radio3" class="radio"  value="buyer" />
+<label for="radio3">購入者</label>
+</div>
+
+<div>
+<input type="radio" name="grade" id="radio4" class="radio"  value="seller" />
+<label for="radio4">販売者</label>
+</div>
+			
 			<div class="items">
-				<div class="item" ><input type="radio" name="memberStatus" value="newResitration">新規登録</div>
-				<div class="item "><input type="radio" name="memberStatus" value="reentrance">再登録<br></div>
+				
 			</div>
 			<div class="items">
-				<div class="item" ><input type="radio" name="grade" value="buyer">購入者</div>
-				<div class="item "><input type="radio" name="grade" value="seller">販売者<br></div>
-			</div>
-			<div class="items">
-				<div class="item" ><input type="submit" value="会員登録へ進む"></div>
-				<div class="item" ><input type="button" value="閉じる" id="close"></div>
+				<button type="submit" >会員登録へ進む</button>
+				<button type="button" id="close">閉じる</button>
 			</div>
     	</form>
     </div>
