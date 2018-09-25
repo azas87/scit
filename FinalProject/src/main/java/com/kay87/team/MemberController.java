@@ -41,7 +41,7 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.joinMember(member);
 		
-		return "home";
+		return "main";
 	}
 	
 	@RequestMapping(value = "/updateWishList", method = RequestMethod.GET)
@@ -66,7 +66,7 @@ public class MemberController {
 			r.setSellerId(member.getId());
 			reviewMapper.insertReview(r);
 			
-			return "home";
+			return "main";
 		}
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -106,7 +106,6 @@ public class MemberController {
 		
 		String id = (String)session.getAttribute("loginId");
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
-		dao.updateUserFirst(id);
 		
 		WishList w = new WishList();
 		w.setId(id);
@@ -145,6 +144,16 @@ public class MemberController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/setNotFirst", method = RequestMethod.GET)
+	public String setNotFirst(HttpSession session) {
+		
+		String id = (String)session.getAttribute("loginId");
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		dao.updateUserFirst(id);
+		
+		return "main";
+	}
+
 	//id중복체크
 	@RequestMapping(value = "/checkId", method = RequestMethod.GET)
 	public @ResponseBody String checkId(String userid) {
@@ -160,7 +169,7 @@ public class MemberController {
 	public String LogOut(HttpSession session, Model model) {
 
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 
 
@@ -246,7 +255,7 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.reenterance(member);
 		
-		return "home";
+		return "main";
 	}
 	
 	
