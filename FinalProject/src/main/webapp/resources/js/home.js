@@ -174,7 +174,23 @@ function homeList() {
 		},
 		loadComplete:function(data)
 		{
-			//helper();
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 		},
 		gridComplete: function(){
 		},
@@ -272,7 +288,23 @@ function sellerWishList() {
 		},
 		loadComplete:function(data)
 		{
-			helper();
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 
 			$(".jqGridghead_0").css('font-size','1.5em');
 		}, 
@@ -402,7 +434,23 @@ function myList_ing_buyer() {
 		},
 		loadComplete:function(data)
 		{
-			helper();
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 			
 			$(".jqGridghead_0").css('font-size','1.5em');
 		},
@@ -513,6 +561,7 @@ function myList_ing_seller() {
 				width : 100,
 				height : 200,
 				formatter: selectCancel,
+				cellattr:mouseCursor,
 				align:'center'
 			},
 
@@ -532,7 +581,23 @@ function myList_ing_seller() {
 		},
 		loadComplete:function(data)
 		{
-			helper();
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 		},
 		gridComplete: function(){
 		},
@@ -657,7 +722,23 @@ function myAllList_buyer() {
 		},
 		loadComplete:function(data)
 		{
-			helper();
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				if(title!="")
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 		},
 		gridComplete: function(){
 		},
@@ -672,28 +753,32 @@ function myAllList_buyer() {
 				}else{
 					return;
 				}    			
-    		}else if(cm[index].name == "deletee"){ 
-    			var con = confirm('정말삭제하시겠습니까?');
-    			if(con==true){
-    				console.log(jQuery("#jqGrid").getRowData(rowid));
-        			var obj = $("#jqGrid").getRowData(rowid);
-           		 	       		       		 		
-    		 		$.ajax({
-    				url:"deleteMyList_seller",
-    				type:"get",
-    				data:{"buyNum":obj.buyNum
-    				},
-    				success:function(data){
-    					ResetBuyList('myAllList_buyer');
-    				},
-    				error:function(){
-    					alert("통신실패");
-    				}
-    		 		});           		 	
-           		 	
-    			}else{
-    				return;
-    			}    			
+    		}else if(cm[index].name == "deletee"){ 				
+				console.log(jQuery("#jqGrid").getRowData(rowid));
+    			var obj = $("#jqGrid").getRowData(rowid);
+       		 	
+    			if(obj.deletee != ""){
+       		 		var con = confirm('정말삭제하시겠습니까?');    			
+       		 		if(con==true){       		 		
+	       		 		$.ajax({
+	    				url:"deleteMyList_buyer",
+	    				type:"get",
+	    				data:{"buyNum":obj.buyNum
+	    				},
+	    				success:function(data){
+	    					ResetBuyList('myAllList_buyer');
+	    				},
+	    				error:function(){
+	    					alert("통신실패");
+	    				}
+	    		 		});  
+       		 		}else{
+           		 		return;
+           		 	}           	
+       		 	}else{
+       		 		return;
+       		 	}	 	
+			  		    				
     		}else if(cm[index].name == "successSellerId"){
     			console.log(jQuery("#jqGrid").getRowData(rowid));
     			var obj = $("#jqGrid").getRowData(rowid);
@@ -883,7 +968,21 @@ function bestSeller() {
 		},
 		loadComplete:function(data)
 		{
-			//helper();
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				console.log("test");
+				var title = $(this).attr('title');
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 		},
 		gridComplete: function(){
 		},
@@ -973,8 +1072,21 @@ function seasonInfo() {
 		},
 		loadComplete:function(data)
 		{
-			helper();
-			
+			console.log("loadComplete");
+			$('.bigSize').hover(function(){
+				console.log("test");
+				var title = $(this).attr('title');
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
 		},
 		gridComplete: function(){
 		},
@@ -1076,25 +1188,6 @@ function today(){
        
 }
 
+/* 커밋 테스트용 */
 
-function helper()
-{
-	
-	$('.bigSize').hover(function(){
-		var title = $(this).attr('title');
-		console.log(title);
-		if(title!=" " && title!="" && title!=null)
-		{
-			$(this).data('tipText', title).removeAttr('title');
-			$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-		}
-	},
-	function() {
-		$(this).attr('title',$(this).data('tipText'));
-		$('.tooltip').remove();
-	}).mousemove(function(e) {
-		var mousex = e.pageX + 20;
-		var mousey = e.pageY + 10;
-		$('.tooltip').css({top : mousey,left : mousex});
-	});
-}
+
