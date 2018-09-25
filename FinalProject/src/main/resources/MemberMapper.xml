@@ -16,7 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			addrHurikana,
 			tel,
 			email,
-			alarm,
 			grade,
 			first,
 			memberStatus
@@ -31,14 +30,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{addrHurikana},
 			#{tel},
 			#{email},
-			#{alarm},
-			#{grade},
-			#{first},
-			#{memberStatus}
+			'buyer',
+			'first',
+			'join'
 		)
 
 	
 	</insert>
+		<insert id="joinSeller" parameterType="Member">
+	
+		insert into memberinfo
+		(
+			id,
+			password,
+			nameKana,
+			name,
+			address,
+			<if test="tel!=null">
+			tel,
+			</if>
+			grade,
+			first,
+			memberStatus
+		)
+		values
+		(
+			#{id},
+			#{password},
+			#{nameKana},
+			#{name},
+			#{address},
+			<if test="tel!=null">
+			#{tel},
+			</if>
+			'seller',
+			'first',
+			'join'
+		)
+
+	
+	</insert>
+	
+	
 	
 	<select id="login" parameterType="Member" resultType="Member">
 	

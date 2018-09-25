@@ -7,228 +7,240 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="./resources/js/joinFormSeller.js"></script>
+ <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="./resources/css/materialize.min.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="./resources/css/button.css"/>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 <!-- 로그인 폼이랑 슬라이드 높이가 높이 -->
 
-<style media="screen">
-* {
-	margin: 0;
-	padding: 0;
-}
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-.tooltip {
-	display: none;
-	position: absolute;
-	border: 1px solid #333;
-	background-color: #161616;
-	border-radius: 5px;
-	padding: 10px;
-	color: #fff;
-	font-size: 3.5em Arial;
-}
 
-.slide {
-	width: 1200px;
-	height: 600px;
-	overflow: hidden;
-	position: relative;
-	margin: 0 auto;
-}
+    .tooltip {
+      display: none;
+      position: absolute;
+      border: 1px solid #333;
+      background-color: #161616;
+      border-radius: 5px;
+      padding: 10px;
+      color: #fff;
+      font-size: 3.5em Arial;
+    }
 
-.slide ul {
-	width: 5000px;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
+    .slide {
+      width: 1200px;
+      height: 660px;
+      overflow: hidden;
+      position: relative;
+      margin: 0 auto;
+    }
 
-.slide ul li {
-	display: inline-block;
-	width: 1200px;
-	height: 650px;
-}
+    .slide ul {
+      width: 5000px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
-#back {
-	position: absolute;
-	top: 250px;
-	left: 0;
-	cursor: pointer;
-	z-index: 1;
-	font-size: 8rem;
-}
+    .slide ul li {
+      display: inline-block;
+      width: 1200px;
+      height:650px;
 
-#next {
-	position: absolute;
-	top: 250px;
-	right: 0;
-	cursor: pointer;
-	z-index: 1;
-	font-size: 8rem;
-}
+    }
 
-/**/
-.input_size {
-	width: 640px !important;
-	height: 50px !important;
-	padding-top: 40px !important;
-	font-size: 3em !important;
-}
+    #back {
+      position: absolute;
+      top: 250px;
+      left: 0;
+      cursor: pointer;
+      z-index: 1;
+      font-size:8rem;
+    }
 
-body {
-	display: table-cell;
-	vertical-align: middle; //
-	background-color: #e0f2f1 !important;
-	background: url(./resources/img/bg.png) repeat;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
-		"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	font-weight: 300;
+    #next {
+      position: absolute;
+      top: 250px;
+      right: 0;
+      cursor: pointer;
+      z-index: 1;
+      font-size:8rem;
+    }
+    
+    
+    /**/
+    
+    .input_size
+    {
+    	width:640px !important;
+    	height:50px !important;
+    	padding-top:40px !important;
+    	font-size:3em !important;
+    }
+    
+    body{
+    
+    display: table-cell;
+    vertical-align: middle;
+    //background-color: #e0f2f1 !important; 
+    background:url(./resources/img/bg.png) repeat;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight:300;
 	text-align: left;
 	text-decoration: none;
 }
 
 html {
-	display: table;
-	margin: auto;
+    display: table;
+    margin: auto;
 }
 
 html, body {
-	height: 100%;
+    height: 100%;
 }
 
 .medium-small {
-	font-size: 1.6rem;
-	margin: 0;
-	padding: 0;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
 }
 
 .login-form {
-	width: 800px;
-	height: 600px;
+    width: 800px;
+    height:650px;
+    
 }
 
 .login-form-text {
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
 }
 
 .login-text {
-	margin-top: -6px;
-	margin-left: -6px !important;
+    margin-top: -6px;
+    margin-left: -6px !important;
 }
 
 .margin {
-	margin: 0 !important;
+    margin: 0 !important;
 }
 
 .pointer-events {
-	pointer-events: auto !important;
+    pointer-events: auto !important;
 }
 
-.input-field>.material-icons {
-	padding-top: 10px;
+.input-field >.material-icons  {
+    padding-top:10px;
 }
 
-.input-field div.error {
-	position: relative;
-	top: -1rem;
-	left: 3rem;
-	font-size: 0.8rem;
-	color: #FF4081;
-	-webkit-transform: translateY(0%);
-	-ms-transform: translateY(0%);
-	-o-transform: translateY(0%);
-	transform: translateY(0%);
+.input-field div.error{
+    position: relative;
+    top: -1rem;
+    left: 3rem;
+    font-size: 0.8rem;
+    color:#FF4081;
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
 }
 
-#submit_btn {
-	height: 80px;
-	font-size: 3em;
+#submit_btn
+{
+	height:80px;
+	font-size:3em;
 }
 
+
+
+
+	
 .breadcrumb-counter-nav {
-	margin: 0 auto;
-	margin-bottom: 10px;
-	padding: 0;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	width: 800px;
-	list-style: none;
-	background: #2C3E50;
+  margin: 0 auto;
+  margin-bottom:10px;
+  padding: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 800px;
+  list-style: none;
+  background: #2C3E50;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item {
-	position: relative;
-	-webkit-flex: 1 0 auto;
-	-ms-flex: 1 0 auto;
-	flex: 1 0 auto;
-	padding: 1rem 2rem;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
+  position: relative;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item:hover {
-	background: #1a252f;
+  background: #1a252f;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item::before {
-	counter-increment: section;
-	content: counter(section);
-	position: relative;
-	background: #507192;
-	color: #fff;
-	right: 0.8rem;
-	border-radius: 50%;
-	padding: 0.2em 0.55em;
+  counter-increment: section;
+  content: counter(section);
+  position: relative;
+  background: #507192;
+  color: #fff;
+  right: 0.8rem;
+  border-radius: 50%;
+  padding: 0.2em 0.55em;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item.current {
-	background: #1a252f;
+  background: #1a252f;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item.current::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: -1rem;
-	width: 0;
-	height: 0;
-	border-top: 1.75rem solid transparent;
-	border-bottom: 1.75rem solid transparent;
-	border-left: 1rem solid #1a252f;
-	z-index: 300;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1rem;
+  width: 0;
+  height: 0;
+  border-top: 1.75rem solid transparent;
+  border-bottom: 1.75rem solid transparent;
+  border-left: 1rem solid #1a252f;
+  z-index: 300;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item.current::before {
-	background-color: #88a4bf;
+  background-color: #88a4bf;
 }
 
 .breadcrumb-counter-nav .breadcrumb-counter-nav-item a {
-	color: #fff;
-	font-size: 0.875rem;
+  color: #fff;
+  font-size: 0.875rem;
 }
 
 @media only screen and (max-width: 52em) {
-	.breadcrumb-counter-nav {
-		-webkit-flex-direction: column;
-		-ms-flex-direction: column;
-		flex-direction: column;
-	}
+  .breadcrumb-counter-nav {
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
-login-page {
-	
-}
-</style>
+
+
+    
+  </style>
 <script>
 	
 </script>
@@ -238,17 +250,18 @@ login-page {
 
 
 	<div class="slide" style="border: 0">
+	<form action="updateUserInfo" method="post">
 		<i id="back" class="material-icons prefix">arrow_back</i>
 		<ul>
 			<li>
 				<div class="join_body" style="width: 800px; margin: 0 auto;">
 					<div id="login-page" class="row">
 						<div class="col s12 z-depth-4 card-panel">
-							<form class="login-form">
+							<div class="login-form">
 								<div class="row">
 									<div class="input-field col s12 center">
-										<h2>会員登録のすすめ</h2>
-										<p class="center">ニックネームと暗証番号を決めてください。</p>
+										<h2>会員情報変更</h2>
+										<p class="center">暗証番号を変更したくない方は次へ</p>
 									</div>
 								</div>
 
@@ -257,7 +270,7 @@ login-page {
 										<!-- <i class="mdi-social-person-outline prefix"></i> -->
 										<i class="material-icons prefix">account_box</i> <input
 											id="id" name="id" class="input_size" type="text"
-											value="${member.id}" /> <label for="usernid">ニックネーム</label>
+											value="${member.id}" readonly="readonly"/> <label for="usernid">ニックネーム</label>
 									</div>
 								</div>
 
@@ -281,7 +294,7 @@ login-page {
 									</div>
 								</div>
 
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -290,11 +303,11 @@ login-page {
 				<div style="width: 850px; margin: 0 auto;">
 					<div id="login-page" class="row">
 						<div class="col s12 z-depth-4 card-panel">
-							<form class="login-form">
+							<div class="login-form">
 								<div class="row">
 									<div class="input-field col s12 center">
-										<h2>会員登録のすすめ</h2>
-										<p class="center">お名前とお住まいの都道府県を入力してください。</p>
+										<h2>会員情報変更</h2>
+										<p class="center">変更の内容を入力してください。</p>
 
 
 										<div class="row margin">
@@ -327,20 +340,27 @@ login-page {
 										<div class="input-field col s12">
 											<button id="submit_btn"
 												class="btn waves-effect waves-light col s12"
-												onclick="return check()">REGISTER NOW</button>
+												onclick="return check()">会員情報変更</button>
 										</div>
 									</div>
 								</div>
-							</form>
+							</div>
+							
 						</div>
 					</div>
+					
 				</div>
+				
 			</li>
-
+			
 		</ul>
 		<i id="next" class="material-icons prefix" style="">arrow_forward</i>
+		</form>
 	</div>
-
+<div style="height:20px;"></div>
+<div style="width: 200px; margin: 0 auto;">
+ <a class="myButton" href="/team/?" >戻る</a> 
+</div>
 </body>
 
 <script type="text/javascript">

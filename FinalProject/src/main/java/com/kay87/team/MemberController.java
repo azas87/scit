@@ -33,7 +33,8 @@ public class MemberController {
 	
 	@Autowired
 	SqlSession sql;
-
+	
+	
 	//구매자회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(MemberInfo member) {
@@ -41,9 +42,18 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.joinMember(member);
 		
-		return "redirect:/main";
+		return "redirect:/";
 	}
 	
+	//판매자회원가입
+		@RequestMapping(value = "/joinSeller", method = RequestMethod.POST)
+		public String joinSeller(MemberInfo member) {
+			System.out.println("회원가입"+member);
+			MemberMapper dao=sql.getMapper(MemberMapper.class);
+			dao.joinSeller(member);
+			
+			return "redirect:/";
+		}
 	@RequestMapping(value = "/updateWishList", method = RequestMethod.GET)
 	public String updateWishList(Model model, HttpSession session) {
 		
