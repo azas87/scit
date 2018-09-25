@@ -345,7 +345,7 @@ function confirm(obj) {
 			alert("통신실패");
 		}
 	});
-
+	
 	reset();
 	alertify.set({ buttonReverse: true });
 	alertify.confirm("レビューを登録されますか", function (e) {
@@ -388,6 +388,7 @@ function refund(obj) {
 	return false;
 	
 	}
+
 function ResetBuyList() {	
 	//$( "#jqGrid").jqGrid().setGridParam({url:'jqgrid_R',datatype:'json'}).trigger('reloadGrid');
 	var period = $('#period').val();

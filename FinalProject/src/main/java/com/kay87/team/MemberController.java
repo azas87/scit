@@ -204,12 +204,12 @@ public class MemberController {
 			return "reentrance";
 		}
 		else if(member.getMemberStatus().equals("seller")) {
+			return "joinForm";
 			
 		}else {
 			model.addAttribute("grade", "buyer");
-			return "joinForm";
+			return "joinFormBuyer";
 		}
-		return "joinForm";
 	}
 	
 	@RequestMapping(value = "/checkingEmail", method = RequestMethod.POST)

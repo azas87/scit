@@ -1,10 +1,11 @@
+
+
 function check() {
 
-	var userid = $('#userid').val();
+	var userid = $('#id').val();
 	var email =  $('#email').val();
-	var userpwd = $('#userpwd').val();
+	var userpwd = $('#password').val();
 	var userpwd2 = $('#userpwd2').val();
-	var phone = $('#phone').val();
 	var name = $('#name').val();
 	var namekana = $('#namekana').val();
 	var pattern1 = /[0-9]/;	
@@ -56,13 +57,7 @@ function check() {
 		return false;
 	}
 
-	else if(phone.length!=0&&(phone.length!=11||isNaN(tel2))){
-		alert("電話番号はハイフンなしの半角数字11桁で入力してください。");
-    	document.getElementById("phone").value="";
-    	document.getElementById("phone").focus();
-    	return false;
 
-	}
 	else{
 		return true;	
 	}

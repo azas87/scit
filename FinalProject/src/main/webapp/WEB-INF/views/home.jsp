@@ -222,13 +222,13 @@ function reset () {
       			<li class="nav-item item bigSize">
        				<a class="nav-link" onclick="newPage('main?')">メイン</a>
       			</li>      			
-      			<c:if test="${sessionScope.userMode == 'buyer' }">      			
+      			<c:if test="${sessionScope.userMode eq 'buyer' }">      			
 	      			<li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
+						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')"></a>
 					</li>
 					
 					<li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('updateWishList?')">선호</a>
+						<a class="nav-link" onclick="newPage('updateWishList?')">関心</a>
 					</li>
 				</c:if>					
 					<c:if test="${sessionScope.userMode ne 'manager'}">	
@@ -253,7 +253,7 @@ function reset () {
 	       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
 	      			</li>
 	      			<li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('fishInfoList?')">어종</a>
+						<a class="nav-link" onclick="newPage('fishInfoList?')">魚図鑑</a>
 					</li>
 			</c:when>			
 		</c:choose>		   
@@ -266,7 +266,7 @@ function reset () {
        			<a class="nav-link" href="loginForm?">入場</a>
       		</li>
       		<li class="nav-item item bigSize">
-       			<a class="trigger_popup_fricc nav-link">退場</a>
+       			<a class="trigger_popup_fricc nav-link">会員登録</a>
       		</li>
     	</c:when>    
     
