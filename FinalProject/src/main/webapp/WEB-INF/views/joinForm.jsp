@@ -33,7 +33,7 @@ language="java" pageEncoding="UTF-8"%>
 
     .slide {
       width: 1200px;
-      height: 600px;
+      height: 660px;
       overflow: hidden;
       position: relative;
       margin: 0 auto;
@@ -110,8 +110,8 @@ html, body {
 }
 
 .login-form {
-    width: 780px;
-    height:600px;
+    width: 800px;
+    height:650px;
     
 }
 

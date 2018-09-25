@@ -76,25 +76,6 @@ $(document).ready(function(){
 	}, refreshInterver);
 	 
 	
-	    
-	  $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
-		  {
-			  $(this).css('flex-grow',1);
-		      $(this).css('font-size',"3.5em");
-		      $(this).css('background-color',"powderblue");
-	/*	      $('input').css('line-height', '60px');
-		      $('input').css('width', '200px');*/
-		  }
-	     
-	    });
-	    
-	  $(".item").mouseleave(function(){
-	      $(this).css('flex-grow',1);
-	      $(this).css('font-size',"1em");
-	      $(this).css('background-color',"white");
-	    });
-	  
 
 	    
     $('.search').hover(function(){
@@ -271,11 +252,11 @@ var chartDrowFun = {
 	<div class="items">
 		<div class="item " onclick="homeList()">전체 글</div>
 		<c:choose>
-			<c:when test="${sessionScope.userMode == '1' }">
+			<c:when test="${sessionScope.userMode == 'buyer' }">
 				<div class="item " onclick="myList_ing_buyer()">진행중인리스트</div>
 				<div class="item " onclick="myAllList_buyer()">내글 목록</div>
 			</c:when>
-			<c:when test="${sessionScope.userMode == '2' }">
+			<c:when test="${sessionScope.userMode == 'seller' }">
 				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
 				<div class="item " onclick="sellerWishList()">선호리스트</div>
 				<div class="item " onclick="myList_ing_seller()">참여리스트</div>

@@ -15,7 +15,7 @@ $(document).ready(function() {
 	 
 	var userMode = $('#userMode').val();
 	console.log(userMode);
-	if(userMode!=1)
+	if(userMode!='buyer')
 	{
 	    
 	  $(".item").mouseenter(function(){
@@ -37,6 +37,7 @@ $(document).ready(function() {
 	      $(this).css('font-weight','normal');
 	      /*$(this).css('background-color',"white");*/
 	    });
+	  
 	  
 
 	}   
@@ -121,7 +122,7 @@ function homeList() {
  			}, {
 				label : '購買日付',
 				name : 'deadline',
-				width : 250,
+				width : 230,
 				height : 200,
 				align:'center'
 			}, {
@@ -139,7 +140,7 @@ function homeList() {
 			}, {
 				label : '重量',
 				name : 'weight',
-				width : 60,
+				width : 80,
 				height : 200,
 				align:'center'
 			}, {
@@ -147,11 +148,11 @@ function homeList() {
 				name : 'price',
 				width : 80,
 				height : 200,
-				align:'center'
+				align:'center'	
 			}, {
-				label : '購買者ID',//구매자,판매자:販売者
+				label : '購買者ID',//구매자ID,판매자:販売者
 				name : 'buyerId',
-				width : 100,
+				width : 120,
 				height : 200,
 				align:'center'
 			}, 
@@ -173,23 +174,7 @@ function homeList() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			//helper();
 		},
 		gridComplete: function(){
 		},
@@ -198,7 +183,7 @@ function homeList() {
 }
 
 
-
+//판매자 선호리스트
 function sellerWishList() {
 	console.log("sellerWishList");
 	$.jgrid.gridUnload('#jqGrid');
@@ -248,7 +233,29 @@ function sellerWishList() {
 				width : 80,
 				height : 200,
 				align:'center'
+			}, {
+				label : '購買者ID',//구매자,판매자:販売者    
+				name : 'buyerId',
+				width : 100,
+				height : 200,
+				align:'center'
+			}, {
+				label : '購買者選択',//구매자선택, 판매자가 구매자 선택(딜을 넣는다),전체리스트에서는 if로 구매자 판매자 구분해서 넣어야하나?,글자크기커서 넓이를 조정해야함
+				name : 'buyerSelect',
+				width : 80,
+				height : 200,
+				formatter: buyerSelect,
+				cellattr:mouseCursor,
+				align:'center'
+			}, {
+				label : 'successSellerId',//판매자 참여여부
+				name : 'successSellerId',
+				width : 80,
+				height : 200,				
+				align:'center',
+				hidden:true					
 			}, 
+
 		],
 		viewrecords : true,
 		//altRows:true,
@@ -265,26 +272,41 @@ function sellerWishList() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
+
+			$(".jqGridghead_0").css('font-size','1.5em');
 		}, 
+		gridComplete: function(){
+		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+    		var cm = $(this).jqGrid('getGridParam','colModel');    
+    		if(cm[index].name == "buyerSelect")
+    		{	var con = confirm('구매자를 선택하시겠습니까?');
+    				if(con==true){
+    					console.log(jQuery("#jqGrid").getRowData(rowid));
+    					var obj = $("#jqGrid").getRowData(rowid);
+           		 		
+           		 		$.ajax({
+           				url:"selectBuyer",
+           				type:"get",
+           				data:{"buyNum":obj.buyNum
+           				},
+           				success:function(data){
+           					ResetBuyList('sellerWishList');
+           				},
+           				error:function(){
+           					alert("통신실패");
+           				}
+           		 		});
+           		 		
+    				}else{
+    					return;
+    				}    				 	    			
+    		}
+    	},   
 	});
-}
+};	
 
 
 
@@ -340,7 +362,7 @@ function myList_ing_buyer() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '販売者ID',//구매자,판매자:販売者
+				label : '販売者ID',//판매자ID,  구매자:購買者   
 				name : 'successSellerId',
 				width : 100,
 				height : 200,
@@ -355,11 +377,11 @@ function myList_ing_buyer() {
 				cellattr:mouseCursor,
 				align:'center'
 			}, {
-				label : '販売者選択',
+				label : '販売者選択',//구매자가 판매자 선택
 				name : 'sellerSelect',
 				width : 100,
 				height : 200,
-				formatter: select,
+				formatter: sellerSelect,
 				cellattr:mouseCursor,
 				align:'center'
 			}, 
@@ -380,23 +402,7 @@ function myList_ing_buyer() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 			
 			$(".jqGridghead_0").css('font-size','1.5em');
 		},
@@ -415,11 +421,25 @@ function myList_ing_buyer() {
     				}    			
     		}else if(cm[index].name == "sellerSelect"){
     			
-    			var con = confirm('정말 선택하시겠습니까?');
+    			var con = confirm('판매자를 선택하시겠습니까?');
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
     					var obj = $("#jqGrid").getRowData(rowid);
-       		 			location.href="selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum;    			
+    				
+       		 			$.ajax({
+           				//url:"selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum,
+       		 			url : "selectSeller",
+           				type:"get",
+           				data:{"SellerId":obj.successSellerId, "buyNum":obj.buyNum
+           				},
+           				success:function(data){
+           					ResetBuyList('myList_ing_buyer');
+           				},
+           				error:function(){
+           					alert("통신실패");
+           				}
+           		 		});  
+       		 			
     				}else{
     					return;
     				}
@@ -482,7 +502,7 @@ function myList_ing_seller() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '購買者ID',
+				label : '購買者ID',//구매자ID
 				name : 'buyerId',
 				width : 100,
 				height : 200,
@@ -512,23 +532,7 @@ function myList_ing_seller() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -540,7 +544,20 @@ function myList_ing_seller() {
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
     	    			var obj = $("#jqGrid").getRowData(rowid);
-    	       		 		location.href="deleteMyList_seller?buyNum="+obj.buyNum; 
+    	       		       		 		
+           		 		$.ajax({
+           				url:"deleteMyList_seller",
+           				type:"get",
+           				data:{"buyNum":obj.buyNum
+           				},
+           				success:function(data){
+           					ResetBuyList('myList_ing_seller');
+           				},
+           				error:function(){
+           					alert("통신실패");
+           				}
+           		 		});
+           		 		
     				}else{
     					return;
     				}       		 
@@ -640,23 +657,7 @@ function myAllList_buyer() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -676,13 +677,32 @@ function myAllList_buyer() {
     			if(con==true){
     				console.log(jQuery("#jqGrid").getRowData(rowid));
         			var obj = $("#jqGrid").getRowData(rowid);
-           		 	location.href="deleteMyList_buyer?buyNum="+obj.buyNum;
+           		 	       		       		 		
+    		 		$.ajax({
+    				url:"deleteMyList_seller",
+    				type:"get",
+    				data:{"buyNum":obj.buyNum
+    				},
+    				success:function(data){
+    					ResetBuyList('myAllList_buyer');
+    				},
+    				error:function(){
+    					alert("통신실패");
+    				}
+    		 		});           		 	
+           		 	
     			}else{
     				return;
     			}    			
     		}else if(cm[index].name == "successSellerId"){
-    			alert('이벤트');
-     			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
+    			console.log(jQuery("#jqGrid").getRowData(rowid));
+    			var obj = $("#jqGrid").getRowData(rowid);
+    			if(obj.successSellerId != ""){//판매자ID가 비어있지 않으면
+    				alert('이벤트');
+         			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
+    			}else{
+    				return;
+    			}
      		}    		    		
     	},   
 	});
@@ -863,21 +883,7 @@ function bestSeller() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				console.log("test");
-				var title = $(this).attr('title');
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			//helper();
 		},
 		gridComplete: function(){
 		},
@@ -967,21 +973,8 @@ function seasonInfo() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				console.log("test");
-				var title = $(this).attr('title');
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
+			
 		},
 		gridComplete: function(){
 		},
@@ -1021,9 +1014,17 @@ function selectCancel (cellvalue, options, rowObject) {
 function rebuy (cellvalue, options, rowObject) {
    return '再購入'; 
 };
-function select (cellvalue, options, rowObject) {
+function sellerSelect (cellvalue, options, rowObject) {
 //console.log(rowObject);	
    return '選択';
+};	
+function buyerSelect (cellvalue, options, rowObject) {
+//console.log(rowObject)
+	if(rowObject.successSellerId==null){
+		return '選択';
+	}else{	
+		return "";
+	}	
 };	
 function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1줄을 읽는것,jgride함수에 적혀있음
 //console.log(rowObject);	
@@ -1034,37 +1035,23 @@ function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1�
 	}
 };	
 
-function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
-	return "style='cursor:pointer'";
+function ResetBuyList(urlReset) {	
+	$( "#jqGrid").jqGrid('clearGridData');
+	$( "#jqGrid").jqGrid().setGridParam({url:urlReset,datatype:'json'}).trigger('reloadGrid');
+}
+
+function mouseCursor(rowid, cellValue, rawData, colModel, rowData){
+	if(cellValue!=""){
+		return "style='cursor:pointer'";
+	}else{	
+		return "";
+	}
 };		 
 function sellerDetail (seller) {
 	$('#sellerInfo').val(seller);
 	window.open("sellerDetail", "sellerDetail", "width=400px,height=300px,left=500px,top=200px");
 };
 	
-
-function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
-	return "style='cursor:pointer'";
-};
-
-function myList() {		
-	console.log("myBuylist");
-	
-	var userMode = $("#userMode").val();
-	console.log(userMode);
-	if(userMode==1)
-	{
-		listMode = "myBuyList";
-	}
-	else
-	{
-		listMode = "mySaleList";
-	}
-	
-	
-	ListRefresh();
-}
-
 
 function autoWriteTest()
 {
@@ -1090,3 +1077,24 @@ function today(){
 }
 
 
+function helper()
+{
+	
+	$('.bigSize').hover(function(){
+		var title = $(this).attr('title');
+		console.log(title);
+		if(title!=" " && title!="" && title!=null)
+		{
+			$(this).data('tipText', title).removeAttr('title');
+			$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+		}
+	},
+	function() {
+		$(this).attr('title',$(this).data('tipText'));
+		$('.tooltip').remove();
+	}).mousemove(function(e) {
+		var mousex = e.pageX + 20;
+		var mousey = e.pageY + 10;
+		$('.tooltip').css({top : mousey,left : mousex});
+	});
+}

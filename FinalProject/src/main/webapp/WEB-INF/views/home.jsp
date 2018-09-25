@@ -73,13 +73,13 @@
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
     height: auto;
-    max-width: 551px;
+    max-width: 600px;
     min-height: 200px;
     vertical-align: middle;
     width: 60%;
     position: relative;
     border-radius: 8px;
-    padding: 15px 5%;
+    padding: 5px 5%;
 }
 .popupCloseButton {
     background-color: #fff;
@@ -110,6 +110,32 @@
 	font-size: 20px;
 }
 
+
+input.radio:empty ~ label
+{
+	line-height:2em;
+	text-indent:2em;
+	font-size:3em;
+	margin-top:1em;
+}
+
+label
+{
+	width:350px;
+}
+
+input.radio:empty ~ label:before
+{
+	width:2em;
+}
+
+#close
+{
+	font-size:2em;
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
 </style>
 <script>
 $(window).load(function () {
@@ -122,11 +148,23 @@ $(window).load(function () {
     });
    
     $('#close').click(function(){
-    	
+    	$('#memberStatus_page').css('display','block');
+    	$('#grade_page').css('display','none');
+    	$('input[class=radio]').attr('checked',false);
         $('.hover_bkgr_fricc').hide();
     }); 
     
     $('.popdown').popdown();
+    
+    $('#radio1, #radio2').click(function(){
+    	$('#grade_page').css('display','block');
+    	$('#memberStatus_page').css('display','none');
+    });
+    
+    $('#radio3, #radio4').click(function(){
+    	$('#outForm').submit();
+    });
+    
     
 });
 
@@ -224,7 +262,7 @@ function reset () {
       			</li>      			
       			<c:if test="${sessionScope.userMode eq 'buyer' }">      			
 	      			<li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')"></a>
+						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
 					</li>
 					
 					<li class="nav-item item bigSize">
@@ -305,33 +343,31 @@ function reset () {
     <div>
         <div class="popupCloseButton">X</div>
         <form id="outForm" action="checkingStatus">
-			<!--  <div class="items">  -->
-			
-<div>
-<input type="radio" name="memberStatus" id="radio1" class="radio" value="newResitration"/>
-<label for="radio1">新規登録</label>
-</div>
-
-<div>
-<input type="radio" name="memberStatus" id="radio2" class="radio"  value="reentrance" />
-<label for="radio2">再登録</label>
-</div>
-
-<div>
-<input type="radio" name="grade" id="radio3" class="radio"  value="buyer" />
-<label for="radio3">購入者</label>
-</div>
-
-<div>
-<input type="radio" name="grade" id="radio4" class="radio"  value="seller" />
-<label for="radio4">販売者</label>
-</div>
-			
-			<div class="items">
+			<div id="memberStatus_page">
+				<div class="test">
+					<input type="radio" name="memberStatus" id="radio1" class="radio" value="newResitration" style="display: none;"/>
+					<label for="radio1">新規登録</label>
+				</div>
 				
+				<div class="test">
+					<input type="radio" name="memberStatus" id="radio2" class="radio"  value="reentrance" style="display: none;"/>
+					<label for="radio2">再登録</label>
+				</div>
 			</div>
-			<div class="items">
-				<button type="submit" >会員登録へ進む</button>
+			
+			<div id="grade_page" style="display: none;">
+				<div class="test">
+					<input type="radio" name="grade" id="radio3" class="radio"  value="buyer" style="display: none;" />
+					<label for="radio3">購入者</label>
+				</div>
+				
+				<div class="test">
+					<input type="radio" name="grade" id="radio4" class="radio"  value="seller" style="display: none;"/>
+					<label for="radio4">販売者</label>
+				</div>
+			</div>
+			
+			<div class="test ">
 				<button type="button" id="close">閉じる</button>
 			</div>
     	</form>
