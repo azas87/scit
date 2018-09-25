@@ -411,15 +411,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		from 
 			BuyList b, wishlist w
-		where			
-			b.buyerid=w.id 
+		where	
+			w.id =#{userid}		
 			and w.wish=b.fishname
-			and b.buyerid=#{userid}
 			and b.salestatus='onSale'
 		order by b.buyNum asc
 	</select>
 	
-	<insert id="insertAvgList" parameterType="AvgList">
+	<select id="selectOneBuylist" parameterType="int" resultType="BuyList">
+		
+		SELECT * FROM buylist WHERE buyNum = #{value}
+		
+	</select>
+	<!-- <insert id="insertTodayAvgList" parameterType="TodayAvgList">
 		insert into buyList
 		(
 			avgListNum
@@ -433,29 +437,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,fishName
 			, avgPrice
 			, to_char(sysdate,YYYY/MM/DD);
+<<<<<<< HEAD
 		)	
 	</insert>
+=======
+		)
+	</insert> -->
+
+	<select id="getMarketPrice" resultType="AvgList">
+>>>>>>> refs/remotes/origin/mina
 	
-<!-- 	
-	  <select id="selectBestseller" resultType="hashmap">
-   	SELECT
-   		b.bookcode,
-   		b.title,
-   		b.price,
-   		s.purchasecnt
-   	FROM
-   		book b, sale s
-   	WHERE
-   		b.bookcode=s.bookcode
-   	AND
-   		s.purchasecnt
-   	IN (
-   		SELECT
-   			MAX(purchasecnt)
-   		FROM
-   			sale
-   	)
-   </select> -->
+		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
+		
+	</select>
 
 	
 </mapper>

@@ -4,9 +4,6 @@ window.onload = function() { //실행될 코드 }
 		var period = $('#period').val();
 		var startDay = $('#startDay').val();
 		var endDay = $('#endDay').val();
-		
-		console.log("dddd = "+ endDay);
-		
 		buyList(period, startDay, endDay);
 		sumList(period, startDay, endDay);
 		
@@ -248,6 +245,8 @@ function sellerDetail (seller) {
      		var cm = $(this).jqGrid('getGridParam','colModel');    
      		if(cm[index].name == "再購入")
      		{	
+     			var buyNum =$("#jqGrid").getRowData(rowid).buyNum;
+     			location.href="writeBuyBoardForm?buyNum="+buyNum;
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
      		}
      		else if(cm[index].name == "確認") {

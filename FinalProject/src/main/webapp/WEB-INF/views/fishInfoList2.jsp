@@ -44,51 +44,6 @@ function deleteFishInfo() {
 <style>
 
 
-
-.myButton {
-	-moz-box-shadow:inset -8px 7px 7px -2px #9fb4f2;
-	-webkit-box-shadow:inset -8px 7px 7px -2px #9fb4f2;
-	box-shadow:inset -8px 7px 7px -2px #9fb4f2;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #567ec4), color-stop(1, #476e9e));
-	background:-moz-linear-gradient(top, #567ec4 5%, #476e9e 100%);
-	background:-webkit-linear-gradient(top, #567ec4 5%, #476e9e 100%);
-	background:-o-linear-gradient(top, #567ec4 5%, #476e9e 100%);
-	background:-ms-linear-gradient(top, #567ec4 5%, #476e9e 100%);
-	background:linear-gradient(to bottom, #567ec4 5%, #476e9e 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#567ec4', endColorstr='#476e9e',GradientType=0);
-	background-color:#567ec4;
-	-moz-border-radius:13px;
-	-webkit-border-radius:13px;
-	border-radius:13px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Impact;
-	font-size:26px;
-	font-weight:bold;
-	padding:13px 66px;
-	text-decoration:none;
-}
-.myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #567ec4));
-	background:-moz-linear-gradient(top, #476e9e 5%, #567ec4 100%);
-	background:-webkit-linear-gradient(top, #476e9e 5%, #567ec4 100%);
-	background:-o-linear-gradient(top, #476e9e 5%, #567ec4 100%);
-	background:-ms-linear-gradient(top, #476e9e 5%, #567ec4 100%);
-	background:linear-gradient(to bottom, #476e9e 5%, #567ec4 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#567ec4',GradientType=0);
-	background-color:#476e9e;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
-.contain{
-	width: 345px;
-	height: 100px;
-	margin: 0 auto;
-
-}
 </style>
   <body>
 <div class="contain">
