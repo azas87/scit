@@ -7,7 +7,7 @@
 <html lang="en">
     <head> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./resources/css/joinBuyer.css">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -33,14 +33,14 @@
 	               
 	            </div> 
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="join">
+					<form class="form-horizontal" method="post" action="join" >
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">ID</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="id" id="name"  placeholder="桁～30桁の半角英数字"/>
+									<input type="text" class="form-control" name="id" id="id"  placeholder="3桁～10桁の半角英数字"/>
 								</div>
 							</div>
 						</div>
@@ -49,7 +49,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="8桁～30桁の半角英数字"/>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="8桁～16桁の半角英数字"/>
 								</div>
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 						
 
 						<div class="form-group ">
-							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
+							<button class="btn btn-primary btn-lg btn-block login-button" onclick="return check()">Register</button>
 						</div>
 						
 					</form>

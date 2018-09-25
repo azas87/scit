@@ -1,4 +1,6 @@
-
+/*$(function() {
+	$("#btn").on("click",check());
+});*/
 
 function check() {
 
@@ -10,15 +12,17 @@ function check() {
 	var namekana = $('#namekana').val();
 	var pattern1 = /[0-9]/;	
 	var pattern2 = /[a-zA-Z]/;
-	
+	alert(userid);
+	alert(name);
 	if( userid.length < 3 || userid.length > 10){
+	
 		alert("IDは3桁～10桁を入力してください。");
-		document.getElementById("userid").focus();
+		document.getElementById("id").focus();
 		return false;
 	}
 	else if(userpwd.length==0){
 		alert("パスワードを入力してください。");
-		document.getElementById("userpwd").focus();
+		document.getElementById("password").focus();
 		return false;
 	}
 	else if(userpwd2.length==0){
@@ -34,7 +38,7 @@ function check() {
 
 	else if(userpwd!=userpwd2){
 		alert('パスワードが一致しません。');
-		document.getElementById("userpwd").value="";
+		document.getElementById("password").value="";
 		document.getElementById("userpwd2").value="";
 		document.getElementById("userpwd2").focus();
 		return false;
