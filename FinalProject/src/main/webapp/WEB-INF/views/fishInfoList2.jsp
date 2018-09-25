@@ -96,8 +96,8 @@ function deleteFishInfo() {
 
                 <a href="#"></a>
                 <div class="card-body">
-                  <h3 class="card-title">
-                   <strong><a href="#">${fish.fishName }</a></strong>
+                  <h3 class="card-title" style="color: #3aa9d5;">
+                   <strong>${fish.fishName }</strong>
                   </h4>
                   <div class="title"><i class="material-icons prefix">details</i> <b>産地</b></div>
                   <div class="content">

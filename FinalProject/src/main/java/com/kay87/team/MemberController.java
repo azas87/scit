@@ -175,6 +175,24 @@ public class MemberController {
 		
 		return result;
 	}
+	//회원정보수정form호출
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	public String updateUser(HttpSession session, Model model) {
+		
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		String userid = (String) session.getAttribute("loginId");
+		String userMode= (String)session.getAttribute("userMode");
+		MemberInfo m = dao.getUserInfo(userid);
+		model.addAttribute("member", m);
+		
+		if(userMode.equals("seller")) {	
+	
+			return "updateSellerForm";
+		}
+		else
+			
+			return "updateBuyerForm";
+		}
 	
 	
 	@RequestMapping(value = "/sellerDetail", method = RequestMethod.GET)
@@ -203,7 +221,7 @@ public class MemberController {
 			model.addAttribute("grade", "buyer");
 			return "reentrance";
 		}
-		else if(member.getMemberStatus().equals("seller")) {
+		else if(member.getGrade().equals("seller")) {
 			return "joinForm";
 			
 		}else {

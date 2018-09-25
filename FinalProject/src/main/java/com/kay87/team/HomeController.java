@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.util.PageNavigator;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
+import com.kay87.team.vo.MemberInfo;
 import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.WishAvgList;
 
@@ -37,6 +39,9 @@ public class HomeController {
 	
 	@Autowired
 	SqlSession sql;	
+	
+	
+
 	
 	//회원가입 폼 불러오기
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)

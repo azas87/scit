@@ -275,7 +275,7 @@ function reset () {
       			<a class="nav-link" href="logOut?">退場</a>
       		</li>
       		<li class="nav-item item bigSize">
-      			<a class="nav-link">会員情報修正</a>
+      			<a class="nav-link" href="updateUser?">会員情報修正</a>
       		</li>	
       	</c:when>
     </c:choose>

@@ -118,4 +118,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<select id="getUserInfo" parameterType="string" resultType="Member">
+	
+		SELECT * FROM memberinfo WHERE id = #{id}
+		
+	</select>
 </mapper>
