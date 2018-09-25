@@ -108,14 +108,14 @@
 <head>
 	<title>Home</title>
 
-
+<!-- <link rel="stylesheet" href="./resources/css/dateType.css"> -->
 
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
  <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
-
+<link rel="stylesheet" href="./resources/css/button.css"/>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -174,7 +174,7 @@
     	var data = google.visualization.arrayToDataTable(dataChart);
         var view = new google.visualization.DataView(data);
         var options = {
-          title: '魚種別購入額',
+          title: '魚種別取引額',
           is3D: true,
           fontSize:23,
           tooltip          : {textStyle : {fontSize:30}, showColorCode : true,trigger: 'both'},
@@ -212,7 +212,7 @@
                              2]);
 
             var options = {
-              title: "月間購入額",
+              title: "月間取引額",
               chartArea:{
           	    left:100,
           	    bottom:50,  // !!! works !!!
@@ -239,7 +239,7 @@
 
 <body>
 
-
+<input type="hidden" id="userMode" value="${sessionScope.userMode}">
  
 <div id="contain">
 	<div id="header">
@@ -258,9 +258,11 @@
 		</div>
 		<div class="items">
 			<form action="buyListHistory">
-				<input type="date" name="startDay">
-				<input type="date" name="endDay">
-				<input type="submit" value="検索">
+			
+				<input type="date" name="startDay" style="height: 50px; font-size: 20px; font-weight: bolder;">
+	
+				<input type="date" name="endDay" style="height: 50px; font-size: 20px; font-weight: bolder;">
+				<button>検索</button>
 			</form>
 		</div>
 	</div>

@@ -4,7 +4,14 @@ window.onload = function() { //실행될 코드 }
 		var period = $('#period').val();
 		var startDay = $('#startDay').val();
 		var endDay = $('#endDay').val();
+		var userMode = $('#userMode').val();
+		
+		if(userMode=='buyer'){
 		buyList(period, startDay, endDay);
+		}
+		else{
+		sellerBuyList(period, startDay, endDay);
+		}
 		sumList(period, startDay, endDay);
 		
 		
@@ -123,7 +130,7 @@ function sellerDetail (seller) {
  				align:'center'
  			}, 
  			{
- 				label : '購買日付',
+ 				label : '取引日付',
  				name : 'deadline',
  				width:295,
  				align:'center'
@@ -144,7 +151,7 @@ function sellerDetail (seller) {
  				width:80,
  				align:'center'
  			},  {
- 				label : '販売者',
+ 				label : '取引者',
  				name : 'successSellerId',
  				width: 120,
  				cellattr:mouseCursor,
@@ -282,6 +289,103 @@ function sellerDetail (seller) {
  };					
 					
 	
+
+ function sellerBuyList(period, startDay, endDay) {
+	
+ 	$("#jqGrid").jqGrid({
+ 		/* 환불 url:'refundList'*/
+ 		
+ 		url : 'jqgrid_R?period='+period+"&startDay="+startDay+"&endDay="+endDay,
+ 		mtype : "GET",
+ 		datatype : "json",
+ 		colModel : 
+ 		[ 
+ 			{
+ 				label : '히든',
+ 				name : 'buyNum',
+ 				align:'center',
+ 				hidden:true
+ 			},{
+ 				label : '수취히든',
+ 				name : 'saleStatus',
+ 				align:'center',
+ 				hidden:true
+ 			}, 
+ 			{
+ 				label : '取引日付',
+ 				name : 'deadline',
+ 				width:400,
+ 				align:'center'
+ 			
+ 			}, {
+ 				label : '品種',
+ 				name : 'fishName',
+ 				width:350,
+ 				align:'center' 				
+ 			}, {
+ 				label : '重量',
+ 				name : 'weight',
+ 				width:150,
+ 				align:'center'
+ 			},  {
+ 				label : '取引者',
+ 				name : 'id',
+ 				width: 200,
+ 				cellattr:mouseCursor,
+ 				align:'center'
+ 			},{
+ 				label : '価格',
+ 				name : 'price',
+ 				width:200,
+ 				align:'center'
+ 			},
+
+ 		],
+ 		viewrecords : true,
+ 		width:1300,
+ 		rowNum : 10,
+ 		rowList:[10,20,30],
+ 		height:500,
+ 		pager : "#jqGridPager",
+ 		loadonce: true,
+ 		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
+ 		footerrow:true,
+ 		userDataOnFooter : true,
+ 		loadComplete:function(data)
+ 		{
+ 			
+ 
+ 			
+ 			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
+ 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
+ 			$('.footrow').css('fontSize','1.5em');
+
+ 			$('table.ui-jqgrid-ftable td:eq(2)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(4)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(5)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(6)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(7)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(9)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(10)').hide();
+ 			
+ 			
+
+ 		},
+ 		gridComplete: function(){
+ 		},
+ 		onCellSelect: function(rowid, index, contents, event) 
+     	{    
+     		var cm = $(this).jqGrid('getGridParam','colModel');    
+     		
+     	},
+     	
+ 	});
+ };					
+					
+ 
+ 
+ 
+ 
  function resizeJqGridWidth(div_id, width, tf){
 	 console.log("Test");
      // window에 resize 이벤트를 바인딩 한다. 
