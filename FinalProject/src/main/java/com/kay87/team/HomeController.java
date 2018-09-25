@@ -211,7 +211,7 @@ public class HomeController {
 	    map.put("buyNum", buyNum);
 	    dao.selectSeller(map);
 	    
-		return "main";
+		return "redirect:/main";
 	}
 
 	
@@ -257,7 +257,7 @@ public class HomeController {
 		BuyMapper dao = sql.getMapper(BuyMapper.class);	
 		dao.deleteMyList_buyer(buyNum);
 		
-		return "main";		
+		return "redirect:/main";		
 	}
 	
 
@@ -276,7 +276,7 @@ public class HomeController {
 	    BuyMapper dao = sql.getMapper(BuyMapper.class);			
 		dao.deleteMyList_seller(map);
 		
-		return "main";		
+		return "redirect:/main";		
 	}
 	
 	// 판매자 메인화면에서 선호 목록_k

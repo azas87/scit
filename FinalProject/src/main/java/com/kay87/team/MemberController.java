@@ -41,12 +41,13 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.joinMember(member);
 		
-		return "main";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value = "/updateWishList", method = RequestMethod.GET)
-	public String updateWishList(Model model) {
+	public String updateWishList(Model model, HttpSession session) {
 		
+		session.setAttribute("updateWishList", "updateWishList");
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
 		List<FishCategoryList> categoryList = mapper.getCategory();
 		model.addAttribute("categoryList", categoryList);
@@ -66,7 +67,7 @@ public class MemberController {
 			r.setSellerId(member.getId());
 			reviewMapper.insertReview(r);
 			
-			return "main";
+			return "redirect:/main";
 		}
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -151,7 +152,11 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.updateUserFirst(id);
 		
-		return "main";
+		if(session.getAttribute("updateWishList")!=null) {
+			return "redirect:/main";
+		}
+		
+		return "redirect:/";
 	}
 
 	//id중복체크
@@ -255,7 +260,19 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.reenterance(member);
 		
-		return "main";
+		return "redirect:/main";
+	}
+	
+	//회원정보수정
+	@RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+	public String  updateUserInfo(MemberInfo member,HttpSession session) {
+		
+		String userid = (String) session.getAttribute("loginId");
+		member.setId(userid);
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		dao.updateUserInfo(member);
+		
+		return "redirect:/";
 	}
 	
 	

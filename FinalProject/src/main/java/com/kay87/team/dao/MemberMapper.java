@@ -36,4 +36,6 @@ public interface MemberMapper {
 
 	public MemberInfo getUserInfo(String userid);
 
+	public void updateUserInfo(MemberInfo member);
+
 }
