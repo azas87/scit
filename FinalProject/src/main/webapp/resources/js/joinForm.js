@@ -3,7 +3,8 @@
 });*/
 
 function check() {
-
+	
+	var tel = $('#tel').val();
 	var userid = $('#id').val();
 	var email =  $('#email').val();
 	var userpwd = $('#password').val();
@@ -12,8 +13,7 @@ function check() {
 	var namekana = $('#namekana').val();
 	var pattern1 = /[0-9]/;	
 	var pattern2 = /[a-zA-Z]/;
-	alert(userid);
-	alert(name);
+	
 	if( userid.length < 3 || userid.length > 10){
 	
 		alert("IDは3桁～10桁を入力してください。");
@@ -25,6 +25,12 @@ function check() {
 		document.getElementById("password").focus();
 		return false;
 	}
+	else if(tel.length>=10 && tel.length<=11){
+		alert("電話番号は10桁～11桁を入力してください。。");
+		document.getElementById("tel").focus();
+		return false;
+	}
+	
 	else if(userpwd2.length==0){
 		alert("パスワードをもう一度入力してください。");
 		document.getElementById("userpwd2").focus();
