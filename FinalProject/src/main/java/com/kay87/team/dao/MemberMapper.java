@@ -38,4 +38,6 @@ public interface MemberMapper {
 
 	public void updateUserInfo(MemberInfo member);
 
+	public void joinSeller(MemberInfo member);
+
 }

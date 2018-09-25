@@ -10,7 +10,9 @@ function check() {
 	var userpwd = $('#password').val();
 	var userpwd2 = $('#userpwd2').val();
 	var name = $('#name').val();
-	var namekana = $('#namekana').val();
+	var namekana = $('#nameKana').val();
+	var address = $('#address').val();
+	var addrHurikana = $('#addrHurikana').val();
 	var pattern1 = /[0-9]/;	
 	var pattern2 = /[a-zA-Z]/;
 	
@@ -23,6 +25,16 @@ function check() {
 	else if(userpwd.length==0){
 		alert("パスワードを入力してください。");
 		document.getElementById("password").focus();
+		return false;
+	}
+	else if(address.length==0){
+		alert("住所を入力してください。");
+		document.getElementById("address").focus();
+		return false;
+	}
+	else if(addrHurikana.length==0){
+		alert("住所（ふりがな）を入力してください。");
+		document.getElementById("addrHurikana").focus();
 		return false;
 	}
 	else if(tel.length>=10 && tel.length<=11){

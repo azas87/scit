@@ -246,16 +246,17 @@ html, body {
 </head>
 
 <body>
-
+	
 
   <div class="slide" style="border:0">
+  <form  action="joinSeller" method="post">
     <i id="back" class="material-icons prefix" >arrow_back</i>
     <ul>
       <li>
       	<div class="join_body" style="width:800px; margin:0 auto;">
         <div id="login-page" class="row">
 		  <div class="col s12 z-depth-4 card-panel">
-		    <form class="login-form">
+		    <div class="login-form">
 		      <div class="row">
 		        <div class="input-field col s12 center">
 			          <h2>会員登録のすすめ</h2>
@@ -290,7 +291,7 @@ html, body {
 			        </div>
 			      </div>
 			      
-			    </form>
+			  
 			  </div>
 			</div>
 		</div>
@@ -299,7 +300,7 @@ html, body {
       	<div style="width:800px; margin:0 auto;">
         <div id="login-page" class="row">
 		  <div class="col s12 z-depth-4 card-panel">
-		    <form class="login-form">
+		    <div class="login-form">
 		      <div class="row">
 
 		        <div class="input-field col s12 center">
@@ -334,15 +335,19 @@ html, body {
 			        </div>
 			      </div>
 			      <div class="input-field col s12">
-			          <button id="submit_btn" class="btn waves-effect waves-light col s12" onclick="return check()">REGISTER NOW</button>
+			          <button id="submit_btn" class="btn waves-effect waves-light col s12" onclick="return check()">会員登録</button>
 		        </div>
-			    </form>
-			  </div>
-			</div>
 		</div>
-      </li>
-
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</li>
 		</ul>
+	</form>
+		
+    
 	          <i id="next" class="material-icons prefix" style="">arrow_forward</i>
         </div>       
     
