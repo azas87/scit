@@ -511,7 +511,11 @@ function searchByDate() {
 }
 
 function mouseCursor(rowid, cellValue, rawData, colModel, rowData){   
-	return "style='cursor:pointer'";
+	if(cellValue!=""){
+		return "style='cursor:pointer'";
+	}else{	
+		return "";
+	}
 }
 
 //sumList

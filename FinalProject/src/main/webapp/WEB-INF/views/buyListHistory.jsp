@@ -58,6 +58,7 @@
 	margin:0px;
 	flex-grow: 1;
 	text-align: right;
+	font-size:1.5em
 }
 
 #tab

@@ -119,9 +119,11 @@ body
   
   #tab
   {
+  border-radius:5px;
   	width:1100px;
   	box-sizing:true;
-  	border:1px solid #cccccc;
+  	/* border:1px solid #cccccc; */
+  	background:url(../img/bg.png) repeat;
 	padding:1px;
 	margin: 1px;
 	text-align: center;
@@ -130,7 +132,7 @@ body
   }
   
    #tab div{
-			border:1px solid #cccccc;
+			/* border:1px solid #cccccc; */
 			padding:1px;
 			margin: 1px;
 			text-align: center;
@@ -140,16 +142,17 @@ body
     border:0px;	
     display: flex;
     flex-direction: row;
-    height:80px;    
+    height:60px;    
 
   }
   #tab .item
   {
-    line-height: 80px;
+    line-height: 60px;
     list-style: none;
     margin:0px;
     flex-grow: 1;
-    //border:0;
+    font-size:1.5em;
+    border-right:1px solid white;
   }
   
   #tab .item:nth-child(4)

@@ -76,25 +76,6 @@ $(document).ready(function(){
 	}, refreshInterver);
 	 
 	
-	    
-	  $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
-		  {
-			  $(this).css('flex-grow',1);
-		      $(this).css('font-size',"3.5em");
-		      $(this).css('background-color',"powderblue");
-	/*	      $('input').css('line-height', '60px');
-		      $('input').css('width', '200px');*/
-		  }
-	     
-	    });
-	    
-	  $(".item").mouseleave(function(){
-	      $(this).css('flex-grow',1);
-	      $(this).css('font-size',"1em");
-	      $(this).css('background-color',"white");
-	    });
-	  
 
 	    
     $('.search').hover(function(){

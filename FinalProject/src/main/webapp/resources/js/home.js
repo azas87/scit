@@ -1143,11 +1143,16 @@ function deletee (cellvalue, options, rowObject) {//rowObject는 테이블의 1�
 };	
 
 function ResetBuyList(urlReset) {	
+	$( "#jqGrid").jqGrid('clearGridData');
 	$( "#jqGrid").jqGrid().setGridParam({url:urlReset,datatype:'json'}).trigger('reloadGrid');
 }
 
 function mouseCursor(rowid, cellValue, rawData, colModel, rowData){
-	return "style='cursor:pointer'";
+	if(cellValue!=""){
+		return "style='cursor:pointer'";
+	}else{	
+		return "";
+	}
 };		 
 function sellerDetail (seller) {
 	$('#sellerInfo').val(seller);
