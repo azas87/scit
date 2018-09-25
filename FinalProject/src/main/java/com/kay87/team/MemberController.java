@@ -175,6 +175,24 @@ public class MemberController {
 		
 		return result;
 	}
+	//회원정보수정form호출
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	public String updateUser(HttpSession session, Model model) {
+		
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		String userid = (String) session.getAttribute("loginId");
+		String userMode= (String)session.getAttribute("userMode");
+		MemberInfo m = dao.getUserInfo(userid);
+		model.addAttribute("member", m);
+		
+		if(userMode.equals("seller")) {	
+	
+			return "updateSellerForm";
+		}
+		else
+			
+			return "updateBuyerForm";
+		}
 	
 	
 	@RequestMapping(value = "/sellerDetail", method = RequestMethod.GET)
@@ -185,10 +203,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "/getSellerInfo", method = RequestMethod.POST)
 	public @ResponseBody  List<SellerInfo> getSellerInfo(String sellerId) {
-	
+		System.out.println(sellerId);
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		List<SellerInfo> sellerInfo = dao.getSellerInfo(sellerId);
-		
+		System.out.println(sellerInfo);
 		return sellerInfo;
 	}
 	
@@ -203,13 +221,13 @@ public class MemberController {
 			model.addAttribute("grade", "buyer");
 			return "reentrance";
 		}
-		else if(member.getMemberStatus().equals("seller")) {
+		else if(member.getGrade().equals("seller")) {
+			return "joinForm";
 			
 		}else {
 			model.addAttribute("grade", "buyer");
-			return "joinForm";
+			return "joinFormBuyer";
 		}
-		return "joinForm";
 	}
 	
 	@RequestMapping(value = "/checkingEmail", method = RequestMethod.POST)

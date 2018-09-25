@@ -31,8 +31,8 @@ function check() {
 		return false;
 	}
 	
-	else if( !pattern1.test(userpwd) || !pattern2.test(userpwd) || userpwd.length < 8 || userpwd.length >= 16){ 
-		alert("パスワードは8桁～16桁の英数記号混在にしてください。");
+	else if( !pattern1.test(userpwd) || userpwd.length <= 4 || userpwd.length >= 8){ 
+		alert("パスワードは4桁～8桁の数字にしてください。");
 		return false;
 	}
 

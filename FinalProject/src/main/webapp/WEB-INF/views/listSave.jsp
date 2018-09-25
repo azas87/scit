@@ -25,12 +25,12 @@ String today = mSimpleDateFormat.format ( currentTime );
 </head>
 <body>
 <table>
- <tr><td>購買日付</td>
+ <tr><td>取引日付</td>
  <td>品種</td>
  <td>産地</td>
  <td>重量</td>
  <td>価格</td>
- <td>販売者ID</td></tr>
+ 
  <c:forEach var="m" items="${list}" varStatus="status">
 		<tr class="test2">
 			<td>${m.deadline}</td>
@@ -38,7 +38,7 @@ String today = mSimpleDateFormat.format ( currentTime );
 			<td>${m.location}</td>
 			<td>${m.weight}</td>
 			<td>${m.price}</td>
-			<td>${m.successSellerId}</td>
+			
 		</tr>
 </c:forEach> 
 </table>

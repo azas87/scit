@@ -58,6 +58,7 @@
 	margin:0px;
 	flex-grow: 1;
 	text-align: right;
+	font-size:1.5em
 }
 
 #tab
@@ -108,14 +109,14 @@
 <head>
 	<title>Home</title>
 
-
+<!-- <link rel="stylesheet" href="./resources/css/dateType.css"> -->
 
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
  <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
-
+<link rel="stylesheet" href="./resources/css/button.css"/>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -140,6 +141,23 @@
 <script type="text/javascript" src="./resources/js/buyListHistory.js"></script>
 <script type='text/javascript'>
 	$(document).ready(function() {
+		
+		$(".item").mouseenter(function(){
+			  if($(this).attr('class') != "item search")
+			  {
+				  $(this).css('flex-grow',1);
+			      $(this).css('font-size',"3em");
+			      $(this).css('background-color',"powderblue");
+			  }
+		     
+		    });
+		    
+		  $(".item").mouseleave(function(){
+		      $(this).css('flex-grow',1);
+		      $(this).css('font-size',"1.5em");
+		      $(this).css('background-color',"white");
+		    });
+		  
       	google.charts.load("current", {packages:["corechart"]});
       	google.charts.setOnLoadCallback(drawPieChart);
       	google.charts.setOnLoadCallback(drawHistogram);
@@ -157,7 +175,7 @@
     	var data = google.visualization.arrayToDataTable(dataChart);
         var view = new google.visualization.DataView(data);
         var options = {
-          title: '魚種別購入額',
+          title: '魚種別取引額',
           is3D: true,
           fontSize:23,
           tooltip          : {textStyle : {fontSize:30}, showColorCode : true,trigger: 'both'},
@@ -195,7 +213,7 @@
                              2]);
 
             var options = {
-              title: "月間購入額",
+              title: "月間取引額",
               chartArea:{
           	    left:100,
           	    bottom:50,  // !!! works !!!
@@ -222,7 +240,7 @@
 
 <body>
 
-
+<input type="hidden" id="userMode" value="${sessionScope.userMode}">
  
 <div id="contain">
 	<div id="header">
@@ -235,15 +253,17 @@
 	<br><br>
 	<div id="tab">
 		<div class="items">
-			<div class="item " onclick="buyListHistory?period=1week">1週間</div>
-			<div class="item " onclick="buyListHistory?period=1month">1ヶ月</div>
-			<div class="item " onclick="buyListHistory?period=3month">3ヶ月</div>
+			<div class="item "><a href="buyListHistory?period=1week">1週間</a></div>
+			<div class="item "><a href="buyListHistory?period=1month">1ヶ月</a></div>
+			<div class="item "><a href="buyListHistory?period=3month">3ヶ月</a></div>
 		</div>
 		<div class="items">
 			<form action="buyListHistory">
-					<input type="date" name="startDay">
-					<input type="date" name="endDay">
-					<input type="submit" value="検索">
+			
+				<input type="date" name="startDay" style="height: 50px; font-size: 20px; font-weight: bolder;">
+	
+				<input type="date" name="endDay" style="height: 50px; font-size: 20px; font-weight: bolder;">
+				<button>検索</button>
 			</form>
 		</div>
 	</div>
@@ -293,7 +313,7 @@
 		<input type="hidden" id="period" value="${period}">
 		<input type="hidden" id="startDay" value="${startDay}">
 		<input type="hidden" id="endDay" value="${endDay}">
-		<a class="myButton"　href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
+		<a class="myButton" href="download?period=${period}&startDay=${startDay}&endDay=${endDay}" >エクセルファイルにダウンロード</a>
 		</div>
 	</div>
 	

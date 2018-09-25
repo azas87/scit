@@ -267,7 +267,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_box</i>
-			          <input id="id" name="id" class="input_size" type="text"/>
+			          <input id="id" name="id" class="input_size" type="text"  value="${member.id}"/>
 			          <label for="usernid">ニックネーム</label>
 			        </div>
 			      </div>
@@ -276,7 +276,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">vpn_key</i>
-			          <input id="password" name="password" class="input_size" type="password"/>
+			          <input id="password" name="password" class="input_size" type="password"  value="${member.password}"/>
 			          <label for="password">暗証番号</label>
 			        </div>
 			      </div>
@@ -285,7 +285,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">vpn_key</i>
-			          <input id="userpwd2" name="userpwd2" class="input_size" type="password" />
+			          <input id="userpwd2" name="userpwd2" class="input_size" type="password" value="${member.password}"/>
 			          <label for="password_a">暗証番号の再入力</label>
 			        </div>
 			      </div>
@@ -311,7 +311,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_circle</i>
-			          <input id="name" name="name" class="input_size" type="text" />
+			          <input id="name" name="name" class="input_size" type="text" value="${member.name}"/>
 			          <label for="username">お名前</label>
 			        </div>
 			      </div>
@@ -320,7 +320,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">assignment_ind</i>
-			          <input id="nameKana" name="nameKana" class="input_size" type="text" />
+			          <input id="nameKana" name="nameKana" class="input_size" type="text" value="${member.nameKana}" />
 			          <label for="name_kana">ふりがな</label>
 			        </div>
 			      </div>
@@ -329,7 +329,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_balance</i>
-			          <input id="address" name="address" class="input_size" type="text"/>
+			          <input id="address" name="address" class="input_size" type="text"  value="${member.address}"/>
 			          <label for="address">お住まいの都道府県</label>
 			        </div>
 			      </div>

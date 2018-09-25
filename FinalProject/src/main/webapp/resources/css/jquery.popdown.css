@@ -61,7 +61,7 @@ div.popdown-content section.body p {
   color: #B3B3B1;
 }
 div.popdown-content footer {
-  padding: 0px 20px 20px 0;
+  padding: 0px 30px 20px 0;
   text-align: right;
 }
 div.popdown-content footer button {
@@ -70,7 +70,7 @@ div.popdown-content footer button {
   padding: 10px 30px;
   background-color: #3BB69E;
   border: none;
-  font-size: 12px;
+  font-size: 2em;
   cursor: pointer;
   outline: none;
   color: #fff;

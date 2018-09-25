@@ -27,11 +27,11 @@ language="java" pageEncoding="UTF-8"%>
 	<table id="jqGridBoard"></table>
 	<div id="jqGridPager"></div>
 	</div>
-	<%-- <c:if test="${sessionScope.userMode=='manager'}">
+	<c:if test="${sessionScope.userMode eq 'manager'}">
 	<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
 	<button onclick="writeFaqForm()">投稿</button>
 	</div>
-	</c:if> --%>
+	</c:if> 
 
 
 </body>

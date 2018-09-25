@@ -1,0 +1,28 @@
+
+
+button{
+	padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+	background-image: none;
+	cursor: pointer;
+    -webkit-appearance: button;
+    text-transform: none;
+    margin: 0;
+    box-sizing: border-box;
+    align-items: flex-start;
+    text-align: center;
+    text-rendering: auto;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+   -webkit-writing-mode: horizontal-tb !important;
+   	background-color: #3aa9d5;
+   	box-shadow:inset -8px 7px 7px -2px #0277ad;
+   	font-size:15px;
+	font-weight:bold;
+	color: white;
+}

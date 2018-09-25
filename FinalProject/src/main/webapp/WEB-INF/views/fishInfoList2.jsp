@@ -21,7 +21,8 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="./resources/js/bootstrap.bundle.min.js"></script>
-
+    
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   
 <script>
@@ -40,9 +41,34 @@ function deleteFishInfo() {
 	alert(fishName);
 	location.href="updateFishInfoForm?fishName="+fishName;
 }
+
+
 </script>
 <style>
 
+.title
+{
+	font-size: 2em;
+}
+
+.content
+{
+	margin-left: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 1.5em;
+}
+
+.container
+{
+	max-width:1400px;
+}
+
+.card-title
+{
+	font-size:3em;
+	
+}
 
 </style>
   <body>
@@ -70,20 +96,24 @@ function deleteFishInfo() {
 
                 <a href="#"></a>
                 <div class="card-body">
-                <ul>
-                  <h4 class="card-title">
-                   <strong><a href="#">${fish.fishName }</a></strong>
+                  <h3 class="card-title" style="color: #3aa9d5;">
+                   <strong>${fish.fishName }</strong>
                   </h4>
-                  <li><h5>産地</h5>
-                  	${fish.locations }
+                  <div class="title"><i class="material-icons prefix">details</i> <b>産地</b></div>
+                  <div class="content">
+                  	 <i class="material-icons prefix">info_outline</i> 	${fish.locations }
                   	<br>
-                  <li><h5>旬</h5>
-                  	${fish.seasonInfo }
+                  </div>	
+                  <div class="title"><i class="material-icons prefix">details</i> <b>旬</b></div>
+                  <div class="content">
+                  	<i class="material-icons prefix">info_outline</i> ${fish.seasonInfo }
 					<br>
-                  <li><h5>基本情報</h5>
+					</div>
+                  <div class="title"><i class="material-icons prefix">details</i> <b>基本情報</b></div>
+                   <div class="content">
                 	${fish.fishInfo }
                 	<br>
-                </ul>
+                </div>
                 </div>
                
                 <div class="card-footer" style="background-color: #3aa9d5; ">

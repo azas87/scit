@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
+import com.kay87.team.vo.SaleList;
 import com.kay87.team.vo.AvgList;
 
 public interface BuyMapper {
@@ -45,6 +46,10 @@ public interface BuyMapper {
 	
 
 	public int selectSeller(Map<String, String> map);//sql문은 update임
+	
+	public int selectBuyer(SaleList salelist);//sql문은 insert임
+	
+	public List<SaleList> selectSaleList(String userId);
 
 	public int refund(String buyNum);
 	

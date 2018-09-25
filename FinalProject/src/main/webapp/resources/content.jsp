@@ -18,7 +18,7 @@
 	
 	<section class="body">
 		<table id="jqGrid_pop"></table>			
-		<div id="jqGridPager_pop"></div>
+		<div id="jqGridPager_pop" style="height: 50px;"></div>
 	</section>
 	
 	<footer>
@@ -29,7 +29,7 @@
 	$(document).ready(function() {
 		console.log("132");
 		//jqGridmyBuyList();
-		if($('#userMode').val() == 1)
+		if($('#userMode').val() == 'buyer')
 		{
 			myList_ing_buyer_pop();
 		}
@@ -150,6 +150,8 @@
 					var mousey = e.pageY + 10;
 					$('.tooltip').css({top : mousey,left : mousex});
 				});
+				
+				$(".jqGrid_popghead_0").css('font-size','1.5em');
 			},
 			gridComplete: function(){
 			},

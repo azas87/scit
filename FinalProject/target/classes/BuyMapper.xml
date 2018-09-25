@@ -84,7 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE buyerId = #{id}
 			
 			AND 
-                saleStatus = 'saleComplete'
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
    			<if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -270,8 +272,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				buyList
 	 		where 
 	 			buyerid = #{id}
-	 		and 
-                saleStatus = 'saleComplete'
+	 		AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
             <if test="period !=null and period=='1week'">
             AND 
             	deadline >= sysdate-7
@@ -312,8 +316,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		to_char(deadline, 'YYYYMMDD') between sysdate-365 and sysdate
 		and
    			buyerid = #{id}
-		and 
-		    saleStatus = 'saleComplete'
+		AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
 		group by 
 		    to_char(deadline, 'MM')
 		order by
@@ -331,14 +337,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<!-- 판매자 선택  -->
-	<update id="selectSeller" parameterType="map">
+	<update id="selectSeller" parameterType="map"><!--parameter로 buyNum과 선택한 판매자id를 컨트롤러에 가져가야해서 map사용했음  -->
 		UPDATE buylist
      	SET saleStatus = 'saleComplete'
      		,successSellerId=#{SellerId}
     	WHERE buyNum = #{buyNum}
 	</update>
-
-
+	
+	<!--구매자 선택  -->
+	<insert id="selectBuyer" parameterType="SaleList">
+		INSERT into SaleList
+     	(saleNum,buyNum,sellerId)
+     	values
+     	(saleNum.nextval,#{buyNum},#{sellerId})
+	</insert>
+	
+	<!--구매자 선택 표시 /구매자를 선택했으면 '選択'표시되면안됨, 선택전의 구매글에는 '選択'가 표시되어야함 -->
+	<select id="selectSaleList" parameterType="string" resultType="SaleList">
+		select 
+			saleNum,buyNum,sellerId 
+		from 
+			SaleList 
+		where 
+			sellerId=#{sellerId}
+	</select>
+	
+	
+	
+	
 	<update id="refund" parameterType="string">
  
   	 	UPDATE buylist
@@ -356,7 +382,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyNum=#{buyNum} 		
 	</delete>
 	
-	<!--판매자 구매목록에서 글삭제(취소)-->
+	<!--판매자 구매목록에서 글삭제(취소 cancel)-->
 	<delete id="deleteMyList_seller" parameterType="string">
 		delete 
 			saleList
@@ -411,8 +437,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		from 
 			BuyList b, wishlist w
-		where	
-			w.id =#{userid}		
+		where			
+			w.id = #{userid} 
 			and w.wish=b.fishname
 			and b.salestatus='onSale'
 		order by b.buyNum asc
@@ -437,15 +463,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,fishName
 			, avgPrice
 			, to_char(sysdate,YYYY/MM/DD);
-<<<<<<< HEAD
-		)	
-	</insert>
-=======
 		)
 	</insert> -->
 
 	<select id="getMarketPrice" resultType="AvgList">
->>>>>>> refs/remotes/origin/mina
 	
 		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
 		
