@@ -33,7 +33,7 @@
 	               
 	            </div> 
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="join" >
+					<form class="form-horizontal" method="post" action="updateUserInfo" >
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">ID</label>
@@ -105,14 +105,16 @@
 							</div>
 						</div>
 					<div class="form-group ">
-							<button class="btn btn-primary btn-lg btn-block login-button" onclick="return check()">Register</button>
+					<!-- onclick="return check()" -->
+							<button class="btn btn-primary btn-lg btn-block login-button" onclick="check()">変更確認</button>
+							<div style="height: 5px;"></div>
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="goHome()" style="background: #EF5350; ">戻る</button	>
 						</div>
 						
 					</form>
 				</div>
 			</div>
 		</div>
-
-		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
-	</body>
+		
+		</body>
 </html>

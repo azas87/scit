@@ -57,7 +57,7 @@ public class BuyController {
 		buyList.setBuyerId((String)session.getAttribute("loginId"));
 		dao.insertBuyList(buyList);
 
-		return "home";
+		return "main";
 	}
 	
 	
