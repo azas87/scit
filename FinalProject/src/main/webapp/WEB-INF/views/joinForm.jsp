@@ -8,7 +8,7 @@ language="java" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="./resources/js/joinFormSeller.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/materialize.min.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+ <link href="./resources/css/shop-homepage.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 <!-- 로그인 폼이랑 슬라이드 높이가 높이 -->
@@ -350,7 +350,10 @@ html, body {
     
 	          <i id="next" class="material-icons prefix" style="">arrow_forward</i>
         </div>       
-    
+ <div style="height:20px;"></div>
+<div style="width: 200px; margin: 0 auto;">
+ <a class="myButton" href="/team/?" >戻る</a> 
+</div>   
 </body>
 
 <script type="text/javascript">

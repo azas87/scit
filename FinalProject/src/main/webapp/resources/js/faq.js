@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	getQnaTable();
+	getFaqTable();
 	
 	$('#jqGridBoard').jqGrid('navGrid',"#jqGridPager", {                
 	       search: false, // show search button on the toolbar
@@ -19,7 +19,8 @@ function writeFaqForm() {
 }
 
 
-function getQnaTable() {
+function getFaqTable() {
+	
 	
 	$("#jqGridBoard").jqGrid({
 		url : "getFaqList",
@@ -55,13 +56,14 @@ function getQnaTable() {
 				height : 200,
 				align:'center'
 			}, 
+			
 		],
 		viewrecords : true,
 		width : 900,
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-	/*	pager : "#jqGridPager",*/
+		/*pager : "#jqGridPager",*/
 		loadonce: true,
 		grouping: false,
 		groupingView: {
@@ -97,12 +99,15 @@ function getQnaTable() {
         	if(cm[index].name == "title")
         	{
         		var obj = $("#jqGridBoard").getRowData(rowid);
+           		alert(JSON.stringify(obj));
         		location.href="FAQDetail?FAQNum="+obj.FAQNum;
 
         	}
     		
     	},   
 	});
+	
+	
 }
 
 
