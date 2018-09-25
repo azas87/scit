@@ -229,7 +229,7 @@ function reset () {
       		</c:when>
       		
       		<c:when test="${sessionScope.loginId != null }">
-      			<c:if test="${sessionScope.userMode == '1' }">      			
+      			<c:if test="${sessionScope.userMode == 'buyer' }">      			
 	      			<li class="nav-item">
 						<a class="nav-link" href="writeBuyBoardForm?">購入される方</a>
 					</li>
@@ -245,7 +245,7 @@ function reset () {
 					<li class="nav-item">
 	       				<a class="nav-link" onclick="">市価</a>
 	      			</li>
-	      			<!-- <li class="nav-item">
+	      			<li class="nav-item">
 	       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
 	      			</li>
 	      			<li class="nav-item">
@@ -253,7 +253,7 @@ function reset () {
 	      			</li>
 	      			<li class="nav-item">
 	       				<a class="nav-link" onclick="newPage('faqForm?')">よくある質問</a>
-	      			</li> -->
+	      			</li>
 			</c:when>			
 		</c:choose>		   
     </ul>
@@ -265,7 +265,7 @@ function reset () {
        			<a class="nav-link" href="loginForm?">入場</a>
       		</li>
       		<li class="nav-item">
-       			<a class="trigger_popup_fricc nav-link">退場</a>
+       			<a class="trigger_popup_fricc nav-link">会員登録</a>
       		</li>
     	</c:when>    
     
@@ -273,9 +273,9 @@ function reset () {
    			<li class="nav-item">
       			<a class="nav-link" href="logOut?">退場</a>
       		</li>
-      		<li class="nav-item">
+      		<!-- <li class="nav-item">
       			<a class="nav-link">会員情報修正</a>
-      		</li>	
+      		</li>	 -->
       	</c:when>
     </c:choose>
     </form>

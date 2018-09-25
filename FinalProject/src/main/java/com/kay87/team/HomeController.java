@@ -26,6 +26,7 @@ import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.util.PageNavigator;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
+import com.kay87.team.vo.SaleList;
 import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.WishAvgList;
 
@@ -208,7 +209,18 @@ public class HomeController {
 	    
 		return "redirect:/";
 	}
-
+	
+	//구매자선택
+	@RequestMapping(value = "/selectBuyer", method = RequestMethod.GET)
+	public String selectBuyer(SaleList salelist, HttpSession session){
+		System.out.println(salelist);
+		salelist.setSellerId((String)session.getAttribute("loginId"));  		
+		
+	    BuyMapper dao = sql.getMapper(BuyMapper.class);			
+		dao.selectBuyer(salelist);
+	    
+		return "redirect:/";
+	}
 	
 	//bestSeller
 	@RequestMapping(value = "/bestSeller", method = RequestMethod.GET, produces = "application/text; charset=utf8")
@@ -244,7 +256,7 @@ public class HomeController {
 		return jsonPlace;
 	}
 	
-	//구매자 글 삭제(진행중인 리스트에서)
+	//구매자 글 삭제(구매자 내글 목록)
 	@RequestMapping(value = "/deleteMyList_buyer", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String deleteMyList_buyer(String buyNum){
 		System.out.println("deleteMyList_buyer");
@@ -281,7 +293,37 @@ public class HomeController {
 			BuyMapper mapper = sql.getMapper(BuyMapper.class);
 			String userId = (String) session.getAttribute("loginId");	
 			List<BuyList> myWishList_seller = mapper.sellerWishList(userId);			
-			System.out.println(myWishList_seller);
+			for(BuyList i : myWishList_seller) {
+				System.out.println(i);
+			}
+			
+			System.out.println("");
+			
+			List<SaleList> salelist  = mapper.selectSaleList(userId);
+			//System.out.println(salelist);   //salelist에 정보가 안들어 있으면 결과:[]
+			if(salelist.size()==0) {
+				System.out.println("salelist없네!");
+			}else {
+				for(SaleList i : salelist) {
+					System.out.println(i);
+				}
+			}
+			
+			//System.out.println(myWishList_seller.get(0).getBuyNum());
+			for(int i=0; i<myWishList_seller.size() ;i++) {			
+				System.out.println(myWishList_seller.get(i).getBuyNum());
+				for(int j=0;j<salelist.size();j++) {
+					System.out.println(salelist.get(j).getBuyNum());
+					if(Integer.parseInt(myWishList_seller.get(i).getBuyNum())==salelist.get(j).getBuyNum()) {
+						myWishList_seller.get(i).setSuccessSellerId(userId);
+						break;//가장가까이 있는 반복문 빠져나감
+					}
+				}				
+			}
+			
+			for(BuyList i : myWishList_seller) {
+				System.out.println(i);
+			}			
 			
 			Gson gson = new Gson();
 			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
