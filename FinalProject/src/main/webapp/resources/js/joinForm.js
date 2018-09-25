@@ -66,3 +66,7 @@ function check() {
 		return true;	
 	}
 	}
+
+function goHome() {
+	location.href="/team/?";
+}

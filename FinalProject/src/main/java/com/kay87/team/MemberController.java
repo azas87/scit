@@ -41,12 +41,13 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.joinMember(member);
 		
-		return "home";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value = "/updateWishList", method = RequestMethod.GET)
-	public String updateWishList(Model model) {
+	public String updateWishList(Model model, HttpSession session) {
 		
+		session.setAttribute("updateWishList", "updateWishList");
 		FishInfoListMapper mapper = sql.getMapper(FishInfoListMapper.class);
 		List<FishCategoryList> categoryList = mapper.getCategory();
 		model.addAttribute("categoryList", categoryList);
@@ -66,7 +67,7 @@ public class MemberController {
 			r.setSellerId(member.getId());
 			reviewMapper.insertReview(r);
 			
-			return "home";
+			return "redirect:/main";
 		}
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -106,7 +107,6 @@ public class MemberController {
 		
 		String id = (String)session.getAttribute("loginId");
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
-		dao.updateUserFirst(id);
 		
 		WishList w = new WishList();
 		w.setId(id);
@@ -145,6 +145,20 @@ public class MemberController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/setNotFirst", method = RequestMethod.GET)
+	public String setNotFirst(HttpSession session) {
+		
+		String id = (String)session.getAttribute("loginId");
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		dao.updateUserFirst(id);
+		
+		if(session.getAttribute("updateWishList")!=null) {
+			return "redirect:/main";
+		}
+		
+		return "redirect:/";
+	}
+
 	//id중복체크
 	@RequestMapping(value = "/checkId", method = RequestMethod.GET)
 	public @ResponseBody String checkId(String userid) {
@@ -160,7 +174,7 @@ public class MemberController {
 	public String LogOut(HttpSession session, Model model) {
 
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 
 
@@ -246,7 +260,19 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.reenterance(member);
 		
-		return "home";
+		return "redirect:/main";
+	}
+	
+	//회원정보수정
+	@RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+	public String  updateUserInfo(MemberInfo member,HttpSession session) {
+		
+		String userid = (String) session.getAttribute("loginId");
+		member.setId(userid);
+		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		dao.updateUserInfo(member);
+		
+		return "redirect:/";
 	}
 	
 	

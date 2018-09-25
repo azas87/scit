@@ -318,7 +318,7 @@ $(document).ready(function() {
 							for='id_comments'>コメント</label>
 						<div class='col-md-6'>
 							<textarea class='form-control' id='id_comments'
-								placeholder='Additional comments' rows='10'></textarea>
+								placeholder='Additional comments' name='buyListComment' rows='10'></textarea>
 						</div>
 					</div>
 					<div class='form-group'>

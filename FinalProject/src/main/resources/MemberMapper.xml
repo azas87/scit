@@ -123,4 +123,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM memberinfo WHERE id = #{id}
 		
 	</select>
+
+	
+	<update id="updateUserInfo" parameterType="Member">
+	
+		UPDATE 
+			memberinfo
+		SET 
+			nameKana= #{nameKana},
+			name= #{name},
+			address= #{address},
+			<if test="addrHurikana!=null">
+			addrHurikana= #{addrHurikana},
+			</if>
+			<if test="tel!=null">
+			tel= #{tel},
+			</if>
+			password= #{password}
+		 WHERE id = #{id}
+	
+	</update>
 </mapper>

@@ -561,6 +561,7 @@ function myList_ing_seller() {
 				width : 100,
 				height : 200,
 				formatter: selectCancel,
+				cellattr:mouseCursor,
 				align:'center'
 			},
 
@@ -752,28 +753,32 @@ function myAllList_buyer() {
 				}else{
 					return;
 				}    			
-    		}else if(cm[index].name == "deletee"){ 
-    			var con = confirm('정말삭제하시겠습니까?');
-    			if(con==true){
-    				console.log(jQuery("#jqGrid").getRowData(rowid));
-        			var obj = $("#jqGrid").getRowData(rowid);
-           		 	       		       		 		
-    		 		$.ajax({
-    				url:"deleteMyList_seller",
-    				type:"get",
-    				data:{"buyNum":obj.buyNum
-    				},
-    				success:function(data){
-    					ResetBuyList('myAllList_buyer');
-    				},
-    				error:function(){
-    					alert("통신실패");
-    				}
-    		 		});           		 	
-           		 	
-    			}else{
-    				return;
-    			}    			
+    		}else if(cm[index].name == "deletee"){ 				
+				console.log(jQuery("#jqGrid").getRowData(rowid));
+    			var obj = $("#jqGrid").getRowData(rowid);
+       		 	
+    			if(obj.deletee != ""){
+       		 		var con = confirm('정말삭제하시겠습니까?');    			
+       		 		if(con==true){       		 		
+	       		 		$.ajax({
+	    				url:"deleteMyList_buyer",
+	    				type:"get",
+	    				data:{"buyNum":obj.buyNum
+	    				},
+	    				success:function(data){
+	    					ResetBuyList('myAllList_buyer');
+	    				},
+	    				error:function(){
+	    					alert("통신실패");
+	    				}
+	    		 		});  
+       		 		}else{
+           		 		return;
+           		 	}           	
+       		 	}else{
+       		 		return;
+       		 	}	 	
+			  		    				
     		}else if(cm[index].name == "successSellerId"){
     			console.log(jQuery("#jqGrid").getRowData(rowid));
     			var obj = $("#jqGrid").getRowData(rowid);

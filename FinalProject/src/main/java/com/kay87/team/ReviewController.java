@@ -37,7 +37,7 @@ public class ReviewController {
 		ReviewMapper dao=sql.getMapper(ReviewMapper.class);
 		int result = dao.insertReview(review);
 		
-		return "home";
+		return "main";
 	}
 
 }

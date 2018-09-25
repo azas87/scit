@@ -35,7 +35,7 @@ $(function() {
 	});//ajax
 	
 		$(".button").click(function() { 
-			location.href="/team/	";
+			location.href="setNotFirst?";
 			
 		});
 		$("input:radio[name=radio]").click(function() { 

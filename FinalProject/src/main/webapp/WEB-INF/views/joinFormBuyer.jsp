@@ -113,21 +113,23 @@
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 									<input type="text" class="form-control" name="confirm" id="confirm"  placeholder="メールから認証番号を入力してください。"/>
+								
 								</div>
 							</div>
 						</div>
-
 						
 
 						<div class="form-group ">
-							<button class="btn btn-primary btn-lg btn-block login-button" onclick="return check()">Register</button>
+							<button class="btn btn-primary btn-lg btn-block login-button" onclick="return check()">会員登録</button>
+							<div style="height: 5px;"></div>
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="goHome()" style="background: #EF5350; ">戻る</button	>
 						</div>
 						
 					</form>
 				</div>
 			</div>
 		</div>
-
-		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		
+		
 	</body>
 </html>
