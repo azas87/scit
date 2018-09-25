@@ -7,7 +7,7 @@
 <html lang="en">
     <head> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="./resources/css/smallButton.css"/>
+
 		<link rel="stylesheet" type="text/css" href="./resources/css/joinBuyer.css">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -20,9 +20,12 @@
 		<!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-
+		<script type="text/javascript" src="./resources/js/joinForm.js"></script>
 		<title>Admin</title>
 	</head>
+	
+
+	
 	<body style="background:url(./resources/img/bg.png) repeat;">
 		<div class="container">
 			<div class="row main">
@@ -30,14 +33,14 @@
 	               
 	            </div> 
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
+					<form class="form-horizontal" method="post" action="join">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">ID</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+									<input type="text" class="form-control" name="id" id="name"  placeholder="桁～30桁の半角英数字"/>
 								</div>
 							</div>
 						</div>
@@ -46,7 +49,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="8桁～30桁の半角英数字"/>
 								</div>
 							</div>
 						</div>
@@ -56,7 +59,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+									<input type="password" class="form-control" name="userpwd2" id="userpwd2" />
 								</div>
 							</div>
 						</div>
@@ -66,7 +69,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+									<input type="text" class="form-control" name="name" id="name" />
 								</div>
 							</div>
 						</div>
@@ -75,7 +78,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+									<input type="text" class="form-control" name="nameKana" id="nameKana" />
 								</div>
 							</div>
 						</div>
@@ -85,7 +88,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+									<input type="text" class="form-control" name="address" id="address"  />
 								</div>
 							</div>
 						</div>
@@ -97,17 +100,19 @@
 								<div class="input-group">
 									
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="メールアドレス"/>
 								</div>
 							</div>
 						</div>
-						<button id="nani" type="button">認証番号取得</button>
-						<div class="form-group">
+						<div style="position: relative; left: 65%;">
+						<button type="button" class="btn btn-primary btn-lg btn-block login-button" style="width: 105px; font-size: 13px; height: 35px;">認証番号送信</button>
+						</div>
+						<div class="form-group" >
 							<label for="username" class="cols-sm-2 control-label">認証番号</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+									<input type="text" class="form-control" name="confirm" id="confirm"  placeholder="メールから認証番号を入力してください。"/>
 								</div>
 							</div>
 						</div>
@@ -115,7 +120,7 @@
 						
 
 						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
 						</div>
 						
 					</form>

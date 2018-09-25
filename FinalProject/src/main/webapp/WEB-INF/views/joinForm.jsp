@@ -10,7 +10,7 @@ language="java" pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
+<script type="text/javascript" src="./resources/js/joinForm.js"></script>
 <!-- 로그인 폼이랑 슬라이드 높이가 높이 -->
 
   <style media="screen">
@@ -267,7 +267,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_box</i>
-			          <input id="usernid" name="userid" class="input_size" type="text"/>
+			          <input id="id" name="id" class="input_size" type="text"/>
 			          <label for="usernid">ニックネーム</label>
 			        </div>
 			      </div>
@@ -285,7 +285,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">vpn_key</i>
-			          <input id="password_a" name="cpassword" class="input_size" type="password" />
+			          <input id="userpwd2" name="userpwd2" class="input_size" type="password" />
 			          <label for="password_a">暗証番号の再入力</label>
 			        </div>
 			      </div>
@@ -306,13 +306,12 @@ html, body {
 			          <h2>会員登録のすすめ</h2>
 			          <p class="center">お名前とお住まいの都道府県を入力してください。</p>
 
-
 			
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
 			          <i class="material-icons prefix">account_circle</i>
-			          <input id="username" name="username" class="input_size" type="text"/>
+			          <input id="name" name="name" class="input_size" type="text"/>
 			          <label for="username">お名前</label>
 			        </div>
 			      </div>
@@ -321,7 +320,7 @@ html, body {
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
 			          <i class="material-icons prefix">assignment_ind</i>
-			          <input id="name_kana" name="name_kana" class="input_size" type="password" />
+			          <input id="nameKana" name="nameKana" class="input_size" type="password" />
 			          <label for="name_kana">ふりがな</label>
 			        </div>
 			      </div>
@@ -335,7 +334,7 @@ html, body {
 			        </div>
 			      </div>
 			      <div class="input-field col s12">
-			          <button type="submit" id="submit_btn" class="btn waves-effect waves-light col s12" >REGISTER NOW</button>
+			          <button type="submit" id="submit_btn" class="btn waves-effect waves-light col s12" onclick="check()">REGISTER NOW</button>
 		        </div>
 			    </form>
 			  </div>
