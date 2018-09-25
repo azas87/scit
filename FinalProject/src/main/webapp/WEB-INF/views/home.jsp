@@ -262,7 +262,7 @@ function reset () {
       			</li>      			
       			<c:if test="${sessionScope.userMode eq 'buyer' }">      			
 	      			<li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')"></a>
+						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
 					</li>
 					
 					<li class="nav-item item bigSize">
