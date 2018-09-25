@@ -15,7 +15,7 @@ $(document).ready(function() {
 	 
 	var userMode = $('#userMode').val();
 	console.log(userMode);
-	if(userMode!=1)
+	if(userMode!='buyer')
 	{
 	    
 	  $(".item").mouseenter(function(){
@@ -37,6 +37,7 @@ $(document).ready(function() {
 	      $(this).css('font-weight','normal');
 	      /*$(this).css('background-color',"white");*/
 	    });
+	  
 	  
 
 	}   
@@ -121,7 +122,7 @@ function homeList() {
  			}, {
 				label : '購買日付',
 				name : 'deadline',
-				width : 250,
+				width : 230,
 				height : 200,
 				align:'center'
 			}, {
@@ -139,7 +140,7 @@ function homeList() {
 			}, {
 				label : '重量',
 				name : 'weight',
-				width : 60,
+				width : 80,
 				height : 200,
 				align:'center'
 			}, {
@@ -147,11 +148,11 @@ function homeList() {
 				name : 'price',
 				width : 80,
 				height : 200,
-				align:'center'
+				align:'center'	
 			}, {
 				label : '購買者ID',//구매자,판매자:販売者
 				name : 'buyerId',
-				width : 100,
+				width : 120,
 				height : 200,
 				align:'center'
 			}, 
@@ -1052,7 +1053,7 @@ function myList() {
 	
 	var userMode = $("#userMode").val();
 	console.log(userMode);
-	if(userMode==1)
+	if(userMode=='buyer')
 	{
 		listMode = "myBuyList";
 	}

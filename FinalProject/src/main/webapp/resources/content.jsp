@@ -29,7 +29,7 @@
 	$(document).ready(function() {
 		console.log("132");
 		//jqGridmyBuyList();
-		if($('#userMode').val() == 1)
+		if($('#userMode').val() == 'buyer')
 		{
 			myList_ing_buyer_pop();
 		}

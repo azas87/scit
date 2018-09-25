@@ -222,7 +222,7 @@ function reset () {
       			<li class="nav-item item bigSize">
        				<a class="nav-link" onclick="newPage('main?')">メイン</a>
       			</li>      			
-      			<c:if test="${sessionScope.userMode == '1' }">      			
+      			<c:if test="${sessionScope.userMode == 'buyer' }">      			
 	      			<li class="nav-item item bigSize">
 						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
 					</li>
