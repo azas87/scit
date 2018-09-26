@@ -273,13 +273,13 @@ function reset () {
       			<c:if test="${sessionScope.userMode eq 'buyer' }">      			
 	      			<li class="nav-item item bigSize">
 						<a class="nav-link" onclick="newPage('writeBuyBoardForm?')">ご購入</a>
-					</li>
+					</li>					
 					
+				</c:if>					
+					<c:if test="${sessionScope.userMode ne 'manager'}">	
 					<li class="nav-item item bigSize">
 						<a class="nav-link" onclick="newPage('updateWishList?')">関心</a>
 					</li>
-				</c:if>					
-					<c:if test="${sessionScope.userMode ne 'manager'}">	
 					<li class="nav-item item bigSize">								
 						<a class="nav-link" onclick="newPage('buyListHistory?')">履歴</a>
 					</li>	
