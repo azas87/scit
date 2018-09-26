@@ -295,7 +295,7 @@ function sellerDetail (seller) {
  	$("#jqGrid").jqGrid({
  		/* 환불 url:'refundList'*/
  		
- 		url : 'jqgrid_R?period='+period+"&startDay="+startDay+"&endDay="+endDay,
+ 		url : 'sellerHistory?period='+period+"&startDay="+startDay+"&endDay="+endDay,
  		mtype : "GET",
  		datatype : "json",
  		colModel : 
@@ -329,7 +329,7 @@ function sellerDetail (seller) {
  				align:'center'
  			},  {
  				label : '取引者',
- 				name : 'id',
+ 				name : 'buyerid',
  				width: 200,
  				cellattr:mouseCursor,
  				align:'center'
