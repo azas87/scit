@@ -51,8 +51,11 @@
 
 
 <style>
+
+
 /* Popup box BEGIN */
 .hover_bkgr_fricc{
+
     background:rgba(0,0,0,.4);
     cursor:pointer;
     display:none;
@@ -68,8 +71,17 @@
     height:100%;
     vertical-align:middle;
 }
+
+form	
+{
+	background: #ffffff;
+	border-radius: 15px;
+}
+
+
 .hover_bkgr_fricc > div {
-    background-color: #fff;
+    /* background-color: #fff; */
+    background:url(./resources/img/bg.png) repeat;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
     height: auto;
@@ -103,6 +115,7 @@
 }
 
 /* Popup box BEGIN */
+
 
 
 .legend
@@ -143,10 +156,7 @@ $(window).load(function () {
        $('.hover_bkgr_fricc').show();
     });
    
-    $('.popupCloseButton').click(function(){
-        $('.hover_bkgr_fricc').hide();
-    });
-   
+    /* $('#close, .popupCloseButton').click(function(){ */
     $('#close').click(function(){
     	$('#memberStatus_page').css('display','block');
     	$('#grade_page').css('display','none');
@@ -341,7 +351,7 @@ function reset () {
 <div class="hover_bkgr_fricc">
     <span class="helper"></span>
     <div>
-        <div class="popupCloseButton">X</div>
+        <!-- <div class="popupCloseButton">X</div> -->
         <form id="outForm" action="checkingStatus">
 			<div id="memberStatus_page">
 				<div class="test">

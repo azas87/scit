@@ -121,6 +121,36 @@ $(document).ready(function(){
 
 	// 팝업 띄우기
 	//$('#popup').trigger('click');
+	
+	
+	$('.item').click(function(){
+		
+		$('.item').css('background','url(./resources/img/bg.png) repeat');
+		$('.item').css('color','black');
+		$('.item').css('border-right','1px solid white');
+		$('.item').css('border-radius','0px');
+		
+		$(this).css('background','white');
+		$(this).css('color','black');
+		$(this).css('border-right','2px solid white');
+		$(this).css('border-radius','5px'); 
+		
+		
+		/* 
+		$('.item').css('background','white');
+		$('.item').css('color','black');
+		$('.item').css('border-right','1px solid blue');
+		$('.item').css('border-left','1px solid blue');
+		$('.item').css('border-radius','0px');
+		
+		$(this).css('background','url(./resources/img/bg.png) repeat');
+		$(this).css('color','black');
+		$(this).css('border-right','0px');
+		$(this).css('border-left','0px');
+		$(this).css('border-radius','5px'); */
+		
+		
+	});
 		
 });
    
@@ -250,16 +280,16 @@ var chartDrowFun = {
 
 <div id="tab">
 	<div class="items">
-		<div class="item " onclick="homeList()">전체 글</div>
+		<div class="item " id="homeList"  onclick="homeList()">전체 글</div>
 		<c:choose>
 			<c:when test="${sessionScope.userMode == 'buyer' }">
-				<div class="item " onclick="myList_ing_buyer()">진행중인리스트</div>
-				<div class="item " onclick="myAllList_buyer()">내글 목록</div>
+				<div class="item " id="myList_ing_buyer" onclick="myList_ing_buyer()">진행중인리스트</div>
+				<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">내글 목록</div>
 			</c:when>
 			<c:when test="${sessionScope.userMode == 'seller' }">
 				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
-				<div class="item " onclick="sellerWishList()">선호리스트</div>
-				<div class="item " onclick="myList_ing_seller()">참여리스트</div>
+				<div class="item " id="sellerWishList" onclick="sellerWishList()">선호리스트</div>
+				<div class="item " id="myList_ing_seller" onclick="myList_ing_seller()">참여리스트</div>
 			</c:when>
 		</c:choose>
 		<div class="item search" title="검색어">검색 : <input type="text" id="search_cells" title=""></div>

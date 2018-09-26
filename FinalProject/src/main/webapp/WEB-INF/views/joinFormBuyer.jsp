@@ -82,6 +82,15 @@
 								</div>
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">電話番号</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="number" class="form-control" name="tel" id="tel" />
+								</div>
+							</div>
+						</div>
 						
 						<div class="form-group">
 							<label for="email" class="cols-sm-2 control-label">住所</label>
@@ -93,6 +102,15 @@
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">住所(フリガナ)</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="addrHurikana" id="addrHurikana"  />
+								</div>
+							</div>
+						</div>
 
 						<div class="form-group">
 							<label for="username" class="cols-sm-2 control-label">メール</label>
