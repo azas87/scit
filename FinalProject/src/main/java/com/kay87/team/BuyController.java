@@ -103,6 +103,10 @@ public class BuyController {
 		model.addAttribute("list", list);
 		//생선별합계
 		model.addAttribute("sumPricebyFishName", sumPrice(id, period, startDay, endDay));
+		System.out.println(startDay);
+		System.out.println(endDay);
+		System.out.println(period);
+		System.out.println(list);
 		
 		return "buyListHistory";
 	}

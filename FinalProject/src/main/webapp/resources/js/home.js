@@ -314,11 +314,12 @@ function sellerWishList() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "buyerSelect")
-    		{	var con = confirm('구매자를 선택하시겠습니까?');
-    				if(con==true){
-    					console.log(jQuery("#jqGrid").getRowData(rowid));
-    					var obj = $("#jqGrid").getRowData(rowid);
-           		 		
+    		{	console.log(jQuery("#jqGrid").getRowData(rowid));
+				var obj = $("#jqGrid").getRowData(rowid);
+    			
+				if(obj.buyerSelect != ""){
+					var con = confirm('구매자를 선택하시겠습니까?');
+    				if(con==true){           		 		
            		 		$.ajax({
            				url:"selectBuyer",
            				type:"get",
@@ -331,10 +332,12 @@ function sellerWishList() {
            					alert("통신실패");
            				}
            		 		});
-           		 		
     				}else{
     					return;
-    				}    				 	    			
+    				}	           		 		
+    			}else{
+    				return;
+    			}    				 	    			
     		}
     	},   
 	});
