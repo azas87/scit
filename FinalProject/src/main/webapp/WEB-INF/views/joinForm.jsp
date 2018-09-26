@@ -33,7 +33,7 @@ language="java" pageEncoding="UTF-8"%>
 
     .slide {
       width: 1200px;
-      height: 660px;
+      height: 680px;
       overflow: hidden;
       position: relative;
       margin: 0 auto;
@@ -70,10 +70,10 @@ language="java" pageEncoding="UTF-8"%>
       z-index: 1;
       font-size:8rem;
     }
-    
-    
+
+
     /**/
-    
+
     .input_size
     {
     	width:640px !important;
@@ -81,12 +81,12 @@ language="java" pageEncoding="UTF-8"%>
     	padding-top:40px !important;
     	font-size:3em !important;
     }
-    
+
     body{
-    
+
     display: table-cell;
     vertical-align: middle;
-    //background-color: #e0f2f1 !important; 
+    //background-color: #e0f2f1 !important;
     background:url(./resources/img/bg.png) repeat;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight:300;
@@ -111,8 +111,8 @@ html, body {
 
 .login-form {
     width: 800px;
-    height:650px;
-    
+    height:670px;
+
 }
 
 .login-form-text {
@@ -159,7 +159,7 @@ html, body {
 
 
 
-	
+
 .breadcrumb-counter-nav {
   margin: 0 auto;
   margin-bottom:10px;
@@ -234,19 +234,19 @@ html, body {
 
 
 
-    
+
   </style>
   <script>
 
-    
-  
-  
-  
+
+
+
+
   </script>
 </head>
 
 <body>
-	
+
 
   <div class="slide" style="border:0">
   <form  action="joinSeller" method="post">
@@ -263,7 +263,7 @@ html, body {
 			          <p class="center">ニックネームと暗証番号を決めてください。</p>
 			        </div>
 			    </div>
-			
+
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
@@ -272,7 +272,7 @@ html, body {
 			          <label for="usernid">ニックネーム</label>
 			        </div>
 			      </div>
-			
+
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
@@ -281,7 +281,7 @@ html, body {
 			          <label for="password">暗証番号</label>
 			        </div>
 			      </div>
-			
+
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
@@ -290,8 +290,8 @@ html, body {
 			          <label for="password_a">暗証番号の再入力</label>
 			        </div>
 			      </div>
-			      
-			  
+
+
 			  </div>
 			</div>
 		</div>
@@ -307,7 +307,7 @@ html, body {
 			          <h2>会員登録のすすめ</h2>
 			          <p class="center">お名前とお住まいの都道府県を入力してください。</p>
 
-			
+
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-social-person-outline prefix"></i> -->
@@ -316,7 +316,7 @@ html, body {
 			          <label for="username">お名前</label>
 			        </div>
 			      </div>
-			
+
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
@@ -325,7 +325,7 @@ html, body {
 			          <label for="name_kana">ふりがな</label>
 			        </div>
 			      </div>
-			
+
 			      <div class="row margin">
 			        <div class="input-field col s12">
 			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
@@ -346,11 +346,11 @@ html, body {
 		</li>
 		</ul>
 	</form>
-		
-    
+
+
 	          <i id="next" class="material-icons prefix" style="">arrow_forward</i>
-        </div>       
-    
+        </div>
+
 </body>
 
 <script type="text/javascript">
@@ -387,18 +387,18 @@ html, body {
         img_position++;
       }
     }
-    
+
     $('.breadcrumb-counter-nav-item').click(function () {
   	  $('.breadcrumb-counter-nav-item').removeClass('current');
   	  $(this).addClass('current');
   	});
-    
+
    /*  $(".login-form").validate({
   	  rules: {
   	    username: {
   	      required: true,
   	      minlength: 4
-  	    },     
+  	    },
   	    email: {
   	      required: true,
   	      email:true
@@ -432,7 +432,7 @@ html, body {
   	}); */
 
   });
- 
+
 </script>
 
 

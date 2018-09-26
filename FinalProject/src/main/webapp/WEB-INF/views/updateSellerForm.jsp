@@ -38,7 +38,7 @@
 
     .slide {
       width: 1200px;
-      height: 660px;
+      height: 680px;
       overflow: hidden;
       position: relative;
       margin: 0 auto;
@@ -75,10 +75,10 @@
       z-index: 1;
       font-size:8rem;
     }
-    
-    
+
+
     /**/
-    
+
     .input_size
     {
     	width:640px !important;
@@ -86,12 +86,12 @@
     	padding-top:40px !important;
     	font-size:3em !important;
     }
-    
+
     body{
-    
+
     display: table-cell;
     vertical-align: middle;
-    //background-color: #e0f2f1 !important; 
+    //background-color: #e0f2f1 !important;
     background:url(./resources/img/bg.png) repeat;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight:300;
@@ -116,8 +116,8 @@ html, body {
 
 .login-form {
     width: 800px;
-    height:650px;
-    
+    height:670px;
+
 }
 
 .login-form-text {
@@ -164,7 +164,7 @@ html, body {
 
 
 
-	
+
 .breadcrumb-counter-nav {
   margin: 0 auto;
   margin-bottom:10px;
@@ -239,10 +239,10 @@ html, body {
 
 
 
-    
+
   </style>
 <script>
-	
+
 </script>
 </head>
 
@@ -345,21 +345,21 @@ html, body {
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
-					
+
 				</div>
-				
+
 			</li>
-			
+
 		</ul>
 		<i id="next" class="material-icons prefix" style="">arrow_forward</i>
 		</form>
 	</div>
-<div style="height:20px;"></div>
-<div style="width: 200px; margin: 0 auto;">
- <a class="myButton" href="/team/?" >戻る</a> 
+<div style="height:10px;"></div>
+<div style="width: 200px; margin: 0 auto; margin-bottom:10px;">
+ <a class="myButton" href="/team/?" >戻る</a>
 </div>
 </body>
 
@@ -408,7 +408,7 @@ html, body {
 		    username: {
 		      required: true,
 		      minlength: 4
-		    },     
+		    },
 		    email: {
 		      required: true,
 		      email:true
