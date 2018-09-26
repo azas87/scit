@@ -115,6 +115,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	
+	<select id="getSuccessSellList"  parameterType="map" resultType="BuyList">
+	
+	SELECT		
+				buyerid,
+				buyNum,
+				fishName,
+				buyerId,
+				TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
+				TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
+				TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+				weight,
+				saleStatus,
+				price,
+				successSellerId,
+				buyListComment,
+				location 
+			FROM 
+				buyList
+				
+			WHERE successSellerId = #{id}
+			
+			AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
+   			<if test="period !=null and period=='1week'">
+            AND 
+            	deadline >= sysdate-7
+            </if>
+            <if test="period !=null and period=='3week'">
+            AND 
+            	deadline >= sysdate-21
+            </if>
+            <if test="period !=null and period=='1month'">
+            AND 
+            	deadline >= sysdate-30
+            </if>
+             <if test="period !=null and period=='1year'">
+            AND 
+            	deadline >= sysdate-365
+            </if>
+            <if test="startDay !=null">
+            <![CDATA[
+            AND 
+            	deadline >= #{startDay}
+        	AND 
+            	deadline <= #{endDay}
+             ]]>
+            </if>
+
+	</select>
+	
 	<!-- 환불이력가져오기 -->
 	<select id="getRefundsBuyList" parameterType="string" resultType="BuyList">
 	
@@ -306,6 +359,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 fishName
     </select>
     
+    <select id="sumPricebyFishNameForSeller" parameterType="map" resultType="BuyList">
+		SELECT SUM(price) as price ,fishName
+			FROM 
+				buyList
+	 		where 
+	 			successSellerId = #{id}
+	 		AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
+            <if test="period !=null and period=='1week'">
+            AND 
+            	deadline >= sysdate-7
+            </if>
+            <if test="period !=null and period=='3week'">
+            AND 
+            	deadline >= sysdate-21
+            </if>
+            <if test="period !=null and period=='1month'">
+            AND 
+            	deadline >= sysdate-30
+            </if>
+           
+             <if test="period !=null and period=='1year'">
+            AND 
+            	deadline >= sysdate-365
+            </if>
+             
+            <if test="startDay !=null">
+            <![CDATA[
+            AND 
+            	deadline >= #{startDay}
+        	AND 
+            	deadline <= #{endDay}
+             ]]>
+            </if>
+            group by 
+                fishName
+    </select>
+    
+    
     <!-- 월별 구매합계 -->
     <select id="sumPricebyMonth" parameterType="string" resultType="BuyList">
 		select
@@ -316,6 +410,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		to_char(deadline, 'YYYYMMDD') between sysdate-365 and sysdate
 		and
    			buyerid = #{id}
+		AND 
+                (saleStatus = 'saleComplete'
+            OR
+            	saleStatus = 'getComplete')
+		group by 
+		    to_char(deadline, 'MM')
+		order by
+ 		   fishName
+    </select>
+    
+      <select id="sumPricebyMonthBySeller" parameterType="string" resultType="BuyList">
+		select
+   			 to_char(deadline, 'MM') as fishName, sum(price) as price
+		from
+    		buylist
+		where 
+    		to_char(deadline, 'YYYYMMDD') between sysdate-365 and sysdate
+		and
+   			successSellerId = #{id}
 		AND 
                 (saleStatus = 'saleComplete'
             OR

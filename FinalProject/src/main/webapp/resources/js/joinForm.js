@@ -37,7 +37,7 @@ function check() {
 		document.getElementById("addrHurikana").focus();
 		return false;
 	}
-	else if(tel.length>=10 && tel.length<=11){
+	else if(tel.length<10 && tel.length>11){
 		alert("電話番号は10桁～11桁を入力してください。。");
 		document.getElementById("tel").focus();
 		return false;

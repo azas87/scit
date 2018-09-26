@@ -239,11 +239,11 @@ public class MemberController {
 		System.out.println(member);
 		if(member.getGrade().equals("seller")&&member.getMemberStatus().equals("reentrance")) {
 			model.addAttribute("grade", "seller");
-			return "reentrance";
+			return "reenteranceSeller";
 		}
 		else if(member.getGrade().equals("buyer")&&member.getMemberStatus().equals("reentrance")) {
 			model.addAttribute("grade", "buyer");
-			return "reentrance";
+			return "reenteranceBuyer";
 		}
 		else if(member.getGrade().equals("seller")) {
 			return "joinForm";
@@ -256,8 +256,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/checkingEmail", method = RequestMethod.POST)
 	public @ResponseBody MemberInfo  checkingEmail(MemberInfo member) {
-
+		
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
+		System.out.println(member);
 		MemberInfo m = dao.checkingEmail(member);
 		System.out.println("null"+m);
 		return m;
@@ -270,7 +271,7 @@ public class MemberController {
 		MemberMapper dao=sql.getMapper(MemberMapper.class);
 		dao.reenterance(member);
 		
-		return "redirect:/main";
+		return "redirect:/";
 	}
 	
 	//회원정보수정
