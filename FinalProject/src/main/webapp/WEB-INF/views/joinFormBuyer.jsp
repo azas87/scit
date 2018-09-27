@@ -123,7 +123,7 @@
 							</div>
 						</div>
 						<div style="position: relative; left: 65%;">
-						<button type="button" class="btn btn-primary btn-lg btn-block login-button" style="width: 105px; font-size: 13px; height: 35px;">認証番号送信</button>
+						<button type="button" onclick="sendMail()" class="btn btn-primary btn-lg btn-block login-button" style="width: 105px; font-size: 13px; height: 35px;">認証番号送信</button>
 						</div>
 						<div class="form-group" >
 							<label for="username" class="cols-sm-2 control-label">認証番号</label>
@@ -131,7 +131,7 @@
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 									<input type="text" class="form-control" name="confirm" id="confirm"  placeholder="メールから認証番号を入力してください。"/>
-								
+									<input type="hidden" id="mailNumber">
 								</div>
 							</div>
 						</div>
@@ -147,7 +147,5 @@
 				</div>
 			</div>
 		</div>
-		
-		
 	</body>
 </html>

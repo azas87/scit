@@ -1,6 +1,8 @@
 var listMode = "allBuyList";
 var refreshInterver = 600000; // 1000 = 1초
-
+var isSeasonInfoLoad = false;
+var isHomeListLoad=false;
+var isBestSellerLoad=false;
 
 $(document).ready(function() {
 	
@@ -174,23 +176,8 @@ function homeList() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			isHomeListLoad=true;
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -289,23 +276,8 @@ function sellerWishList() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
-
+			helper();
+			
 			$(".jqGridghead_0").css('font-size','1.5em');
 		}, 
 		gridComplete: function(){
@@ -438,22 +410,7 @@ function myList_ing_buyer() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 			
 			$(".jqGridghead_0").css('font-size','1.5em');
 		},
@@ -585,22 +542,7 @@ function myList_ing_seller() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -726,22 +668,7 @@ function myAllList_buyer() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -972,20 +899,8 @@ function bestSeller() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				console.log("test");
-				var title = $(this).attr('title');
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			isBestSellerLoad=true;
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -1076,20 +991,8 @@ function seasonInfo() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				console.log("test");
-				var title = $(this).attr('title');
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			isSeasonInfoLoad=true;
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -1194,3 +1097,26 @@ function today(){
 /* 커밋 테스트용 */
 
 
+function helper()
+{
+	if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+	{
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			console.log(title);
+			if(title!=" " && title!="" && title!=null)
+			{
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			}
+		},
+		function() {
+			$(this).attr('title',$(this).data('tipText'));
+			$('.tooltip').remove();
+		}).mousemove(function(e) {
+			var mousex = e.pageX + 20;
+			var mousey = e.pageY + 10;
+			$('.tooltip').css({top : mousey,left : mousex});
+		});
+	}
+} 
