@@ -69,6 +69,8 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public String home() {				
 		System.out.println("qq");
+		BuyMapper mapper = sql.getMapper(BuyMapper.class);
+		
 		
 		return "home";
 	}	

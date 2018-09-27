@@ -50,6 +50,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</insert>
 	
+	<insert id="insertPriority" parameterType="PriorityList">
+
+	INSERT INTO priorityList VALUES(priorityNum.nextval, buyNum.nextval-1, #{priorityId},#{orders})
+	
+	</insert>
+	
 	<!-- 사용자의 판매이력 가져오기(중복된 판매자는 제외) 
 	판매자 우선순위를 위해-->
 	<select id="getHistorySellerId" parameterType="string" resultType="BuyList">

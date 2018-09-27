@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
+import com.kay87.team.vo.PriorityList;
 import com.kay87.team.vo.SaleList;
 import com.kay87.team.vo.AvgList;
 
@@ -80,6 +81,10 @@ public interface BuyMapper {
 	public List<BuyList> sumPricebyMonthBySeller(String id);
 
 	public List<BuyList> sumPricebyFishNameForSeller(Map<String, Object> map);
+
+	public void insertPriorityList(PriorityList priority);
+
+	public void insertPriority(PriorityList priorityList);
 
 	
 
