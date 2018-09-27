@@ -75,8 +75,36 @@ function newPage(action)
 {
  	console.log("newPage");
  	console.log(action);
+ 	var height='';
+ 	switch(action)
+ 	{
+ 	case "main?":
+ 		height='1600px';
+ 		break;
+ 	case "writeBuyBoardForm?":
+ 		height='800px';
+ 		break;
+ 	case "updateWishList?":
+ 		height='900px';
+ 		break;
+ 	case "buyListHistory?":
+ 		height='2000px';
+ 		break;
+ 	case "marketPrice?":
+ 	case "noticeForm?":
+ 	case "qnaForm?":
+ 	case "faqForm?":
+ 		height='700px';
+ 		break;
+ 	case "fishInfoList?":
+ 		height='3000px';
+ 		break;	
+ 	}
 	//$("#f_main").src=action;*/
+ 	$('#f_main').attr('height', height);
 	$('#f_main').attr('src', action);
+	
+	/*$('#page-wrapper').attr('height','1000px');*/
 }
 
 function printClock() {
