@@ -58,10 +58,89 @@
 	margin:0px;
 	flex-grow: 1;
 	text-align: right;
-	font-size:1.5em
+	font-size:2em
 }
 
+
 #tab
+  {
+  border-radius:5px;
+  	box-sizing:true;
+  	/* border:1px solid #cccccc; */
+  	background:url(./resources/img/bg.png) repeat;
+	padding:1px;
+	margin: 1px;
+	text-align: center;
+	margin:0px auto;
+	margin-bottom: 10px;	
+  }
+
+ #tab div{
+	/* border:1px solid #cccccc; */
+	padding:1px;
+	margin: 1px;
+	text-align: center;
+}
+
+    #tab .items {
+    border:0px;	
+    display: flex;
+    flex-direction: row;
+    height:60px;    
+
+  }
+  #tab .item
+  {
+    line-height: 60px;
+    list-style: none;
+    margin:0px;
+    flex-grow: 1;
+    font-size:2em;
+    border-right:1px solid white;
+    cursor:pointer;
+  }
+  
+.calander
+{
+	line-height: 0px !important;
+	border-bottom:1px solid white;
+	border-right:0px !important;
+	height:70px !important;
+	
+}
+
+#search_cells
+{
+	margin-top:5px;
+	height:50px;
+	max-width: 300px;
+	font-size: 1em;
+}
+
+.submit
+{
+	border-bottom:1px solid white;
+	height:70px !important;
+	max-width:115px;
+}
+
+
+#tab .items .item:nth-child(4)
+{
+	font-size:3em;
+	max-width:135px;
+	cursor:normal;
+	border-right:0px;
+}
+
+
+
+ #tab .items .item:nth-child(5)
+{
+	max-width: 305px;
+}
+
+/* #tab
   {
   	box-sizing:true;
   	border:1px solid #cccccc;
@@ -95,14 +174,20 @@
     //border:0;
   }
   
-  #tab .item:nth-child(4)
-  {
-  	border:0px;	
-    list-style: none;
-    margin:0px;
-    flex-grow: 1;
-    
-  }
+   */
+
+
+.ui-datepicker{ font-size: 2em !important; width: 470px !important; z-index:1000 !important; }
+.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
+.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
+
+#datepicker1, #datepicker2
+{
+	font-size:2em;
+	max-width:400px;
+	height: 68px;
+	
+}
 
 
 </style>
@@ -142,21 +227,51 @@
 <script type='text/javascript'>
 	$(document).ready(function() {
 		
+		$( "#datepicker1" ).datepicker({
+		    dateFormat: 'yy-mm-dd'
+		  });
+		
+		$( "#datepicker2" ).datepicker({
+		    dateFormat: 'yy-mm-dd'
+		  });
+		
 		$(".item").mouseenter(function(){
-			  if($(this).attr('class') != "item search")
+			var itemClass= $(this).attr('class');
+			  if( (itemClass != "item search_title" ) && (itemClass != "item search_text" ) && (itemClass != "item calander" ) )
 			  {
 				  $(this).css('flex-grow',1);
 			      $(this).css('font-size',"3em");
-			      $(this).css('background-color',"powderblue");
+			      $(this).css('font-weight','bold');
+	/*		      $(this).css('background-color',"powderblue");
+	*/	/*	      $('input').css('line-height', '60px');
+			      $('input').css('width', '200px');*/
 			  }
 		     
 		    });
 		    
 		  $(".item").mouseleave(function(){
 		      $(this).css('flex-grow',1);
-		      $(this).css('font-size',"1.5em");
-		      $(this).css('background-color',"white");
+		      $(this).css('font-size',"2em");
+		      $(this).css('font-weight','normal');
+		      /*$(this).css('background-color',"white");*/
 		    });
+		  
+		  
+		  $('.item').click(function(){
+			  var itemClass= $(this).attr('class');
+			  if( (itemClass != "item search_title" ) && (itemClass != "item search_text" )  && (itemClass != "item calander" ) )	
+			  {
+				$('.item').css('background','url(./resources/img/bg.png) repeat');
+				$('.item').css('color','black');
+				$('.item').css('border-right','1px solid white');
+				$('.item').css('border-radius','0px');
+				
+				$(this).css('background','white');
+				$(this).css('color','black');
+				$(this).css('border-right','2px solid white');
+				$(this).css('border-radius','5px'); 
+		      }
+			});
 		  
       	google.charts.load("current", {packages:["corechart"]});
       	google.charts.setOnLoadCallback(drawPieChart);
@@ -252,26 +367,34 @@
 	
 	<br><br>
 	<div id="tab">
+	<form action="buyListHistory">
+		<div class="items calander">
+			<div class="item calander">
+				<br>
+			</div>
+			<div class="item calander">
+				<input type="text" id="datepicker1" name="startDay" placeholder="始まり" title="始まり" class="bigSize"  >
+			</div>
+			<div class="item calander">	
+				<input type="text" id="datepicker2" name="endDay" placeholder="始まり" title="始まり" class="bigSize" >
+			</div>
+			<div class="item submit">	
+				<button>検索</button>
+			</div>
+		</div>
+	</form>
 		<div class="items">
 			<div class="item "><a href="buyListHistory?period=1week">1週間</a></div>
 			<div class="item "><a href="buyListHistory?period=1month">1ヶ月</a></div>
 			<div class="item "><a href="buyListHistory?period=3month">3ヶ月</a></div>
-		</div>
-		<div class="items">
-			<form action="buyListHistory">
-			
-				<input type="date" name="startDay" style="height: 50px; font-size: 20px; font-weight: bolder;">
-	
-				<input type="date" name="endDay" style="height: 50px; font-size: 20px; font-weight: bolder;">
-				<button>検索</button>
-			</form>
+			<div class="item search_title" title="검색어">검색</div>
+			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
 		</div>
 	</div>
-
 	
 	<div><br></div>
 	
-	<div ><input id="search_cells" type="search"/></div>
+	
 	<table id="jqGrid"></table>
 	<div id="jqGridPager"></div>
 	<div><Br></div>
