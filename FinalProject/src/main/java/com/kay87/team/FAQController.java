@@ -68,11 +68,11 @@ public class FAQController {
 	//게시판 내용 불러오기
 	@RequestMapping(value="/FAQDetail", method=RequestMethod.GET)
 	public void boardDetail(String FAQNum, Model model, HttpSession session) {
-		
+		System.out.println("넘버"+FAQNum);
 		FaQMapper dao = sql.getMapper(FaQMapper.class);
 		FAQ faq=getBoard(FAQNum);
 		//조회수 증가
-		
+		System.out.println("faq"+faq);
 		int cnt=faq.getHitcount();
 		cnt++;
 		faq.setHitcount(cnt);

@@ -75,6 +75,12 @@ public interface BuyMapper {
 
 	public List<AvgList> getMarketPrice();
 
+	public List<BuyList> getSuccessSellList(Map<String, String> map);
+
+	public List<BuyList> sumPricebyMonthBySeller(String id);
+
+	public List<BuyList> sumPricebyFishNameForSeller(Map<String, Object> map);
+
 	
 
 	

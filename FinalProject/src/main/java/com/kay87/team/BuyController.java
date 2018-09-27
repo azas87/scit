@@ -71,7 +71,7 @@ public class BuyController {
 		return fishlist;
 	}
 	
-	//구매완료내역출력
+	//거래완료내역출력
 	@RequestMapping(value = "/buyListHistory", method = RequestMethod.GET)
 	public String buyListHistory(Model model, HttpSession session,
 			@RequestParam(value="period", defaultValue="1") String period,
@@ -80,9 +80,17 @@ public class BuyController {
 		
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		String id = (String)session.getAttribute("loginId");
+		String userMode = (String) session.getAttribute("userMode");
+		List<BuyList> sumPricebyMonth = null;
+		if(userMode.equals("buyer")) {
+			sumPricebyMonth= dao.sumPricebyMonth(id);
+		}
+		else {
+			sumPricebyMonth= dao.sumPricebyMonthBySeller(id);
+		}
 
 		//월별 구매합계
-		List<BuyList> sumPricebyMonth= dao.sumPricebyMonth(id);
+		
 		int[] list = new int[12];
 		int month=0;
 
@@ -102,7 +110,8 @@ public class BuyController {
 		model.addAttribute("period", period);
 		model.addAttribute("list", list);
 		//생선별합계
-		model.addAttribute("sumPricebyFishName", sumPrice(id, period, startDay, endDay));
+		model.addAttribute("sumPricebyFishName", sumPrice(id, period, startDay, endDay, userMode));
+		
 		
 		return "buyListHistory";
 	}
@@ -127,7 +136,7 @@ public class BuyController {
 		
 		return 0;
 	}
-
+	
 	@RequestMapping(value = "/jqgrid_R", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 
 	public @ResponseBody String jqgrid(
@@ -135,7 +144,7 @@ public class BuyController {
 		   String startDay, String endDay, String page, String rows, HttpSession session) {
 		System.out.println("jqgrid_R");
 		System.out.println(endDay);
-
+		
 		String id =(String)session.getAttribute("loginId");
 		List<BuyList> buyListHistory = getBuyListHistory(id, period,startDay,endDay);
 		System.out.println(buyListHistory);
@@ -147,6 +156,24 @@ public class BuyController {
 		return jsonPlace;
 	}
 	
+	@RequestMapping(value = "/sellerHistory", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+
+	public @ResponseBody String sellerHistory(
+		   @RequestParam(value="period", defaultValue="1") String period,
+		   String startDay, String endDay, String page, String rows, HttpSession session) {
+
+		String id =(String)session.getAttribute("loginId");
+		List<BuyList> sellList = getSellListHistory(id, period,startDay,endDay);
+		System.out.println(sellList);
+		Gson gson = new Gson();
+		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
+		String jsonPlace = "{\"rows\":"+ gson.toJson(sellList) + "}";
+		System.out.println(jsonPlace);
+		
+		return jsonPlace;
+	}
+	
+	
 	//생선별 합계 표
 	@RequestMapping(value = "/sumList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 
@@ -155,7 +182,9 @@ public class BuyController {
 		   String startDay, String endDay, String page, String rows, HttpSession session) {
 		System.out.println("생선별합계");
 		String id =(String)session.getAttribute("loginId");
-		List<BuyList> sumPricebyFishName = sumPrice(id, period,startDay,endDay);
+		String userMode = (String) session.getAttribute("userMode");
+		
+		List<BuyList> sumPricebyFishName = sumPrice(id, period,startDay,endDay, userMode);
 		
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
@@ -258,8 +287,60 @@ public class BuyController {
 	
 		return buyListHistory;
 	}
+	//구매내역
+	public List<BuyList> getSellListHistory(String id, String period, String startDay, String endDay){
+		System.out.println(startDay);
+		System.out.println(endDay);
+		System.out.println(period);
+		BuyMapper dao=sql.getMapper(BuyMapper.class);
+		Map<String, String> map = new HashMap<String, String>();
+		
+		System.out.println("getBuyListHistory");
+		System.out.println(startDay);
+		
+
+		if(startDay == null)
+		{
+			System.out.println("startDay null");
+		}
+		else if(startDay == "")
+		{
+			System.out.println("startDay 공백");
+		}
+		else
+		{
+			System.out.println("startDay not null");
+		}
+			
+	    map.put("period", period);
+	    map.put("id", id);
+	    if(startDay.length()!=0) {
+	    	map.put("startDay", startDay);
+	    	map.put("endDay", endDay);
+	    }
+	    
+	    System.out.println("map");
+	    System.out.println(map.get(startDay));
+	    
+		if(map.get(startDay) == null)
+		{
+			System.out.println("startDay null");
+		}
+		else
+		{
+			System.out.println("startDay not null");
+		}
+		
+		List<BuyList> list = dao.getSuccessSellList(map);
+		
+		System.out.println("get = " + list);
+	
+		return list;
+	}
+	
+	
 	//생선별 구매합계
-	public List<BuyList> sumPrice(String id, String period, String startDay, String endDay){
+	public List<BuyList> sumPrice(String id, String period, String startDay, String endDay, String userMode){
 			
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -269,8 +350,13 @@ public class BuyController {
 	    	map.put("startDay", startDay);
 	    	map.put("endDay", endDay);
 	    }
+	    List<BuyList> sumPricebyFishName=null;
+		if(userMode.equals("buyer")) {
+			sumPricebyFishName=dao.sumPricebyFishName(map);
+		}else {
+			sumPricebyFishName=dao.sumPricebyFishNameForSeller(map);
+		}
 		
-		List<BuyList> sumPricebyFishName=dao.sumPricebyFishName(map);
 		return sumPricebyFishName;
 }
 	
