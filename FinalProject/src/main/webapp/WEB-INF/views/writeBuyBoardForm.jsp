@@ -325,7 +325,7 @@ $(document).ready(function() {
 						<div id='submit'>
 							<button class='btn-lg btn-danger'
 								style="background-color: #3aa9d5; "
-								type='submit' onclick="return check()" id="btn2">登録</button>
+								onclick="return check()" id="btn2">登録</button>
 						</div>
 					</div>
 				</form>

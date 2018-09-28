@@ -24,6 +24,7 @@ import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FAQ;
 import com.kay87.team.vo.FishList;
+import com.kay87.team.vo.PriorityList;
 
 
 @Controller
@@ -51,12 +52,20 @@ public class BuyController {
 	}
 	//구매글쓰기
 	@RequestMapping(value = "/writeBuyBoard", method = RequestMethod.POST)
-	public String writeBuyBoard(BuyList buyList, HttpSession session){
+	public String writeBuyBoard(BuyList buyList, String priority1, String priority2, String priority3, HttpSession session){
+		
 		System.out.println("writeBuyBoard buyList => " + buyList);
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		buyList.setBuyerId((String)session.getAttribute("loginId"));
 		dao.insertBuyList(buyList);
-
+		
+		if(priority1!=null)
+		dao.insertPriority(new PriorityList(0, 0, priority1, 1));
+		if(priority2!=null)
+		dao.insertPriority2(new PriorityList(0, 0, priority2, 2));
+		if(priority3!=null)
+		dao.insertPriority3(new PriorityList(0, 0, priority3, 3));
+		
 		return "main";
 	}
 	

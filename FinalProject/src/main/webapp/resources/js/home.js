@@ -3,6 +3,7 @@ var refreshInterver = 600000; // 1000 = 1초
 var isSeasonInfoLoad = false;
 var isHomeListLoad=false;
 var isBestSellerLoad=false;
+var userMode;
 
 $(document).ready(function() {
 	
@@ -15,7 +16,7 @@ $(document).ready(function() {
 	
 	$('.popdown').popdown();
 	 
-	var userMode = $('#userMode').val();
+	userMode = $('#userMode').val();
 	console.log(userMode);
 	if(userMode!='buyer')
 	{
@@ -1127,24 +1128,29 @@ function today(){
 
 function helper()
 {
-	if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+	console.log("helper");
+	console.log(userMode);
+	if(userMode=='seller')
 	{
-		$('.bigSize').hover(function(){
-			var title = $(this).attr('title');
-			console.log(title);
-			if(title!=" " && title!="" && title!=null)
-			{
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			}
-		},
-		function() {
-			$(this).attr('title',$(this).data('tipText'));
-			$('.tooltip').remove();
-		}).mousemove(function(e) {
-			var mousex = e.pageX + 20;
-			var mousey = e.pageY + 10;
-			$('.tooltip').css({top : mousey,left : mousex});
-		});
+		if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+		{
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				console.log(title);
+				if(title!=" " && title!="" && title!=null)
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		}
 	}
 } 
