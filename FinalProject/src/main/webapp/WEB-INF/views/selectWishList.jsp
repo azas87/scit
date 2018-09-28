@@ -54,14 +54,14 @@ $(function() {
 function getFishList(){ 
 	
 	 var radioVal = $('input[name="radio"]:checked').val();
-	 alert(radioVal);
+	 console.log(radioVal);
 	$.ajax({
 		url:"getFishList",
 		type:"get",
 		data:{"fishCategoryNum":radioVal},
 	
 		success:function(resp){
-			alert(resp)
+			console.log(resp);
 			var temp="";
 			
 			for(i in resp){
@@ -85,7 +85,7 @@ function getFishList(){
 function setWishList() {
 	 var fishName = $('input[name="radio1"]:checked').val();
 	if(fishName==null){
-		alert('값넣어줘');
+		console.log('값넣어줘');
 	}
 	else{
 		$.ajax({
@@ -132,19 +132,20 @@ function deleteWishList(fishName) {
 }
 </script>
 
-<body style="background:url(./resources/img/bg.png) repeat;">
+<body>
 
 
-<div class="message warning" style="width: 800px; height: 720px;  border: none;">
+<div class="message warning" style="width: 900px; height: 720px;  border: none;">
 <div class="inset" >
 	<div class="login-head" style="background: #d4dedf;">
-		<h1 style="color: black; margin: 0 auto; position:relative; left:290px; font-weight: 900" >よく販売する業種</h1>
+		<!-- <h1 style="color: black; margin: 0 auto; position:relative; left:290px; font-weight: 900" >よく販売する業種</h1> -->
+		よく販売する業種
 		
 	</div>
 	<div id="wishFishList"></div>
 	<form >
-		<div style="height: 600px; height:600px;">
-		<div style="width: 200px; float: left;">
+		<div style="height: 600px; height:480px;">
+		<div id="fishList" style="width: 200px; float: left;">
 		<!-- カテゴリーを選んでください。 -->
 			<c:forEach items="${categoryList}" var="category" varStatus="status" begin="0" end="4">
 				<div class="test">	
@@ -153,7 +154,7 @@ function deleteWishList(fishName) {
 				</div>
 			</c:forEach>
 		</div>
-		<div id="fishListDetail" style="float: right; width: 200px;  position: relative;left: -200px;" ></div>
+		<div id="fishListDetail"  ></div>
 	<!-- 魚種を選んで確認ボタンを押してください。 -->
 	</div>
 	<div style="padding-bottom: 20px;">
