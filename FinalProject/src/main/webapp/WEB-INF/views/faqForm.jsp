@@ -87,7 +87,7 @@ $(document).ready(function(){
 		<!-- <div class="" title="검색어">검색 : <input type="text" id="search_cells" title=""></div> -->
 		<div class="items">
 			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
-			<div class="item search_title" title="검색어">검색</div>
+			<div class="item search_title" title="검색어">検索</div>
 			<c:if test="${sessionScope.userMode ne 'seller' }">  
 			<div class="item title">FAQ</div>
 			</c:if>

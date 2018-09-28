@@ -45,15 +45,18 @@ $(function(){
 });
 	
 function updateForm() {
-	alert('이벤트');
+
 	var input = '<textarea class="updateContent" cols="100" rows="8">';
+	$('.testInsert').html('');
+
 	$(this).parent().children(".reviewContent").html(input);
-	$(this).parent().children(".updateRelpy").val("완료");
+	$(this).parent().children(".updateRelpy").val("確認");
 	$(".updateRelpy").off('click', updateForm);
 	$(".updateRelpy").on('click', update);
 }
 
 function update() {
+	
 	
 	var replyNum = $(this).parent().children(".reviewNum").val();
 	var updateContet = $(this).parent().children(".reviewContent").children(".updateContent").val();
@@ -74,7 +77,9 @@ function update() {
 	
 	});
 
-	
+		var textAreaInput = '<textarea id="reviewContent" cols="100" rows="8"></textarea>'
+			textAreaInput += '<input type="button" id="insertReply" value="返事をする"/>'
+		$('.testInsert').html(textAreaInput);
 }
 
 function remove() {
@@ -116,8 +121,8 @@ function output(resp) {
 		result += '<strong style="font-size: large;">'+resp[i].id+'</strong>&nbsp;&nbsp;&nbsp;&nbsp;'+resp[i].replyRegdate;
 		result += '</br><div class="reviewContent">'+resp[i].replyContent+'</div>';
 		result += '<input type="hidden" class="reviewNum" value="'+resp[i].replyNum+'">'
-		result += '<input type="button" value="수정" class="updateRelpy"/>';
-		result += '<input type="button" value="삭제" class="deleteRelpy"/></td>';
+		result += '<input type="button" value="変更" class="updateRelpy"/>';
+		result += '<input type="button" value="削除" class="deleteRelpy"/></td>';
 
 	}
 	
@@ -150,11 +155,11 @@ function output(resp) {
 <table class="tab" border=0 w/f;flidth="100%"><tr>
 <td height=28 style='padding-left:20px' width="70%">
 
-	<strong>글쓴이</strong>&nbsp;&nbsp;&nbsp;&nbsp;${qna.id}&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>作成者</strong>&nbsp;&nbsp;&nbsp;&nbsp;${qna.id}&nbsp;&nbsp;&nbsp;&nbsp;
     </td><td style='padding-left:20px'>
-	<strong>날짜</strong>&nbsp;&nbsp; ${qna.writeBoardDate} &nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>日付</strong>&nbsp;&nbsp; ${qna.writeBoardDate} &nbsp;&nbsp;&nbsp;&nbsp;
     </td><td style='padding-left:40px'>
-	<strong>조회수</strong>&nbsp;&nbsp;&nbsp;&nbsp; ${qna.hitcount}&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>閲覧数</strong>&nbsp;&nbsp;&nbsp;&nbsp; ${qna.hitcount}&nbsp;&nbsp;&nbsp;&nbsp;
     
     </td>
 </tr></table>
@@ -172,10 +177,10 @@ function output(resp) {
 
 <div class="div">
 <p class="p">
-<input type="button" value="목록으로" onclick="boardList()"/>
+<input type="button" value="戻る" onclick="boardList()"/>
 <c:if test="${sessionScope.loginId eq qna.id }">
-<input type="button" value="수정" onclick="updateQna(${qna.qnaNum})"/>
-<input type="button" value="삭제" onclick="deleteBoard(${qna.qnaNum})"/>
+<input type="button" value="変更" onclick="updateQna(${qna.qnaNum})"/>
+<input type="button" value="削除" onclick="deleteBoard(${qna.qnaNum})"/>
 </c:if>
 </p>
 </div>
@@ -186,16 +191,20 @@ function output(resp) {
 <tr> 
 
 <tr height="20"> </tr>
+
 <c:if test="${sessionScope.userMode=='manager'}">
+
     <td id="btn" >
     <!-- <strong>댓글</strong>&nbsp;&nbsp;&nbsp;&nbsp; -->
     <input type="hidden" id="qnaNum" value="${qna.qnaNum}">
+	<div class ="testInsert">
     <textarea id="reviewContent" cols="100" rows="8"></textarea>
-	<input type="button" id="insertReply" value="댓글등록"/>
-	
+	<input type="button" id="insertReply" value="返事をする"/>
+	</div>
 </td>
 </c:if>
-<br><br>
+
+
 </tr>
 <tr height="20"> </tr>
 
@@ -210,8 +219,8 @@ function output(resp) {
 		</br><div class="reviewContent">${reply.replyContent}</div>
 		<input type="hidden" class="reviewNum" value="${reply.replyNum}">
 		<c:if test="${sessionScope.userMode=='manager'}">
-		<input type="button" value="수정" class="updateRelpy"/>
-		<input type="button" value="삭제" class="deleteRelpy"/></c:if></td>
+		<input type="button" value="変更" class="updateRelpy"/>
+		<input type="button" value="削除" class="deleteRelpy"/></c:if></td>
 		
 	</tr>
     </c:forEach>

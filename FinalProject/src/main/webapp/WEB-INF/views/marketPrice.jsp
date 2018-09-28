@@ -91,7 +91,7 @@ $(document).ready(function(){
 		<!-- <div class="" title="검색어">검색 : <input type="text" id="search_cells" title=""></div> -->
 		<div class="items">
 			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
-			<div class="item search_title" title="검색어">검색</div>
+			<div class="item search_title" title="검색어">検索</div>
 			<div class="item title">市価</div>
 		</div>
 	</div>
@@ -99,12 +99,15 @@ $(document).ready(function(){
 		<table id="jqGridBoard"></table>
 		<div id="jqGridPager"></div>
 	</div>
+<<<<<<< HEAD
 	<c:if test="${sessionScope.userMode=='manager'}">
 		<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
 			<button onclick="writeFaqForm()">投稿</button>
 		</div>
 	</c:if>
 
+=======
+>>>>>>> refs/remotes/origin/mina
 
 </body>
 </html>
