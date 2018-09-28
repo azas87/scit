@@ -373,10 +373,10 @@
 				<br>
 			</div>
 			<div class="item calander">
-				<input type="text" id="datepicker1" name="startDay" placeholder="始まり" title="始まり" class="bigSize"  >
+				<input type="text" id="datepicker1" name="startDay" placeholder="開始日" title="開始日" class="bigSize"  >
 			</div>
 			<div class="item calander">	
-				<input type="text" id="datepicker2" name="endDay" placeholder="始まり" title="始まり" class="bigSize" >
+				<input type="text" id="datepicker2" name="endDay" placeholder="終了日" title="終了日" class="bigSize" >
 			</div>
 			<div class="item submit">	
 				<button>検索</button>
@@ -387,7 +387,7 @@
 			<div class="item "><a href="buyListHistory?period=1week">1週間</a></div>
 			<div class="item "><a href="buyListHistory?period=1month">1ヶ月</a></div>
 			<div class="item "><a href="buyListHistory?period=3month">3ヶ月</a></div>
-			<div class="item search_title" title="검색어">검색</div>
+			<div class="item search_title" title="검색어">検索</div>
 			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
 		</div>
 	</div>

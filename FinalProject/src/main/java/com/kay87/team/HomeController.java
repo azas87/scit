@@ -21,11 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.BestSeller;
 import com.kay87.team.vo.BuyList;
+import com.kay87.team.vo.PriorityList;
 import com.kay87.team.vo.SaleList;
+import com.kay87.team.vo.SellerInfo;
 import com.kay87.team.vo.WishAvgList;
 
 
@@ -69,9 +72,10 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public String home() {				
 		System.out.println("qq");
-		BuyMapper mapper = sql.getMapper(BuyMapper.class);
 		
-		
+		int buyNum = 1;
+		String seller = selectSeller(buyNum);
+		System.out.println(seller);
 		return "home";
 	}	
 	
@@ -334,6 +338,38 @@ public class HomeController {
 			System.out.println(jsonPlace);		
 			
 			return jsonPlace;
+		}
+		
+		public String selectSeller(int buyNum) {
+			
+			BuyMapper mapper = sql.getMapper(BuyMapper.class);
+			List<PriorityList> list=mapper.getPriorityList(buyNum);
+			System.out.println("선호"+list);
+			List<SaleList> sellerList = mapper.getSellerId(buyNum);
+			System.out.println("판매자"+sellerList);
+			
+			//우선순위 판매자를 등록한경우
+			String successSeller="";
+			for(PriorityList p :list) {
+				for(int i=1;i<=3;i++) {
+				if(p.getOrders()==i) {
+					for(SaleList s:sellerList){
+						if(s.getSellerId().equals(p.getPriorityId())) {
+							successSeller = p.getPriorityId();
+							/*return successSeller;*/
+						}
+					}
+				}
+					
+			}
+			}
+			
+			//별점순서대로 판매자 결정
+			List<SellerInfo> starList=mapper.getSellerStar(buyNum);
+			System.out.println("별점리스트"+starList);
+			
+			
+			return null;
 		}
 	
 }

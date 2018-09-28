@@ -56,6 +56,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</insert>
 	
+	<insert id="insertPriority2" parameterType="PriorityList">
+
+	INSERT INTO priorityList VALUES(priorityNum.nextval, buyNum.nextval-2, #{priorityId},#{orders})
+	
+	</insert>
+	
+	<insert id="insertPriority3" parameterType="PriorityList">
+
+	INSERT INTO priorityList VALUES(priorityNum.nextval, buyNum.nextval-3, #{priorityId},#{orders})
+	
+	</insert>
+
 	<!-- 사용자의 판매이력 가져오기(중복된 판매자는 제외) 
 	판매자 우선순위를 위해-->
 	<select id="getHistorySellerId" parameterType="string" resultType="BuyList">
@@ -590,6 +602,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
 		
 	</select>
+	
+	<select id="getPriorityList" parameterType="int" resultType="PriorityList">
 
+		select * from priorityList where buyNum = #{buyNum}
+	
+	</select>
+
+	<select id="getSellerId" parameterType="int" resultType="SaleList">
+	
+		select * from salelist where buyNum = #{buyNum}
+	
+	</select>
+	
+	<select id="getSellerStar" parameterType="int"  resultType="SellerInfo">
+		
+		SELECT 
+			round(avg(star),0) as star, r.sellerId as id
+		FROM 
+			review r, salelist s
+		WHERE 
+			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
+		GROUP BY 
+			r.sellerId
+			
+	</select>
 	
 </mapper>

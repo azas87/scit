@@ -58,10 +58,13 @@ public class BuyController {
 		BuyMapper dao=sql.getMapper(BuyMapper.class);
 		buyList.setBuyerId((String)session.getAttribute("loginId"));
 		dao.insertBuyList(buyList);
-	
+		
+		if(priority1!=null)
 		dao.insertPriority(new PriorityList(0, 0, priority1, 1));
-		dao.insertPriority(new PriorityList(0, 0, priority2, 2));
-		dao.insertPriority(new PriorityList(0, 0, priority3, 3));
+		if(priority2!=null)
+		dao.insertPriority2(new PriorityList(0, 0, priority2, 2));
+		if(priority3!=null)
+		dao.insertPriority3(new PriorityList(0, 0, priority3, 3));
 		
 		return "main";
 	}

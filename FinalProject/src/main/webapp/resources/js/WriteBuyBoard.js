@@ -103,6 +103,7 @@ function check() {
 
 	var fishName = $('#fishName').val();
 	var location = $('#location').val();
+	alert(location);
 	var weight = $('#weight').val();
 	var price = $('#price').val();
 	var deadline = $('#deadline').val();

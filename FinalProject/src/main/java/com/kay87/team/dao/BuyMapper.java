@@ -8,6 +8,7 @@ import com.kay87.team.vo.BuyList;
 import com.kay87.team.vo.FishList;
 import com.kay87.team.vo.PriorityList;
 import com.kay87.team.vo.SaleList;
+import com.kay87.team.vo.SellerInfo;
 import com.kay87.team.vo.AvgList;
 
 public interface BuyMapper {
@@ -82,9 +83,17 @@ public interface BuyMapper {
 
 	public List<BuyList> sumPricebyFishNameForSeller(Map<String, Object> map);
 
-	public void insertPriorityList(PriorityList priority);
-
 	public void insertPriority(PriorityList priorityList);
+
+	public void insertPriority2(PriorityList priorityList);
+
+	public void insertPriority3(PriorityList priorityList);
+
+	public List<PriorityList> getPriorityList(int buyNum);
+
+	public List<SaleList> getSellerId(int buyNum);
+
+	public List<SellerInfo> getSellerStar(int buyNum);
 
 	
 
