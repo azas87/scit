@@ -28,40 +28,38 @@ function getQnaTable() {
 			{
 				label : '番号',
 				name : 'qnaNum',
-				height : 200,
+				width : 70,
 				align:'center'
 			}, {
 				label : '件名',
 				name : 'title',
-				width : 80,
-				height : 200,
+				width : 450,
 				align:'center'
 			}, {
 				label : '作成者',
 				name : 'id',
-				height : 200,
+				width : 150,
 				align:'center'
 			}, {
 				label : '登録日付',
 				name : 'writeBoardDate',
-				height : 200,
 				align:'center'
 			}, 
 			 {
 				label : '閲覧数',
 				name : 'hitcount',
-				height : 200,
+				width : 70,
 				align:'center'
 			}, 
 			 {
 				label : '状態',
 				name : 'content',
-				height : 200,
+				width : 100,
 				align:'center'
 			},
 		],
 		viewrecords : true,
-		width : 900,
+		width : 1200,
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],

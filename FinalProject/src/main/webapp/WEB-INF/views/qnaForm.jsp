@@ -97,7 +97,7 @@ $(document).ready(function(){
 	});
 	
 	$('#jqGridPager_left').css('display','none');
-	$('#jqGridPager_center').css('width','570px');
+	$('#jqGridPager_center').css('width','810px');
 	$('#jqGridPager_right').css('padding-right','26px');
 	
 	
@@ -122,7 +122,7 @@ $(document).ready(function(){
 			</c:if>		
 		</div>
 	</div>
-	<div style="width: 900px; margin: 0 auto;">
+	<div style="width: 1200px; margin: 0 auto;">
 	<table id="jqGridBoard"></table>
 	<div id="jqGridPager"></div>
 	</div>
