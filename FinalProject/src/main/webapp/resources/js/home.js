@@ -3,6 +3,7 @@ var refreshInterver = 600000; // 1000 = 1초
 var isSeasonInfoLoad = false;
 var isHomeListLoad=false;
 var isBestSellerLoad=false;
+var userMode;
 
 $(document).ready(function() {
 	
@@ -15,25 +16,43 @@ $(document).ready(function() {
 	
 	$('.popdown').popdown();
 	 
-	var userMode = $('#userMode').val();
+	userMode = $('#userMode').val();
 	console.log(userMode);
-	if(userMode!='buyer')
+	if(userMode!='buyer' && userMode !='manager')
 	{
 	    
 	  $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
+		  
+		  
+
+		  if( ($(this).attr('class') == "item search_title") || ($(this).attr('class') == "item search_text"))
+		  {
+			  $('.search_title').css('flex-grow',1);
+		      $('.search_title').css('font-size',"3em");
+		      $('.search_title').css('font-weight','bold');
+		  }
+		  else
 		  {
 			  $(this).css('flex-grow',1);
 		      $(this).css('font-size',"3em");
 		      $(this).css('font-weight','bold');
-/*		      $(this).css('background-color',"powderblue");
-*/	/*	      $('input').css('line-height', '60px');
+	/*		      $(this).css('background-color',"powderblue");
+	*/	/*	      $('input').css('line-height', '60px');
 		      $('input').css('width', '200px');*/
 		  }
+		  
 	     
 	    });
 	    
 	  $(".item").mouseleave(function(){
+		  
+		  if( ($(this).attr('class') == "item search_text"))
+		  {
+			  $('.search_title').css('flex-grow',1);
+		      $('.search_title').css('font-size',"2em");
+		      $('.search_title').css('font-weight','normal');
+		  }
+		  
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"2em");
 	      $(this).css('font-weight','normal');
@@ -1127,24 +1146,36 @@ function today(){
 
 function helper()
 {
-	if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+	console.log("helper");
+	console.log(userMode);
+	if(userMode!='buyer' && userMode !='manager')
+	{
+		if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+		{
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				console.log(title);
+				if(title!=" " && title!="" && title!=null)
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		}
+	}
+	else
 	{
 		$('.bigSize').hover(function(){
 			var title = $(this).attr('title');
-			console.log(title);
-			if(title!=" " && title!="" && title!=null)
-			{
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			}
-		},
-		function() {
-			$(this).attr('title',$(this).data('tipText'));
-			$('.tooltip').remove();
-		}).mousemove(function(e) {
-			var mousex = e.pageX + 20;
-			var mousey = e.pageY + 10;
-			$('.tooltip').css({top : mousey,left : mousex});
+			$(this).attr('title', "");
 		});
 	}
 } 

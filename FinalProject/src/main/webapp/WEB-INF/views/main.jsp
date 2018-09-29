@@ -130,6 +130,14 @@ $(document).ready(function(){
 		$('.item').css('border-right','1px solid white');
 		$('.item').css('border-radius','0px');
 		
+		if(($(this).attr('class') == "item search_text"))
+		{
+			console.log("title");
+			$('.search_title').css('background','white');
+			$('.search_title').css('color','black');
+			$('.search_title').css('border-right','2px solid white');
+		}
+		
 		$(this).css('background','white');
 		$(this).css('color','black');
 		$(this).css('border-right','2px solid white');
@@ -151,6 +159,26 @@ $(document).ready(function(){
 		
 		
 	});
+	
+	/* $('#jqGridPager_left').css('display','none');
+	$('#jqGridPager_center').css('width','600px');
+	$('#jqGridPager_right').css('padding-right','26px');
+	
+	
+	$('#input_jqGridPager').css('width','600px');
+	$('#input_jqGrid2Pager').css('width','600px');
+	
+	$('.ui-pg-input').css('width','60px');
+	
+	$('#input_jqGridPager').css('font-size','1.5em');
+	$('#input_jqGrid2Pager').css('font-size','1.5em');
+	
+	$('#jqGrid2Pager_left').css('display','none');
+	$('#jqGrid2Pager_center').css('width','530px');
+	$('#jqGrid2Pager_center').css('padding-left','50px');
+	$('#jqGrid2Pager_right').css('padding-right','26px');
+	
+	$('#jqGrid2Pager').css('height','50px'); */
 		
 });
    
@@ -292,7 +320,13 @@ var chartDrowFun = {
 				<div class="item " id="myList_ing_seller" onclick="myList_ing_seller()">参加リスト</div>
 			</c:when>
 		</c:choose>
-		<div class="item search" title="검색어">検索 : <input type="text" id="search_cells" title=""></div>
+		<!-- <div class="item search" title="검색어">検索 : <input type="text" id="search_cells" title=""></div> -->
+		
+			<div class="item search_title" title="검색어">検索</div>
+			<div class="item search_text">
+				<input type="text" id="search_cells" title="">
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -304,6 +338,7 @@ var chartDrowFun = {
 </div>
 
 <input type="hidden" id="sellerInfo" name="sellerInfo">
+<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 
 </body>
 </html>

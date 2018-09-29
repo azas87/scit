@@ -140,6 +140,11 @@
 	max-width: 305px;
 }
 
+#tab .date
+{
+	cursor:pointer;
+}
+
 /* #tab
   {
   	box-sizing:true;
@@ -235,26 +240,32 @@
 		    dateFormat: 'yy-mm-dd'
 		  });
 		
-		$(".item").mouseenter(function(){
-			var itemClass= $(this).attr('class');
-			  if( (itemClass != "item search_title" ) && (itemClass != "item search_text" ) && (itemClass != "item calander" ) )
-			  {
-				  $(this).css('flex-grow',1);
-			      $(this).css('font-size',"3em");
-			      $(this).css('font-weight','bold');
-	/*		      $(this).css('background-color',"powderblue");
-	*/	/*	      $('input').css('line-height', '60px');
-			      $('input').css('width', '200px');*/
-			  }
-		     
-		    });
-		    
-		  $(".item").mouseleave(function(){
-		      $(this).css('flex-grow',1);
-		      $(this).css('font-size',"2em");
-		      $(this).css('font-weight','normal');
-		      /*$(this).css('background-color',"white");*/
-		    });
+		userMode = $('#userMode').val();
+		console.log(userMode);
+		if(userMode!='buyer' && userMode !='manager')
+		{
+		
+			$(".item").mouseenter(function(){
+				var itemClass= $(this).attr('class');
+				  if( (itemClass != "item search_title" ) && (itemClass != "item search_text" ) && (itemClass != "item calander" ) )
+				  {
+					  $(this).css('flex-grow',1);
+				      $(this).css('font-size',"3em");
+				      $(this).css('font-weight','bold');
+		/*		      $(this).css('background-color',"powderblue");
+		*/	/*	      $('input').css('line-height', '60px');
+				      $('input').css('width', '200px');*/
+				  }
+			     
+			    });
+			    
+			  $(".item").mouseleave(function(){
+			      $(this).css('flex-grow',1);
+			      $(this).css('font-size',"2em");
+			      $(this).css('font-weight','normal');
+			      /*$(this).css('background-color',"white");*/
+			    });
+		}
 		  
 		  
 		  $('.item').click(function(){
@@ -373,10 +384,10 @@
 				<br>
 			</div>
 			<div class="item calander">
-				<input type="text" id="datepicker1" name="startDay" placeholder="開始日" title="開始日" class="bigSize"  >
+				<input type="text" id="datepicker1" name="startDay" placeholder="開始日" title="開始日" class="date bigSize"  >
 			</div>
 			<div class="item calander">	
-				<input type="text" id="datepicker2" name="endDay" placeholder="終了日" title="終了日" class="bigSize" >
+				<input type="text" id="datepicker2" name="endDay" placeholder="終了日" title="終了日" class="date bigSize" >
 			</div>
 			<div class="item submit">	
 				<button>検索</button>

@@ -5,8 +5,8 @@
 <head>
 <title>Home</title>
 <link rel="stylesheet" href="./resources/css/button.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 <link rel="stylesheet" type="text/css" media="screen"
 	href="./resources/css/jquery-ui.css" />
 <!-- The link to the CSS that the grid needs -->
@@ -15,12 +15,13 @@
 
 <script type="text/javascript"
 	src="./resources/js/i18n/grid.locale-ja.js"></script>
-<script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
+
 
 <script type="text/javascript" src="./resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="./resources/js/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
+<script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
 <script type="text/javascript" src="./resources/js/marketPrice.js"></script>
 
 <style>
@@ -70,6 +71,20 @@
 	border-right:1px solid white;	
 }
 
+.tooltip
+{
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:3.5em;
+	text-align: center;
+	z-index: 1000;
+}
+
 </style>
 </head>
 <script>
@@ -91,7 +106,7 @@ $(document).ready(function(){
 		<!-- <div class="" title="검색어">검색 : <input type="text" id="search_cells" title=""></div> -->
 		<div class="items">
 			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
-			<div class="item search_title" title="검색어">검색</div>
+			<div class="item search_title" title="검색어">検索</div>
 			<div class="item title">市価</div>
 		</div>
 	</div>
@@ -99,7 +114,6 @@ $(document).ready(function(){
 		<table id="jqGridBoard"></table>
 		<div id="jqGridPager"></div>
 	</div>
-
 
 </body>
 </html>
