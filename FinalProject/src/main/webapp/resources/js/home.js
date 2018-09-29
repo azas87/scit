@@ -213,7 +213,7 @@ function homeList() {
 		scrollOffset : 0,
 		//altRows:true,
 		width : 1100,
-		height : 505,
+		height : 510,
 		rowNum : 10,
 		rowList:[10,20,30],
 		pager : "#jqGridPager",

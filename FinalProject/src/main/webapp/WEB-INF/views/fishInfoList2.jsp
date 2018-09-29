@@ -41,6 +41,11 @@ function deleteFishInfo() {
 	alert(fishName);
 	location.href="updateFishInfoForm?fishName="+fishName;
 }
+function newPage()
+{
+	$('#f_main', parent.document).attr('height', '800px');
+	$('#f_main', parent.document).attr('src', 'writeFishInfoForm?');
+}
 
 
 </script>
@@ -74,7 +79,7 @@ function deleteFishInfo() {
   <body>
 <div class="contain">
 <c:if test="${sessionScope.userMode=='manager'}">
-	<a href="writeFishInfoForm?" class="myButton">新しい魚種の登録</a>
+	<div onclick="newPage()" class="myButton">新しい魚種の登録</div>
 </c:if>
 </div>
     <!-- Page Content -->

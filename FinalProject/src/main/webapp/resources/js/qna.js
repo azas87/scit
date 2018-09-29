@@ -15,7 +15,8 @@ $(document).ready(function() {
 });
 
 function writeBoardForm() {
-	location.href="writeBoardForm?";
+	$('#f_main', parent.document).attr('height', '820px');
+	$('#f_main', parent.document).attr('src', 'writeBoardForm?');
 }
 function getQnaTable() {
 	

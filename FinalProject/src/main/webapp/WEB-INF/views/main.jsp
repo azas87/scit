@@ -328,7 +328,7 @@ var chartDrowFun = {
 		</c:choose>
 		<!-- <div class="item search" title="검색어">検索 : <input type="text" id="search_cells" title=""></div> -->
 		
-			<div class="item search_title" title="검색어">検索</div>
+			<div class="item search_title" >検索</div>
 			<div class="item search_text">
 				<input type="text" id="search_cells" title="">
 			</div>

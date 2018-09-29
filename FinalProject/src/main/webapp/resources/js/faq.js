@@ -15,13 +15,14 @@ $(document).ready(function() {
 });
 
 function writeFaqForm() {
-	location.href="writeFaqForm?";
+	// 부모가 가진 iframe 제어
+	$('#f_main', parent.document).attr('height', '820px');
+	$('#f_main', parent.document).attr('src', 'writeFaqForm?');
 }
 
 
 function getFaqTable() {
-	
-	
+		
 	$("#jqGridBoard").jqGrid({
 		url : "getFaqList",
 		mtype : "GET",
@@ -31,18 +32,18 @@ function getFaqTable() {
 			{
 				label : '番号',
 				name : 'FAQNum',
-				height : 200,
+				height : 50,
 				align:'center'
 			}, {
 				label : '件名',
 				name : 'title',
-				width : 80,
+				width : 300,
 				height : 200,
 				align:'center'
 			}, {
 				label : '作成者',
 				name : 'id',
-				height : 200,
+				height : 100,
 				align:'center'
 			}, {
 				label : '登録日付',
@@ -53,7 +54,7 @@ function getFaqTable() {
 			 {
 				label : '閲覧数',
 				name : 'hitcount',
-				height : 200,
+				height : 50,
 				align:'center'
 			}, 
 			

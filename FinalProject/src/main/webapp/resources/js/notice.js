@@ -15,7 +15,8 @@ $(document).ready(function() {
 });
 
 function writeNoticeForm() {
-	location.href='writeNoticeForm?';
+	$('#f_main', parent.document).attr('height', '820px');
+	$('#f_main', parent.document).attr('src', 'writeNoticeForm?');
 }
 
 
