@@ -105,10 +105,10 @@ $(document).ready(function(){
 		<div class="items">
 			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
 			<div class="item search_title" title="검색어">検索</div>
-			<c:if test="${sessionScope.userMode ne 'seller' }">  
+			<c:if test="${sessionScope.userMode eq 'buyer'||sessionScope.userMode eq 'manager'}">  
 			<div class="item title">Q&A</div>
 			</c:if>
-			<c:if test="${sessionScope.userMode eq 'seller' }">  
+			<c:if test="${sessionScope.userMode eq 'seller'||sessionScope.loginId == null }"> 
 			<div class="item title">お問い合わせ</div>
 			</c:if>		
 		</div>

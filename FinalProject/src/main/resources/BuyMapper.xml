@@ -233,7 +233,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BuyList
 		where			
 			saleStatus = 'onSale'
-		order by buyNum asc
+		order by deadline desc
 	</select>
 	
 	
@@ -257,7 +257,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where b.buynum=s.buynum 
 		and buyerId = #{userId}
 		and saleStatus = 'onSale'	
-		order by buyNum asc			
+		order by deadline desc		
 	</select>	
 	
 
@@ -277,7 +277,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			location 
 		from BuyList b, (select * from SaleList where  sellerid=#{userId}) s
 		where b.buynum = s.buyNum
-		order by saleStatus asc
+		order by deadline desc
+		<!-- order by saleStatus asc -->
 	</select>
 
 <!--구매자 내글 목록-->		
@@ -300,7 +301,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BuyList
 		where			
 			buyerId=#{userId}
-		order by buyNum asc
+		order by deadline desc
 	</select>
 	
 <!--판매자 나의 모든리스트-->		
@@ -550,7 +551,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,sysdate
 		)
 	</insert>
-	
+<!--판매자 선호리스트  -->	
 	<select id="sellerWishList" resultType="BuyList" parameterType="string">
 		SELECT 
 			buyNum,
@@ -572,7 +573,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			w.id = #{userid} 
 			and w.wish=b.fishname
 			and b.salestatus='onSale'
-		order by b.buyNum asc
+		order by b.deadline desc
 	</select>
 	
 	<select id="selectOneBuylist" parameterType="int" resultType="BuyList">

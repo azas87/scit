@@ -886,4 +886,3 @@ html, body {
 
 </html>
 
->>>>>>> refs/remotes/origin/mina

@@ -114,6 +114,12 @@ $(document).ready(function(){
 		<table id="jqGridBoard"></table>
 		<div id="jqGridPager"></div>
 	</div>
+	<c:if test="${sessionScope.userMode=='manager'}">
+		<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
+			<button onclick="writeFaqForm()">投稿</button>
+		</div>
+	</c:if>
+	
 	<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 </body>
 </html>

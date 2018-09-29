@@ -314,9 +314,13 @@ function reset () {
 	       				<a class="nav-link" onclick="newPage('faqForm?')">よくある質問</a>
 	      			</li>
 	      			</c:if>
-	      			<!-- <li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('fishInfoList?')">魚図鑑</a>
-					</li> -->
+	      			<li class="nav-item item bigSize">
+	      			<c:if test="${sessionScope.userMode ne 'seller' }">
+		      			<li class="nav-item item bigSize">
+							<a class="nav-link" onclick="newPage('fishInfoList?')">魚図鑑</a>
+						</li>
+					</c:if>
+					
 			</c:when>			
 		</c:choose>		   
     </ul>
