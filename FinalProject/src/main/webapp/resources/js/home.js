@@ -929,7 +929,7 @@ function bestSeller() {
 				align:'center'
 			}, 
 		],
-		caption:"bestSeller",
+		caption:"今、売れている魚",
 		scrollOffset : 0,
 		hidegrid : false,
 		hidden:false,
@@ -1023,7 +1023,7 @@ function seasonInfo() {
 				align:'center'
 			}, 
 		],
-		caption:"seasonInfo",
+		caption:"旬の魚",
 		scrollOffset : 0,
 		hidegrid : false,
 		viewrecords : true,
