@@ -345,7 +345,7 @@ function reset () {
 <div id="page-wrapper">
 	<!-- frameborder="1" -->
 	<!-- <iframe name="f_main" id="f_main" src="main?"  width="100%" height="100%" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" allowtransparency="true" ></iframe> -->
-	<iframe name="f_main" id="f_main" src="main?"  frameborder="0" width="100%" marginwidth="0" marginheight="0" scrolling="no" style="border: 0px" onload="window.scrollTo(0,0)" height="100%"></iframe>
+	<iframe name="f_main" id="f_main" src="main?"  frameborder="0" width="100%" marginwidth="0" marginheight="0" scrolling="no" style="border: 0px" onload="window.scrollTo(0,0)" height="1600px"></iframe>
 </div>
 
 <div class="hover_bkgr_fricc">

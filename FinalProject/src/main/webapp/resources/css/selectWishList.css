@@ -47,9 +47,12 @@ body{
      margin-top:30px;
 }
 .login-head {
-	padding: 2em 0;
+	padding: 15px 0;
 	background: #6D4A70;
 	position:relative;
+	color:black;
+	font-size: 3em;
+	font-weight:600;
 }
 .login-head h1 {
 	color: #fff;
@@ -170,123 +173,6 @@ input[type="text"]:hover, input[type="password"]:hover{
 	transition: color 0.2s ease-in-out;
 	width: 30px;
 }
-/*-----start-responsive-design------*/
-@media (max-width:1440px){
-.message.warning {
-		margin: 11% auto 0;
-		width: 30%;
-	}
-	.footer {
-	left: 44%;
-	}
-}
-@media (max-width:1366px){
-	.message.warning{
-		margin: 7% auto 0;
-		width: 35%;
-	}
-	.footer {
-		left: 43%;
-		bottom: 9%;
-	}
-}
-@media (max-width:1280px){
-	.message.warning {
-		margin: auto 0;
-		width: 800px;
-		height: 670px;
-	
-	}
-	.footer {
-		left: 43%;
-	}
-}
-@media (max-width:1024px){
-	.message.warning{
-		margin: auto 0;
-		width: 47%;
-	}
-	.footer {
-		left: 41%;
-	}
-}
-@media (max-width:768px){
-	.message.warning{
-		margin: auto 0;
-		width: 65%;
-	}
-	.footer {
-		left: 38%;
-		bottom:87px;
-	}
-}
-@media (max-width:640px){
-	.message.warning{
-		margin: auto 0;
-		width: 67%;
-	}
-	.footer {
-		left: 35%;
-		bottom:87px;
-	}
-}
-@media (max-width:480px){
-	.message.warning  {
-		margin: auto 0;
-		width:90%;
-	}
-	.footer {
-		left: 33%;
-		bottom: 136px;
-	}
-}
-@media (max-width:320px){
-	.message.warning  {
-		margin: auto 0;
-		width:90%;
-	}
-	.login-head {
-	padding: 1.45em 0;
-	}
-	.login-head h1 {
-	font-size: 1.15em;
-	}
-	.icon {
-		margin: -33px 9px 9px 0px;
-	}
-	input[type="text"], input[type="password"] {
-		font-size: 16px;
-	}
-	.alert-close {
-	right: 12px;
-	top: 22px;
-	}
-	form {
-	padding: 1.5em 1.5em;
-	}
-	.submit {
-	padding-top: 0.4em;
-	}
-	input[type="submit"] {
-		float:none;
-	padding: 11px 0px;
-	width: 52%;
-	font-size: 15px;
-	}
-	.submit h4 {
-		margin-top: 15px;
-		margin-bottom: 20px;
-	}
-	.submit h4 a {
-	float: none;
-	font-size: 15px;
-	}
-	.footer {
-	left: 22%;
-	bottom: 59px;
-	}
-	
-}
 
 
 
@@ -298,9 +184,6 @@ body {
 	background-color: #eee;
 }
 
-form {
-	margin: 40px 0;
-}
 
 .test {
 	clear: both;
@@ -321,6 +204,8 @@ input.radio:empty {
 
 /* 라벨 넓이 높이 글자 마진 (text-indent) */
 /* style label */
+
+
 input.radio:empty ~ label {
 	position: relative;
 	float: left;
@@ -328,7 +213,6 @@ input.radio:empty ~ label {
 	line-height:4em;
 	text-indent: 3.25em;
 	text-align:center;
-	margin-top: 2em;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -376,10 +260,11 @@ input.radio:checked ~ label {
 input.radio:focus ~ label:before {
 	box-shadow: 0 0 0 3px #999;
 }
-#fishList
-{
-	margin-left:210px;
-}
+
+
+
+
+
 
 .category, .fishName
 {
@@ -406,7 +291,7 @@ input.radio:focus ~ label:before {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:28px;
+	font-size:3em;
 	font-weight:bold;
 	padding:4px 25px;
 	text-decoration:none;
@@ -425,4 +310,44 @@ input.radio:focus ~ label:before {
 .myButton:active {
 	position:relative;
 	top:1px;
+}
+
+
+input.radio:empty ~ label
+{
+	line-height:75px;
+	text-indent:2em;
+	font-size:3em;
+	margin-top:15px;
+}
+
+#fishList label
+{
+	width:270px;
+	height:70px;
+}
+
+#fishListDetail
+{
+	float: right; 
+	width: 200px;
+	position: relative;
+	left: -340px;
+}
+
+
+#fishListDetail label
+{
+	width:450px;
+	height:70px;
+}
+
+input.radio:empty ~ label:before
+{
+	width:2em;
+}
+
+#wishFishList
+{
+	margin:20px 0;
 }

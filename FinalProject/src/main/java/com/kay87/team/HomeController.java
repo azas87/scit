@@ -364,12 +364,26 @@ public class HomeController {
 			}
 			}
 			
-			//별점순서대로 판매자 결정
-			List<SellerInfo> starList=mapper.getSellerStar(buyNum);
+			//별점 순서대로  판매자  결정
+			List<SellerInfo> starList=mapper.getSellerStar(buyNum);/////별점리스트로 뽑아와야 하는데 안됨
+			//별점 최대값들의 리스트를 뽑는 쿼리 필요
 			System.out.println("별점리스트"+starList);
+			if(starList.size()==1) {
+				successSeller = starList.get(0).getId();
+				return successSeller;
+			}
 			
+			//판매수 숫자대로 판매자 결정
+			int max=0;
+			for(SellerInfo s: starList) {
+				int count =mapper.successCount(s.getId());
+				if(max<count) {
+					max = count;
+					successSeller=s.getId();
+				}
+			}
 			
-			return null;
+			return successSeller;
 		}
 	
 }

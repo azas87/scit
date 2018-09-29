@@ -88,3 +88,23 @@ function check() {
 function goHome() {
 	location.href="/team/?";
 }
+
+function sendMail()
+{
+		var address =$('#email').val();
+		$.ajax({
+			url:"sendMail",
+			type:"post",
+			data:{"address":address},
+			
+			success:function(data){
+				console.log("send Mail success");
+				$('#mailNumber').val(data);
+				console.log($('#mailNumber').val());
+			},
+			
+			error:function(){
+				alert("통신실패")
+			}
+		});
+}
