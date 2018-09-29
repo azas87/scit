@@ -11,7 +11,6 @@ $(document).ready(function() {
 	       del: false,
 	       refresh: true
 	   });
-	
 });
 
 function writeBoardForm() {
@@ -66,7 +65,7 @@ function getQnaTable() {
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-		/*pager : "#jqGridPager",*/
+		pager : "#jqGridPager",
 		loadonce: true,
 		grouping: false,
 		groupingView: {
@@ -86,6 +85,7 @@ function getQnaTable() {
         	var cm = $(this).jqGrid('getGridParam','colModel');    
         	if(cm[index].name == "title")
         	{
+        		console.log(rowid);
         		var obj = $("#jqGridBoard").getRowData(rowid);
            		alert(JSON.stringify(obj));
         		location.href="boardDetail?qnaNum="+obj.qnaNum;

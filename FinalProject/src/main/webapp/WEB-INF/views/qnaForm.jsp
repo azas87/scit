@@ -11,13 +11,14 @@ language="java" pageEncoding="UTF-8"%>
 <!-- The link to the CSS that the grid needs -->
 <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
 
-<script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
+
 
 
  <script type="text/javascript" src="./resources/js/jquery.min.js"></script> 
  <script type="text/javascript" src="./resources/js/jquery-ui.min.js"></script>
  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
 <script type="text/javascript" src="./resources/js/qna.js"></script>
 
 <style>
@@ -94,6 +95,14 @@ $(document).ready(function(){
 			$("#jqGridBoard").jqGrid('filterInput', self.value);
 		},0);
 	});
+	
+	$('#jqGridPager_left').css('display','none');
+	$('#jqGridPager_center').css('width','570px');
+	$('#jqGridPager_right').css('padding-right','26px');
+	
+	
+	$('#input_jqGridPager').css('width','310px');
+	$('#input_jqGridPager').css('font-size','1.5em');	
 });
 </script>
 </head>

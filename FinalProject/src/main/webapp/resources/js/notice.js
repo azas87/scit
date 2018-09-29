@@ -57,7 +57,7 @@ function getQnaTable() {
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-		/*pager : "#jqGridPager",*/
+		pager : "#jqGridPager",
 		loadonce: true,
 		grouping: false,
 		groupingView: {

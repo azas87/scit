@@ -160,25 +160,16 @@ $(document).ready(function(){
 		
 	});
 	
-	/* $('#jqGridPager_left').css('display','none');
+	$('#jqGridPager_left').css('display','none');
 	$('#jqGridPager_center').css('width','600px');
+	$('#jqGridPager_center').css('padding-left','100px');
 	$('#jqGridPager_right').css('padding-right','26px');
 	
 	
-	$('#input_jqGridPager').css('width','600px');
-	$('#input_jqGrid2Pager').css('width','600px');
-	
-	$('.ui-pg-input').css('width','60px');
+	$('#input_jqGridPager').css('width','340px');
 	
 	$('#input_jqGridPager').css('font-size','1.5em');
-	$('#input_jqGrid2Pager').css('font-size','1.5em');
-	
-	$('#jqGrid2Pager_left').css('display','none');
-	$('#jqGrid2Pager_center').css('width','530px');
-	$('#jqGrid2Pager_center').css('padding-left','50px');
-	$('#jqGrid2Pager_right').css('padding-right','26px');
-	
-	$('#jqGrid2Pager').css('height','50px'); */
+	$('.ui-paging-pager').css('width','650px');
 		
 });
    

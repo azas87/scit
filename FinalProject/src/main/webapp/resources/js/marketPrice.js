@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	getQnaTable();
+	getMarketPrice();
 	
 	$('#jqGridBoard').jqGrid('navGrid',"#jqGridPager", {                
 	       search: false, // show search button on the toolbar
@@ -19,7 +19,7 @@ function writeFaqForm() {
 }
 
 
-function getQnaTable() {
+function getMarketPrice() {
 	
 	$("#jqGridBoard").jqGrid({
 		url : "getMarketPrice",
@@ -47,16 +47,11 @@ function getQnaTable() {
 		],
 		viewrecords : true,
 		width : 900,
-		height : 400,
+		height : 510,
 		rowNum : 10,
 		rowList:[10,20,30],
-		/*pager : "#jqGridPager",*/
+		pager : "#jqGridPager",
 		loadonce: true,
-		grouping: false,
-		groupingView: {
-		    groupField: ['FAQNum'],
-		    groupColumnShow : [false],
-		},
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");

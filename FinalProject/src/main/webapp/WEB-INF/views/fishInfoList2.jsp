@@ -43,7 +43,7 @@ function deleteFishInfo() {
 }
 function newPage()
 {
-	$('#f_main', parent.document).attr('height', '800px');
+	$('#f_main', parent.document).attr('height', '700px');
 	$('#f_main', parent.document).attr('src', 'writeFishInfoForm?');
 }
 

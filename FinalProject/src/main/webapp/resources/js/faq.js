@@ -41,11 +41,6 @@ function getFaqTable() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '作成者',
-				name : 'id',
-				height : 100,
-				align:'center'
-			}, {
 				label : '登録日付',
 				name : 'writeBoardDate',
 				height : 200,
@@ -64,13 +59,8 @@ function getFaqTable() {
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-		/*pager : "#jqGridPager",*/
+		pager : "#jqGridPager",
 		loadonce: true,
-		grouping: false,
-		groupingView: {
-		    groupField: ['FAQNum'],
-		    groupColumnShow : [false],
-		},
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
@@ -80,10 +70,15 @@ function getFaqTable() {
 		},
 		onCellSelect: function(rowid, index, contents, event) 
     	{    
-    	
+			console.log(rowid);
         	var cm = $(this).jqGrid('getGridParam','colModel');    
+        	
         	if(cm[index].name == "title")
         	{
+        		console.log(rowid);
+        		console.log(contents);
+        		
+        		
         		var obj = $("#jqGridBoard").getRowData(rowid);
            		alert(JSON.stringify(obj));
         		location.href="FAQDetail?FAQNum="+obj.FAQNum;
@@ -104,7 +99,7 @@ function helper()
 	{
 			$('.bigSize').hover(function(){
 				var title = $(this).attr('title');
-				console.log(title);
+				//console.log(title);
 				if(title!=" " && title!="" && title!=null)
 				{
 					$(this).data('tipText', title).removeAttr('title');

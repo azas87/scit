@@ -115,7 +115,7 @@ function newPage(action)
  	case "noticeForm?":
  	case "qnaForm?":
  	case "faqForm?":
- 		height='700px';
+ 		height='800px';
  		break;
  	case "fishInfoList?":
  		height='3000px';
@@ -230,6 +230,10 @@ function homeList() {
 		},
 		gridComplete: function(){
 		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+			console.log(rowid);
+    	}
 		
 	});
 }
@@ -335,7 +339,9 @@ function sellerWishList() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "buyerSelect")
-    		{	console.log(jQuery("#jqGrid").getRowData(rowid));
+    		{	
+    			console.log(rowid);
+    			console.log(jQuery("#jqGrid").getRowData(rowid));
 				var obj = $("#jqGrid").getRowData(rowid);
     			
 				if(obj.buyerSelect != ""){

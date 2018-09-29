@@ -13,8 +13,6 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	href="./resources/css/ui.jqgrid.css" />
 
-<script type="text/javascript"
-	src="./resources/js/i18n/grid.locale-ja.js"></script>
 
 
 <script type="text/javascript" src="./resources/js/jquery.min.js"></script>
@@ -22,6 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
 <script type="text/javascript" src="./resources/js/marketPrice.js"></script>
 
 <style>
@@ -98,6 +97,14 @@ $(document).ready(function(){
 			$("#jqGridBoard").jqGrid('filterInput', self.value);
 		},0);
 	});
+	
+	$('#jqGridPager_left').css('display','none');
+	$('#jqGridPager_center').css('width','570px');
+	$('#jqGridPager_right').css('padding-right','26px');
+	
+	
+	$('#input_jqGridPager').css('width','310px');
+	$('#input_jqGridPager').css('font-size','1.5em');	
 });
 </script>
 
@@ -106,11 +113,7 @@ $(document).ready(function(){
 		<!-- <div class="" title="검색어">검색 : <input type="text" id="search_cells" title=""></div> -->
 		<div class="items">
 			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
-			<c:if test="${sessionScope.userMode=='manager'}">
-				<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
-					<button onclick="writeFaqForm()">投稿</button>
-				</div>
-			</c:if>
+			<div class="item search_title">検索</div>
 			<div class="item title">市価</div>
 		</div>
 	</div>
@@ -118,6 +121,12 @@ $(document).ready(function(){
 		<table id="jqGridBoard"></table>
 		<div id="jqGridPager"></div>
 	</div>
+	
+	<c:if test="${sessionScope.userMode=='manager'}">
+		<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
+			<button onclick="writeFaqForm()">投稿</button>
+		</div>
+	</c:if>
 	
 	<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 

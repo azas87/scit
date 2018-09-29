@@ -497,6 +497,7 @@ td.menu_text {
     font-size: 1.5em !important;
     margin: 0 !important;
     padding: 0px !important;
+    width:70px;
 }
 
 .ui-jqgrid .ui-pg-selbox, .ui-jqgrid .ui-jqgrid-toppager .ui-pg-selbox {
