@@ -226,8 +226,13 @@ var chartDrowFun = {
                             isStacked   : 'percent',
                             focusTarget : 'category',
                             //chartArea:{left:300,top:50,width:"1000px",height:"500px"},
+                            chartArea:{
+				        	  	left:200,
+				        	    right:70, // !!! works !!!
+				        	    top:100,
+				        	  },
                             height          : 600,
-                            width              : '100%',
+                            width              : 1400,
                             legend          : { position: "top", textStyle: {fontSize: 30}},
                             pointSize        : 15,
                             tooltip          : {textStyle : {fontSize:50}, showColorCode : true,trigger: 'both'},
@@ -240,7 +245,8 @@ var chartDrowFun = {
 
               animation        : {startup: true,duration: 100,easing: 'in' },
              
-            }
+            },
+            
           });
 
           var control = new google.visualization.ControlWrapper({

@@ -20,7 +20,7 @@ $(document).ready(function() {
 	console.log(userMode);
 	if(userMode!='buyer' && userMode !='manager')
 	{
-	    
+		
 	  $(".item").mouseenter(function(){
 		  
 		  
@@ -59,9 +59,11 @@ $(document).ready(function() {
 	      /*$(this).css('background-color',"white");*/
 	    });
 	  
-	  
-
 	}   
+	else
+	{
+		$('.item:nth-child(1)').css('font-size','2em');
+	}
 	  
 });
 

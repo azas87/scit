@@ -95,6 +95,8 @@ public interface BuyMapper {
 
 	public List<SellerInfo> getSellerStar(int buyNum);
 
+	public int successCount(String string);
+
 	
 
 	
