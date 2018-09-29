@@ -170,6 +170,10 @@ $(document).ready(function(){
 	
 	$('#input_jqGridPager').css('font-size','1.5em');
 	$('.ui-paging-pager').css('width','650px');
+	
+	
+	$('#gview_jqGridbestSeller .ui-jqgrid-titlebar').css('padding-left','140');
+	$('#gview_jqGridseasonInfo .ui-jqgrid-titlebar').css('padding-left','215');
 		
 });
    

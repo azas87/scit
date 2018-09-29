@@ -32,24 +32,23 @@ function getFaqTable() {
 			{
 				label : '番号',
 				name : 'FAQNum',
-				height : 50,
+				width : 70,
 				align:'center'
 			}, {
 				label : '件名',
 				name : 'title',
-				width : 300,
-				height : 200,
+				width : 450,
 				align:'center'
 			}, {
 				label : '登録日付',
 				name : 'writeBoardDate',
-				height : 200,
+				width : 150,
 				align:'center'
 			}, 
 			 {
 				label : '閲覧数',
 				name : 'hitcount',
-				height : 50,
+				width : 100,
 				align:'center'
 			}, 
 			

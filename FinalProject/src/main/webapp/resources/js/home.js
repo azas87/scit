@@ -14,6 +14,13 @@ $(document).ready(function() {
     });
 	
 	
+	$("#jqGridbestSeller").closest("div.ui-jqgrid-view")
+    .children("div.ui-jqgrid-titlebar")
+    .css("text-align", "center")
+    .children("span.ui-jqgrid-title")
+    .css("float", "none");
+	
+	
 	$('.popdown').popdown();
 	 
 	userMode = $('#userMode').val();
