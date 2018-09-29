@@ -171,7 +171,7 @@ function homeList() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 230,
 				height : 200,
@@ -260,7 +260,7 @@ function sellerWishList() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -296,7 +296,7 @@ function sellerWishList() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '購買者選択',//구매자선택, 판매자가 구매자 선택(딜을 넣는다),전체리스트에서는 if로 구매자 판매자 구분해서 넣어야하나?,글자크기커서 넓이를 조정해야함
+				label : '販売要望',//구매자선택, 판매자가 구매자 선택(딜을 넣는다),전체리스트에서는 if로 구매자 판매자 구분해서 넣어야하나?,글자크기커서 넓이를 조정해야함
 				name : 'buyerSelect',
 				width : 80,
 				height : 200,
@@ -345,7 +345,7 @@ function sellerWishList() {
 				var obj = $("#jqGrid").getRowData(rowid);
     			
 				if(obj.buyerSelect != ""){
-					var con = confirm('구매자를 선택하시겠습니까?');
+					var con = confirm('販売要請を送りますか？');
     				if(con==true){           		 		
            		 		$.ajax({
            				url:"selectBuyer",
@@ -394,7 +394,7 @@ function myList_ing_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -475,7 +475,7 @@ function myList_ing_buyer() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")
-    		{	var con = confirm('재구입하시겠습니까?');
+    		{	var con = confirm('再購入しますか?');
     				if(con==true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
            		 		location.href="writeBuyBoardForm";
@@ -484,7 +484,7 @@ function myList_ing_buyer() {
     				}    			
     		}else if(cm[index].name == "sellerSelect"){
     			
-    			var con = confirm('판매자를 선택하시겠습니까?');
+    			var con = confirm('販売者を選択しますか');
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
     					var obj = $("#jqGrid").getRowData(rowid);
@@ -535,7 +535,7 @@ function myList_ing_seller() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -605,7 +605,7 @@ function myList_ing_seller() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "selectCancel")
-    		{	var con = confirm('정말 취소하시겠습니까?');
+    		{	var con = confirm('取り消ししますか?');
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
     	    			var obj = $("#jqGrid").getRowData(rowid);
@@ -652,7 +652,7 @@ function myAllList_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -731,7 +731,7 @@ function myAllList_buyer() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")    			
-    		{	var con = confirm('재구입하시겠습니까?');
+    		{	var con = confirm('再購入しますか?');
 				if(con==true){
 					console.log(jQuery("#jqGrid").getRowData(rowid));
    		 			location.href="writeBuyBoardForm";
@@ -743,7 +743,7 @@ function myAllList_buyer() {
     			var obj = $("#jqGrid").getRowData(rowid);
        		 	
     			if(obj.deletee != ""){
-       		 		var con = confirm('정말삭제하시겠습니까?');    			
+       		 		var con = confirm('削除しますか?');    			
        		 		if(con==true){       		 		
 	       		 		$.ajax({
 	    				url:"deleteMyList_buyer",
@@ -799,7 +799,7 @@ function myAllList_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -935,7 +935,7 @@ function bestSeller() {
 				align:'center'
 			}, 
 		],
-		caption:"bestSeller",
+		caption:"今、売れている魚",
 		scrollOffset : 0,
 		hidegrid : false,
 		hidden:false,
@@ -1029,7 +1029,7 @@ function seasonInfo() {
 				align:'center'
 			}, 
 		],
-		caption:"seasonInfo",
+		caption:"旬の魚",
 		scrollOffset : 0,
 		hidegrid : false,
 		viewrecords : true,
