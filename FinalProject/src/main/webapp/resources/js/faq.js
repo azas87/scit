@@ -99,7 +99,7 @@ function helper()
 {
 	userMode = $('#userMode').val();
 	console.log(userMode);
-	if(userMode=='seller')
+	if(userMode!='buyer' && userMode !='manager')
 	{
 			$('.bigSize').hover(function(){
 				var title = $(this).attr('title');
@@ -118,6 +118,13 @@ function helper()
 				var mousey = e.pageY + 10;
 				$('.tooltip').css({top : mousey,left : mousex});
 			});
+	}
+	else
+	{
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			$(this).attr('title', "");
+		});
 	}
 } 
 

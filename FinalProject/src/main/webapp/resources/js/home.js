@@ -18,23 +18,41 @@ $(document).ready(function() {
 	 
 	userMode = $('#userMode').val();
 	console.log(userMode);
-	if(userMode!='buyer')
+	if(userMode!='buyer' && userMode !='manager')
 	{
 	    
 	  $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
+		  
+		  
+
+		  if( ($(this).attr('class') == "item search_title") || ($(this).attr('class') == "item search_text"))
+		  {
+			  $('.search_title').css('flex-grow',1);
+		      $('.search_title').css('font-size',"3em");
+		      $('.search_title').css('font-weight','bold');
+		  }
+		  else
 		  {
 			  $(this).css('flex-grow',1);
 		      $(this).css('font-size',"3em");
 		      $(this).css('font-weight','bold');
-/*		      $(this).css('background-color',"powderblue");
-*/	/*	      $('input').css('line-height', '60px');
+	/*		      $(this).css('background-color',"powderblue");
+	*/	/*	      $('input').css('line-height', '60px');
 		      $('input').css('width', '200px');*/
 		  }
+		  
 	     
 	    });
 	    
 	  $(".item").mouseleave(function(){
+		  
+		  if( ($(this).attr('class') == "item search_text"))
+		  {
+			  $('.search_title').css('flex-grow',1);
+		      $('.search_title').css('font-size',"2em");
+		      $('.search_title').css('font-weight','normal');
+		  }
+		  
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"2em");
 	      $(this).css('font-weight','normal');
@@ -1130,7 +1148,7 @@ function helper()
 {
 	console.log("helper");
 	console.log(userMode);
-	if(userMode=='seller')
+	if(userMode!='buyer' && userMode !='manager')
 	{
 		if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
 		{
@@ -1152,5 +1170,12 @@ function helper()
 				$('.tooltip').css({top : mousey,left : mousex});
 			});
 		}
+	}
+	else
+	{
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			$(this).attr('title', "");
+		});
 	}
 } 
