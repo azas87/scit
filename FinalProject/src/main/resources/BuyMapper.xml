@@ -600,7 +600,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getMarketPrice" resultType="AvgList">
 	
-		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
+		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList 
 		
 	</select>
 	

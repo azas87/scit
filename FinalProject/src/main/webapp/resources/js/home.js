@@ -171,7 +171,7 @@ function homeList() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 230,
 				height : 200,
@@ -256,7 +256,7 @@ function sellerWishList() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -388,7 +388,7 @@ function myList_ing_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -529,7 +529,7 @@ function myList_ing_seller() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -646,7 +646,7 @@ function myAllList_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -793,7 +793,7 @@ function myAllList_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
