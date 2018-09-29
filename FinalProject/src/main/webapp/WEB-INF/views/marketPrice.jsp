@@ -119,7 +119,7 @@ $(document).ready(function(){
 		<div id="jqGridPager"></div>
 	</div>
 	
-	
 	<input type="hidden" id="userMode" value="${sessionScope.userMode}">
+
 </body>
 </html>

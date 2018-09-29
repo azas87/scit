@@ -617,10 +617,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	 <select id="getSellerStar" parameterType="int"  resultType="SellerInfo">
-		
-		  SELECT star,id	
-    FROM
-        (SELECT 
+	  
+	SELECT id 
+	FROM 
+      (SELECT 
 			round(avg(star),0) as star, r.sellerId as id
 		FROM 
 			review r, salelist s
@@ -628,14 +628,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
 		GROUP BY 
 			r.sellerId)
-   WHERE star IN 
-        (SELECT 
-			MAX(round(avg(star),0)) as star
+    WHERE star IN 
+    	(SELECT 
+			max(avg(star)) as star
 		FROM 
 			review r, salelist s
 		WHERE 
 			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
-        GROUP BY star)
+        GROUP BY 
+			r.sellerId)
+			
 			
 	</select>
 	
