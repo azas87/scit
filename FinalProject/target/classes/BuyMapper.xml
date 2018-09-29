@@ -616,17 +616,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<select id="getSellerStar" parameterType="int"  resultType="SellerInfo">
-		
-		SELECT 
+	 <select id="getSellerStar" parameterType="int"  resultType="SellerInfo">
+	  
+	SELECT id 
+	FROM 
+      (SELECT 
 			round(avg(star),0) as star, r.sellerId as id
 		FROM 
 			review r, salelist s
 		WHERE 
 			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
 		GROUP BY 
-			r.sellerId
+			r.sellerId)
+    WHERE star IN 
+    	(SELECT 
+			max(avg(star)) as star
+		FROM 
+			review r, salelist s
+		WHERE 
+			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
+        GROUP BY 
+			r.sellerId)
+			
 			
 	</select>
 	
+	<select id="successCount" parameterType="string" resultType="int">
+	
+		 SELECT count(*) from buylist where successSellerID = #{value}
+		 
+	</select>
 </mapper>

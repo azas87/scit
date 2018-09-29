@@ -284,9 +284,6 @@ function reset () {
 						<a class="nav-link" onclick="newPage('buyListHistory?')">履歴</a>
 					</li>	
 					</c:if>
-					<!-- <li class="nav-item item bigSize">	
-						<a class="nav-link" href="javascript:void(0);" onclick="cancel(); return false;">탈퇴</a>
-					</li> -->
 					<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('marketPrice?')">市価</a>
 	      			</li>
@@ -315,9 +312,9 @@ function reset () {
 	      			</li>
 	      			</c:if>
 	      			<c:if test="${sessionScope.userMode ne 'seller' }">
-	      			<li class="nav-item item bigSize">
-						<a class="nav-link" onclick="newPage('fishInfoList?')">魚図鑑</a>
-					</li>
+		      			<li class="nav-item item bigSize">
+							<a class="nav-link" onclick="newPage('fishInfoList?')">魚図鑑</a>
+						</li>
 					</c:if>
 					
 			</c:when>			
