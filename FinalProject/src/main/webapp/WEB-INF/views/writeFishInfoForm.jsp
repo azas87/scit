@@ -153,7 +153,7 @@ $(document).ready(function() {
           <div class='form-group'>
             <label class='control-label col-md-2 col-md-offset-2' for='id_comments'>基本情報</label>
             <div class='col-md-6'>
-              <textarea class='form-control' id='fishInfo' placeholder='Additional comments1' rows='20' name="fishInfo"></textarea>
+              <textarea class='form-control' id='fishInfo' rows='20' name="fishInfo"></textarea>
             </div>
           </div>
           <div class='form-group'>
