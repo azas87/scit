@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		hitcount,
 		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
 		FROM faq
+		order by FAQNum desc
 	</select>
 	
 

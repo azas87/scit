@@ -231,8 +231,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		from 
 			BuyList
-		where			
-			saleStatus = 'onSale'
+		<!-- where			
+			saleStatus = 'onSale' -->
 		order by deadline desc
 	</select>
 	
@@ -277,6 +277,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			location 
 		from BuyList b, (select * from SaleList where  sellerid=#{userId}) s
 		where b.buynum = s.buyNum
+		and b.saleStatus = 'onSale'
 		order by deadline desc
 		<!-- order by saleStatus asc -->
 	</select>
