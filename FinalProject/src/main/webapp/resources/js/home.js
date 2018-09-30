@@ -937,7 +937,7 @@ function bestSeller() {
 				align:'center'
 			}, {
 				label : '市価',
-				name : 'total',
+				name : 'price',
 				width : 130,
 				align:'center'
 			}, 
@@ -1031,7 +1031,7 @@ function seasonInfo() {
 				align:'center'
 			}, {
 				label : '市価',
-				name : 'total',
+				name : 'price',
 				width : 130,
 				align:'center'
 			}, 
