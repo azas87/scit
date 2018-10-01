@@ -290,12 +290,61 @@ html, body {
 			          <label for="password_a">暗証番号の再入力</label>
 			        </div>
 			      </div>
+			      </div>
 
 
 			  </div>
 			</div>
 		</div>
       </li>
+      
+      <li>
+      	<div class="join_body" style="width:800px; margin:0 auto;">
+        <div id="login-page" class="row">
+		  <div class="col s12 z-depth-4 card-panel">
+		    <div class="login-form">
+		      <div class="row">
+		        <div class="input-field col s12 center">
+			          <h2>会員登録のすすめ</h2>
+			          <p class="center">ニックネームと暗証番号を決めてください。</p>
+			        </div>
+			    </div>
+
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">account_balance</i>
+			          <input id="email" name="email" class="input_size" type="text"/>
+			          <label for="address">メールアドレス</label>
+			        </div>
+			      </div>
+
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">vpn_key</i>
+			          <input id="password" name="password" class="input_size" type="password"/>
+			          <label for="password">暗証番号</label>
+			        </div>
+			      </div>
+
+			      <div class="row margin">
+			        <div class="input-field col s12">
+			          <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+			          <i class="material-icons prefix">vpn_key</i>
+			          <input id="userpwd2" name="userpwd2" class="input_size" type="password" />
+			          <label for="password_a">暗証番号の再入力</label>
+			        </div>
+			      </div>
+			      </div>
+
+
+			  </div>
+			</div>
+		</div>
+      </li>
+      
+      
        <li>
       	<div style="width:800px; margin:0 auto;">
         <div id="login-page" class="row">

@@ -56,9 +56,6 @@ $(document).ready(function(){
 	//myBuyList();
 	///printClock();
 	 
-
-
-	 
 	 /*
 	 // 자동 글쓰기 테스트.
 	 setTimeout(function(){
@@ -68,15 +65,27 @@ $(document).ready(function(){
 	}, 60000);
 		*/
 	 
-	 // 10분 마다 자동갱신
-	 setInterval(function(){
-		 console.log(new Date());
-		 //ListRefresh();
-		
-	}, refreshInterver);
-	 
-	
-
+	  // 10분 마다 자동갱신
+	console.log(userMode);
+	if(userMode=='buyer' || userMode =='seller')
+	{
+		console.log("timer");
+		 setInterval(function(){
+			 var defaults = {
+						width :1165,
+						height:'auto'
+					};
+				$("#popup").show_popdown("./resources/content.jsp",defaults);
+			
+		}, refreshInterver);
+	}
+ 
+ /* console.log($('#popdown-opacity'));
+ console.log('123');
+ $('#popup').trigger('click');
+ 
+ console.log($('#popdown-opacity'));
+console.log('456'); */
 	    
     $('.search').hover(function(){
         // Hover over code

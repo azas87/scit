@@ -1,9 +1,10 @@
 var listMode = "allBuyList";
-var refreshInterver = 600000; // 1000 = 1초
+var refreshInterver = 60000; // 1000 = 1초
 var isSeasonInfoLoad = false;
 var isHomeListLoad=false;
 var isBestSellerLoad=false;
 var userMode;
+var isPopup=false;
 
 $(document).ready(function() {
 	

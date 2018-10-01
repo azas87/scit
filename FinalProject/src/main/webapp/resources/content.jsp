@@ -45,7 +45,7 @@
 		
 		$.jgrid.gridUnload("#jqGrid_pop");
 		$("#jqGrid_pop").jqGrid({
-			url : "myList_ing_buyer",
+			url : "myList_ing_buyer?alram=1",
 			mtype : "GET",
 			datatype : "json",
 			colModel : 
@@ -185,7 +185,7 @@
 		console.log("sellerWishList_pop");
 		$.jgrid.gridUnload('#jqGrid_pop');
 		$("#jqGrid_pop").jqGrid({
-			url : "sellerWishList",
+			url : "sellerWishList?alram=1",
 			mtype : "GET",
 			datatype : "json",
 			colModel : 
