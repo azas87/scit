@@ -515,7 +515,7 @@ function myList_ing_buyer() {
     					return;
     				}
     		} else if(cm[index].name == "successSellerId"){
-    			alert('이벤트');
+    			console.log('이벤트');
      			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
      		}
     	},   
@@ -776,7 +776,7 @@ function myAllList_buyer() {
     			console.log(jQuery("#jqGrid").getRowData(rowid));
     			var obj = $("#jqGrid").getRowData(rowid);
     			if(obj.successSellerId != ""){//판매자ID가 비어있지 않으면
-    				alert('이벤트');
+    				console.log('이벤트');
          			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
     			}else{
     				return;

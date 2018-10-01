@@ -119,7 +119,6 @@ var starRating = function(){
       $result = $star.find("output>b");
  	  $result.text(3);
  	  $('#p3').addClass("focus");
- 	  alert('')
   $(document)
     .on("focusin", ".star-input>.input", function(){
     $(this).addClass("focus");

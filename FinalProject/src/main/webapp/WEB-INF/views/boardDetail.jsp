@@ -12,6 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 function boardList(){
+	$('#f_main', parent.document).attr('height', '800px');
 	location.href="qnaForm?";
 }
 function updateQna(qnaNum) {

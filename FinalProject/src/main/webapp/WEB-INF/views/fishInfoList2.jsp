@@ -38,13 +38,14 @@ function updateFishInfo() {
 }
 function deleteFishInfo() {
 	var fishName = $(this).parent().children(".fishName").val();
-	alert(fishName);
+	console.log(fishName);
 	location.href="updateFishInfoForm?fishName="+fishName;
 }
 function newPage()
 {
 	$('#f_main', parent.document).attr('height', '700px');
 	$('#f_main', parent.document).attr('src', 'writeFishInfoForm?');
+	
 }
 
 
@@ -125,8 +126,8 @@ function newPage()
                 <div style="float: right;">
                 	<small class="text-muted">
                 	<c:if test="${sessionScope.userMode=='manager'}">
-                		<img src="./resources/img/icons8-trash-26.png" class="update">
-                		<img src="./resources/img/icons8-pencil-26.png" class="delete">
+                		<img src="./resources/img/icons8-trash-26.png" class="update" style="cursor:pointer;">
+                		<img src="./resources/img/icons8-pencil-26.png" class="delete" style="cursor:pointer;">
                 		<input type="hidden" class="fishName" name="fishName" value="${fish.fishName}">
                 	</c:if>
                 	</small>
