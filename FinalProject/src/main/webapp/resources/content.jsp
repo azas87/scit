@@ -11,7 +11,7 @@
 <div class="popdown-content">
 <input type="hidden" id="userMode" value="${sessionScope.userMode}">
 	<header>
-		<h2>新しい注文要望のお知らせ</h2>
+		<h2>新しいお知らせ</h2>
 
 
 	</header>

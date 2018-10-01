@@ -357,28 +357,19 @@ function sellerDetail (seller) {
  		loadComplete:function(data)
  		{
  			
- 
- 			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
  			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
  			$('.footrow').css('fontSize','1.5em');
-
- 			$('table.ui-jqgrid-ftable td:eq(2)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(1)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(3)').hide();
  			$('table.ui-jqgrid-ftable td:eq(4)').hide();
  			$('table.ui-jqgrid-ftable td:eq(5)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(6)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(7)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(9)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(10)').hide();
- 			
- 			
 
  		},
  		gridComplete: function(){
  		},
  		onCellSelect: function(rowid, index, contents, event) 
      	{    
-     		var cm = $(this).jqGrid('getGridParam','colModel');    
      		
      	},
      	

@@ -134,7 +134,7 @@ function confirmFunction(obj, rowid)
 		break;
 	case '再購入2':
 		//var con = confirm('再購入しますか?');
- 		location.href="writeBuyBoardForm";
+ 		location.href="writeBuyBoardForm?buyNum="+rowData.buyNum;
  		break;
 	case 'sellerSelect':
 		//var con = confirm('販売者を選択しますか');
