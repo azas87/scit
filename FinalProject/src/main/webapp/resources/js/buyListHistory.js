@@ -332,7 +332,7 @@ function sellerDetail (seller) {
  				align:'center'
  			},  {
  				label : '取引者',
- 				name : 'buyerid',
+ 				name : 'buyerId',
  				width: 200,
  				cellattr:mouseCursor,
  				align:'center'
