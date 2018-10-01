@@ -294,12 +294,26 @@ function reset () {
 	      			<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('noticeForm?')">お知らせ</a>
 	      			</li>
+	      			<c:if test="${sessionScope.userMode ne 'seller' }">
 	      			<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('qnaForm?')">Q&A</a>
 	      			</li>
+	      			</c:if>
+	      			<c:if test="${sessionScope.userMode eq 'seller' }">
+	      			<li class="nav-item item bigSize">
+	       				<a class="nav-link" onclick="newPage('qnaForm?')">お問い合わせ</a>
+	      			</li>
+	      			</c:if>
+	      			<c:if test="${sessionScope.userMode ne 'seller' }">
 	      			<li class="nav-item item bigSize">
 	       				<a class="nav-link" onclick="newPage('faqForm?')">FAQ</a>
 	      			</li>
+	      			</c:if>
+	      			<c:if test="${sessionScope.userMode eq 'seller' }">
+	      			<li class="nav-item item bigSize">
+	       				<a class="nav-link" onclick="newPage('faqForm?')">よくある質問</a>
+	      			</li>
+	      			</c:if>
 	      			<li class="nav-item item bigSize">
 						<a class="nav-link" onclick="newPage('fishInfoList?')">魚図鑑</a>
 					</li>
@@ -345,7 +359,7 @@ function reset () {
 <div id="page-wrapper">
 	<!-- frameborder="1" -->
 	<!-- <iframe name="f_main" id="f_main" src="main?"  width="100%" height="100%" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" allowtransparency="true" ></iframe> -->
-	<iframe name="f_main" id="f_main" src="main?"  frameborder="0" width="100%" marginwidth="0" marginheight="0" scrolling="no" style="border: 0px" onload="window.scrollTo(0,0)" height="100%"></iframe>
+	<iframe name="f_main" id="f_main" src="main?"  frameborder="0" width="100%" marginwidth="0" marginheight="0" scrolling="no" style="border: 0px" onload="window.scrollTo(0,0)" height="1600px"></iframe>
 </div>
 
 <div class="hover_bkgr_fricc">

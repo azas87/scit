@@ -20,12 +20,13 @@ public class MailSendComponent {
  
   public static Message message = null;
  
-  public static void createMail(){
+  public void createMail(String address, String number){
     MimeBodyPart mbp = new MimeBodyPart();
     try{
       //메일 본문 작성
       //text 경우
-      mbp.setText("Mail send");
+    	String Content = "会員登録のためにはメールで本人確認が必要になります。お手数ですが、こちらの認証番号6下駄をサイトに入力してください。\n" + number;
+    	mbp.setText(Content);
        
       //message 객체에 본문을 넣기 위하여 Multipart 객체 생성
       Multipart mp = new MimeMultipart();
@@ -55,7 +56,7 @@ public class MailSendComponent {
       message.setFrom(new InternetAddress("zpdl87@gmail.com"));
        
       //단건 전송일 때는 사용 start
-      message.setRecipient(RecipientType.TO, new InternetAddress("azas87@naver.com"));
+      message.setRecipient(RecipientType.TO, new InternetAddress(address));
       //단건 전송일 때는 사용 end
        
 /*      //복수 건 전송일 때는 사용 start
@@ -69,7 +70,7 @@ public class MailSendComponent {
      
   }
    
-  public static void connectSMTP(){
+  public void connectSMTP(){
     Properties prop = new Properties();
  
     //Gmail 연결을 위하여 아래 설정 적용
@@ -93,18 +94,12 @@ public class MailSendComponent {
     }
   }
    
-  public static void sendMail(){
+  public void sendMail(){
     try {
       Transport.send(message);
     } catch (MessagingException e) {
       e.printStackTrace();
     }
-  }
-   
-  public static void main(String[] args) {
-    connectSMTP();
-    createMail();
-    sendMail();
   }
 }
  

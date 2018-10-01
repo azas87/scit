@@ -20,10 +20,83 @@ language="java" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="./resources/js/faq.js"></script>
 
 
+<style>
+
+#tab
+  {
+  border-radius:5px;
+  	box-sizing:true;
+  	/* border:1px solid #cccccc; */
+  	background:url(./resources/img/bg.png) repeat;
+	padding:1px;
+	margin: 1px;
+	text-align: center;
+	margin:0px auto;
+	margin-bottom: 20px;
+	margin-top:30px;	
+	width:900px;
+  }
+
+
+    #tab .items {
+    border:0px;	
+    display: flex;
+    flex-direction: row-reverse;
+    height:60px;    
+  }
+  #tab .item
+  {
+    line-height: 60px;
+    list-style: none;
+    margin:0px;
+        margin-right: 16px;
+    font-size:3em;
+  }
+  
+ #search_cells
+{
+	margin-top:5px;
+	height:50px;
+	max-width: 300px;
+	font-size: 1em;
+}
+
+.title
+{
+	width:50%;
+	border-right:1px solid white;	
+}
+</style>
+<script>
+$(document).ready(function(){
+	var timer;
+	$("#search_cells").on("keyup", function() {
+		var self = this;
+		if(timer) { clearTimeout(timer); }
+		timer = setTimeout(function(){
+			//timer = null;
+			$("#jqGridBoard").jqGrid('filterInput', self.value);
+		},0);
+	});
+});
+</script>
 </head>
 <body>
 
-<div style="width: 900px; margin: 0 auto; padding-top: 80px;">
+<div id="tab">
+		<!-- <div class="" title="검색어">검색 : <input type="text" id="search_cells" title=""></div> -->
+		<div class="items">
+			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
+			<div class="item search_title" title="검색어">検索</div>
+			<c:if test="${sessionScope.userMode ne 'seller' }">  
+			<div class="item title">FAQ</div>
+			</c:if>
+			<c:if test="${sessionScope.userMode eq 'seller' }">  
+			<div class="item title">よくある質問</div>
+			</c:if>
+		</div>
+	</div>
+	<div style="width: 900px; margin: 0 auto;">
 	<table id="jqGridBoard"></table>
 	<div id="jqGridPager"></div>
 	</div>

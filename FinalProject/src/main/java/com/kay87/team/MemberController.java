@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kay87.team.dao.BuyMapper;
+import com.kay87.team.common.MailSendComponent;
 import com.kay87.team.dao.FishInfoListMapper;
 import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.dao.ReviewMapper;
@@ -44,6 +44,30 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+	public @ResponseBody String sendMail(String address) {
+		System.out.println(address);
+		
+		MailSendComponent mail = new MailSendComponent();
+		mail.connectSMTP();
+		
+		/*for(int i = 0; i < 100000; i++)
+		{
+			double temp = Math.round(Math.random()*899999)+100000;
+			String number = String.format("%06d", (long)temp);
+			System.out.println(number);
+		}*/
+		double temp = Math.round(Math.random()*899999)+100000;
+		String number = String.format("%06d", (long)temp);
+		System.out.println(number);
+		mail.createMail(address,number);
+		mail.sendMail();
+		
+		return number;
+	}
+	
+	
 	
 	//판매자회원가입
 		@RequestMapping(value = "/joinSeller", method = RequestMethod.POST)
