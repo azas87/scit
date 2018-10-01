@@ -312,8 +312,8 @@ var chartDrowFun = {
 		<div class="item " id="homeList"  onclick="homeList()">取引リスト</div>
 		<c:choose>
 			<c:when test="${sessionScope.userMode == 'buyer' }">
-				<div class="item " id="myList_ing_buyer" onclick="myList_ing_buyer()">注文要望リスト</div>
-				<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">取引済みリスト</div>
+				<div class="item " id="myList_ing_buyer" onclick="myList_ing_buyer()">購買要請中</div>
+				<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">注文要望</div>
 			</c:when>
 			<c:when test="${sessionScope.userMode == 'seller' }">
 				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
