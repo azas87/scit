@@ -29,7 +29,8 @@ $(document).ready(function() {
 	if(userMode!='buyer' && userMode !='manager')
 	{
 		
-	  $(".item").mouseenter(function(){
+	  $(".item").mouseenter(function()
+	{
 		  
 		  
 
@@ -74,6 +75,117 @@ $(document).ready(function() {
 	}
 	  
 });
+
+function reset () {
+	$("#toggleCSS").attr("href", "./resources/css/alertify.default.css");
+	alertify.set({
+		labels : {
+			ok     : "OK",
+			cancel : "Cancel"
+		},
+		delay : 5000,
+		buttonReverse : false,
+		buttonFocus   : "ok"
+	});
+	
+}
+
+function confirm(title, obj, rowid) {
+	//리뷰등록을 위해 buyNum 저장해두기
+	
+	reset();
+	alertify.set({ buttonReverse: true });
+	var result = null;
+		alertify.confirm(title, function (e) {
+		if (e) {
+			alertify.success("You've clicked OK");
+			confirmFunction(obj, rowid);
+		} else {
+			alertify.error("You've clicked Cancel");
+		}
+	});
+}
+
+function confirmFunction(obj, rowid)
+{
+	var rowData = null;
+	if(rowid != null)
+	{
+		rowData = $("#jqGrid").getRowData(rowid);
+	}
+	console.log(rowData);
+	
+	switch(obj)
+	{
+	case 'buyerSelect':
+		//var con = confirm('販売要請を送りますか？');
+		$.ajax({
+			url:"selectBuyer",
+			type:"get",
+			data:{"buyNum":rowData.buyNum
+			},
+			success:function(data){
+				ResetBuyList('sellerWishList');
+			},
+			error:function(){
+				alert("통신실패");
+			}
+		});
+		break;
+	case '再購入2':
+		//var con = confirm('再購入しますか?');
+ 		location.href="writeBuyBoardForm";
+ 		break;
+	case 'sellerSelect':
+		//var con = confirm('販売者を選択しますか');
+		
+		$.ajax({
+			//url:"selectSeller?SellerId="+rowData.successSellerId+"&buyNum="+rowData.buyNum,
+ 			url : "selectSeller",
+			type:"get",
+			data:{"SellerId":rowData.successSellerId, "buyNum":rowData.buyNum
+			},
+			success:function(data){
+				ResetBuyList('myList_ing_buyer');
+			},
+			error:function(){
+				alert("통신실패");
+			}
+ 		});  
+		break;
+	case 'selectCancel':
+		//var con = confirm('取り消ししますか?');
+		var rowData = $("#jqGrid").getRowData(rowid);
+ 		$.ajax({
+			url:"deleteMyList_seller",
+			type:"get",
+			data:{"buyNum":rowData.buyNum
+			},
+			success:function(data){
+				ResetBuyList('myList_ing_seller');
+			},
+			error:function(){
+				alert("통신실패");
+			}
+ 		});
+ 		break;
+	case 'deletee':
+		//var con = confirm('削除しますか?');
+ 		$.ajax({
+			url:"deleteMyList_buyer",
+			type:"get",
+			data:{"buyNum":rowData.buyNum
+			},
+			success:function(data){
+				ResetBuyList('myAllList_buyer');
+			},
+			error:function(){
+				alert("통신실패");
+			}
+ 		});  
+ 		break;
+	}
+}
 
 
 function tab(e, num){
@@ -352,26 +464,9 @@ function sellerWishList() {
     			console.log(jQuery("#jqGrid").getRowData(rowid));
 				var obj = $("#jqGrid").getRowData(rowid);
     			
-				if(obj.buyerSelect != ""){
-					var con = confirm('販売要請を送りますか？');
-    				if(con==true){           		 		
-           		 		$.ajax({
-           				url:"selectBuyer",
-           				type:"get",
-           				data:{"buyNum":obj.buyNum
-           				},
-           				success:function(data){
-           					ResetBuyList('sellerWishList');
-           				},
-           				error:function(){
-           					alert("통신실패");
-           				}
-           		 		});
-    				}else{
-    					return;
-    				}	           		 		
-    			}else{
-    				return;
+				if(obj.buyerSelect != "")
+				{
+					confirm('販売要請を送りますか？', 'buyerSelect', rowid);
     			}    				 	    			
     		}
     	},   
@@ -483,37 +578,11 @@ function myList_ing_buyer() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")
-    		{	var con = confirm('再購入しますか?');
-    				if(con==true){
-    					console.log(jQuery("#jqGrid").getRowData(rowid));
-           		 		location.href="writeBuyBoardForm";
-    				}else{
-    					return;
-    				}    			
+    		{	
+    			confirm('再購入しますか?', '再購入2', rowid);
     		}else if(cm[index].name == "sellerSelect"){
     			
-    			var con = confirm('販売者を選択しますか');
-    				if(con == true){
-    					console.log(jQuery("#jqGrid").getRowData(rowid));
-    					var obj = $("#jqGrid").getRowData(rowid);
-    				
-       		 			$.ajax({
-           				//url:"selectSeller?SellerId="+obj.successSellerId+"&buyNum="+obj.buyNum,
-       		 			url : "selectSeller",
-           				type:"get",
-           				data:{"SellerId":obj.successSellerId, "buyNum":obj.buyNum
-           				},
-           				success:function(data){
-           					ResetBuyList('myList_ing_buyer');
-           				},
-           				error:function(){
-           					alert("통신실패");
-           				}
-           		 		});  
-       		 			
-    				}else{
-    					return;
-    				}
+    			confirm('販売者を選択しますか', 'sellerSelect', rowid);
     		} else if(cm[index].name == "successSellerId"){
     			console.log('이벤트');
      			sellerDetail($("#jqGrid").getRowData(rowid).successSellerId);
@@ -613,27 +682,8 @@ function myList_ing_seller() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "selectCancel")
-    		{	var con = confirm('取り消ししますか?');
-    				if(con == true){
-    					console.log(jQuery("#jqGrid").getRowData(rowid));
-    	    			var obj = $("#jqGrid").getRowData(rowid);
-    	       		       		 		
-           		 		$.ajax({
-           				url:"deleteMyList_seller",
-           				type:"get",
-           				data:{"buyNum":obj.buyNum
-           				},
-           				success:function(data){
-           					ResetBuyList('myList_ing_seller');
-           				},
-           				error:function(){
-           					alert("통신실패");
-           				}
-           		 		});
-           		 		
-    				}else{
-    					return;
-    				}       		 
+    		{	
+    			confirm('取り消ししますか?','selectCancel', rowid);
     		}
     	},   
 	});
@@ -739,38 +789,15 @@ function myAllList_buyer() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")    			
-    		{	var con = confirm('再購入しますか?');
-				if(con==true){
-					console.log(jQuery("#jqGrid").getRowData(rowid));
-   		 			location.href="writeBuyBoardForm";
-				}else{
-					return;
-				}    			
+    		{	
+    			confirm('再購入しますか?','再購入2',rowid);
     		}else if(cm[index].name == "deletee"){ 				
 				console.log(jQuery("#jqGrid").getRowData(rowid));
     			var obj = $("#jqGrid").getRowData(rowid);
        		 	
     			if(obj.deletee != ""){
-       		 		var con = confirm('削除しますか?');    			
-       		 		if(con==true){       		 		
-	       		 		$.ajax({
-	    				url:"deleteMyList_buyer",
-	    				type:"get",
-	    				data:{"buyNum":obj.buyNum
-	    				},
-	    				success:function(data){
-	    					ResetBuyList('myAllList_buyer');
-	    				},
-	    				error:function(){
-	    					alert("통신실패");
-	    				}
-	    		 		});  
-       		 		}else{
-           		 		return;
-           		 	}           	
-       		 	}else{
-       		 		return;
-       		 	}	 	
+       		 		confirm('削除しますか?','deletee',rowid);
+       		 	}
 			  		    				
     		}else if(cm[index].name == "successSellerId"){
     			console.log(jQuery("#jqGrid").getRowData(rowid));

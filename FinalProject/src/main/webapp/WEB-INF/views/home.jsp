@@ -194,34 +194,33 @@ function cancel() {
 					console.log('성공');
 				},
 				error:function(){
-					alert("통신실패");
-				}
-			});
-	
-			
-			
-		} else {
-			alertify.error("You've clicked Cancel");
-		}
-	}, "");
-	return false;
-}
+					
+	alert("통신실패");
+					}
+				});
 
-function reset () {
-	$("#toggleCSS").attr("href", "./resources/css/alertify.default.css");
-	alertify.set({
-		labels : {
-			ok     : "OK",
-			cancel : "Cancel"
-		},
-		delay : 5000,
-		buttonReverse : false,
-		buttonFocus   : "ok"
-	});
-	
-	var audio = new Audio('./resources/alram.wav');
-	audio.play();
-}
+			} else {
+				alertify.error("You've clicked Cancel");
+			}
+		}, "");
+		return false;
+	}
+
+	function reset() {
+		$("#toggleCSS").attr("href", "./resources/css/alertify.default.css");
+		alertify.set({
+			labels : {
+				ok : "OK",
+				cancel : "Cancel"
+			},
+			delay : 5000,
+			buttonReverse : false,
+			buttonFocus : "ok"
+		});
+
+		var audio = new Audio('./resources/alram.wav');
+		audio.play();
+	}
 </script>
 
 
