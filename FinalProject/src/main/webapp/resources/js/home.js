@@ -297,7 +297,7 @@ function homeList() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 150,
 				height : 200,
@@ -386,7 +386,7 @@ function sellerWishList() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 150,
 				height : 200,
@@ -503,7 +503,7 @@ function myList_ing_buyer() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 150,
 				height : 200,
@@ -618,7 +618,7 @@ function myList_ing_seller() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 150,
 				height : 200,
@@ -716,7 +716,7 @@ function myAllList_buyer() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 150,
 				height : 200,
@@ -840,7 +840,7 @@ function myAllList_buyer() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 150,
 				height : 200,
@@ -950,7 +950,7 @@ function bestSeller() {
 		colModel : 
 		[ 
 			{
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 180,
 				align:'center'
@@ -1044,7 +1044,7 @@ function seasonInfo() {
 		colModel : 
 		[ 
 			{
-				label : '品種',
+				label : '魚種',
 				name : 'fishName',
 				width : 180,
 				align:'center'

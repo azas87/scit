@@ -38,10 +38,10 @@ div.popdown-content header h2 {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
-  font-size: 18px;
+  font-size: 3em;
   text-align: center;
   padding: 15px 10px;
-  font-weight: 400;
+  font-weight: 800;
   font-family: "Helvetica Neue", Helvetica, "pragmatica-web", Arial, sans-serif;
   color: #727272;
 }

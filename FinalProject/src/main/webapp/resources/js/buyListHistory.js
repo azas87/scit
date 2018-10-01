@@ -139,7 +139,7 @@ function sellerDetail (seller) {
  				align:'center'
  			
  			}, {
- 				label : '品種',
+ 				label : '魚種',
  				name : 'fishName',
  				width:200,
  				align:'center' 				
@@ -321,7 +321,7 @@ function sellerDetail (seller) {
  				align:'center'
  			
  			}, {
- 				label : '品種',
+ 				label : '魚種',
  				name : 'fishName',
  				width:350,
  				align:'center' 				
@@ -534,12 +534,12 @@ function sumList(period, startDay, endDay) {
  		colModel : 
  		[ 
  			{
- 				label : '品種',
+ 				label : '魚種',
  				name : 'fishName',
  				autowidth:true,
  				align:'center'
  			}, {
- 				label : '価格',
+ 				label : '合計',
  				autowidth:true,
  				name : 'price',
  				align:'center'
