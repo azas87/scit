@@ -35,19 +35,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--bestSeller  -->
 	<select id="bestSeller" resultType="BestSeller">
 		select 
-			f.fishName, buy.location, f.unit, buy.total from fishList f, 
-		(select fishName, location, sum(price) as total from buylist b group by fishName, location) buy
+			f.fishName, buy.location, f.unit,  nvl(trunc((buy.total/buy.cnt)),0) as price,  buy.cnt from fishList f, 
+		(select fishName, location, sum(price) as total, sum(weight) as cnt from buylist b group by fishName, location) buy
 		where 
 			f.fishName = buy.fishName
 		order by 
-			buy.total desc
+			buy.cnt desc
+
 	</select>
 	
 	<!--제철정보  -->            <!--resultType의 BestSeller를 변경해야할수도있다  -->
 	<select id="seasonInfo" parameterType="string" resultType="BestSeller">  
 		select 
-			f.fishName, buy.location, f.unit, buy.total from fishList f, 
-		(select fishName, location, sum(price) as total from buylist b group by fishName, location) buy
+			f.fishName, buy.location, f.unit, nvl(trunc((buy.total/buy.cnt)),0) as price,  buy.cnt from fishList f, 
+		(select fishName, location, sum(price) as total, sum(weight) as cnt from buylist b group by fishName, location) buy
 		where 
 			f.fishName = buy.fishName
 		and 

@@ -98,8 +98,8 @@
 		};
 
 		var options = $.extend(defaults, options);
-		console.log("popdown");
-		console.log(options);
+		//console.log("popdown");
+		//console.log(options);
 
 		// Re-size the opacity when the window is resized
 		$(window).resize(function() {

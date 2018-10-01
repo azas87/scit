@@ -11,11 +11,11 @@ $(document).ready(function() {
 	       del: false,
 	       refresh: true
 	   });
-	
 });
 
 function writeBoardForm() {
-	location.href="writeBoardForm?";
+	$('#f_main', parent.document).attr('height', '820px');
+	$('#f_main', parent.document).attr('src', 'writeBoardForm?');
 }
 function getQnaTable() {
 	
@@ -28,44 +28,42 @@ function getQnaTable() {
 			{
 				label : '番号',
 				name : 'qnaNum',
-				height : 200,
+				width : 70,
 				align:'center'
 			}, {
 				label : '件名',
 				name : 'title',
-				width : 80,
-				height : 200,
+				width : 450,
 				align:'center'
 			}, {
 				label : '作成者',
 				name : 'id',
-				height : 200,
+				width : 150,
 				align:'center'
 			}, {
 				label : '登録日付',
 				name : 'writeBoardDate',
-				height : 200,
 				align:'center'
 			}, 
 			 {
 				label : '閲覧数',
 				name : 'hitcount',
-				height : 200,
+				width : 70,
 				align:'center'
 			}, 
 			 {
 				label : '状態',
 				name : 'content',
-				height : 200,
+				width : 100,
 				align:'center'
 			},
 		],
 		viewrecords : true,
-		width : 900,
+		width : 1200,
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-		/*pager : "#jqGridPager",*/
+		pager : "#jqGridPager",
 		loadonce: true,
 		grouping: false,
 		groupingView: {
@@ -75,9 +73,37 @@ function getQnaTable() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
+			helper();
+		},
+		gridComplete: function(){
+		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+    	
+        	var cm = $(this).jqGrid('getGridParam','colModel');    
+        	if(cm[index].name == "title")
+        	{
+        		console.log(rowid);
+        		var obj = $("#jqGridBoard").getRowData(rowid);
+           		alert(JSON.stringify(obj));
+        		location.href="boardDetail?qnaNum="+obj.qnaNum;
+
+        	}
+    		
+    	},   
+	});
+}
+
+function helper()
+{
+	userMode = $('#userMode').val();
+	console.log(userMode);
+	if(userMode!='buyer' && userMode !='manager')
+	{
 			$('.bigSize').hover(function(){
 				var title = $(this).attr('title');
-				if(title!="")
+				console.log(title);
+				if(title!=" " && title!="" && title!=null)
 				{
 					$(this).data('tipText', title).removeAttr('title');
 					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
@@ -91,23 +117,12 @@ function getQnaTable() {
 				var mousey = e.pageY + 10;
 				$('.tooltip').css({top : mousey,left : mousex});
 			});
-		},
-		gridComplete: function(){
-		},
-		onCellSelect: function(rowid, index, contents, event) 
-    	{    
-    	
-        	var cm = $(this).jqGrid('getGridParam','colModel');    
-        	if(cm[index].name == "title")
-        	{
-        		var obj = $("#jqGridBoard").getRowData(rowid);
-           		alert(JSON.stringify(obj));
-        		location.href="boardDetail?qnaNum="+obj.qnaNum;
-
-        	}
-    		
-    	},   
-	});
-}
-
-
+	}
+	else
+	{
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			$(this).attr('title', "");
+		});
+	}
+} 

@@ -3,11 +3,16 @@ package com.kay87.team;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -15,13 +20,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kay87.team.dao.BuyMapper;
-import com.kay87.team.dao.MemberMapper;
 import com.kay87.team.dao.ReviewMapper;
 import com.kay87.team.vo.AvgList;
 import com.kay87.team.vo.BestSeller;
@@ -295,8 +300,12 @@ public class HomeController {
 	
 	// 판매자 메인화면에서 선호 목록_k
 		@RequestMapping(value = "/sellerWishList", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-		public @ResponseBody String sellerWishList(HttpSession session) {			
+		public @ResponseBody String sellerWishList(@CookieValue(value="seller",defaultValue="0") String cookie, String alram,  HttpSession session, HttpServletResponse response) {	
+			
 			System.out.println("sellerWishList");
+			
+			
+			
 			BuyMapper mapper = sql.getMapper(BuyMapper.class);
 			String userId = (String) session.getAttribute("loginId");	
 			List<BuyList> myWishList_seller = mapper.sellerWishList(userId);			
@@ -318,9 +327,9 @@ public class HomeController {
 			
 			//System.out.println(myWishList_seller.get(0).getBuyNum());
 			for(int i=0; i<myWishList_seller.size() ;i++) {			
-				System.out.println(myWishList_seller.get(i).getBuyNum());
+				//System.out.println(myWishList_seller.get(i).getBuyNum());
 				for(int j=0;j<salelist.size();j++) {
-					System.out.println(salelist.get(j).getBuyNum());
+					//System.out.println(salelist.get(j).getBuyNum());
 					if(Integer.parseInt(myWishList_seller.get(i).getBuyNum())==salelist.get(j).getBuyNum()) {
 						myWishList_seller.get(i).setSuccessSellerId(userId);
 						break;//가장가까이 있는 반복문 빠져나감
@@ -328,15 +337,52 @@ public class HomeController {
 				}				
 			}
 			
-			for(BuyList i : myWishList_seller) {
+					
+			List<Integer> number = new ArrayList<Integer>();
+			for(BuyList i : myWishList_seller) 
+			{
+				number.add(Integer.parseInt(i.getBuyNum()));
 				System.out.println(i);
-			}			
+			}
+			
+			System.out.println("alram = "+ alram);
+			if(alram!=null)
+			{
+				for(int i = myWishList_seller.size()-1; i>=0; i--)
+				//for(BuyList i : myWishList_seller) 
+				{
+					int num = Integer.parseInt(myWishList_seller.get(i).getBuyNum());
+					if( num < Integer.parseInt(cookie) )
+					{
+						myWishList_seller.remove(i);
+					}
+				}		
+			}
+			
+			/*for(BuyList i : myWishList_seller) 
+			{
+				System.out.println(i);
+			}*/
+			
+			//System.out.println(cookie);
+			
+			Cookie realCookie=null;
+			if(cookie.equals("0"))
+			{
+				realCookie = new Cookie("seller", Collections.max(number).toString());
+			}
+			else
+			{
+				realCookie = new Cookie("seller",Collections.max(number).toString());
+			}
+			//System.out.println(cookie);
+			response.addCookie(realCookie);
+			
 			
 			Gson gson = new Gson();
 			//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
 			String jsonPlace = "{\"rows\":"+ gson.toJson(myWishList_seller) + "}";
-			System.out.println(jsonPlace);		
-			
+			//System.out.println(jsonPlace);	
 			return jsonPlace;
 		}
 		
@@ -364,12 +410,26 @@ public class HomeController {
 			}
 			}
 			
-			//별점순서대로 판매자 결정
-			List<SellerInfo> starList=mapper.getSellerStar(buyNum);
+			//별점 순서대로  판매자  결정
+			List<SellerInfo> starList=mapper.getSellerStar(buyNum);/////별점리스트로 뽑아와야 하는데 안됨
+			//별점 최대값들의 리스트를 뽑는 쿼리 필요
 			System.out.println("별점리스트"+starList);
+			if(starList.size()==1) {
+				successSeller = starList.get(0).getId();
+				return successSeller;
+			}
 			
+			//판매수 숫자대로 판매자 결정
+			int max=0;
+			for(SellerInfo s: starList) {
+				int count =mapper.successCount(s.getId());
+				if(max<count) {
+					max = count;
+					successSeller=s.getId();
+				}
+			}
 			
-			return null;
+			return successSeller;
 		}
 	
 }

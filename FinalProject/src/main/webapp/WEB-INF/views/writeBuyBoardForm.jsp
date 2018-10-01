@@ -318,7 +318,7 @@ $(document).ready(function() {
 							for='id_comments'>コメント</label>
 						<div class='col-md-6'>
 							<textarea class='form-control' id='id_comments'
-								placeholder='Additional comments' name='buyListComment' rows='10'></textarea>
+								placeholder='例）メスのみお願いします。&#13;&#10;　30Cm以上でお願いします。&#13;&#10;　天然もののみお願いします。' name='buyListComment' rows='10'></textarea>
 						</div>
 					</div>
 					<div class='form-group'>

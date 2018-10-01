@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		hitcount,
 		to_char(writeboarddate, 'YYYY/MM/DD')as writeboarddate
 		FROM qna
+		order by qnanum desc
 	</select>
 	
 	<select id="getRelplyList" resultType="Reply">

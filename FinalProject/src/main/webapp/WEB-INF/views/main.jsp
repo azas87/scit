@@ -56,9 +56,6 @@ $(document).ready(function(){
 	//myBuyList();
 	///printClock();
 	 
-
-
-	 
 	 /*
 	 // 자동 글쓰기 테스트.
 	 setTimeout(function(){
@@ -68,15 +65,27 @@ $(document).ready(function(){
 	}, 60000);
 		*/
 	 
-	 // 10분 마다 자동갱신
-	 setInterval(function(){
-		 console.log(new Date());
-		 //ListRefresh();
-		
-	}, refreshInterver);
-	 
-	
-
+	  // 10분 마다 자동갱신
+	console.log(userMode);
+	if(userMode=='buyer' || userMode =='seller')
+	{
+		console.log("timer");
+		 setInterval(function(){
+			 var defaults = {
+						width :1165,
+						height:'auto'
+					};
+				$("#popup").show_popdown("./resources/content.jsp",defaults);
+			
+		}, refreshInterver);
+	}
+ 
+ /* console.log($('#popdown-opacity'));
+ console.log('123');
+ $('#popup').trigger('click');
+ 
+ console.log($('#popdown-opacity'));
+console.log('456'); */
 	    
     $('.search').hover(function(){
         // Hover over code
@@ -130,6 +139,14 @@ $(document).ready(function(){
 		$('.item').css('border-right','1px solid white');
 		$('.item').css('border-radius','0px');
 		
+		if(($(this).attr('class') == "item search_text"))
+		{
+			console.log("title");
+			$('.search_title').css('background','white');
+			$('.search_title').css('color','black');
+			$('.search_title').css('border-right','2px solid white');
+		}
+		
 		$(this).css('background','white');
 		$(this).css('color','black');
 		$(this).css('border-right','2px solid white');
@@ -151,6 +168,21 @@ $(document).ready(function(){
 		
 		
 	});
+	
+	$('#jqGridPager_left').css('display','none');
+	$('#jqGridPager_center').css('width','600px');
+	$('#jqGridPager_center').css('padding-left','100px');
+	$('#jqGridPager_right').css('padding-right','26px');
+	
+	
+	$('#input_jqGridPager').css('width','340px');
+	
+	$('#input_jqGridPager').css('font-size','1.5em');
+	$('.ui-paging-pager').css('width','650px');
+	
+	
+	$('#gview_jqGridbestSeller .ui-jqgrid-titlebar').css('padding-left','140');
+	$('#gview_jqGridseasonInfo .ui-jqgrid-titlebar').css('padding-left','215');
 		
 });
    
@@ -198,8 +230,13 @@ var chartDrowFun = {
                             isStacked   : 'percent',
                             focusTarget : 'category',
                             //chartArea:{left:300,top:50,width:"1000px",height:"500px"},
+                            chartArea:{
+				        	  	left:200,
+				        	    right:70, // !!! works !!!
+				        	    top:100,
+				        	  },
                             height          : 600,
-                            width              : '100%',
+                            width              : 1400,
                             legend          : { position: "top", textStyle: {fontSize: 30}},
                             pointSize        : 15,
                             tooltip          : {textStyle : {fontSize:50}, showColorCode : true,trigger: 'both'},
@@ -212,7 +249,8 @@ var chartDrowFun = {
 
               animation        : {startup: true,duration: 100,easing: 'in' },
              
-            }
+            },
+            
           });
 
           var control = new google.visualization.ControlWrapper({
@@ -283,8 +321,8 @@ var chartDrowFun = {
 		<div class="item " id="homeList"  onclick="homeList()">取引リスト</div>
 		<c:choose>
 			<c:when test="${sessionScope.userMode == 'buyer' }">
-				<div class="item " id="myList_ing_buyer" onclick="myList_ing_buyer()">注文要望リスト</div>
-				<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">取引済みリスト</div>
+				<div class="item " id="myList_ing_buyer" onclick="myList_ing_buyer()">購買要請中</div>
+				<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">注文要望</div>
 			</c:when>
 			<c:when test="${sessionScope.userMode == 'seller' }">
 				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
@@ -292,7 +330,13 @@ var chartDrowFun = {
 				<div class="item " id="myList_ing_seller" onclick="myList_ing_seller()">参加リスト</div>
 			</c:when>
 		</c:choose>
-		<div class="item search" title="검색어">検索 : <input type="text" id="search_cells" title=""></div>
+		<!-- <div class="item search" title="검색어">検索 : <input type="text" id="search_cells" title=""></div> -->
+		
+			<div class="item search_title" >検索</div>
+			<div class="item search_text">
+				<input type="text" id="search_cells" title="">
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -304,6 +348,7 @@ var chartDrowFun = {
 </div>
 
 <input type="hidden" id="sellerInfo" name="sellerInfo">
+<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 
 </body>
 </html>

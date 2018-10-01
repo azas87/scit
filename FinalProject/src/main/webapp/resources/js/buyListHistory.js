@@ -314,7 +314,7 @@ function sellerDetail (seller) {
  			{
  				label : '取引日付',
  				name : 'deadline',
- 				width:400,
+ 				width:370,
  				align:'center'
  			
  			}, {
@@ -342,7 +342,7 @@ function sellerDetail (seller) {
 
  		],
  		viewrecords : true,
- 		width:1300,
+ 		width:1295,
  		rowNum : 10,
  		rowList:[10,20,30],
  		height:500,
@@ -544,6 +544,7 @@ function sumList(period, startDay, endDay) {
  		scrollOffset : 0,
  		autowidth:true,
  		//altRows:true,	// tooltip 나오는 기능인데 차이가 없네? 이미 title에 값이 적혀 있어서 그런가?
+ 		width:1100,
  		height:400,
  		pager : "#jqGrid2Pager",
  		loadonce: true,
@@ -551,23 +552,44 @@ function sumList(period, startDay, endDay) {
  		loadComplete:function(data)
  		{
  	
- 			$('.bigSize').hover(function(){
- 				console.log("test");
- 				var title = $(this).attr('title');
- 				$(this).data('tipText', title).removeAttr('title');
- 				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
- 			},
- 			function() {
- 				$(this).attr('title',$(this).data('tipText'));
- 				$('.tooltip').remove();
- 			}).mousemove(function(e) {
- 				var mousex = e.pageX + 20;
- 				var mousey = e.pageY + 10;
- 				$('.tooltip').css({top : mousey,left : mousex});
- 			});
+ 			helper();
  			
  		}     	
  	});
  };			
 
+ 
+ 
+ function helper()
+ {
+ 	console.log("helper");
+ 	console.log(userMode);
+ 	if(userMode!='buyer' && userMode !='manager')
+ 	{
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			console.log(title);
+			if(title!=" " && title!="" && title!=null)
+			{
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			}
+		},
+		function() {
+			$(this).attr('title',$(this).data('tipText'));
+			$('.tooltip').remove();
+		}).mousemove(function(e) {
+			var mousex = e.pageX + 20;
+			var mousey = e.pageY + 10;
+			$('.tooltip').css({top : mousey,left : mousex});
+		});
+ 	}
+ 	else
+ 	{
+ 		$('.bigSize').hover(function(){
+ 			var title = $(this).attr('title');
+ 			$(this).attr('title', "");
+ 		});
+ 	}
+ } 
 

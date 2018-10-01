@@ -15,7 +15,8 @@ $(document).ready(function() {
 });
 
 function writeNoticeForm() {
-	location.href='writeNoticeForm?';
+	$('#f_main', parent.document).attr('height', '820px');
+	$('#f_main', parent.document).attr('src', 'writeNoticeForm?');
 }
 
 
@@ -30,24 +31,23 @@ function getQnaTable() {
 			{
 				label : '番号',
 				name : 'noticeNum',
-				height : 200,
+				width : 70,
 				align:'center'
 			}, {
 				label : '件名',
 				name : 'title',
-				width : 80,
-				height : 200,
+				width : 450,
 				align:'center'
 			}, {
 				label : '登録日付',
 				name : 'writeBoardDate',
-				height : 200,
+				width : 150,
 				align:'center'
 			}, 
 			 {
 				label : '閲覧数',
 				name : 'hitcount',
-				height : 200,
+				width : 100,
 				align:'center'
 			}, 
 		],
@@ -56,7 +56,7 @@ function getQnaTable() {
 		height : 400,
 		rowNum : 10,
 		rowList:[10,20,30],
-		/*pager : "#jqGridPager",*/
+		pager : "#jqGridPager",
 		loadonce: true,
 		grouping: false,
 		groupingView: {
@@ -66,22 +66,7 @@ function getQnaTable() {
 		loadComplete:function(data)
 		{
 			console.log("loadComplete");
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				if(title!="")
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
+			helper();
 		},
 		gridComplete: function(){
 		},
@@ -99,5 +84,38 @@ function getQnaTable() {
     	},   
 	});
 }
+
+function helper()
+{
+	userMode = $('#userMode').val();
+	console.log(userMode);
+	if(userMode!='buyer' && userMode !='manager')
+	{
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				console.log(title);
+				if(title!=" " && title!="" && title!=null)
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+	}
+	else
+	{
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			$(this).attr('title', "");
+		});
+	}
+} 
 
 

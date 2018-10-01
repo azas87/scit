@@ -1,8 +1,10 @@
 var listMode = "allBuyList";
-var refreshInterver = 600000; // 1000 = 1초
+var refreshInterver = 60000; // 1000 = 1초
 var isSeasonInfoLoad = false;
 var isHomeListLoad=false;
 var isBestSellerLoad=false;
+var userMode;
+var isPopup=false;
 
 $(document).ready(function() {
 	
@@ -13,36 +15,63 @@ $(document).ready(function() {
     });
 	
 	
+	$("#jqGridbestSeller").closest("div.ui-jqgrid-view")
+    .children("div.ui-jqgrid-titlebar")
+    .css("text-align", "center")
+    .children("span.ui-jqgrid-title")
+    .css("float", "none");
+	
+	
 	$('.popdown').popdown();
 	 
-	var userMode = $('#userMode').val();
+	userMode = $('#userMode').val();
 	console.log(userMode);
-	if(userMode!='buyer')
+	if(userMode!='buyer' && userMode !='manager')
 	{
-	    
+		
 	  $(".item").mouseenter(function(){
-		  if($(this).attr('class') != "item search")
+		  
+		  
+
+		  if( ($(this).attr('class') == "item search_title") || ($(this).attr('class') == "item search_text"))
+		  {
+			  $('.search_title').css('flex-grow',1);
+		      $('.search_title').css('font-size',"3em");
+		      $('.search_title').css('font-weight','bold');
+		  }
+		  else
 		  {
 			  $(this).css('flex-grow',1);
 		      $(this).css('font-size',"3em");
 		      $(this).css('font-weight','bold');
-/*		      $(this).css('background-color',"powderblue");
-*/	/*	      $('input').css('line-height', '60px');
+	/*		      $(this).css('background-color',"powderblue");
+	*/	/*	      $('input').css('line-height', '60px');
 		      $('input').css('width', '200px');*/
 		  }
+		  
 	     
 	    });
 	    
 	  $(".item").mouseleave(function(){
+		  
+		  if( ($(this).attr('class') == "item search_text"))
+		  {
+			  $('.search_title').css('flex-grow',1);
+		      $('.search_title').css('font-size',"2em");
+		      $('.search_title').css('font-weight','normal');
+		  }
+		  
 	      $(this).css('flex-grow',1);
 	      $(this).css('font-size',"2em");
 	      $(this).css('font-weight','normal');
 	      /*$(this).css('background-color',"white");*/
 	    });
 	  
-	  
-
 	}   
+	else
+	{
+		$('.item:nth-child(1)').css('font-size','2em');
+	}
 	  
 });
 
@@ -94,7 +123,7 @@ function newPage(action)
  	case "noticeForm?":
  	case "qnaForm?":
  	case "faqForm?":
- 		height='700px';
+ 		height='800px';
  		break;
  	case "fishInfoList?":
  		height='3000px';
@@ -150,7 +179,7 @@ function homeList() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 230,
 				height : 200,
@@ -192,7 +221,7 @@ function homeList() {
 		scrollOffset : 0,
 		//altRows:true,
 		width : 1100,
-		height : 505,
+		height : 510,
 		rowNum : 10,
 		rowList:[10,20,30],
 		pager : "#jqGridPager",
@@ -209,6 +238,10 @@ function homeList() {
 		},
 		gridComplete: function(){
 		},
+		onCellSelect: function(rowid, index, contents, event) 
+    	{    
+			console.log(rowid);
+    	}
 		
 	});
 }
@@ -235,7 +268,7 @@ function sellerWishList() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -271,7 +304,7 @@ function sellerWishList() {
 				height : 200,
 				align:'center'
 			}, {
-				label : '購買者選択',//구매자선택, 판매자가 구매자 선택(딜을 넣는다),전체리스트에서는 if로 구매자 판매자 구분해서 넣어야하나?,글자크기커서 넓이를 조정해야함
+				label : '販売要望',//구매자선택, 판매자가 구매자 선택(딜을 넣는다),전체리스트에서는 if로 구매자 판매자 구분해서 넣어야하나?,글자크기커서 넓이를 조정해야함
 				name : 'buyerSelect',
 				width : 80,
 				height : 200,
@@ -314,11 +347,13 @@ function sellerWishList() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "buyerSelect")
-    		{	console.log(jQuery("#jqGrid").getRowData(rowid));
+    		{	
+    			console.log(rowid);
+    			console.log(jQuery("#jqGrid").getRowData(rowid));
 				var obj = $("#jqGrid").getRowData(rowid);
     			
 				if(obj.buyerSelect != ""){
-					var con = confirm('구매자를 선택하시겠습니까?');
+					var con = confirm('販売要請を送りますか？');
     				if(con==true){           		 		
            		 		$.ajax({
            				url:"selectBuyer",
@@ -367,7 +402,7 @@ function myList_ing_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -448,7 +483,7 @@ function myList_ing_buyer() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")
-    		{	var con = confirm('재구입하시겠습니까?');
+    		{	var con = confirm('再購入しますか?');
     				if(con==true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
            		 		location.href="writeBuyBoardForm";
@@ -457,7 +492,7 @@ function myList_ing_buyer() {
     				}    			
     		}else if(cm[index].name == "sellerSelect"){
     			
-    			var con = confirm('판매자를 선택하시겠습니까?');
+    			var con = confirm('販売者を選択しますか');
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
     					var obj = $("#jqGrid").getRowData(rowid);
@@ -508,7 +543,7 @@ function myList_ing_seller() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -578,7 +613,7 @@ function myList_ing_seller() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "selectCancel")
-    		{	var con = confirm('정말 취소하시겠습니까?');
+    		{	var con = confirm('取り消ししますか?');
     				if(con == true){
     					console.log(jQuery("#jqGrid").getRowData(rowid));
     	    			var obj = $("#jqGrid").getRowData(rowid);
@@ -625,7 +660,7 @@ function myAllList_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -704,7 +739,7 @@ function myAllList_buyer() {
     	{    
     		var cm = $(this).jqGrid('getGridParam','colModel');    
     		if(cm[index].name == "再購入2")    			
-    		{	var con = confirm('재구입하시겠습니까?');
+    		{	var con = confirm('再購入しますか?');
 				if(con==true){
 					console.log(jQuery("#jqGrid").getRowData(rowid));
    		 			location.href="writeBuyBoardForm";
@@ -716,7 +751,7 @@ function myAllList_buyer() {
     			var obj = $("#jqGrid").getRowData(rowid);
        		 	
     			if(obj.deletee != ""){
-       		 		var con = confirm('정말삭제하시겠습니까?');    			
+       		 		var con = confirm('削除しますか?');    			
        		 		if(con==true){       		 		
 	       		 		$.ajax({
 	    				url:"deleteMyList_buyer",
@@ -772,7 +807,7 @@ function myAllList_buyer() {
  				align:'center',
  				hidden:true
  			}, {
-				label : '購買日付',
+				label : '締切',
 				name : 'deadline',
 				width : 250,
 				height : 200,
@@ -903,12 +938,12 @@ function bestSeller() {
 				align:'center'
 			}, {
 				label : '市価',
-				name : 'total',
+				name : 'price',
 				width : 130,
 				align:'center'
 			}, 
 		],
-		caption:"bestSeller",
+		caption:"今、売れている魚",
 		scrollOffset : 0,
 		hidegrid : false,
 		hidden:false,
@@ -997,12 +1032,12 @@ function seasonInfo() {
 				align:'center'
 			}, {
 				label : '市価',
-				name : 'total',
+				name : 'price',
 				width : 130,
 				align:'center'
 			}, 
 		],
-		caption:"seasonInfo",
+		caption:"旬の魚",
 		scrollOffset : 0,
 		hidegrid : false,
 		viewrecords : true,
@@ -1127,24 +1162,36 @@ function today(){
 
 function helper()
 {
-	if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+	console.log("helper");
+	console.log(userMode);
+	if(userMode!='buyer' && userMode !='manager')
+	{
+		if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
+		{
+			$('.bigSize').hover(function(){
+				var title = $(this).attr('title');
+				console.log(title);
+				if(title!=" " && title!="" && title!=null)
+				{
+					$(this).data('tipText', title).removeAttr('title');
+					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+				}
+			},
+			function() {
+				$(this).attr('title',$(this).data('tipText'));
+				$('.tooltip').remove();
+			}).mousemove(function(e) {
+				var mousex = e.pageX + 20;
+				var mousey = e.pageY + 10;
+				$('.tooltip').css({top : mousey,left : mousex});
+			});
+		}
+	}
+	else
 	{
 		$('.bigSize').hover(function(){
 			var title = $(this).attr('title');
-			console.log(title);
-			if(title!=" " && title!="" && title!=null)
-			{
-				$(this).data('tipText', title).removeAttr('title');
-				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-			}
-		},
-		function() {
-			$(this).attr('title',$(this).data('tipText'));
-			$('.tooltip').remove();
-		}).mousemove(function(e) {
-			var mousex = e.pageX + 20;
-			var mousey = e.pageY + 10;
-			$('.tooltip').css({top : mousey,left : mousex});
+			$(this).attr('title', "");
 		});
 	}
 } 

@@ -221,7 +221,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId,
 			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
 			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
-			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -231,9 +231,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		from 
 			BuyList
-		where			
-			saleStatus = 'onSale'
-		order by buyNum asc
+		<!-- where			
+			saleStatus = 'onSale' -->
+		order by deadline desc
 	</select>
 	
 	
@@ -246,7 +246,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId,
 			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
 			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
-			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -257,7 +257,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where b.buynum=s.buynum 
 		and buyerId = #{userId}
 		and saleStatus = 'onSale'	
-		order by buyNum asc			
+		order by deadline desc		
 	</select>	
 	
 
@@ -269,7 +269,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId,
 			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
 			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
-			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -277,7 +277,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			location 
 		from BuyList b, (select * from SaleList where  sellerid=#{userId}) s
 		where b.buynum = s.buyNum
-		order by saleStatus asc
+		and b.saleStatus = 'onSale'
+		order by deadline desc
+		<!-- order by saleStatus asc -->
 	</select>
 
 <!--구매자 내글 목록-->		
@@ -288,7 +290,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId,
 			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
 			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
-			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -300,7 +302,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BuyList
 		where			
 			buyerId=#{userId}
-		order by buyNum asc
+		order by deadline desc
 	</select>
 	
 <!--판매자 나의 모든리스트-->		
@@ -311,7 +313,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId,
 			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
 			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
-			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -550,7 +552,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,sysdate
 		)
 	</insert>
-	
+<!--판매자 선호리스트  -->	
 	<select id="sellerWishList" resultType="BuyList" parameterType="string">
 		SELECT 
 			buyNum,
@@ -558,7 +560,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			buyerId,
 			TO_CHAR(registDate, 'YYYY-MM-DD') as registDate,
 			TO_CHAR(uploadDate, 'YYYY-MM-DD') as uploadDate,
-			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI:SS') as deadline,
+			TO_CHAR(deadline, 'YYYY-MM-DD HH24:MI') as deadline,
 			weight,
 			saleStatus,
 			price,
@@ -572,7 +574,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			w.id = #{userid} 
 			and w.wish=b.fishname
 			and b.salestatus='onSale'
-		order by b.buyNum asc
+		order by b.deadline desc
 	</select>
 	
 	<select id="selectOneBuylist" parameterType="int" resultType="BuyList">
@@ -599,7 +601,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getMarketPrice" resultType="AvgList">
 	
-		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList
+		SELECT fishName, to_number(to_char(dates, 'yyyymmdd')) as dates, avgPrice FROM WeekAvgList 
 		
 	</select>
 	
@@ -615,17 +617,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<select id="getSellerStar" parameterType="int"  resultType="SellerInfo">
-		
-		SELECT 
+	 <select id="getSellerStar" parameterType="int"  resultType="SellerInfo">
+	  
+	SELECT id 
+	FROM 
+      (SELECT 
 			round(avg(star),0) as star, r.sellerId as id
 		FROM 
 			review r, salelist s
 		WHERE 
 			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
 		GROUP BY 
-			r.sellerId
+			r.sellerId)
+    WHERE star IN 
+    	(SELECT 
+			max(avg(star)) as star
+		FROM 
+			review r, salelist s
+		WHERE 
+			s.buyNum = #{buyNum} AND s.sellerId=r.sellerId 
+        GROUP BY 
+			r.sellerId)
+			
 			
 	</select>
 	
+	<select id="successCount" parameterType="string" resultType="int">
+	
+		 SELECT count(*) from buylist where successSellerID = #{value}
+		 
+	</select>
 </mapper>
