@@ -58,7 +58,6 @@ $(function(){
 						$('#myDropdown').html('');
 					}
 				}
-				
 			},
 			
 			error:function(){

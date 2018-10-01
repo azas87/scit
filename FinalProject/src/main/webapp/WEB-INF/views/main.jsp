@@ -43,6 +43,12 @@
  
  <link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  <script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
+ 
+ <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/alertify.core.css" />
+<link rel="stylesheet" href="./resources/css/alertify.default.css" id="toggleCSS" />
+
+<script type="text/javascript" src="./resources/js/alertify.js"></script>
+<script type="text/javascript" src="./resources/js/alertify.min.js"></script>
 
 
 <script>
