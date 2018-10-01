@@ -103,10 +103,12 @@ function check() {
 
 	var fishName = $('#fishName').val();
 	var location = $('#location').val();
-	alert(location);
+	console.log(location);
 	var weight = $('#weight').val();
 	var price = $('#price').val();
 	var deadline = $('#deadline').val();
+	
+	
 
 	if(fishName.length==0){
 		alert('魚種を入力してください。');
@@ -146,6 +148,9 @@ function check() {
 	var takenTime = $('#finishHour').val();
 	var finishTime = plusTime(startDate, takenTime);
 	$('#deadline').val(finishTime);
+	
+	$('#f_main', parent.document).attr('height', '1600px');
+	
 	return true;
 }
 //선택한 생선이름에 대한 원산지 정보 select 박스에 주입

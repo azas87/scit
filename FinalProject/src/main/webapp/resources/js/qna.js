@@ -85,7 +85,8 @@ function getQnaTable() {
         	{
         		console.log(rowid);
         		var obj = $("#jqGridBoard").getRowData(rowid);
-           		alert(JSON.stringify(obj));
+        		console.log(JSON.stringify(obj));
+           		$('#f_main', parent.document).attr('height', '1050px');
         		location.href="boardDetail?qnaNum="+obj.qnaNum;
 
         	}

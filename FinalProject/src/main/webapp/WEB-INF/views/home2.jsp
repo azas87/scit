@@ -153,10 +153,10 @@ function cancel() {
 				data:{"password":str,
 					  },
 				success:function(data){
-					alert('성공');
+					console.log('성공');
 				},
 				error:function(){
-					alert("통신실패");
+					console.log("통신실패");
 				}
 			});
 	

@@ -91,7 +91,10 @@ function rebuy2 (cellvalue, options, rowObject) {
  
 function rebuy3 (cellvalue, options, rowObject) {
 	//console.log(rowObject);
-	return '返金'; 
+	if(rowObject.saleStatus=='saleComplete')
+		return '返金';
+	else
+		return"";
 };
 function sellerDetail (seller) {
 	
@@ -132,7 +135,7 @@ function sellerDetail (seller) {
  			{
  				label : '取引日付',
  				name : 'deadline',
- 				width:295,
+ 				width:290,
  				align:'center'
  			
  			}, {
@@ -179,10 +182,10 @@ function sellerDetail (seller) {
 
  		],
  		viewrecords : true,
- 		width:1300,
+ 		width:1295,
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:500,
+ 		height:505,
  		pager : "#jqGridPager",
  		loadonce: true,
  		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
@@ -345,7 +348,7 @@ function sellerDetail (seller) {
  		width:1295,
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:500,
+ 		height:505,
  		pager : "#jqGridPager",
  		loadonce: true,
  		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
@@ -436,19 +439,7 @@ function confirm(obj) {
 	//리뷰등록을 위해 buyNum 저장해두기
 	$('#buyNum').val(obj.buyNum);
 	$('#sellerId').val(obj.successSellerId);
-	//수취확인
-	$.ajax({
-		url:"confirm",
-		type:"get",
-		data:{"buyNum":obj.buyNum,
-			  },
-		success:function(data){
-			ResetBuyList();
-		},
-		error:function(){
-			alert("통신실패");
-		}
-	});
+	
 	
 	reset();
 	alertify.set({ buttonReverse: true });
@@ -456,6 +447,20 @@ function confirm(obj) {
 		if (e) {
 			alertify.success("You've clicked OK");
 			window.open("reviewForm", "reviewForm", "width=400px,height=300px,left=500px,top=200px");
+			console.log("ok");
+			//수취확인
+			$.ajax({
+				url:"confirm",
+				type:"get",
+				data:{"buyNum":obj.buyNum,
+					  },
+				success:function(data){
+					ResetBuyList();
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
 		} else {
 			alertify.error("You've clicked Cancel");
 		}
@@ -494,6 +499,7 @@ function refund(obj) {
 	}
 
 function ResetBuyList() {	
+	console.log("ResetBuyList");
 	//$( "#jqGrid").jqGrid().setGridParam({url:'jqgrid_R',datatype:'json'}).trigger('reloadGrid');
 	var period = $('#period').val();
 	var startDay = $('#startDay').val();
