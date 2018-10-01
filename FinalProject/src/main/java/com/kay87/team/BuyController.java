@@ -66,7 +66,7 @@ public class BuyController {
 		if(priority3!=null)
 		dao.insertPriority3(new PriorityList(0, 0, priority3, 3));
 		
-		return "main";
+		return "redirect:/main";
 	}
 	
 	
@@ -156,7 +156,7 @@ public class BuyController {
 		
 		String id =(String)session.getAttribute("loginId");
 		List<BuyList> buyListHistory = getBuyListHistory(id, period,startDay,endDay);
-		System.out.println(buyListHistory);
+		System.out.println("내역리스트"+buyListHistory);
 		Gson gson = new Gson();
 		//String jsonPlace = "{\"total\":"+navi.getTotalPageCount()+",\"rows\":"+ gson.toJson(buyListHistory) + "}";
 		String jsonPlace = "{\"rows\":"+ gson.toJson(buyListHistory) + "}";
