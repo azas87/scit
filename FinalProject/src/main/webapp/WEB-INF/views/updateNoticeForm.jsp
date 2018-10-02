@@ -61,7 +61,7 @@ function boardList(){
 <input type="hidden" name="noticeNum" value="${Notice.noticeNum}"/>
 <input type="submit" value="확인">
 
-<input type="button" value="목록으로" onclick="boardList()"></td>
+<input type="button" value="戻る" onclick="boardList()"></td>
 </tr>
 </table>
 

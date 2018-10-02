@@ -167,13 +167,13 @@ function sellerDetail (seller) {
  			},{
  				label : '受取',
  				width:100,
- 				name : '確認',
+ 				name : 'check',
  				formatter: rebuy2,
  				cellattr:mouseCursor,
  				align:'center'
  			},{
  				label : '返金',
- 				name : '払い戻し',
+ 				name : 'del',
  				width : 100,
  				formatter: rebuy3,
  				cellattr:mouseCursor,
@@ -212,7 +212,7 @@ function sellerDetail (seller) {
  			*/
  			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
- 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
+ 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'合計', price:moneySum });
  			$('.footrow').css('fontSize','1.5em');
 
  			$('table.ui-jqgrid-ftable td:eq(2)').hide();
@@ -273,13 +273,22 @@ function sellerDetail (seller) {
      			location.href="writeBuyBoardForm?buyNum="+buyNum;
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
      		}
-     		else if(cm[index].name == "確認") {
-     			confirm($("#jqGrid").getRowData(rowid));
+     		else if(cm[index].name == "check") {
+     			var obj = $("#jqGrid").getRowData(rowid);
+     			if(obj.check!="")
+     			{
+     				confirm(obj);
+     			}
+     			
      			//console.log($("#jqGrid").getRowData(rowid));
      			
      		}
-     		else if(cm[index].name == "払い戻し") {
-     			refund($("#jqGrid").getRowData(rowid));
+     		else if(cm[index].name == "del") {
+     			var obj = $("#jqGrid").getRowData(rowid);
+     			if(obj.del != "")
+     			{
+     				refund($("#jqGrid").getRowData(rowid));
+     			}
      			
      		}
      		else if(cm[index].name == "successSellerId") {
@@ -358,7 +367,7 @@ function sellerDetail (seller) {
  		{
  			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
- 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
+ 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'合計', price:moneySum });
  			$('.footrow').css('fontSize','1.5em');
  			$('table.ui-jqgrid-ftable td:eq(1)').hide();
  			$('table.ui-jqgrid-ftable td:eq(3)').hide();
@@ -437,7 +446,7 @@ function confirm(obj) {
 	alertify.confirm("レビューを登録されますか", function (e) {
 		if (e) {
 			alertify.success("You've clicked OK");
-			window.open("reviewForm", "reviewForm", "width=400px,height=300px,left=500px,top=200px");
+			window.open("reviewForm", "reviewForm", "width=290px,height=350px,left=500px,top=200px");
 			console.log("ok");
 			//수취확인
 			$.ajax({
