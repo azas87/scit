@@ -1,0 +1,58 @@
+
+#tab
+  {
+  border-radius:5px;
+  	/* border:1px solid #cccccc; */
+  	background:url(../img/bg.png) repeat;
+	padding:1px;
+	margin: 1px;
+	text-align: center;
+	margin:0px auto;
+	margin-bottom: 20px;
+	margin-top:30px;	
+	width:900px;
+  }
+
+
+    #tab .items {
+    border:0px;	
+    display: flex;
+    flex-direction: row-reverse;
+    height:60px;    
+  }
+  #tab .item
+  {
+    line-height: 60px;
+    list-style: none;
+    margin:0px;
+        margin-right: 16px;
+    font-size:3em;
+  }
+  
+ #search_cells
+{
+	margin-top:5px;
+	height:50px;
+	max-width: 300px;
+	font-size: 1em;
+}
+
+.title
+{
+	width:50%;
+	border-right:1px solid white;	
+}
+
+.tooltip
+{
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:3.5em;
+	text-align: center;
+	z-index: 1000;
+}
