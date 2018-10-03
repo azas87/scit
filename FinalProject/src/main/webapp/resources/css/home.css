@@ -1,18 +1,10 @@
-/* .google-visualization-atl .legend
-{
-	font-size:20px !important;
-} */
 #blank_div
 {
 	height:96px;
 }
 
-body
+#menu_wrap 
 {
-	/* background:url(../img/bg.png) repeat; */
-}
-
-#menu_wrap {
 	position: fixed;
 	top: px;
 	left: 0px;
@@ -23,11 +15,11 @@ body
 	background-color: #ffffff;
   	left: 0px;
   	margin:0px auto;
-  	/* background:url(../img/bg.png) repeat; */
   	background: #0c73cc;
 }
 
 
+/* iframe */
 #page-wrapper
 {
 	width:100%;
@@ -35,7 +27,7 @@ body
  */	margin:0 auto;
 }
 
-
+/* 상단 바 전체 테두리 */
  #contain
 {
 	width:1450px;
@@ -43,20 +35,8 @@ body
 	display:flex;
 }
 
-/*  #contain div{
-	border:1px solid #cccccc;
-	padding:1px;
-	margin: 1px;
-	text-align: center;
-} */
 
-#list {
-	border:1px solid #cccccc;
-	width:1100px;
-	margin: 0 auto;
-	overflow: hidden;
-}
-
+/* 글자 크게 보여주는 기능 */
 .tooltip
 {
 	display:none;
@@ -71,119 +51,46 @@ body
 	z-index: 1000;
 }
 
-.smallList{
-	width:1150px;
-	height:300px;
-	margin: 0 auto;
-    border:0px;	
-     display: flex;
-}
-.smallList .flexs {
-    flex-grow: 1;
-  }
-  
+/* 상단 바의 각 버튼 */  
+.nav-item
+{
+	flex-grow: 1;
+	font-size: 2em; 
+	line-height:60px;
+	height:80px;
+	border-right:1px solid #cccccc;
+	
+	padding-right: 5px;
+	padding-left: 5px;
 
-#header{
-	width:180px;
-	line-height:100px;
-	color:#666;
-	font-size:100px;
-	text-align:center;
+}
+.nav-item:nth-child(1)
+{
+	border-left:1px solid #cccccc;
 }
 
 
-#nav{
-	width:1080px;
-}
-
-    #outForm .items, #nav .items {
+#outForm .items
+{
     border:0px;	
     display: flex;
     flex-direction: row;
     height:60px;   
-
-  }
-  #nav .item, #outForm .item
-  {
+}
+  
+#outForm .item
+{
     line-height: 60px;
     list-style: none;
     margin:0px;
     flex-grow: 1;
     font-size: 1.5em;   
-  }
-   /* #nav .item:nth-child(1)
-  {
-
-  } */
-  
-  #tab
-  {
-  border-radius:5px;
-  	width:1100px;
-  	box-sizing:true;
-  	/* border:1px solid #cccccc; */
-  	background:url(../img/bg.png) repeat;
-	padding:1px;
-	margin: 1px;
-	text-align: center;
-	margin:0px auto;
-	margin-bottom: 10px;	
-  }
-  
-   #tab div{
-			/* border:1px solid #cccccc; */
-			padding:1px;
-			margin: 1px;
-			text-align: center;
-		}
-
-    #tab .items {
-    border:0px;	
-    display: flex;
-    flex-direction: row;
-    height:60px;    
-
-  }
-  #tab .item
-  {
-    line-height: 60px;
-    list-style: none;
-    margin:0px;
-    flex-grow: 1;
-    font-size:2em;
-    border-right:1px solid white;
-    cursor:pointer;
-  }
-  
-	
-	#tab .item:nth-child(1)
-	{
-		background:white;
-		color:black;
-		border-right:2px solid white;
-		border-radius:5px;
-		font-size:3em;
-	}
-  
-  #tab .item:nth-child(4), #tab .item:nth-child(5)
-  {
-  	border:0px;	
-    list-style: none;
-    margin:0px;
-    flex-grow: 1;
-    cursor:cursor;
-    
-  }
-
- #search_cells
-{
-	margin-top:5px;
-	height:50px;
-	max-width: 300px;
-	font-size: 1em;
 }
 
-* { margin:0; padding:0; }
+
+
+
+/* 부트스트랩 쪽 내용인데 뭐에 쓰는걸까? */
 ul,li { list-style:none; }
 a { text-decoration:none; color:#000; }
 .tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
@@ -192,8 +99,6 @@ a { text-decoration:none; color:#000; }
 .tab li.on { background-color:#eee; color:#f00; }
 .tab_con { clear:both; margin-top:5px; border:1px solid #ddd; }
 .tab_con div { display:none; height:100px; background:#fff; line-height:100px; text-align:center; }
-
-
 
  .navbar{
     background: #0c73cc !important;
@@ -226,24 +131,6 @@ a { text-decoration:none; color:#000; }
 
 #navbarTogglerDemo03{
 	height:80px;
-	
-}
-
-.nav-item
-{
-	flex-grow: 1;
-	font-size: 2em; 
-	line-height:60px;
-	height:80px;
-	border-right:1px solid #cccccc;
-	
-	padding-right: 5px;
-	padding-left: 5px;
-
-}
-.nav-item:nth-child(1)
-{
-	border-left:1px solid #cccccc;
 }
 
 .bg-light
@@ -253,19 +140,100 @@ a { text-decoration:none; color:#000; }
 	padding-top: 10px;
 }
 
+/* home.jsp에 있던 것 */
 
-.switch
-{
-	width:150px;
+
+/* Popup box BEGIN */
+.hover_bkgr_fricc{
+
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+.hover_bkgr_fricc .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
 }
 
-#audio
-{
-	display:flex;
-	flex-direction: column;
+.hover_bkgr_fricc > div {
+    /* background-color: #fff; */
+    background:url(./resources/img/bg.png) repeat;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 600px;
+    min-height: 200px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+    padding: 5px 5%;
+}
+.popupCloseButton {
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: #ccc;
 }
 
-.ui-jqgrid .ui-jqgrid-titlebar
+
+/* 회원가입에 사용하는 큰 체크박스 */
+.legend
 {
-	padding-left:140px;
+	font-size: 20px;
+}
+
+input.radio:empty ~ label
+{
+	line-height:2em;
+	text-indent:2em;
+	font-size:3em;
+	margin-top:1em;
+}
+
+label
+{
+	width:350px;
+}
+
+input.radio:empty ~ label:before
+{
+	width:2em;
+}
+
+#close
+{
+	font-size:2em;
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+
+
+/* 회원 가입 선택 밖의 배경 */
+form	
+{
+	background: #ffffff;
+	border-radius: 15px;
 }

@@ -53,190 +53,13 @@
 <style>
 
 
-/* Popup box BEGIN */
-.hover_bkgr_fricc{
-
-    background:rgba(0,0,0,.4);
-    cursor:pointer;
-    display:none;
-    height:100%;
-    position:fixed;
-    text-align:center;
-    top:0;
-    width:100%;
-    z-index:10000;
-}
-.hover_bkgr_fricc .helper{
-    display:inline-block;
-    height:100%;
-    vertical-align:middle;
-}
-
-form	
-{
-	background: #ffffff;
-	border-radius: 15px;
-}
-
-
-.hover_bkgr_fricc > div {
-    /* background-color: #fff; */
-    background:url(./resources/img/bg.png) repeat;
-    box-shadow: 10px 10px 60px #555;
-    display: inline-block;
-    height: auto;
-    max-width: 600px;
-    min-height: 200px;
-    vertical-align: middle;
-    width: 60%;
-    position: relative;
-    border-radius: 8px;
-    padding: 5px 5%;
-}
-.popupCloseButton {
-    background-color: #fff;
-    border: 3px solid #999;
-    border-radius: 50px;
-    cursor: pointer;
-    display: inline-block;
-    font-family: arial;
-    font-weight: bold;
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    font-size: 25px;
-    line-height: 30px;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-}
-.popupCloseButton:hover {
-    background-color: #ccc;
-}
-
-/* Popup box BEGIN */
-
-
-
-.legend
-{
-	font-size: 20px;
-}
-
-
-input.radio:empty ~ label
-{
-	line-height:2em;
-	text-indent:2em;
-	font-size:3em;
-	margin-top:1em;
-}
-
-label
-{
-	width:350px;
-}
-
-input.radio:empty ~ label:before
-{
-	width:2em;
-}
-
-#close
-{
-	font-size:2em;
-	margin-top:15px;
-	margin-bottom:15px;
-}
-
 </style>
-<script>
-$(window).load(function () {
-    $(".trigger_popup_fricc").click(function(){
-       $('.hover_bkgr_fricc').show();
-    });
-   
-    /* $('#close, .popupCloseButton').click(function(){ */
-    $('#close').click(function(){
-    	$('#memberStatus_page').css('display','block');
-    	$('#grade_page').css('display','none');
-    	$('input[class=radio]').attr('checked',false);
-        $('.hover_bkgr_fricc').hide();
-    }); 
-    
-    $('.popdown').popdown();
-    
-    $('#radio1, #radio2').click(function(){
-    	$('#grade_page').css('display','block');
-    	$('#memberStatus_page').css('display','none');
-    });
-    
-    $('#radio3, #radio4').click(function(){
-    	$('#outForm').submit();
-    });
-    
-    
-});
-
-function cancel() {
-	
-	reset();
-	alertify.prompt("パスワードをもう一度入力してください。", function (e, str) {
-		if (e) {
-			alertify.success("You've clicked OK and typed: " + str);
-			
-			$.ajax({
-				url:"cancel",
-				type:"post",
-				data:{"password":str,
-					  },
-				success:function(data){
-					alert('성공');
-				},
-				error:function(){
-					alert("통신실패");
-				}
-			});
-	
-			
-			
-		} else {
-			alertify.error("You've clicked Cancel");
-		}
-	}, "");
-	return false;
-}
-
-function reset () {
-	$("#toggleCSS").attr("href", "./resources/css/alertify.default.css");
-	alertify.set({
-		labels : {
-			ok     : "OK",
-			cancel : "Cancel"
-		},
-		delay : 5000,
-		buttonReverse : false,
-		buttonFocus   : "ok"
-	});
-	
-	var audio = new Audio('./resources/alram.wav');
-	audio.play();
-}
-</script>
-
-
 
 <body>
 
 <div id="menu_wrap">
 
 <div id="contain">
-
-<!-- 	<div id="header">
-		<div id="clock">	</div>
-		
-	</div> -->
-	
 
 <nav class="navbar navbar-expand-sm   navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -347,10 +170,6 @@ function reset () {
 </nav>
 
 </div>
-
-
-
-
 
 </div>
 

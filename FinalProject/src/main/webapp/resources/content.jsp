@@ -11,7 +11,7 @@
 <div class="popdown-content">
 <input type="hidden" id="userMode" value="${sessionScope.userMode}">
 	<header>
-		<h2>신규 글 알림</h2>
+		<h2>新しいお知らせ</h2>
 
 
 	</header>
@@ -29,6 +29,7 @@
 	$(document).ready(function() {
 		console.log("132");
 		//jqGridmyBuyList();
+		console.log($('#userMode').val());
 		if($('#userMode').val() == 'buyer')
 		{
 			myList_ing_buyer_pop();
@@ -45,7 +46,7 @@
 		
 		$.jgrid.gridUnload("#jqGrid_pop");
 		$("#jqGrid_pop").jqGrid({
-			url : "myList_ing_buyer",
+			url : "myList_ing_buyer?alram=1",
 			mtype : "GET",
 			datatype : "json",
 			colModel : 
@@ -110,7 +111,7 @@
 					name : 'sellerSelect',
 					width : 100,
 					height : 200,
-					formatter: select,
+					formatter: sellerSelect,
 					cellattr:mouseCursor,
 					align:'center'
 				}, 
@@ -180,12 +181,16 @@
 		});
 	}
 
+	function sellerSelect (cellvalue, options, rowObject) {
+		//console.log(rowObject);	
+		   return '選択';
+		};	
 	
 	function sellerWishList_pop() {
 		console.log("sellerWishList_pop");
 		$.jgrid.gridUnload('#jqGrid_pop');
 		$("#jqGrid_pop").jqGrid({
-			url : "sellerWishList",
+			url : "sellerWishList?alram=1",
 			mtype : "GET",
 			datatype : "json",
 			colModel : 

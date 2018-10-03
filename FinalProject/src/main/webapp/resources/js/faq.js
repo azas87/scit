@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 
 	getFaqTable();
@@ -79,7 +77,7 @@ function getFaqTable() {
         		
         		
         		var obj = $("#jqGridBoard").getRowData(rowid);
-           		alert(JSON.stringify(obj));
+        		console.log(JSON.stringify(obj));
         		location.href="FAQDetail?FAQNum="+obj.FAQNum;
 
         	}

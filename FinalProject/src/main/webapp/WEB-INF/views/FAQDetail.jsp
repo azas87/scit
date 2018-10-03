@@ -69,7 +69,7 @@ function deleteBoard(FAQNum) {
 
 <div class="div">
 <p class="p">
-<input type="button" value="목록으로" onclick="boardList()"/>
+<input type="button" value="戻る" onclick="boardList()"/>
 <c:if test="${sessionScope.loginId eq faq.id }">
 <input type="button" value="수정" onclick="update(${faq.FAQNum})"/>
 <input type="button" value="삭제" onclick="deleteBoard(${faq.FAQNum})"/>

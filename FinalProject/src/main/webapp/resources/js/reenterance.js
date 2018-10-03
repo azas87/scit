@@ -12,7 +12,7 @@ $(function(){
 				  "email":email},
 			
 			success:function(data){
-				alert(data);
+				console.log(data);
 				if(data.length==0){
 				/*
 					var temp='잘못된 사용자 정보 입니다.';
@@ -37,7 +37,7 @@ $(function(){
 
 
 function check() {
-	alert('check');
+	console.log('check');
 	var id = $('#id').val();
 	var email =  $('#email').val();
 	var password = $('#password').val();
@@ -92,7 +92,7 @@ function check() {
 
 	}
 	if(grade=='buyer'){	
-		alert('buyer');
+		console.log('buyer');
 		if( !pattern1.test(password) || !pattern2.test(password) || password.length < 8 || password.length >= 16){ 
 			alert("パスワードは8桁～16桁の英数記号混在にしてください。");
 	

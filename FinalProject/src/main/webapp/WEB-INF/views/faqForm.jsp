@@ -4,148 +4,59 @@ language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>Home</title>
-<link rel="stylesheet" href="./resources/css/button.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
-<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/jquery-ui.css" />
-<!-- The link to the CSS that the grid needs -->
-<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/ui.jqgrid.css" />
-
-
-
-
- <script type="text/javascript" src="./resources/js/jquery.min.js"></script> 
- <script type="text/javascript" src="./resources/js/jquery-ui.min.js"></script>
- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
-<script type="text/javascript" src="./resources/js/faq.js"></script>
-
+<!-- For jqgrid -->
+<link rel="stylesheet" type="text/css" media="screen"href="./resources/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" media="screen"href="./resources/css/ui.jqgrid.css" />
+<script type="text/javascript" src="./resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="./resources/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
 <script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
-<style>
-
-#tab
-  {
-  border-radius:5px;
-  	box-sizing:true;
-  	/* border:1px solid #cccccc; */
-  	background:url(./resources/img/bg.png) repeat;
-	padding:1px;
-	margin: 1px;
-	text-align: center;
-	margin:0px auto;
-	margin-bottom: 20px;
-	margin-top:30px;	
-	width:900px;
-  }
+<!-- For jqgrid -->
 
 
-    #tab .items {
-    border:0px;	
-    display: flex;
-    flex-direction: row-reverse;
-    height:60px;    
-  }
-  #tab .item
-  {
-    line-height: 60px;
-    list-style: none;
-    margin:0px;
-        margin-right: 16px;
-    font-size:3em;
-  }
-  
- #search_cells
-{
-	margin-top:5px;
-	height:50px;
-	max-width: 300px;
-	font-size: 1em;
-}
+<!-- 여기서 테이블 만드로 crud에서 페이저 추가. 그래서 여기가 먼저 수행되야 함. -->
+<script type="text/javascript" src="./resources/js/faq.js"></script>
 
-.title
-{
-	width:50%;
-	border-right:1px solid white;	
-}
 
-.tooltip
-{
-	display:none;
-	position:absolute;
-	border:1px solid #333;
-	background-color:#161616;
-	border-radius:5px;
-	padding:10px;
-	color:#fff;
-	font-size:3.5em;
-	text-align: center;
-	z-index: 1000;
-}
-</style>
-<script>
-$(document).ready(function(){
-	var timer;
-	
-getFaqTable();
-	
-	$('#jqGridBoard').jqGrid('navGrid',"#jqGridPager", {                
-	       search: false, // show search button on the toolbar
-	       add: false,
-	       edit: false,
-	       del: false,
-	       refresh: true
-	   });
-	
-	$("#search_cells").on("keyup", function() {
-		var self = this;
-		if(timer) { clearTimeout(timer); }
-		timer = setTimeout(function(){
-			//timer = null;
-			$("#jqGridBoard").jqGrid('filterInput', self.value);
-		},0);
-	});
-	
-	
-	$('#jqGridPager_left').css('display','none');
-	$('#jqGridPager_center').css('width','570px');
-	$('#jqGridPager_right').css('padding-right','26px');
-	
-	
-	$('#input_jqGridPager').css('width','310px');
-	$('#input_jqGridPager').css('font-size','1.5em');	
-	
-	
-});
-</script>
+
+<!-- common -->
+<link rel="stylesheet" href="./resources/css/button.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="./resources/css/searchTab.css" />
+<script type="text/javascript" src="./resources/js/zoom.js"></script>
+<script type="text/javascript" src="./resources/js/crudCommon.js"></script>
+<!-- common -->
+
 </head>
 <body>
-
-<div id="tab">
+	<div id="tab">
 		<!-- <div class="" title="검색어">검색 : <input type="text" id="search_cells" title=""></div> -->
 		<div class="items">
-			<div class="item search_text"><input type="text" id="search_cells" title=""></div>
-			<div class="item search_title" title="검색어">検索</div>			
-			
-			<c:if test="${sessionScope.userMode eq 'buyer'||sessionScope.userMode eq 'manager'}">  
-			<div class="item title">FAQ</div>
+			<div class="item search_text">
+				<input type="text" id="search_cells" title="">
+			</div>
+			<div class="item search_title" title="검색어">検索</div>
+
+			<c:if
+				test="${sessionScope.userMode eq 'buyer'||sessionScope.userMode eq 'manager'}">
+				<div class="item title">FAQ</div>
 			</c:if>
-			
-			<c:if test="${sessionScope.userMode eq 'seller'||sessionScope.loginId == null }">  
-			<div class="item title">よくある質問</div>
+
+			<c:if
+				test="${sessionScope.userMode eq 'seller'||sessionScope.loginId == null }">
+				<div class="item title">よくある質問</div>
 			</c:if>
 		</div>
 	</div>
 	<div style="width: 900px; margin: 0 auto;">
-	<table id="jqGridBoard"></table>
-	<div id="jqGridPager"></div>
+		<table id="jqGridBoard"></table>
+		<div id="jqGridPager"></div>
 	</div>
 	<c:if test="${sessionScope.userMode eq 'manager'}">
-	<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
-	<button onclick="writeFaqForm()">投稿</button>
-	</div>
-	</c:if> 
+		<div id="btn" style="width: 150px; height: 30px; margin: 0 auto;">
+			<button onclick="writeFaqForm('writeFaqForm?')">投稿</button>
+		</div>
+	</c:if>
 	<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 
 </body>

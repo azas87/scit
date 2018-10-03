@@ -114,7 +114,7 @@ $(function() {
 		window.close();
 });
 var sellerId = $("#sellerInfo", opener.document ).val();
-alert('sellerId'+sellerId);
+console.log('sellerId'+sellerId);
 $.ajax({
 	url:"getSellerInfo",
 	type:"post",
@@ -126,7 +126,7 @@ $.ajax({
 		for(i in resp){
 			wishlist += resp[i].wish + " ";
 		}
-		alert(resp);
+		console.log(resp);
 		$('#id').text(resp[0].id);
 		$('#name').text(resp[0].name);
 		$('#nameKana').text(resp[0].nameKana);

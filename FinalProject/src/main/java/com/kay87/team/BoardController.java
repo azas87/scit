@@ -72,6 +72,7 @@ public class BoardController {
 	public String writeBoard(QnA qna, HttpSession session){
 
 		qna.setId((String) session.getAttribute("loginId"));
+		System.out.println(qna);
 		BoardMapper dao = sql.getMapper(BoardMapper.class);
 		dao.writeBoard(qna);
 		

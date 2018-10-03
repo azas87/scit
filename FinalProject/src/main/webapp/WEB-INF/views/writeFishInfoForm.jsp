@@ -37,7 +37,7 @@
 </head>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<script type="text/javascript" src="./resources/js/WriteBuyBoard.js"></script>
+<!-- <script type="text/javascript" src="./resources/js/WriteBuyBoard.js"></script> -->
 <style>
 .indent-small {
 	margin-left: 5px;
@@ -124,6 +124,12 @@ $(document).ready(function() {
 //	  $('.datepicker').datepicker();  
 	});
 
+function check()
+{
+	/* $('#f_main', parent.document).attr('height', '3000px'); */
+	$('#f_main', parent.document).attr('height', '3520px');
+	$( "#writeFishForm" ).submit();
+}
 </script>
 <body>
 
@@ -133,7 +139,7 @@ $(document).ready(function() {
 				<h1>新しい魚種情報</h1>
 			</div>
 			<div class='panel-body'>
-				<form class='form-horizontal' role='form' action="newFishInfo">
+				<form id='writeFishForm' class='form-horizontal' role='form' action="newFishInfo">
 
 					<div class='form-group'>
 						<label class='control-label col-md-2 col-md-offset-2'

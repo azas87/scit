@@ -1,23 +1,6 @@
-
-
 $(document).ready(function() {
-
 	getQnaTable();
-	
-	$('#jqGridBoard').jqGrid('navGrid',"#jqGridPager", {                
-	       search: false, // show search button on the toolbar
-	       add: false,
-	       edit: false,
-	       del: false,
-	       refresh: true
-	   });
-	
 });
-
-function writeNoticeForm() {
-	$('#f_main', parent.document).attr('height', '820px');
-	$('#f_main', parent.document).attr('src', 'writeNoticeForm?');
-}
 
 
 function getQnaTable() {
@@ -65,10 +48,8 @@ function getQnaTable() {
 		},
 		loadComplete:function(data)
 		{
-			console.log("loadComplete");
+			console.log("getNoticeList loadComplete");
 			helper();
-		},
-		gridComplete: function(){
 		},
 		onCellSelect: function(rowid, index, contents, event) 
     	{    
@@ -80,42 +61,6 @@ function getQnaTable() {
         		location.href="noticeDetail?noticeNum="+obj.noticeNum;
 
         	}
-    		
     	},   
 	});
 }
-
-function helper()
-{
-	userMode = $('#userMode').val();
-	console.log(userMode);
-	if(userMode!='buyer' && userMode !='manager')
-	{
-			$('.bigSize').hover(function(){
-				var title = $(this).attr('title');
-				console.log(title);
-				if(title!=" " && title!="" && title!=null)
-				{
-					$(this).data('tipText', title).removeAttr('title');
-					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
-				}
-			},
-			function() {
-				$(this).attr('title',$(this).data('tipText'));
-				$('.tooltip').remove();
-			}).mousemove(function(e) {
-				var mousex = e.pageX + 20;
-				var mousey = e.pageY + 10;
-				$('.tooltip').css({top : mousey,left : mousex});
-			});
-	}
-	else
-	{
-		$('.bigSize').hover(function(){
-			var title = $(this).attr('title');
-			$(this).attr('title', "");
-		});
-	}
-} 
-
-

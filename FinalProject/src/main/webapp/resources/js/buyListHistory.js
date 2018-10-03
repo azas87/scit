@@ -91,7 +91,10 @@ function rebuy2 (cellvalue, options, rowObject) {
  
 function rebuy3 (cellvalue, options, rowObject) {
 	//console.log(rowObject);
-	return '返金'; 
+	if(rowObject.saleStatus=='saleComplete')
+		return '返金';
+	else
+		return"";
 };
 function sellerDetail (seller) {
 	
@@ -132,11 +135,11 @@ function sellerDetail (seller) {
  			{
  				label : '取引日付',
  				name : 'deadline',
- 				width:295,
+ 				width:290,
  				align:'center'
  			
  			}, {
- 				label : '品種',
+ 				label : '魚種',
  				name : 'fishName',
  				width:200,
  				align:'center' 				
@@ -164,13 +167,13 @@ function sellerDetail (seller) {
  			},{
  				label : '受取',
  				width:100,
- 				name : '確認',
+ 				name : 'check',
  				formatter: rebuy2,
  				cellattr:mouseCursor,
  				align:'center'
  			},{
  				label : '返金',
- 				name : '払い戻し',
+ 				name : 'del',
  				width : 100,
  				formatter: rebuy3,
  				cellattr:mouseCursor,
@@ -179,10 +182,10 @@ function sellerDetail (seller) {
 
  		],
  		viewrecords : true,
- 		width:1300,
+ 		width:1295,
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:500,
+ 		height:505,
  		pager : "#jqGridPager",
  		loadonce: true,
  		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
@@ -209,7 +212,7 @@ function sellerDetail (seller) {
  			*/
  			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
- 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
+ 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'合計', price:moneySum });
  			$('.footrow').css('fontSize','1.5em');
 
  			$('table.ui-jqgrid-ftable td:eq(2)').hide();
@@ -270,13 +273,22 @@ function sellerDetail (seller) {
      			location.href="writeBuyBoardForm?buyNum="+buyNum;
         		 	//console.log(jQuery("#jqGrid").getRowData(rowid));
      		}
-     		else if(cm[index].name == "確認") {
-     			confirm($("#jqGrid").getRowData(rowid));
+     		else if(cm[index].name == "check") {
+     			var obj = $("#jqGrid").getRowData(rowid);
+     			if(obj.check!="")
+     			{
+     				confirm(obj);
+     			}
+     			
      			//console.log($("#jqGrid").getRowData(rowid));
      			
      		}
-     		else if(cm[index].name == "払い戻し") {
-     			refund($("#jqGrid").getRowData(rowid));
+     		else if(cm[index].name == "del") {
+     			var obj = $("#jqGrid").getRowData(rowid);
+     			if(obj.del != "")
+     			{
+     				refund($("#jqGrid").getRowData(rowid));
+     			}
      			
      		}
      		else if(cm[index].name == "successSellerId") {
@@ -314,11 +326,11 @@ function sellerDetail (seller) {
  			{
  				label : '取引日付',
  				name : 'deadline',
- 				width:400,
+ 				width:370,
  				align:'center'
  			
  			}, {
- 				label : '品種',
+ 				label : '魚種',
  				name : 'fishName',
  				width:350,
  				align:'center' 				
@@ -342,10 +354,10 @@ function sellerDetail (seller) {
 
  		],
  		viewrecords : true,
- 		width:1300,
+ 		width:1295,
  		rowNum : 10,
  		rowList:[10,20,30],
- 		height:500,
+ 		height:505,
  		pager : "#jqGridPager",
  		loadonce: true,
  		shrinkToFit : false,	// true는 컬럼 폭을 같은 크기로 맞춤. 폭 조절이 안 먹힘.
@@ -354,28 +366,19 @@ function sellerDetail (seller) {
  		loadComplete:function(data)
  		{
  			
- 
- 			
  			var moneySum = $("#jqGrid").jqGrid('getCol','price', false, 'sum'); 
- 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'합계', price:moneySum });
+ 			$('#jqGrid').jqGrid('footerData', 'set', { deadline:'合計', price:moneySum });
  			$('.footrow').css('fontSize','1.5em');
-
- 			$('table.ui-jqgrid-ftable td:eq(2)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(1)').hide();
+ 			$('table.ui-jqgrid-ftable td:eq(3)').hide();
  			$('table.ui-jqgrid-ftable td:eq(4)').hide();
  			$('table.ui-jqgrid-ftable td:eq(5)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(6)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(7)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(9)').hide();
- 			$('table.ui-jqgrid-ftable td:eq(10)').hide();
- 			
- 			
 
  		},
  		gridComplete: function(){
  		},
  		onCellSelect: function(rowid, index, contents, event) 
      	{    
-     		var cm = $(this).jqGrid('getGridParam','colModel');    
      		
      	},
      	
@@ -436,26 +439,28 @@ function confirm(obj) {
 	//리뷰등록을 위해 buyNum 저장해두기
 	$('#buyNum').val(obj.buyNum);
 	$('#sellerId').val(obj.successSellerId);
-	//수취확인
-	$.ajax({
-		url:"confirm",
-		type:"get",
-		data:{"buyNum":obj.buyNum,
-			  },
-		success:function(data){
-			ResetBuyList();
-		},
-		error:function(){
-			alert("통신실패");
-		}
-	});
+	
 	
 	reset();
 	alertify.set({ buttonReverse: true });
 	alertify.confirm("レビューを登録されますか", function (e) {
 		if (e) {
 			alertify.success("You've clicked OK");
-			window.open("reviewForm", "reviewForm", "width=400px,height=300px,left=500px,top=200px");
+			window.open("reviewForm", "reviewForm", "width=290px,height=350px,left=500px,top=200px");
+			console.log("ok");
+			//수취확인
+			$.ajax({
+				url:"confirm",
+				type:"get",
+				data:{"buyNum":obj.buyNum,
+					  },
+				success:function(data){
+					ResetBuyList();
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
 		} else {
 			alertify.error("You've clicked Cancel");
 		}
@@ -494,6 +499,7 @@ function refund(obj) {
 	}
 
 function ResetBuyList() {	
+	console.log("ResetBuyList");
 	//$( "#jqGrid").jqGrid().setGridParam({url:'jqgrid_R',datatype:'json'}).trigger('reloadGrid');
 	var period = $('#period').val();
 	var startDay = $('#startDay').val();
@@ -528,12 +534,12 @@ function sumList(period, startDay, endDay) {
  		colModel : 
  		[ 
  			{
- 				label : '品種',
+ 				label : '魚種',
  				name : 'fishName',
  				autowidth:true,
  				align:'center'
  			}, {
- 				label : '価格',
+ 				label : '合計',
  				autowidth:true,
  				name : 'price',
  				align:'center'
@@ -544,6 +550,7 @@ function sumList(period, startDay, endDay) {
  		scrollOffset : 0,
  		autowidth:true,
  		//altRows:true,	// tooltip 나오는 기능인데 차이가 없네? 이미 title에 값이 적혀 있어서 그런가?
+ 		width:1100,
  		height:400,
  		pager : "#jqGrid2Pager",
  		loadonce: true,
@@ -565,26 +572,23 @@ function sumList(period, startDay, endDay) {
  	console.log(userMode);
  	if(userMode!='buyer' && userMode !='manager')
  	{
- 		if(isSeasonInfoLoad && isHomeListLoad && isBestSellerLoad)
- 		{
- 			$('.bigSize').hover(function(){
- 				var title = $(this).attr('title');
- 				console.log(title);
- 				if(title!=" " && title!="" && title!=null)
- 				{
- 					$(this).data('tipText', title).removeAttr('title');
- 					$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
- 				}
- 			},
- 			function() {
- 				$(this).attr('title',$(this).data('tipText'));
- 				$('.tooltip').remove();
- 			}).mousemove(function(e) {
- 				var mousex = e.pageX + 20;
- 				var mousey = e.pageY + 10;
- 				$('.tooltip').css({top : mousey,left : mousex});
- 			});
- 		}
+		$('.bigSize').hover(function(){
+			var title = $(this).attr('title');
+			console.log(title);
+			if(title!=" " && title!="" && title!=null)
+			{
+				$(this).data('tipText', title).removeAttr('title');
+				$('<p class="tooltip"></p>').text(title).appendTo('body').fadeIn('slow');
+			}
+		},
+		function() {
+			$(this).attr('title',$(this).data('tipText'));
+			$('.tooltip').remove();
+		}).mousemove(function(e) {
+			var mousex = e.pageX + 20;
+			var mousey = e.pageY + 10;
+			$('.tooltip').css({top : mousey,left : mousex});
+		});
  	}
  	else
  	{

@@ -21,13 +21,14 @@
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script>
+<!-- 없어도 동작에 문제 없네 
+<script type="text/javascript" src="./resources/js/jquery.jqGrid.js"></script> -->
 
 
  <!-- The jQuery library is a prerequisite for all jqSuite products -->
  <script type="text/javascript" src="./resources/js/jquery.min.js"></script> 
  <script type="text/javascript" src="./resources/js/jquery-ui.min.js"></script>
- <!-- This is the Javascript file of jqGrid -->   
+ <!-- 위에 2개없어도 동작은 하는데? 어디서 쓰고 있는거지? -->
 
 
  <!-- This is the localization file of the grid controlling messages, labels, etc.
@@ -35,148 +36,30 @@
  <script type="text/javascript"	src="./resources/js/i18n/grid.locale-ja.js"></script>
  
  <script type="text/javascript" src="./resources/js/jquery.jqGrid.min.js"></script>
- <script type="text/javascript" src="./resources/js/home.js"></script>
+ <script type="text/javascript" src="./resources/js/main.js"></script>
  
  	<link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  		<script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
- 		<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/home.css" />
+ 		<link rel="stylesheet" type="text/css"jk media="screen" href="./resources/css/main.css" />
  
  <link rel="stylesheet" href="./resources/css/jquery.popdown.css">
  <script type="text/javascript" src="./resources/js/jquery.popdown.js" /></script>
+ 
+ <link rel="stylesheet" type="text/css" media="screen" href="./resources/css/alertify.core.css" />
+<link rel="stylesheet" href="./resources/css/alertify.default.css" id="toggleCSS" />
+
+<script type="text/javascript" src="./resources/js/alertify.js"></script>
+<script type="text/javascript" src="./resources/js/alertify.min.js"></script>
 
 
 <script>
 $(document).ready(function(){
   google.charts.load('current', {'packages':['line','controls']});
   chartDrowFun.chartDrow(); //chartDrow() 실행
-  
-	 homeList('allBuyList');
-	 bestSeller();
-	 seasonInfo();
-	//myBuyList();
-	///printClock();
-	 
-
-
-	 
-	 /*
-	 // 자동 글쓰기 테스트.
-	 setTimeout(function(){
-		 console.log("settimeout");
-		 autoWriteTest();
-		ListRefresh();
-	}, 60000);
-		*/
-	 
-	 // 10분 마다 자동갱신
-	 setInterval(function(){
-		 console.log(new Date());
-		 //ListRefresh();
-		
-	}, refreshInterver);
-	 
-	
-
-	    
-    $('.search').hover(function(){
-        // Hover over code
-        var title = $(this).attr('title');
-        $(this).data('tipText', title).removeAttr('title');
-        $('<p class="tooltip"></p>')
-        .text(title)
-        .appendTo('body')
-        .fadeIn('slow');
-	}, function() {
-	        // Hover out code
-	        $(this).attr('title', $(this).data('tipText'));
-	        $('.tooltip').remove();
-	}).mousemove(function(e) {
-	        var mousex = e.pageX + 20; //Get X coordinates
-	        var mousey = e.pageY + 10; //Get Y coordinates
-	        $('.tooltip').css({ top: mousey, left: mousex })
-	});
-	
-	$('#jqGrid').jqGrid('navGrid',"#jqGridPager", {                
-	    search: false, // show search button on the toolbar
-	    add: false,
-	    edit: false,
-	    del: false,
-	    refresh: true,
-	});
-	
-	var timer;
-	$("#search_cells").on("keyup", function() {
-		var self = this;
-		if(timer) { clearTimeout(timer); }
-		timer = setTimeout(function(){
-			//timer = null;
-			$("#jqGrid").jqGrid('filterInput', self.value);
-		},0);
-	});
-	
-	tab('#tab',0);
-	
-//	$("#popup").attr("href", "./resources/content.jsp");
-
-
-	// 팝업 띄우기
-	//$('#popup').trigger('click');
-	
-	
-	$('.item').click(function(){
-		
-		$('.item').css('background','url(./resources/img/bg.png) repeat');
-		$('.item').css('color','black');
-		$('.item').css('border-right','1px solid white');
-		$('.item').css('border-radius','0px');
-		
-		if(($(this).attr('class') == "item search_text"))
-		{
-			console.log("title");
-			$('.search_title').css('background','white');
-			$('.search_title').css('color','black');
-			$('.search_title').css('border-right','2px solid white');
-		}
-		
-		$(this).css('background','white');
-		$(this).css('color','black');
-		$(this).css('border-right','2px solid white');
-		$(this).css('border-radius','5px'); 
-		
-		
-		/* 
-		$('.item').css('background','white');
-		$('.item').css('color','black');
-		$('.item').css('border-right','1px solid blue');
-		$('.item').css('border-left','1px solid blue');
-		$('.item').css('border-radius','0px');
-		
-		$(this).css('background','url(./resources/img/bg.png) repeat');
-		$(this).css('color','black');
-		$(this).css('border-right','0px');
-		$(this).css('border-left','0px');
-		$(this).css('border-radius','5px'); */
-		
-		
-	});
-	
-	$('#jqGridPager_left').css('display','none');
-	$('#jqGridPager_center').css('width','600px');
-	$('#jqGridPager_center').css('padding-left','100px');
-	$('#jqGridPager_right').css('padding-right','26px');
-	
-	
-	$('#input_jqGridPager').css('width','340px');
-	
-	$('#input_jqGridPager').css('font-size','1.5em');
-	$('.ui-paging-pager').css('width','650px');
-	
-	
-	$('#gview_jqGridbestSeller .ui-jqgrid-titlebar').css('padding-left','140');
-	$('#gview_jqGridseasonInfo .ui-jqgrid-titlebar').css('padding-left','215');
-		
 });
    
+   
+//jstl 을 사용하고 있어서 못 옮김.
 var chartDrowFun = {
 
   chartDrow : function(){[]
@@ -195,11 +78,11 @@ var chartDrowFun = {
         var data = new google.visualization.DataTable();
         //그래프에 표시할 컬럼 추가
         data.addColumn('date', 'Date');
-    data.addColumn('number', '${list[0].fishName}');
-    data.addColumn('number', '${list[1].fishName}');
-    data.addColumn('number', '${list[2].fishName}');
-    data.addColumn('number', '${list[3].fishName}');
-    data.addColumn('number', '${list[4].fishName}');
+	    data.addColumn('number', '${list[0].fishName}');
+	    data.addColumn('number', '${list[1].fishName}');
+	    data.addColumn('number', '${list[2].fishName}');
+	    data.addColumn('number', '${list[3].fishName}');
+	    data.addColumn('number', '${list[4].fishName}');
 
         //그래프에 표시할 데이터
 
@@ -207,7 +90,7 @@ var chartDrowFun = {
        	 <c:forEach items="${list}" var="item">
          	[new Date('${item.dates}'),
          		<c:forEach items="${item.avgList}" var="avgPrice">
-         			Number('${avgPrice}'),
+         			${avgPrice},
          		</c:forEach>	
          	], 
      	</c:forEach> 
@@ -278,68 +161,66 @@ var chartDrowFun = {
 
     }
   }
-
-
  </script>
  
  
 <title>Insert title here</title>
 </head>
 <body>
-<div>
-	<!-- <div id="popup" class="popdown" >알림창 데모</div>-->
-	<a id="popup" href="./resources/content.jsp" class="popdown" style="display:none">알림창 데모</a> 
-</div>
-   <div id="Line_Controls_Chart">
-   <!-- 라인 차트 생성할 영역 -->
-       <div id="lineChartArea"></div>
-   <!-- 컨트롤바를 생성할 영역 -->
-       <div id="controlsArea" style="display:none"></div>
-     </div>
-
-<div class="smallList">
-	<div class="flexs">
-		<table id="jqGridbestSeller" ></table><!--상위3개만  -->
+	<!-- 알림창ㄴ -->
+	<div>
+		<a id="popup" href="./resources/content.jsp" class="popdown" style="display: none"></a>
 	</div>
-	<div class="flexs">	
-		<table id="jqGridseasonInfo"  class="flexs"></table><!--상위3개만  -->			
-	</div>	
-</div>	
+	
+	<!-- 구글 차트 -->
+	<div id="Line_Controls_Chart">
+		<div id="lineChartArea"></div>
+		<div id="controlsArea" style="display: none"></div>
+	</div>
+
+	<!-- 베스트 셀러, 시즌 추천 -->
+	<div class="smallList">
+		<div class="flexs">
+			<table id="jqGridbestSeller"></table>
+		</div>
+		<div class="flexs">
+			<table id="jqGridseasonInfo" class="flexs"></table>
+		</div>
+	</div>
 
 
-<div id="tab">
-	<div class="items">
-		<div class="item " id="homeList"  onclick="homeList()">取引リスト</div>
-		<c:choose>
-			<c:when test="${sessionScope.userMode == 'buyer' }">
-				<div class="item " id="myList_ing_buyer" onclick="myList_ing_buyer()">注文要望リスト</div>
-				<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">取引済みリスト</div>
-			</c:when>
-			<c:when test="${sessionScope.userMode == 'seller' }">
-				<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
-				<div class="item " id="sellerWishList" onclick="sellerWishList()">関心リスト</div>
-				<div class="item " id="myList_ing_seller" onclick="myList_ing_seller()">参加リスト</div>
-			</c:when>
-		</c:choose>
-		<!-- <div class="item search" title="검색어">検索 : <input type="text" id="search_cells" title=""></div> -->
-		
-			<div class="item search_title" >検索</div>
+	<div id="tab">
+		<div class="items">
+			<div class="item " id="homeList" onclick="homeList()">取引リスト</div>
+			<c:choose>
+				<c:when test="${sessionScope.userMode == 'buyer' }">
+					<div class="item " id="myList_ing_buyer"
+						onclick="myList_ing_buyer()">購買要請中</div>
+					<div class="item " id="myAllList_buyer" onclick="myAllList_buyer()">注文要望</div>
+				</c:when>
+				<c:when test="${sessionScope.userMode == 'seller' }">
+					<!-- <div class="item " onclick="myList_ing_seller()">선호리스트</div> -->
+					<div class="item " id="sellerWishList" onclick="sellerWishList()">関心リスト</div>
+					<div class="item " id="myList_ing_seller"
+						onclick="myList_ing_seller()">参加リスト</div>
+				</c:when>
+			</c:choose>
+			<div class="item search_title">検索</div>
 			<div class="item search_text">
 				<input type="text" id="search_cells" title="">
 			</div>
 		</div>
 	</div>
-</div>
 
-<div id="list">
-	<div>
-		<table id="jqGrid"></table>			
-		<div id="jqGridPager"></div>
-	</div>	
-</div>
+	<div id="list">
+		<div>
+			<table id="jqGrid"></table>
+			<div id="jqGridPager"></div>
+		</div>
+	</div>
 
-<input type="hidden" id="sellerInfo" name="sellerInfo">
-<input type="hidden" id="userMode" value="${sessionScope.userMode}">
+	<input type="hidden" id="sellerInfo" name="sellerInfo">
+	<input type="hidden" id="userMode" value="${sessionScope.userMode}">
 
 </body>
 </html>
