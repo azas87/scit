@@ -11,11 +11,11 @@ $(document).ready(function() {
 	 bestSeller();
 	 seasonInfo();
 	
-	$("#jqGridbestSeller").closest("div.ui-jqgrid-view")
+	/*$("#jqGridbestSeller").closest("div.ui-jqgrid-view")
     .children("div.ui-jqgrid-titlebar")
     .css("text-align", "center")
     .children("span.ui-jqgrid-title")
-    .css("float", "none");
+    .css("float", "none");*/
 	
 	
 	$('.popdown').popdown();
@@ -81,6 +81,36 @@ $(document).ready(function() {
 	});
 	
 	tab('#tab',0);
+	
+	
+	userMode = $('#userMode').val();
+	console.log(userMode);
+	if(userMode!='buyer' && userMode !='manager')
+	{
+	
+		$(".item").mouseenter(function(){
+			var itemClass= $(this).attr('class');
+			  //if( (itemClass != "item search_title" ) && (itemClass != "item search_text" ) && (itemClass != "item calander" ) )
+			  if( (itemClass != "item search_title" ) && (itemClass != "item search_text" ) && (itemClass != "item calander" ) )
+			  {
+				  $(this).css('flex-grow',1);
+			      $(this).css('font-size',"3em");
+			      $(this).css('font-weight','bold');
+	/*		      $(this).css('background-color',"powderblue");
+	*/	/*	      $('input').css('line-height', '60px');
+			      $('input').css('width', '200px');*/
+			  }
+		     
+		    });
+		    
+		  $(".item").mouseleave(function(){
+		      $(this).css('flex-grow',1);
+		      $(this).css('font-size',"2em");
+		      $(this).css('font-weight','normal');
+		      /*$(this).css('background-color',"white");*/
+		    });
+	}
+	
 	
 	/* 탭 메뉴 클릭 시 */
 	$('.item').click(function()
